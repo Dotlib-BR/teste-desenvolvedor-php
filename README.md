@@ -1,6 +1,6 @@
 [![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
 
-# Teste para candidatos à vaga de Desenvolvedor Web Pleno.
+# Teste para candidatos à vaga de Desenvolvedor Web.
 
 Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
 
@@ -18,9 +18,7 @@ Você vai criar uma aplicação de cadastro de pedidos de compra, a partir de um
   - deve possuir formulários para criação e atualização de seus itens.
   - deve permitir a deleção de qualquer item de sua lista.
 - Barra de navegação entre os CRUDs.
-- Links para os outros CRUDs nas listagens (Ex: link para o detalhe do cliente da compra na lista de
-  pedidos de compra)
-- API Rest JSON para todos os CRUDS listados acima.
+- Links para os outros CRUDs nas listagens (Ex: link para o detalhe do cliente da compra na lista de pedidos de compra)
 
 ## Modelo de dados
 
@@ -55,5 +53,6 @@ Para iniciar o teste, faça um fork deste repositório, crie uma branch com o se
 - Permitir deleção em massa de itens nos CRUDs.
 - Implementar aplicação de desconto em alguns pedidos de compra.
 - Implementar a camada de Front-End utilizando a biblioteca javascript Bootstrap e ser responsiva.
+- API Rest JSON para todos os CRUDS listados acima.
 
 ### Boa sorte!
