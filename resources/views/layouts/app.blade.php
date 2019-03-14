@@ -22,7 +22,7 @@
             @include('partials.navbar')
         @endauth
 
-        <main>
+        <main class="py-5">
             @yield('content')
         </main>
     </div>
