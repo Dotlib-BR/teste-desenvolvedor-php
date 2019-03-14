@@ -18,7 +18,7 @@ class CreateProdutosTable extends Migration
             $table->string('CodBarras', 20);
             $table->string('Nome', 100)->nullable();
             $table->decimal('ValorUnitario');
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

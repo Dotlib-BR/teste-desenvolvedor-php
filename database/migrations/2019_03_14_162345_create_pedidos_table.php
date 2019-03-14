@@ -21,7 +21,7 @@ class CreatePedidosTable extends Migration
             $table->integer('Quantidade')->unsigned();
             $table->tinyInteger('Status');
 
-            $table->timestamps();
+            // $table->timestamps();
 
             $table->foreign('ClienteId')->references('Id')->on('clientes');
             $table->foreign('ProdutoId')->references('Id')->on('produtos');

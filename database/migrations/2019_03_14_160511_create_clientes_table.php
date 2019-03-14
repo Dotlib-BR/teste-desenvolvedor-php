@@ -18,7 +18,7 @@ class CreateClientesTable extends Migration
             $table->string('Nome', 100);
             $table->char('CPF', 11);
             $table->char('Email', 10)->nullable();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 
