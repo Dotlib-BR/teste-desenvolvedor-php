@@ -15,4 +15,10 @@ Auth::routes([
     'register' => false
 ]);
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::middleware(['auth'])
+    ->group(function () {
+        Route::get('/', 'HomeController@index')->name('home');
+
+        // Clients
+        Route::resource('clients', 'ClientController');
+});
