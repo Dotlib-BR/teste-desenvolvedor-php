@@ -23,6 +23,16 @@
         @endauth
 
         <main class="py-5">
+            @auth
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            @include('partials.alert')
+                        </div>
+                    </div>
+                </div>
+            @endauth
+            
             @yield('content')
         </main>
     </div>
