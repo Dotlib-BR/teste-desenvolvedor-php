@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientCreateRequest;
+use App\Http\Requests\ClientUpdateRequest;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -72,19 +73,26 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('client.manage', compact('client'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ClientUpdateRequest  $request
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(ClientUpdateRequest $request, Client $client)
     {
-        //
+        DB::transaction(function () use ($request, $client) {
+            $client->user()
+                ->update($request->all());
+        });
+
+        return redirect()
+            ->route('clients.edit', $client->id)
+            ->with('success', 'Cliente atualizado com sucesso!');
     }
 
     /**

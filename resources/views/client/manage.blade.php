@@ -7,7 +7,7 @@
                 @component('components.card')    
                     <div class="row align-items-center">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <h3 class="mb-0">Cadastrar Cliente</h3>
+                            <h3 class="mb-0">{{ isset($client) ? 'Cadastrar' : 'Atualizar' }} Cliente</h3>
                         </div>
 
                         <div class="col-sm-6 text-sm-right">
@@ -19,8 +19,12 @@
 
             <div class="col-12">
                 @component('components.card')    
-                    <form action="{{ route('clients.store') }}" method="post">
+                    <form action="{{ ! isset($client) ? route('clients.index') : route('clients.update', $client) }}" method="post">
                         @csrf
+
+                        @isset($client)
+                            @method('PUT')
+                        @endisset
 
                         <div class="form-row">
                             <div class="col-sm-6">
@@ -30,6 +34,7 @@
                                         'name' => 'name',
                                         'label' => 'Nome',
                                         'placeholder' => 'Digite o nome',
+                                        'value' => $client->user->name ?? ''
                                     ])
                                     @endcomponent
                                 </div>
@@ -42,6 +47,7 @@
                                         'name' => 'cpf',
                                         'label' => 'CPF',
                                         'placeholder' => 'Digite o CPF',
+                                        'value' => $client->user->cpf ?? ''
                                     ])
                                     @endcomponent
                                 </div>
@@ -55,6 +61,7 @@
                                         'type' => 'email',
                                         'label' => 'E-mail',
                                         'placeholder' => 'Digite o e-mail',
+                                        'value' => $client->user->email ?? ''
                                     ])
                                     @endcomponent
                                 </div>
