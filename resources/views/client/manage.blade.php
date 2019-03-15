@@ -7,7 +7,7 @@
                 @component('components.card')    
                     <div class="row align-items-center">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <h3 class="mb-0">{{ isset($client) ? 'Cadastrar' : 'Atualizar' }} Cliente</h3>
+                            <h3 class="mb-0">{{ ! isset($client) ? 'Cadastrar' : 'Atualizar' }} Cliente</h3>
                         </div>
 
                         <div class="col-sm-6 text-sm-right">
