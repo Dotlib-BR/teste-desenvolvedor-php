@@ -11,4 +11,11 @@
 |
 */
 
-Route::get('/', 'LoginController@login');
+Route::get('/', 'LoginController@login')->name('login');
+Route::get('/login', 'LoginController@login');
+Route::get('/logout', 'LoginController@logout');
+Route::post('/authenticate', 'LoginController@authenticate');
+
+Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function () {
+    Route::get('/','DashboardController@home');
+});

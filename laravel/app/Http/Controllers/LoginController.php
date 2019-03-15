@@ -9,11 +9,13 @@ class LoginController extends Controller
 {
 
     public function login(){
+
         return view("login");
     }
 
     public function logout(){
-         
+        Auth::logout();
+        return redirect("login");
     }
     
     public function authenticate(Request $request)
@@ -23,6 +25,8 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
 
             return redirect()->intended('dashboard');
+        }else{
+            return redirect("login")->withInput();
         }
     }
 }
