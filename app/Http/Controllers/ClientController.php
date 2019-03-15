@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientCreateRequest;
 use App\Models\Client;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -26,18 +29,28 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('client.manage');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ClientCreateRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientCreateRequest $request, User $user)
     {
-        //
+        DB::transaction(function () use ($request, $user) {
+            $user->fill($request->all())
+                ->save();
+                
+            $user->client()
+                ->create();
+        });
+
+        return redirect()
+            ->route('clients.create')
+            ->with('success', 'Cliente criado com sucesso!');
     }
 
     /**

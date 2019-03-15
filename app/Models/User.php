@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -42,6 +43,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the client record associated with the user.
+     */
+    public function client()
+    {
+        return $this->hasOne(Client::class);
+    }    
+
+    /**
      * Get the formated user's cpf.
      *
      * @return string
@@ -49,5 +58,18 @@ class User extends Authenticatable
     public function getCpfFullAttribute()
     {
         return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $this->cpf);
+    }
+
+    /**
+     * Set the user's password.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setPasswordAttribute($value)
+    {
+        if ($value && Hash::needsRehash($value)) {
+            $this->attributes['password'] = Hash::make($value);
+        }
     }
 }
