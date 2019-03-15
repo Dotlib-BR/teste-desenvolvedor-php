@@ -17,7 +17,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 
-        'email', 
+        'email',
+        'cpf', 
         'password',
     ];
 
@@ -39,4 +40,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the formated user's cpf.
+     *
+     * @return string
+     */
+    public function getCpfFullAttribute()
+    {
+        return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $this->cpf);
+    }
 }
