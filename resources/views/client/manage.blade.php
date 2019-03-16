@@ -19,7 +19,7 @@
 
             <div class="col-12">
                 @component('components.card')    
-                    <form action="{{ ! isset($client) ? route('clients.index') : route('clients.update', $client->id) }}" method="post">
+                    <form action="{{ ! isset($client) ? route('clients.store') : route('clients.update', $client->id) }}" method="post">
                         @csrf
 
                         @isset($client)
@@ -29,54 +29,31 @@
                         <div class="form-row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    @component('components.form.input', [
-                                        'options' => [
-                                            'id' => 'name',
-                                            'name' => 'name',
-                                            'label' => 'Nome',
-                                            'placeholder' => 'Digite o nome',
-                                            'value' => $client->name ?? ''
-                                        ]
-                                    ])
-                                    @endcomponent
+                                    <label for="name">Nome</label>
+                                    <input id="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" value="{{ old('name', $client->name ?? '') }}" placeholder="Digite o nome">
+                                    @include('includes.form.validate', ['name' => 'name'])
                                 </div>
                             </div>
                             
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    @component('components.form.input', [
-                                        'options' => [
-                                            'id' => 'cpf',
-                                            'name' => 'cpf',
-                                            'label' => 'CPF',
-                                            'placeholder' => 'Digite o CPF',
-                                            'value' => $client->cpf ?? ''
-                                        ]
-                                    ])
-                                    @endcomponent
+                                    <label for="cpf">CPF</label>
+                                    <input id="cpf" class="form-control {{ $errors->has('cpf') ? 'is-invalid' : '' }}" type="text" name="cpf" value="{{ old('cpf', $client->cpf ?? '') }}" placeholder="Digite o CPF">
+                                    @include('includes.form.validate', ['name' => 'cpf'])
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    @component('components.form.input', [
-                                        'options' => [
-                                            'id' => 'email',
-                                            'name' => 'email',
-                                            'type' => 'email',
-                                            'label' => 'E-mail',
-                                            'placeholder' => 'Digite o e-mail',
-                                            'value' => $client->email ?? ''
-                                        ]
-                                    ])
-                                    @endcomponent
+                                    <label for="email">email</label>
+                                    <input id="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" value="{{ old('email', $client->email ?? '') }}" placeholder="Digite o email">
+                                    @include('includes.form.validate', ['name' => 'email'])
                                 </div>
                             </div>
 
                             <div class="col-12">
-                                <div class="form-group text-right">
-                                    @component('components.form.submit')
-                                    @endcomponent
+                                <div class="form-group text-right mb-0">
+                                    @include('includes.form.submit')
                                 </div>
                             </div>
                         </div>
