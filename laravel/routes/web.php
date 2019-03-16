@@ -18,4 +18,5 @@ Route::post('/authenticate', 'LoginController@authenticate');
 
 Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function () {
     Route::get('/','DashboardController@home');
+    Route::get('/produto','DashboardController@produto');
 });
