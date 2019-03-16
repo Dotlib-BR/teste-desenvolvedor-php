@@ -8,8 +8,9 @@ use App\model\Produto;
 class ProdutoController extends Controller
 {
     public function produtos(Produto $produto,Request $request){
+         $ordem= $request->input("ordem") ? $request->input("ordem") : ['id','desc'];
          $search = $request->input("search") ? $request->input("search") : "" ;
-         return $produto->where('nome',"like","%{$search}%")->orderBy('id','desc')->paginate(20)->toJson();
+         return $produto->where('nome',"like","%{$search}%")->orderBy($ordem[0],$ordem[1])->paginate(20)->toJson();
     }
 
     public function storage(Request $request,Produto $produto){

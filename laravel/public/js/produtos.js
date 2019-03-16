@@ -1,17 +1,46 @@
 var search = null;
 var storageProduto = [];
+var ordem=['nome','asc'];
+
+function ordenar(field){
+   let order;
+   if(ordem[0]==field){
+      order = ordem[1] == "asc" ? "desc" : "asc";
+   }
+   ordem = [field,order];
+   getProdutos(BASE_URL + "/api/produtos");
+}
+
 function getProdutos(page = null) {
   $.ajax({
     url: page
-      ? page + (search ? "&search=" + search : "")
-      : BASE_URL + "/api/produtos" + (search ? "?search=" + search : ""),
+      ? page 
+      : BASE_URL + "/api/produtos" ,
     type: "GET",
     dataType: "json",
+    data:{
+      "search":search,
+      "ordem":ordem
+    },
     success: function(data) {
       storageProduto = data.data;
       let htmlTabela = [];
       let htmlPaginacao;
+
+      htmlTabela.push(`
+      <thead>
+      <th onClick="ordenar('id')">ID</th>
+      <th onClick="ordenar('codBarras')">Cód. Barras</th>
+      <th onClick="ordenar('nome')">Produto</th>
+      <th onClick="ordenar('valor')">Preço</th>
+      <th onClick="ordenar('created_at')">Data Registro</th>
+      <th onClick="ordenar('updated_at')>Data Atualização</th>
+      <th colspan="2">Ação</th>
+      <tbody>
+  </thead>
+      `)
       $.each(data.data, function(index, row) {
+    
         htmlTabela.push(`
                       <tr>
                           <td>${row.id}</td>
@@ -29,6 +58,8 @@ function getProdutos(page = null) {
                       </tr>
                     `);
       });
+
+      htmlTabela.push("</tbody>");
 
       let prev, next;
       if (data.prev_page_url) {
@@ -57,7 +88,7 @@ function getProdutos(page = null) {
                 </ul>
               </nav>
                 `;
-      $("#tabela-produto tbody").html(htmlTabela.join(""));
+      $("#tabela-produto").html(htmlTabela.join(""));
       $("#paginacao").html(htmlPaginacao);
     }
   });

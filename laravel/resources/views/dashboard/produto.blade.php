@@ -7,20 +7,7 @@
 </div>
 <div class="col-md-12" style=" overflow: auto; max-height:400px">
 
-    <table class="table" id="tabela-produto">
-        <thead>
-            <th>ID</th>
-            <th>Cód. Barras</th>
-            <th>Produto</th>
-            <th>Preço</th>
-            <th>Data Registro</th>
-            <th>Data Atualização</th>
-            <th colspan="2">Ação</th>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
+    <table class="table" id="tabela-produto"></table>
 
 </div>
 
