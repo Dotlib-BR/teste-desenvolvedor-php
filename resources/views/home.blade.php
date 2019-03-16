@@ -10,7 +10,7 @@
                 @endslot
 
                 <div class="text-center py-3 m-0">
-                    <strong class="h1 font-weight-bold">10</strong>
+                    <strong class="h1 font-weight-bold">{{ $clients }}</strong>
                     <p class='mb-0 mt-3 h5'>Clientes</p>
                 </div>
             @endcomponent
@@ -23,7 +23,7 @@
 
                 <div class="text-center py-3 m-0">
                     <strong class="h1 font-weight-bold">10</strong>
-                    <p class='mb-0 mt-3 h5'>Clientes</p>
+                    <p class='mb-0 mt-3 h5'>Produtos</p>
                 </div>
             @endcomponent
         </div>
@@ -35,7 +35,7 @@
 
                 <div class="text-center py-3 m-0">
                     <strong class="h1 font-weight-bold">10</strong>
-                    <p class='mb-0 mt-3 h5'>Clientes</p>
+                    <p class='mb-0 mt-3 h5'>Pedidos</p>
                 </div>
             @endcomponent
         </div>
