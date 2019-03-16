@@ -30,11 +30,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     @component('components.form.input', [
-                                        'id' => 'name',
-                                        'name' => 'name',
-                                        'label' => 'Nome',
-                                        'placeholder' => 'Digite o nome',
-                                        'value' => $client->name ?? ''
+                                        'options' => [
+                                            'id' => 'name',
+                                            'name' => 'name',
+                                            'label' => 'Nome',
+                                            'placeholder' => 'Digite o nome',
+                                            'value' => $client->name ?? ''
+                                        ]
                                     ])
                                     @endcomponent
                                 </div>
@@ -43,11 +45,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     @component('components.form.input', [
-                                        'id' => 'cpf',
-                                        'name' => 'cpf',
-                                        'label' => 'CPF',
-                                        'placeholder' => 'Digite o CPF',
-                                        'value' => $client->cpf ?? ''
+                                        'options' => [
+                                            'id' => 'cpf',
+                                            'name' => 'cpf',
+                                            'label' => 'CPF',
+                                            'placeholder' => 'Digite o CPF',
+                                            'value' => $client->cpf ?? ''
+                                        ]
                                     ])
                                     @endcomponent
                                 </div>
@@ -56,12 +60,14 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     @component('components.form.input', [
-                                        'id' => 'email',
-                                        'name' => 'email',
-                                        'type' => 'email',
-                                        'label' => 'E-mail',
-                                        'placeholder' => 'Digite o e-mail',
-                                        'value' => $client->email ?? ''
+                                        'options' => [
+                                            'id' => 'email',
+                                            'name' => 'email',
+                                            'type' => 'email',
+                                            'label' => 'E-mail',
+                                            'placeholder' => 'Digite o e-mail',
+                                            'value' => $client->email ?? ''
+                                        ]
                                     ])
                                     @endcomponent
                                 </div>

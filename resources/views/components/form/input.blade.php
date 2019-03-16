@@ -1,18 +1,20 @@
-@isset($label)
-    <label for="{{ $id }}">{{ $label }}</label>
+@isset($options['label'])
+    <label for="{{ $options['id'] }}">{{ $options['label'] }}</label>
 @endisset
 
-<input id="{{ $id }}" 
-    class="form-control {{ $errors->has($name) ? 'is-invalid' : '' }}" 
-    type="{{ $type ?? 'text' }}" 
-    name="{{ $name }}"
-    value="{{ old($name, $value ?? '') }}"
-    placeholder="{{ $placeholder ?? '' }}">
+<input id="{{ $options['id'] }}" 
+    class="form-control {{ $errors->has($options['name']) ? 'is-invalid' : '' }}" 
+    @foreach ($options as $key => $option)
+        @if ($key == 'type' && ! $option)
+            {{ $key . '=text' }}
+        @endif
+        {{ $key . '=' . $option }}
+    @endforeach>
 
 @if ((isset($validate) && $validate !== false) || ! @isset($validate))    
-    @if ($errors->has($name))
+    @if ($errors->has($options['name']))
         <div class="invalid-feedback">
-            {{ $errors->first($name) }}
+            {{ $errors->first($options['name']) }}
         </div>
     @endif
 @endif
