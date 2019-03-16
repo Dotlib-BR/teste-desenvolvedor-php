@@ -33,9 +33,9 @@
                                     <td>{{ $client->user->name }}</td>
                                     <td>{{ $client->user->email }}</td>
                                     <td>{{ $client->user->cpf_full }}</td>
-                                    <td class="text-right">
-                                        <a class="btn btn-sm btn-primary" href="{{ route('clients.edit', $client->id) }}">Editar</a>
-                                        <a class="btn btn-sm btn-danger" href="">Remover</a>
+                                    <td class="text-center text-lg-right">
+                                        <a class="btn btn-sm btn-primary mb-2 mb-lg-0" href="{{ route('clients.edit', $client->id) }}">Editar</a>
+                                        <button class="btn btn-sm btn-danger" type="button" data-action="{{ route('clients.destroy', $client->id) }}" data-toggle="modal" data-target="#modalDestroyConfirm">Remover</button>
                                     </td>
                                 </tr>
                             @endforeach          
@@ -46,3 +46,7 @@
         </div>
     </div>
 @endsection
+
+@push('modal')
+    @include('includes.modal-destroy-confirm')
+@endpush

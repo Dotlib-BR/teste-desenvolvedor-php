@@ -6,7 +6,6 @@ use App\Http\Requests\ClientCreateRequest;
 use App\Http\Requests\ClientUpdateRequest;
 use App\Models\Client;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
@@ -103,6 +102,13 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        DB::transaction(function () use ($client) {
+            $client->user()
+                ->delete();
+        });
+
+        return redirect()
+            ->route('clients.index')
+            ->with('success', 'Cliente removido com sucesso!');
     }
 }
