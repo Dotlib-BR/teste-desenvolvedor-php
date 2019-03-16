@@ -82,8 +82,17 @@ class ProdutoController extends Controller
                 'success' => true
             ]);
         }catch(\Exception $ex){
+
+            switch($ex->getCode()){
+                case 23000 :
+                   $msg = "Produto não pode ser excluido pois está relacionado a um pedido";
+                break;
+                default:
+                   $msg =$ex->getMessage();
+                break;
+            }
             return response()->json([
-                'message' => $ex->getMessage(),
+                'message' => $msg ,
                 'success' => false
             ]);
         }

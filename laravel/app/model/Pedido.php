@@ -10,7 +10,7 @@ class Pedido extends Model
         return $this->belongsTo("App\model\Cliente","cliente_id");
     }
 
-    function produto(){
-        return $this->belongsTo("App\model\Produto","produto_id");
+    function pedidoDetalhe(){
+        return $this->hasMany("App\model\PedidoDetalhe","pedido_id");
     }
 }

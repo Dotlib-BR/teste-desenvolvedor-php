@@ -20,4 +20,5 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function () {
     Route::get('/','DashboardController@home');
     Route::get('/produto','DashboardController@produto');
     Route::get('/cliente','DashboardController@cliente');
+    Route::get('/pedido','DashboardController@pedido');
 });

@@ -18,5 +18,9 @@ class DashboardController extends Controller
         return view('dashboard.cliente',["title"=>"CLIENTE"]);
     }
 
+    public function pedido(){
+        return view('dashboard.pedido',["title"=>"PEDIDO"]);
+    }
+
 
 }
