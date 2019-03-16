@@ -15,6 +15,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('css')
 </head>
 <body>
     <div id="app">
@@ -37,7 +38,11 @@
         </main>
     </div>
 
+    <!-- Modals -->
+    @stack('modal')
+    
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @stack('js')
 </body>
 </html>
