@@ -19,7 +19,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 
         'email',
-        'cpf', 
         'password',
     ];
 
@@ -43,21 +42,11 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the client record associated with the user.
+     * Get the clients records associated with the user.
      */
-    public function client()
+    public function clients()
     {
-        return $this->hasOne(Client::class);
-    }    
-
-    /**
-     * Get the formated user's cpf.
-     *
-     * @return string
-     */
-    public function getCpfFullAttribute()
-    {
-        return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $this->cpf);
+        return $this->hasMany(Client::class);
     }
 
     /**
@@ -69,7 +58,9 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         if ($value && Hash::needsRehash($value)) {
-            $this->attributes['password'] = Hash::make($value);
+            $value = Hash::make($value);
         }
+
+        $this->attributes['password'] = $value;
     }
 }

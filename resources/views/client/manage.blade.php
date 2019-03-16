@@ -19,7 +19,7 @@
 
             <div class="col-12">
                 @component('components.card')    
-                    <form action="{{ ! isset($client) ? route('clients.index') : route('clients.update', $client) }}" method="post">
+                    <form action="{{ ! isset($client) ? route('clients.index') : route('clients.update', $client->id) }}" method="post">
                         @csrf
 
                         @isset($client)
@@ -34,7 +34,7 @@
                                         'name' => 'name',
                                         'label' => 'Nome',
                                         'placeholder' => 'Digite o nome',
-                                        'value' => $client->user->name ?? ''
+                                        'value' => $client->name ?? ''
                                     ])
                                     @endcomponent
                                 </div>
@@ -47,7 +47,7 @@
                                         'name' => 'cpf',
                                         'label' => 'CPF',
                                         'placeholder' => 'Digite o CPF',
-                                        'value' => $client->user->cpf ?? ''
+                                        'value' => $client->cpf ?? ''
                                     ])
                                     @endcomponent
                                 </div>
@@ -61,33 +61,7 @@
                                         'type' => 'email',
                                         'label' => 'E-mail',
                                         'placeholder' => 'Digite o e-mail',
-                                        'value' => $client->user->email ?? ''
-                                    ])
-                                    @endcomponent
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    @component('components.form.input', [
-                                        'id' => 'password',
-                                        'name' => 'password',
-                                        'type' => 'password',
-                                        'label' => 'Senha',
-                                        'placeholder' => 'Digite a senha',
-                                    ])
-                                    @endcomponent
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    @component('components.form.input', [
-                                        'id' => 'password_confirmation',
-                                        'name' => 'password_confirmation',
-                                        'type' => 'password',
-                                        'label' => 'Confirmar Senha',
-                                        'placeholder' => 'Digite novamente a senha',
+                                        'value' => $client->email ?? ''
                                     ])
                                     @endcomponent
                                 </div>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ClientCreateRequest;
 use App\Http\Requests\ClientUpdateRequest;
 use App\Models\Client;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
@@ -17,7 +17,10 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::with('user')->get();
+        $clients = Auth::user()
+            ->clients()
+            ->orderBy('name')
+            ->get();
         
         return view('client.index', compact('clients'));
     }
@@ -38,14 +41,15 @@ class ClientController extends Controller
      * @param  ClientCreateRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ClientCreateRequest $request, User $user)
+    public function store(ClientCreateRequest $request, Client $client)
     {
-        DB::transaction(function () use ($request, $user) {
-            $user->fill($request->all())
+        $authUser = Auth::user();
+
+        DB::transaction(function () use ($request, $client, $authUser) {
+            $client->user()
+                ->associate($authUser)
+                ->fill($request->all())
                 ->save();
-                
-            $user->client()
-                ->create();
         });
 
         return redirect()
@@ -85,8 +89,7 @@ class ClientController extends Controller
     public function update(ClientUpdateRequest $request, Client $client)
     {
         DB::transaction(function () use ($request, $client) {
-            $client->user()
-                ->update($request->all());
+            $client->update($request->all());
         });
 
         return redirect()
@@ -103,8 +106,7 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         DB::transaction(function () use ($client) {
-            $client->user()
-                ->delete();
+            $client->delete();
         });
 
         return redirect()

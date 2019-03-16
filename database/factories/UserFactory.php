@@ -17,16 +17,9 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-    $cpf = '';
-    
-    for ($i = 0; $i<11; $i++) {
-        $cpf .= mt_rand(0,9);
-    }
-    
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'cpf' => $cpf,
         'email_verified_at' => now(),
         'password' => Hash::make('secret'), // password
         'remember_token' => Str::random(10),

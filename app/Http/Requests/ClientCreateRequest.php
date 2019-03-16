@@ -25,9 +25,8 @@ class ClientCreateRequest extends FormRequest
     {
         return [
             'name' => 'required|max:100',
-            'email' => 'required|unique:users,email',
-            'cpf' => 'required|unique:users,cpf|digits:11',
-            'password' => 'required|min:4|confirmed',
+            'email' => 'required|unique:clients,email',
+            'cpf' => 'required|unique:clients,cpf|digits:11',
         ];
     }
 
@@ -46,9 +45,6 @@ class ClientCreateRequest extends FormRequest
             'cpf.required' => 'Por favor, informe um CPF.',
             'cpf.unique' => 'O CPF informado já existe no sistema.',
             'cpf.digits' => 'O CPF deve conter somente 11 números.',
-            'password.required' => 'Por favor, informe uma senha.',
-            'password.min' => 'Por favor, informe uma senha com no mínimo 4 caracteres.',
-            'password.confirmed' => 'Por favor, digite a mesma senha nos campos de senha.',
         ];
     }
 }
