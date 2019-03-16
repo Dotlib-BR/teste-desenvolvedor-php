@@ -139,12 +139,22 @@ $(document).ready(function() {
       dataType: "json",
       data: form,
       success: function(data) {
-        if (data.success) {
+          if (data.success) {
+                      
           $("#modal #form-produto").trigger("reset");
           $("#modal").modal("hide");
           getProdutos();
-        }
-        alert(data.message);
+            swal("Sucesso!",data.message,"success");
+          }else if(!data.success && data.message){
+            swal("Alerta!",data.message,"warning");
+          }else{
+            swal("Erro!","Ocorreu um erro","error");
+          }
+          
+
+      },
+      error:function(){
+
       }
     });
   });
@@ -199,22 +209,45 @@ $(document).on("click", "#tabela-produto .excluir", function() {
   let produto = storageProduto[$(this).data("key")];
 
   
-    $.ajaxSetup({
-      headers: {
-        "X-CSRF-TOKEN": $('meta[name="_token"]').attr("content")
-      }
-    });
 
-    $.ajax({
-      url: BASE_URL + "/api/produto/"+produto.id,
-      type: "delete",
-      dataType: "json",
-      success: function(data) {
-        if (data.success) {
-          getProdutos();
+  swal({
+    title: "Deseja Excluir o produto?",
+    text: "O produto será excluido definitivamente do sistema",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      $.ajaxSetup({
+        headers: {
+          "X-CSRF-TOKEN": $('meta[name="_token"]').attr("content")
         }
-        alert(data.message);
-      }
-    });
+      });
+  
+   
+      $.ajax({
+        url: BASE_URL + "/api/produto/"+produto.id,
+        type: "delete",
+        dataType: "json",
+        success: function(data) {
+          if (data.success) {
+            swal("Sucesso!",data.message,"success");
+            getProdutos();
+          }else if(!data.success && data.message){
+            swal("Alerta!",data.message,"warning");
+          }else{
+            swal("Erro!","Ocorreu um erro","error");
+          }
+          
+        },
+        error:function(){
+          swal("Erro!","Ocorreu um erro","error");
+        }
+      });
+    }
 
+  });
+
+   
 });
