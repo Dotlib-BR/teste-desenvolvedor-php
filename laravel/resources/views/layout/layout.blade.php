@@ -32,6 +32,10 @@
             <a class="nav-link" href="{{URL('dashboard/produto')}}">Produto <span class="sr-only">(current)</span></a>
         </li>
 
+        <li class="nav-item active">
+          <a class="nav-link" href="{{URL('dashboard/cliente')}}">Cliente <span class="sr-only">(current)</span></a>
+        </li>
+
         <li class="nav-item">
           <a class="nav-link" href="{{url('logout')}}">Sair</a>
         </li>

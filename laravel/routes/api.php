@@ -21,3 +21,8 @@ Route::get("/pedidos",'PedidoController@pedidos');
 Route::get("/produtos",'ProdutoController@produtos');
 Route::post("/produto",'ProdutoController@storage');
 Route::delete("/produto/{id}",'ProdutoController@delete');
+
+
+Route::get("/clientes",'ClienteController@clientes');
+Route::post("/cliente",'ClienteController@storage');
+Route::delete("/cliente/{id}",'ClienteController@delete');

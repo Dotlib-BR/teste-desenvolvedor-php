@@ -74,7 +74,7 @@ class ProdutoController extends Controller
             }
 
             if(!$prod->delete()){
-                throw new Exception("Não foi possivel excluir o produto!");
+                throw new \Exception("Não foi possivel excluir o produto!");
             }
             
             return response()->json([

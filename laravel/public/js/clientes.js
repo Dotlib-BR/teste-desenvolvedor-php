@@ -1,54 +1,52 @@
 var search = null;
-var storageProduto = [];
-var ordem=['id','desc'];
+var storageCliente = [];
+var ordem = ["id", "desc"];
 
-function ordenar(field){
-   let order;
-   if(ordem[0]==field){
-      order = ordem[1] == "asc" ? "desc" : "asc";
-   }else{
-      order ="asc";
-   }
-   ordem = [field,order];
-   getProdutos(BASE_URL + "/api/produtos");
+function ordenar(field) {
+  let order;
+  if (ordem[0] == field) {
+    order = ordem[1] == "asc" ? "desc" : "asc";
+  } else {
+    order = "asc";
+  }
+
+  ordem = [field, order];
+  getClientes(BASE_URL + "/api/clientes");
 }
 
-function getProdutos(page = null) {
+function getClientes(page = null) {
   $.ajax({
-    url: page
-      ? page 
-      : BASE_URL + "/api/produtos" ,
+    url: page ? page : BASE_URL + "/api/clientes",
     type: "GET",
     dataType: "json",
-    data:{
-      "search":search,
-      "ordem":ordem
+    data: {
+      search: search,
+      ordem: ordem
     },
     success: function(data) {
-      storageProduto = data.data;
+      storageCliente = data.data;
       let htmlTabela = [];
       let htmlPaginacao;
 
       htmlTabela.push(`
       <thead>
       <th onClick="ordenar('id')">ID</th>
-      <th onClick="ordenar('codBarras')">Cód. Barras</th>
-      <th onClick="ordenar('nome')">Produto</th>
-      <th onClick="ordenar('valor')">Preço</th>
+      <th onClick="ordenar('nome')">Nome</th>
+      <th onClick="ordenar('cpf')">cpf</th>
+      <th onClick="ordenar('email')">E-mail</th>
       <th onClick="ordenar('created_at')">Data Registro</th>
       <th onClick="ordenar('updated_at')">Data Atualização</th>
       <th colspan="2">Ação</th>
       <tbody>
   </thead>
-      `)
+      `);
       $.each(data.data, function(index, row) {
-    
         htmlTabela.push(`
                       <tr>
                           <td>${row.id}</td>
-                          <td>${row.codBarras}</td>
                           <td>${row.nome}</td>
-                          <td>${row.valor}</td>
+                          <td>${row.cpf}</td>
+                          <td>${row.email}</td>
                           <td>${row.created_at}</td>
                           <td>${row.updated_at}</td>
                           <td>
@@ -90,37 +88,37 @@ function getProdutos(page = null) {
                 </ul>
               </nav>
                 `;
-      $("#tabela-produto").html(htmlTabela.join(""));
+      $("#tabela-clientes").html(htmlTabela.join(""));
       $("#paginacao").html(htmlPaginacao);
     }
   });
 }
 
 $(document).ready(function() {
-  getProdutos();
+  getClientes();
 
   $("input[name=search]").keyup(function() {
     search = this.value;
-    getProdutos();
+    getClientes();
   });
 
-  $("#novo-produto").click(function() {
-    $("#modal .modal-title").text("Cadastro de Produto");
+  $("#novo-cliente").click(function() {
+    $("#modal .modal-title").text("Cadastro de Cliente");
 
     $("#modal .modal-body").html(`
-       <form id="form-produto">
+       <form id="form-cliente">
 
        <div class="form-group">
-       <label>Cód. Barras</label>
-       <input type="text" name="codBarras" class="form-control" >
+       <label>Nome</label>
+       <input type="text" name="nome" class="form-control" >
    </div>
        <div class="form-group">
-           <label>Produto</label>
-           <input type="text" name="nome" class="form-control">
+           <label>CPF</label>
+           <input type="text" name="cpf" class="form-control">
        </div>
        <div class="form-group">
-           <label>Preço</label>
-           <input type="text" name="valor" class="form-control">
+           <label>E-mail</label>
+           <input type="text" name="email" class="form-control">
        </div>
        </form>`);
 
@@ -128,7 +126,7 @@ $(document).ready(function() {
   });
 
   $("#modal #salvar").click(function() {
-    let form = $("#modal #form-produto").serialize();
+    let form = $("#modal #form-cliente").serialize();
 
     $.ajaxSetup({
       headers: {
@@ -136,30 +134,27 @@ $(document).ready(function() {
       }
     });
     $.ajax({
-      url: BASE_URL + "/api/produto",
+      url: BASE_URL + "/api/cliente",
       type: "post",
       dataType: "json",
       data: form,
       success: function(data) {
-          if (data.success) {
-                      
-          $("#modal #form-produto").trigger("reset");
+        if (data.success) {
+          $("#modal #form-cliente").trigger("reset");
           $("#modal").modal("hide");
           search = null;
           order = null;
           $("input[name=search]").val("");
-          getProdutos();
-            swal("Sucesso!",data.message,"success");
-          }else if(!data.success && data.message){
-            swal("Alerta!",data.message,"warning");
-          }else{
-            swal("Erro!","Ocorreu um erro","error");
-          }
-          
-
+          getClientes();
+          swal("Sucesso!", data.message, "success");
+        } else if (!data.success && data.message) {
+          swal("Alerta!", data.message, "warning");
+        } else {
+          swal("Erro!", "Ocorreu um erro", "error");
+        }
       },
-      error:function(){
-
+      error: function() {
+        swal("Erro!", "Ocorreu um erro", "error");
       }
     });
   });
@@ -167,7 +162,7 @@ $(document).ready(function() {
 
 $(document).on("click", ".page-item", function() {
   if (!$(this).hasClass("disabled")) {
-    getProdutos(
+    getClientes(
       $(this)
         .find("a")
         .data("page")
@@ -175,84 +170,74 @@ $(document).on("click", ".page-item", function() {
   }
 });
 
-$(document).on("click", "#tabela-produto .editar", function() {
-  let produto = storageProduto[$(this).data("key")];
+$(document).on("click", "#tabela-clientes .editar", function() {
+  let cliente = storageCliente[$(this).data("key")];
 
-  $("#modal .modal-title").text("Atualização de Produto");
+  $("#modal .modal-title").text("Atualização de Cliente");
 
   $("#modal .modal-body").html(`
-       <form id="form-produto">
+       <form id="form-cliente">
 
        <div class="form-group">
-           <label>Cód. Barras</label>
-           <input type="text" name="codBarras" class="form-control" value="${
-             produto.codBarras
-           }">
-       </div>
-
-       <div class="form-group">
-           <label>Produto</label>
+           <label>Nome</label>
            <input type="text" name="nome" class="form-control" value="${
-             produto.nome
+             cliente.nome
+           }">
+       </div>
+
+       <div class="form-group">
+           <label>CPF</label>
+           <input type="text" name="cpf" class="form-control" value="${
+             cliente.cpf
            }">
        </div>
        <div class="form-group">
-           <label>Preço</label>
-           <input type="text" name="valor" class="form-control" value="${
-             produto.valor
+           <label>E-mail</label>
+           <input type="text" name="email" class="form-control" value="${
+             cliente.email
            }">
        </div>
-       <input type="hidden" name="id" value="${produto.id}">
+       <input type="hidden" name="id" value="${cliente.id}">
        </form>`);
 
-       $("#modal").modal("show");
+  $("#modal").modal("show");
 });
 
-
-
-$(document).on("click", "#tabela-produto .excluir", function() {
-  let produto = storageProduto[$(this).data("key")];
-
-  
+$(document).on("click", "#tabela-clientes .excluir", function() {
+  let cliente = storageCliente[$(this).data("key")];
 
   swal({
-    title: "Deseja Excluir o produto?",
-    text: "O produto será excluido definitivamente do sistema",
+    title: "Deseja Excluir o cliente?",
+    text: "O cliente será excluido definitivamente do sistema",
     icon: "warning",
     buttons: true,
-    dangerMode: true,
-  })
-  .then((willDelete) => {
+    dangerMode: true
+  }).then(willDelete => {
     if (willDelete) {
       $.ajaxSetup({
         headers: {
           "X-CSRF-TOKEN": $('meta[name="_token"]').attr("content")
         }
       });
-  
-   
+
       $.ajax({
-        url: BASE_URL + "/api/produto/"+produto.id,
+        url: BASE_URL + "/api/cliente/" + cliente.id,
         type: "delete",
         dataType: "json",
         success: function(data) {
           if (data.success) {
-            swal("Sucesso!",data.message,"success");
-            getProdutos();
-          }else if(!data.success && data.message){
-            swal("Alerta!",data.message,"warning");
-          }else{
-            swal("Erro!","Ocorreu um erro","error");
+            swal("Sucesso!", data.message, "success");
+            getClientes();
+          } else if (!data.success && data.message) {
+            swal("Alerta!", data.message, "warning");
+          } else {
+            swal("Erro!", "Ocorreu um erro", "error");
           }
-          
         },
-        error:function(){
-          swal("Erro!","Ocorreu um erro","error");
+        error: function() {
+          swal("Erro!", "Ocorreu um erro", "error");
         }
       });
     }
-
   });
-
-   
 });
