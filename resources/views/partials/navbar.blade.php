@@ -12,14 +12,28 @@
                 <li class="nav-item active">
                     <a class="nav-link text-white" href="{{ route('home') }}">Home</a>
                 </li>
+
+                <!-- Clients -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdownClients" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Clientes
                     </a>
 
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownClients">
                         <a class="dropdown-item" href="{{ route('clients.index') }}">Ver Todos</a>
                         <a class="dropdown-item" href="{{ route('clients.create') }}">Adicionar Novo</a>
+                    </div>
+                </li>
+
+                <!-- Products -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdownProducts" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Produtos
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
+                        <a class="dropdown-item" href="{{ route('products.index') }}">Ver Todos</a>
+                        <a class="dropdown-item" href="{{ route('products.create') }}">Adicionar Novo</a>
                     </div>
                 </li>
             </ul>

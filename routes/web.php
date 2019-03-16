@@ -21,4 +21,7 @@ Route::middleware(['auth'])
 
         // Clients
         Route::resource('clients', 'ClientController');
+
+        // Products
+        Route::resource('products', 'ProductController');
 });
