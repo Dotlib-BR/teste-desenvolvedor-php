@@ -1,6 +1,7 @@
 var search = null;
 var storageProduto = [];
 var ordem=['id','desc'];
+var paginaAtual;
 
 function ordenar(field){
    let order;
@@ -28,7 +29,7 @@ function getProdutos(page = null) {
       storageProduto = data.data;
       let htmlTabela = [];
       let htmlPaginacao;
-
+      paginaAtual = data.data.path+"?page="+data.data.current_page;
       htmlTabela.push(`
       <thead>
       <th onClick="ordenar('id')">ID</th>
@@ -48,7 +49,7 @@ function getProdutos(page = null) {
                           <td>${row.id}</td>
                           <td>${row.codBarras}</td>
                           <td>${row.nome}</td>
-                          <td>${row.valor}</td>
+                          <td>${row.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>
                           <td>${row.created_at}</td>
                           <td>${row.updated_at}</td>
                           <td>
@@ -238,7 +239,7 @@ $(document).on("click", "#tabela-produto .excluir", function() {
         success: function(data) {
           if (data.success) {
             swal("Sucesso!",data.message,"success");
-            getProdutos();
+            getProdutos(paginaAtual);
           }else if(!data.success && data.message){
             swal("Alerta!",data.message,"warning");
           }else{

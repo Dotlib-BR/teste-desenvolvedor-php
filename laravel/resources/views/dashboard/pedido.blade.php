@@ -14,9 +14,59 @@
 
 <div class="col-md-12" id="paginacao" sytle="margin-top:10px;"></div>
 
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo-modal"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+               
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Complementar-->
+<div class="modal fade" id="modal-complementar" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo-modal"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+               
+            </div>
+
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Complementar form-->
+<div class="modal fade" id="modal-complementar-form" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
@@ -37,6 +87,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script src="{{URL('js/pedido.js')}}"></script>
 @endsection
