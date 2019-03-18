@@ -14,7 +14,7 @@ class CreatePedidosTable extends Migration
     public function up()
     {
         Schema::create('pedidos', function (Blueprint $table) {
-            $table->bigIncrements('Id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('ClienteId');
             $table->unsignedBigInteger('ProdutoId');
             $table->dateTime('DtPedido');
@@ -23,8 +23,8 @@ class CreatePedidosTable extends Migration
 
             // $table->timestamps();
 
-            $table->foreign('ClienteId')->references('Id')->on('clientes');
-            $table->foreign('ProdutoId')->references('Id')->on('produtos');
+            $table->foreign('ClienteId')->references('id')->on('clientes');
+            $table->foreign('ProdutoId')->references('id')->on('produtos');
         });
     }
 
