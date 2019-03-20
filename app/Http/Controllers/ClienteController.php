@@ -9,9 +9,36 @@ class ClienteController extends Controller
 {
     public function getAll()
     {
+        $builder = Cliente::query();
+
+        if (request('sortBy') !== null) 
+        {
+            $direction = request('descending') === 'false' ? 'asc' : 'desc';
+            $builder = $builder->orderBy(request('sortBy'), $direction);
+        }
+
+        $data = null;
+        $total = 0;
+        $qtdPages = intval(request('rowsPerPage'));
+
+        if ($qtdPages > 0)
+        {
+            $paginator = $builder->paginate($qtdPages);
+            $data = $paginator->getCollection();
+            $total = $paginator->total();
+        }
+        else
+        {
+            $data = $builder->get();
+            $total = $data->count();
+        }
+
         return response()->json([
             'status' => 'ok',
-            'result' => Cliente::all()
+            'result' => [
+                'data' => $data,
+                'total' => $total
+                ]
         ]);
     }
 
@@ -97,6 +124,38 @@ class ClienteController extends Controller
             'status' => 'ok',
             'message' => 'O cliente ' . $newCliente->Nome . ' foi criado com sucesso!',
             'result' => $newCliente
+        ]);
+    }
+
+    public function deleteMultiple() 
+    {
+        $response = [];
+
+        foreach (request('ids') as $id)
+        {
+            $cliente = Cliente::find(intval($id));
+
+            if ($cliente)
+            {
+                $qtdPedidos = Pedido::where('ClienteId', $cliente->id)->get()->count();
+                if ($qtdPedidos > 0)
+                {
+                    $response[$id] = 'O cliente ' . $cliente->Nome . ' não pode ser deletado, pois existem pedidos em seu nome!';
+                }
+                else
+                {
+                    $cliente->delete();
+                    $response[$id] = 'O cliente ' . $cliente->Nome . ' foi deletado com sucesso!';
+                }
+            }
+            else
+            {
+                $response[$id] = "Não existe um cliente com id " . $id . ".";
+            }
+        }
+        return response()->json([
+            'status' => 'ok',
+            'result' => $response
         ]);
     }
 }

@@ -9,9 +9,36 @@ class PedidoController extends Controller
 {
     public function getAll()
     {
+        $builder = Pedido::with(['cliente', 'produto']);
+
+        if (request('sortBy') !== null) 
+        {
+            $direction = request('descending') === 'false' ? 'asc' : 'desc';
+            $builder = $builder->orderBy(request('sortBy'), $direction);
+        }
+
+        $data = null;
+        $total = 0;
+        $qtdPages = intval(request('rowsPerPage'));
+
+        if ($qtdPages > 0)
+        {
+            $paginator = $builder->paginate($qtdPages);
+            $data = $paginator->getCollection();
+            $total = $paginator->total();
+        }
+        else
+        {
+            $data = $builder->get();
+            $total = $data->count();
+        }
+
         return response()->json([
             'status' => 'ok',
-            'result' => Pedido::all()
+            'result' => [
+                'data' => $data,
+                'total' => $total
+                ]
         ]);
     }
 
@@ -112,6 +139,30 @@ class PedidoController extends Controller
             'status' => 'ok',
             'message' => 'O pedido ' . $newPedido->id . ' foi criado com sucesso!',
             'result' => $newPedido
+        ]);
+    }
+
+    public function deleteMultiple() 
+    {
+        $response = [];
+
+        foreach (request('ids') as $id)
+        {
+            $pedido = Pedido::find(intval($id));
+
+            if ($pedido)
+            {
+                $pedido->delete();
+                $response[$id] = 'O pedido ' . $pedido->id . ' foi deletado com sucesso!';
+            }
+            else
+            {
+                $response[$id] = "Não existe um pedido com id " . $id . ".";
+            }
+        }
+        return response()->json([
+            'status' => 'ok',
+            'result' => $response
         ]);
     }
 }

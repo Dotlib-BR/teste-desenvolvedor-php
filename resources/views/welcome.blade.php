@@ -1,99 +1,123 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>dotlib CRUD</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <v-app>
 
-        <title>Laravel</title>
+      <v-navigation-drawer v-model="drawer" fixed app>
+        <v-list dense>
+          <v-list-tile @click="drawer = !drawer" v-if="this.$vuetify.breakpoint.smAndDown">
+            <v-list-tile-action>
+              <v-icon>close</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              FECHAR
+            </v-list-tile-content>              
+          </v-list-tile>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+          <v-list-group>
+            <v-list-tile slot="activator">
+              <v-list-tile-action>
+                <v-icon>person</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  CLIENTES
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+            <v-list-tile>
+              <v-list-tile-action></v-list-tile-action>
+              <v-list-tile-content>
+                CRIAR NOVO CLIENTE
+              </v-list-tile-content>              
+            </v-list-tile>
 
-            .full-height {
-                height: 100vh;
-            }
+            <v-list-tile to='/'>
+              <v-list-tile-action></v-list-tile-action>
+              <v-list-tile-content>
+                LISTAR TODOS CLIENTES
+              </v-list-tile-content>              
+            </v-list-tile>
+          </v-list-group>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+          <v-list-group>
+            <v-list-tile slot="activator">
+              <v-list-tile-action>
+                <v-icon>shopping_cart</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  PRODUTOS
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
 
-            .position-ref {
-                position: relative;
-            }
+            <v-list-tile>
+              <v-list-tile-action></v-list-tile-action>
+              <v-list-tile-content>
+                CRIAR NOVO PRODUTO
+              </v-list-tile-content>              
+            </v-list-tile>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+            <v-list-tile to='/listaProdutos'>
+              <v-list-tile-action></v-list-tile-action>
+              <v-list-tile-content>
+                LISTAR TODOS PRODUTOS
+              </v-list-tile-content>              
+            </v-list-tile>
+          </v-list-group>
 
-            .content {
-                text-align: center;
-            }
+          <v-list-group>
+            <v-list-tile slot="activator">
+              <v-list-tile-action>
+                <v-icon>bookmark</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  PEDIDOS
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
 
-            .title {
-                font-size: 84px;
-            }
+            <v-list-tile>
+              <v-list-tile-action></v-list-tile-action>
+              <v-list-tile-content>
+                CRIAR NOVO PEDIDO
+              </v-list-tile-content>              
+            </v-list-tile>
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+            <v-list-tile to="/listaPedidos">
+              <v-list-tile-action></v-list-tile-action>
+              <v-list-tile-content>
+                LISTAR TODOS PEDIDOS
+              </v-list-tile-content>              
+            </v-list-tile>
+          </v-list-group>
+        </v-list>
+      </v-navigation-drawer>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+      <v-toolbar color="primary" dark fixed app>
+        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-toolbar-title>dotlib</v-toolbar-title>
+      </v-toolbar>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+      <v-content>
+        <v-container fluid fill-height>
+          <router-view></router-view>
+        </v-container>
+      </v-content>
+    </v-app>
+  </div>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
+  <script src="{{ asset('js/app.js') }}"></script>
+</body>
 </html>

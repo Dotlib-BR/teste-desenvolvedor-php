@@ -18,15 +18,18 @@ Route::get('/clientes/{cliente}', 'ClienteController@get');
 Route::post('/clientes', 'ClienteController@createNew');
 Route::put('/clientes/{cliente}', 'ClienteController@update');
 Route::delete('/clientes/{cliente}', 'ClienteController@delete');
+Route::delete('/clientes', 'ClienteController@deleteMultiple');
 
 Route::get('/produtos', 'ProdutoController@getAll');
 Route::get('/produtos/{produto}', 'ProdutoController@get');
 Route::post('/produtos', 'ProdutoController@createNew');
 Route::put('/produtos/{produto}', 'ProdutoController@update');
 Route::delete('/produtos/{produto}', 'ProdutoController@delete');
+Route::delete('/produtos', 'ProdutoController@deleteMultiple');
 
 Route::get('/pedidos', 'PedidoController@getAll');
 Route::get('/pedidos/{pedido}', 'PedidoController@get');
 Route::post('/pedidos', 'PedidoController@createNew');
 Route::put('/pedidos/{pedido}', 'PedidoController@update');
 Route::delete('/pedidos/{pedido}', 'PedidoController@delete');
+Route::delete('/pedidos', 'PedidoController@deleteMultiple');

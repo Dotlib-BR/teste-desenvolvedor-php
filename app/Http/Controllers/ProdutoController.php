@@ -9,9 +9,36 @@ class ProdutoController extends Controller
 {
     public function getAll()
     {
+        $builder = Produto::query();
+
+        if (request('sortBy') !== null) 
+        {
+            $direction = request('descending') === 'false' ? 'asc' : 'desc';
+            $builder = $builder->orderBy(request('sortBy'), $direction);
+        }
+
+        $data = null;
+        $total = 0;
+        $qtdPages = intval(request('rowsPerPage'));
+
+        if ($qtdPages > 0)
+        {
+            $paginator = $builder->paginate($qtdPages);
+            $data = $paginator->getCollection();
+            $total = $paginator->total();
+        }
+        else
+        {
+            $data = $builder->get();
+            $total = $data->count();
+        }
+
         return response()->json([
             'status' => 'ok',
-            'result' => Produto::all()
+            'result' => [
+                'data' => $data,
+                'total' => $total
+                ]
         ]);
     }
 
@@ -99,6 +126,38 @@ class ProdutoController extends Controller
             'status' => 'ok',
             'message' => 'O produto ' . $newProduto->Nome . ' foi criado com sucesso!',
             'result' => $newProduto
+        ]);
+    }
+
+    public function deleteMultiple() 
+    {
+        $response = [];
+
+        foreach (request('ids') as $id)
+        {
+            $produto = Produto::find(intval($id));
+
+            if ($produto)
+            {
+                $qtdPedidos = Pedido::where('ProdutoId', $produto->id)->get()->count();
+                if ($qtdPedidos > 0)
+                {
+                    $response[$id] = 'O produto ' . $produto->Nome . ' não pode ser deletado, pois está presente em algum pedido!';
+                }
+                else
+                {
+                    $produto->delete();
+                    $response[$id] = 'O produto ' . $produto->Nome . ' foi deletado com sucesso!';
+                }
+            }
+            else
+            {
+                $response[$id] = "Não existe um produto com id " . $id . ".";
+            }
+        }
+        return response()->json([
+            'status' => 'ok',
+            'result' => $response
         ]);
     }
 }

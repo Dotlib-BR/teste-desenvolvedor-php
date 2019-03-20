@@ -27,7 +27,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
         Schema::defaultStringLength(191);
 
         Validator::extend('nao_vazio', function($attr, $value, $params) {
