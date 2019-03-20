@@ -52,7 +52,7 @@
                         <td>{{ $order->number }}</td>
                         <td>{{ $order->order_date }}</td>
                         <td>{{ $order->status }}</td>
-                        <td>{{ $order->client->name }}</td>
+                        <td><a href="{{route('clients.show', $order->client->id)}}">{{ $order->client->name }}</a></td>
                         <td width="130px;">
                             <a
                                 href="{{ route('orders.show', $order->id) }}"
