@@ -26,6 +26,12 @@ class Client extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getAllOrderByName(Type $var = null)
+    {
+        return $this->orderBy('name')
+            ->get();
+    }
+
     /**
      * Get the formated client's cpf.
      *

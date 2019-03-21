@@ -24,4 +24,9 @@ Route::middleware(['auth'])
 
         // Products
         Route::resource('products', 'ProductController');
+
+        // Orders
+        Route::get('orders/add-to-cart', 'OrderController@addToCart');
+        Route::get('orders/remove-from-cart', 'OrderController@removeFromCart');
+        Route::resource('orders', 'OrderController');
 });

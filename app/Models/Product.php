@@ -26,4 +26,12 @@ class Product extends Model
     {
         return number_format($this->price, 2, ',' , '.');
     }
+
+    /**
+     * Get the orders record's associated with the product.
+     */
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_products');
+    }
 }

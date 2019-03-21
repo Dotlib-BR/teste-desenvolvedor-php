@@ -36,6 +36,18 @@
                         <a class="dropdown-item" href="{{ route('products.create') }}">Adicionar Novo</a>
                     </div>
                 </li>
+
+                <!-- Orders -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdownOrders" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pedidos
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownOrders">
+                        <a class="dropdown-item" href="{{ route('orders.index') }}">Ver Todos</a>
+                        <a class="dropdown-item" href="{{ route('orders.create') }}">Adicionar Novo</a>
+                    </div>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

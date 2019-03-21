@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             ClientsTableSeeder::class,
             ProductsTableSeeder::class,
             StatusesTableSeeder::class,
+            OrdersTableSeeder::class,
+            OrderProductsTableSeeder::class,
         ]);
     }
 }
