@@ -90,6 +90,7 @@
             </v-btn>
 
             <v-btn
+              @click="editarPedido"
               dark
               fab
               small
@@ -190,6 +191,17 @@ export default {
       this.pedidos = data.result.data
       this.totalItens = data.result.total
       this.loading = false
+    },
+
+    editarPedido() {
+      this.noSelectedItemError = false
+
+      if (this.selected.length === 0) {
+        this.noSelectedItemError = true
+      } else {
+        localStorage.setItem('pedido-edit-id', this.selected[0].id)
+        this.$router.push('/editarPedido')
+      }
     },
 
     async deleteItems() {

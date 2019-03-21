@@ -85,6 +85,7 @@
             </v-btn>
 
             <v-btn
+              @click="editarProduto"
               dark
               fab
               small
@@ -169,6 +170,17 @@ export default {
       this.produtos = data.result.data
       this.totalItens = data.result.total
       this.loading = false
+    },
+
+    editarProduto() {
+      this.noSelectedItemError = false
+
+      if (this.selected.length === 0) {
+        this.noSelectedItemError = true
+      } else {
+        localStorage.setItem('produto-edit-id', this.selected[0].id)
+        this.$router.push('/editarProduto')
+      }
     },
 
     async deleteItems() {

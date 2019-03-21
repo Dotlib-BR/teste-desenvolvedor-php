@@ -34,7 +34,7 @@
               </v-list-tile-content>
             </v-list-tile>
 
-            <v-list-tile>
+            <v-list-tile to="/novoCliente">
               <v-list-tile-action></v-list-tile-action>
               <v-list-tile-content>
                 CRIAR NOVO CLIENTE
@@ -61,7 +61,7 @@
               </v-list-tile-content>
             </v-list-tile>
 
-            <v-list-tile>
+            <v-list-tile to="/novoProduto">
               <v-list-tile-action></v-list-tile-action>
               <v-list-tile-content>
                 CRIAR NOVO PRODUTO
@@ -88,7 +88,7 @@
               </v-list-tile-content>
             </v-list-tile>
 
-            <v-list-tile>
+            <v-list-tile to="/novoPedido">
               <v-list-tile-action></v-list-tile-action>
               <v-list-tile-content>
                 CRIAR NOVO PEDIDO

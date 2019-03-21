@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Validator::extend('nao_vazio', function($attr, $value, $params) {
-            if (empty($value)) return false;
+            if ($value !== 0 && empty($value)) return false;
             return true;
         }, 'O :attribute não pode ser vazio');
 

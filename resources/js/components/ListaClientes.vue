@@ -90,7 +90,8 @@
               dark
               fab
               small
-              color="yellow darken-4">
+              color="yellow darken-4"
+              @click="editarCliente">
               <v-icon>edit</v-icon>
             </v-btn>
           
@@ -171,6 +172,17 @@ export default {
       this.clientes = data.result.data
       this.totalItens = data.result.total
       this.loading = false
+    },
+
+    editarCliente() {
+      this.noSelectedItemError = false
+
+      if (this.selected.length === 0) {
+        this.noSelectedItemError = true
+      } else {
+        localStorage.setItem('cliente-edit-id', this.selected[0].id)
+        this.$router.push('/editarCliente')
+      }
     },
 
     async deleteItems() {
