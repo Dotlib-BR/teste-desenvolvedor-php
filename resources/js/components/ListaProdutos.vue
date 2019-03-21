@@ -10,6 +10,16 @@
         
         <v-card-text>
 
+          <Filtro v-for="(filtro, idx) in filtros" :key='idx' :fields="headers" :filter="filtro" v-on:remove="removerFiltro(idx)"/>
+
+          <v-btn color="cyan darken-3" dark @click="addFiltro">
+            Adicionar Filtro
+          </v-btn>
+
+          <v-btn v-if="this.filtros.length > 0" color="cyan darken-1" dark @click="fetchData">
+            Aplicar Filtros
+          </v-btn>
+
           <v-alert
             :value="noSelectedItemError"
             type="error"
@@ -90,7 +100,12 @@
 </template>
 
 <script>
+import Filtro from './Filtro.vue'
 export default {
+
+  components: {
+    Filtro
+  },
 
   watch: {
     pagination: {
@@ -103,6 +118,7 @@ export default {
 
   data() {
     return {
+      filtros: [],
       noSelectedItemError: false,
       showDeletedMsg: false,
       deletedMsg: '',
@@ -122,11 +138,33 @@ export default {
 
   methods: {
     async fetchData() {
-      this.loading = true
-      let { data } = await axios.get('/api/produtos', {
-        params: {
+      let filters = {}
+
+      this.filtros.forEach(filtro => {
+        if (!!filtro.value) {
+          if (!filters.hasOwnProperty(filtro.field)) {
+            filters[filtro.field] = []
+          }
+          filters[filtro.field].push(filtro.value)
+        }
+      })
+
+      let params = null
+
+      if (_.isEmpty(filters)) {
+        params = {
           ...this.pagination
         }
+      } else {
+        params = {
+          ...this.pagination,
+          filters
+        }
+      }
+
+      this.loading = true
+      let { data } = await axios.get('/api/produtos', {
+        params
       })
       this.produtos = data.result.data
       this.totalItens = data.result.total
@@ -155,6 +193,14 @@ export default {
         this.showDeletedMsg = true
         this.fetchData()
       }
+    },
+
+    addFiltro() {
+      this.filtros.push({field: '', value: ''})
+    },
+
+    removerFiltro(idx) {
+      this.filtros.splice(idx, 1)
     }
   }
 }

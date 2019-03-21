@@ -9,7 +9,33 @@ class PedidoController extends Controller
 {
     public function getAll()
     {
+        $fields = ["ClienteId", "ProdutoId", "Quantidade", "DtPedido", "Status"];
         $builder = Pedido::with(['cliente', 'produto']);
+        $filtros = json_decode(request('filters'), true);
+
+        if ($filtros !== null)
+        {
+            foreach ($fields as $field)
+            {
+                if (array_key_exists($field, $filtros))
+                {
+                    $builder->where(function($query) use ($filtros, $field) {
+                        foreach ($filtros[$field] as $key => $value)
+                        {
+                            $searchValue = $field === 'DtPedido' ? '%' . $value . '%' : $value;
+                            if ($key === 0)
+                            {
+                                $query->where($field, 'LIKE', $searchValue);
+                            }
+                            else
+                            {
+                                $query->orWhere($field, 'LIKE', $searchValue);
+                            }
+                        }
+                    });
+                }
+            }
+        }
 
         if (request('sortBy') !== null) 
         {

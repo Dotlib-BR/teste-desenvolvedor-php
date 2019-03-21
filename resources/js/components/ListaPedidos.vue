@@ -10,6 +10,16 @@
         
         <v-card-text>
 
+          <Filtro v-for="(filtro, idx) in filtros" :key='idx' :fields="headers" :filter="filtro" v-on:remove="removerFiltro(idx)"/>
+
+          <v-btn color="cyan darken-3" dark @click="addFiltro">
+            Adicionar Filtro
+          </v-btn>
+
+          <v-btn v-if="this.filtros.length > 0" color="cyan darken-1" dark @click="fetchData">
+            Aplicar Filtros
+          </v-btn>
+
           <v-alert
             :value="noSelectedItemError"
             type="error"
@@ -40,8 +50,8 @@
               <tr :active="props.selected" @click="props.selected = !props.selected" >
                 <td><v-checkbox :input-value="props.selected" primary hide-details></v-checkbox></td>
 
-                <td v-text="`${props.item.ClienteId} - ${props.item.cliente.Nome}`"></td>
-                <td v-text="`${props.item.ProdutoId} - ${props.item.produto.Nome}`"></td>
+                <td v-text="`${props.item.cliente.Nome} (${props.item.ClienteId})`"></td>
+                <td v-text="`${props.item.produto.Nome} (${props.item.ProdutoId})`"></td>
                 <td v-text="props.item.Quantidade"></td>
                 <td v-text="props.item.DtPedido"></td>
                 <td v-text="nomeStatus[props.item.Status + 1]"></td>
@@ -95,7 +105,12 @@
 </template>
 
 <script>
+import Filtro from './Filtro.vue'
 export default {
+
+  components: {
+    Filtro
+  },
 
   watch: {
     pagination: {
@@ -108,6 +123,7 @@ export default {
 
   data() {
     return {
+      filtros: [],
       nomeStatus: ['Cancelado', 'Em Aberto', 'Pago'],
       noSelectedItemError: false,
       showDeletedMsg: false,
@@ -119,8 +135,8 @@ export default {
       selected: [],
       pedidos: [],
       headers: [
-        { text: 'Cliente', value: 'ClienteId' },
-        { text: 'Produto', value: 'ProdutoId' },
+        { text: 'Cliente (ID)', value: 'ClienteId' },
+        { text: 'Produto (ID)', value: 'ProdutoId' },
         { text: 'Quantidade', value: 'Quantidade' },
         { text: 'Data', value: 'DtPedido' },
         { text: 'Status', value: 'Status' }
@@ -130,11 +146,46 @@ export default {
 
   methods: {
     async fetchData() {
-      this.loading = true
-      let { data } = await axios.get('/api/pedidos', {
-        params: {
+      let filters = {}
+
+      this.filtros.forEach(filtro => {
+        if (!!filtro.value) {
+          if (!filters.hasOwnProperty(filtro.field)) {
+            filters[filtro.field] = []
+          }
+          filters[filtro.field].push(filtro.value)
+        }
+      })
+
+      let params = null
+
+      if (_.isEmpty(filters)) {
+        params = {
           ...this.pagination
         }
+      } else {
+
+        if (filters.hasOwnProperty('Status')) {
+          filters['Status'] = filters['Status'].map(i => {
+              if (i.toUpperCase() === 'CANCELADO')
+                return -1;
+              else if (i.toUpperCase() === 'ABERTO' || i.toUpperCase() === 'EM ABERTO')
+                return 0;
+              else if (i.toUpperCase() == 'PAGO')
+                return 1;
+              else return -2;
+            }).filter(i => i == 1 || i == 0 || i == -1)
+        }
+
+        params = {
+          ...this.pagination,
+          filters
+        }
+      }
+
+      this.loading = true
+      let { data } = await axios.get('/api/pedidos', {
+        params
       })
       this.pedidos = data.result.data
       this.totalItens = data.result.total
@@ -163,6 +214,14 @@ export default {
         this.showDeletedMsg = true
         this.fetchData()
       }
+    },
+
+    addFiltro() {
+      this.filtros.push({field: '', value: ''})
+    },
+
+    removerFiltro(idx) {
+      this.filtros.splice(idx, 1)
     }
   }
 }

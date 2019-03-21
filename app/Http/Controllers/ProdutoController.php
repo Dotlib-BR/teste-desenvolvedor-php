@@ -9,7 +9,32 @@ class ProdutoController extends Controller
 {
     public function getAll()
     {
+        $fields = ["CodBarras", "Nome", "ValorUnitario"];
         $builder = Produto::query();
+        $filtros = json_decode(request('filters'), true);
+
+        if ($filtros !== null)
+        {
+            foreach ($fields as $field)
+            {
+                if (array_key_exists($field, $filtros))
+                {
+                    $builder->where(function($query) use ($filtros, $field) {
+                        foreach ($filtros[$field] as $key => $value)
+                        {
+                            if ($key === 0)
+                            {
+                                $query->where($field, 'LIKE', '%' . $value . '%');
+                            }
+                            else
+                            {
+                                $query->orWhere($field, 'LIKE', '%' . $value . '%');
+                            }
+                        }
+                    });
+                }
+            }
+        }
 
         if (request('sortBy') !== null) 
         {
