@@ -46,6 +46,8 @@ Devem ser utilizadas as seguintes tecnologias:
 
 Para iniciar o teste, faça um fork deste repositório, crie uma branch com o seu nome completo e depois envie-nos o pull request. Se você apenas clonar o repositório não vai conseguir fazer push e depois vai ser mais complicado fazer o pull request.
 
+Envie também seu currículo atualizado para o email curriculo@dotlib.com.br.
+
 ## Bônus
 
 - Implementar autenticação de usuário na aplicação.
