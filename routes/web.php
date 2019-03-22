@@ -28,5 +28,7 @@ Route::middleware(['auth'])
         // Orders
         Route::get('orders/add-to-cart', 'OrderController@addToCart');
         Route::get('orders/remove-from-cart', 'OrderController@removeFromCart');
+        Route::get('orders/filter', 'OrderController@filter')->name('orders.filter');
+        Route::get('orders/paginate', 'OrderController@paginate')->name('orders.paginate');
         Route::resource('orders', 'OrderController');
 });

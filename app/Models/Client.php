@@ -26,6 +26,14 @@ class Client extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get the order records associated with the client.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function getAllOrderByName(Type $var = null)
     {
         return $this->orderBy('name')

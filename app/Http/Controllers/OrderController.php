@@ -10,8 +10,8 @@ use App\Models\Product;
 use App\Models\Status;
 use App\Services\CartService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -22,10 +22,13 @@ class OrderController extends Controller
      */
     public function index(Order $order)
     {
-        $orders = Order::with('status')
+        $orders = $order->load(['status', 'client'])
+            ->whereHas('client', function ($q) {
+                $q->where('user_id', Auth::user()->id);
+            })
             ->orderBy('date_order', 'desc')
             ->get();
-        
+
         return view('order.index', compact('orders'));
     }
 
@@ -40,7 +43,7 @@ class OrderController extends Controller
         $statuses = Status::all();
         $products = Product::all();
         $clients = $client->getAllOrderByName();
-        
+
         return view('order.manage', compact('statuses', 'products', 'clients'));
     }
 
@@ -90,9 +93,9 @@ class OrderController extends Controller
         $clients = $client->getAllOrderByName();
         $order->load(['client', 'status']);
         $cartService->loadCart($order);
-        
+
         // $order->putProductsInCart();
-        
+
         return view('order.manage', compact('statuses', 'order', 'products', 'clients'));
     }
 
@@ -108,10 +111,10 @@ class OrderController extends Controller
         DB::transaction(function () use ($request, $order) {
             $order->fill($request->all())
                 ->save();
-                
+
             $order->products()
                 ->detach();
-                
+
             $order->products()
                 ->attach($request->input('cart'));
         });
@@ -138,21 +141,84 @@ class OrderController extends Controller
             ->with('success', 'Pedido removido com sucesso com sucesso!');
     }
 
+    public function filter(Request $request, Order $order, Client $client)
+    {
+        $page = $request->input('paged');
+        $search = $request->input('search');
+        $filters = $request->input('filter');
+        $query = $order->newQuery()
+            ->with('client')
+            ->whereHas('client', function ($q) use ($search, $filters) {
+                $q->where('clients.user_id', Auth::user()->id);
+
+                    if ($filters && in_array('name', $filters)) {
+                        $q->where('clients.name', 'LIKE', '%' . $search . '%');
+                    }
+            });
+            
+        if ($filters) {
+            // Status
+            if (in_array('status_id', $filters)) {
+                $query->whereHas('status', function ($q) use ($search) {
+                    $q->where('name', $search);
+                });
+            }
+    
+            // Number
+            if (in_array('number', $filters)) {
+                $query->where('orders.number', 'LIKE', '%' . $search . '%');
+            }
+    
+            // Discount
+            if (in_array('discount', $filters)) {
+                $query->where('orders.discount', 'LIKE', '%' . $search . '%');
+            }
+    
+            // Date Order
+            if (in_array('date_order', $filters)) {
+                $dateFilter = implode('-', array_reverse(explode('/', $search)));
+                $query->whereDate('orders.date_order', 'LIKE', '%' . $dateFilter . '%');
+            };
+        }
+
+        $orders = $query->paginate($page)
+            ->appends($request->except('page'));
+        
+        return view('order.index', compact('orders'));
+    }
+
+    /**
+     * Add item to session cart.
+     *
+     * @param  Request $request
+     * @param  CartService $cartService
+     *
+     * @return Illuminate\Http\Response
+     */
     public function addToCart(Request $request, CartService $cartService)
     {
         $quantity = $request->input("quantity");
         $product = Product::find($request->input('product_id'));
-        
+
         $cartService->addToCart($product, $quantity);
         $cart = $cartService->getCart();
-        
+
         return response()->json([
             'status' => true,
             'cart' => $cart,
         ]);
     }
 
-    public function removeFromCart(Request $request, CartService $cartService) {
+    /**
+     * Remove item from session cart.
+     *
+     * @param  Request $request
+     * @param  CartService $cartService
+     *
+     * @return Illuminate\Http\Response
+     */
+    public function removeFromCart(Request $request, CartService $cartService)
+    {
         $cartService->removeFromCart($request->input('product_id'));
         $cart = $cartService->getCart();
 

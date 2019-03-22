@@ -36665,7 +36665,12 @@ $(function () {
     }
 
     $('.products-added').html(lines);
-  }
+  } // Paginate
+
+
+  $('#paged').on('change', function () {
+    $(this).parents('form').submit();
+  });
 });
 
 /***/ }),
