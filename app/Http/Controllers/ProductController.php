@@ -16,7 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('name')->get();
+        $products = Product::orderBy('name')
+            ->paginate(20);
         
         return view('product.index', compact('products'));
     }
@@ -104,5 +105,41 @@ class ProductController extends Controller
         return redirect()
             ->route('products.index')
             ->with('success', 'Produto removido com sucesso!');
+    }
+
+    /**
+     * Filter products
+     *
+     * @param  Request $request
+     * @param  Product $client
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filter(Request $request, Product $product)
+    {
+        $page = $request->input('paged');
+        $search = $request->input('search');
+        $filters = $request->input('filter');
+        
+        $query = $product->newQuery();
+
+        if ($filters) {
+            if (in_array('name', $filters)) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            }
+    
+            if (in_array('price', $filters)) {
+                $query->where('price', 'LIKE', '%' . $search . '%');
+            }
+            
+            if (in_array('bar_code', $filters)) {
+                $query->where('bar_code', 'LIKE', '%' . $search . '%');
+            }
+        }
+        
+        $products = $query->paginate($page)
+            ->appends($request->except('page'));
+        
+        return view('product.index', compact('products'));
     }
 }

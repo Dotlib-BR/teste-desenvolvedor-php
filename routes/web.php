@@ -24,6 +24,7 @@ Route::middleware(['auth'])
         Route::resource('clients', 'ClientController');
 
         // Products
+        Route::get('products/filter', 'ProductController@filter')->name('products.filter');
         Route::resource('products', 'ProductController');
 
         // Orders
