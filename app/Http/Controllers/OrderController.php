@@ -143,9 +143,12 @@ class OrderController extends Controller
 
     public function filter(Request $request, Order $order, Client $client)
     {
-        $page = $request->input('paged');
+        $page = $request->input('paged') ?? 20;
         $search = $request->input('search');
         $filters = $request->input('filter');
+        $orderBy = $request->input('order');
+        $sortBy = $request->input('sort');
+        
         $query = $order->newQuery()
             ->with('client')
             ->whereHas('client', function ($q) use ($search, $filters) {
@@ -160,7 +163,7 @@ class OrderController extends Controller
             // Status
             if (in_array('status_id', $filters)) {
                 $query->whereHas('status', function ($q) use ($search) {
-                    $q->where('name', $search);
+                    $q->where('status.name', $search);
                 });
             }
     
@@ -179,6 +182,10 @@ class OrderController extends Controller
                 $dateFilter = implode('-', array_reverse(explode('/', $search)));
                 $query->whereDate('orders.date_order', 'LIKE', '%' . $dateFilter . '%');
             };
+        }
+
+        if ($orderBy && $sortBy) {
+            $query->orderBy($orderBy, $sortBy);
         }
 
         $orders = $query->paginate($page)

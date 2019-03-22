@@ -45,10 +45,16 @@
                 @if (isset($products))
                     @component('components.table')
                         <thead>
-                                <th>Nome</th>
-                                <th>Preço</th>
-                                <th>Código de Barras</th>
-                                <th></th>
+                            <th>
+                                <a class="text-muted" href="{{ route('products.filter', ['order' => 'name', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">Nome</a>
+                            </th>
+                            <th>
+                                <a class="text-muted" href="{{ route('products.filter', ['order' => 'price', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">Preço</a>
+                            </th>
+                            <th>
+                                <a class="text-muted" href="{{ route('products.filter', ['order' => 'bar_code', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">Código de Barras</a>
+                            </th>
+                            <th></th>
                         </thead>
 
                         <tbody>

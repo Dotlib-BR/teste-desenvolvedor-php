@@ -18,37 +18,43 @@
             </div>
 
             <div class="col-12 mb-3">
-                    <form action="{{ route('clients.filter') }}" method="get">
-                        <div class="row">
-                            <div class="col-12 mb-3">
-                                @component('components.card')
-                                    @include('partials.filter', [
-                                        'count_results' => request()->get('filter') ? $clients->count() : '',
-                                        'options' => [
-                                            'name' => 'Nome',
-                                            'email' => 'E-mail',
-                                            'cpf' => 'CPF',
-                                        ],
-                                        'placeholder' => 'Busque pelo nome, e-mail ou cpf do cliente.'
-                                    ])
-                                @endcomponent
-                            </div>
-    
-                            <div class="col-12 col-sm-2 mb-2">
-                                @include('partials.paginate')
-                            </div>
+                <form action="{{ route('clients.filter') }}" method="get">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            @component('components.card')
+                                @include('partials.filter', [
+                                    'count_results' => request()->get('filter') ? $clients->count() : '',
+                                    'options' => [
+                                        'name' => 'Nome',
+                                        'email' => 'E-mail',
+                                        'cpf' => 'CPF',
+                                    ],
+                                    'placeholder' => 'Busque pelo nome, e-mail ou cpf do cliente.'
+                                ])
+                            @endcomponent
                         </div>
-                    </form>
-                </div>
+
+                        <div class="col-12 col-sm-2 mb-2">
+                            @include('partials.paginate')
+                        </div>
+                    </div>
+                </form>
+            </div>
 
             <div class="col-12">
                 @if (isset($clients))
                     @component('components.table')
                         <thead>
-                                <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>CPF</th>
-                                <th></th>
+                            <th>
+                                <a class="text-muted" href="{{ route('clients.filter', ['order' => 'name', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">Nome</a>
+                            </th>
+                            <th>
+                                <a class="text-muted" href="{{ route('clients.filter', ['order' => 'email', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">E-mail</a>
+                            </th>
+                            <th>
+                                <a class="text-muted" href="{{ route('clients.filter', ['order' => 'cpf', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">CPF</a>
+                            </th>
+                            <th></th>
                         </thead>
 
                         <tbody>

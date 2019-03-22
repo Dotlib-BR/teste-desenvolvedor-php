@@ -125,9 +125,11 @@ class ClientController extends Controller
      */
     public function filter(Request $request, Client $client)
     {
-        $page = $request->input('paged');
+        $page = $request->input('paged') ?? 20;
         $search = $request->input('search');
         $filters = $request->input('filter');
+        $orderBy = $request->input('order');
+        $sortBy = $request->input('sort');
         
         $query = $client->newQuery()
             ->where('user_id', Auth::user()->id);
@@ -144,6 +146,10 @@ class ClientController extends Controller
             if (in_array('cpf', $filters)) {
                 $query->where('cpf', 'LIKE', '%' . $search . '%');
             }
+        }
+
+        if ($orderBy && $sortBy) {
+            $query->orderBy($orderBy, $sortBy);
         }
 
         $clients = $query->paginate($page)

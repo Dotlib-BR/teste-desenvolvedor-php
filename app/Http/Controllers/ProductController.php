@@ -117,9 +117,11 @@ class ProductController extends Controller
      */
     public function filter(Request $request, Product $product)
     {
-        $page = $request->input('paged');
+        $page = $request->input('paged') ?? 20;
         $search = $request->input('search');
         $filters = $request->input('filter');
+        $orderBy = $request->input('order');
+        $sortBy = $request->input('sort');
         
         $query = $product->newQuery();
 
@@ -135,6 +137,10 @@ class ProductController extends Controller
             if (in_array('bar_code', $filters)) {
                 $query->where('bar_code', 'LIKE', '%' . $search . '%');
             }
+        }
+
+        if ($orderBy && $sortBy) {
+            $query->orderBy($orderBy, $sortBy);
         }
         
         $products = $query->paginate($page)

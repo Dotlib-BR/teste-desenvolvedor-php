@@ -47,12 +47,22 @@
                 @if (isset($orders))
                     @component('components.table')
                         <thead>
-                            <th>Número do Pedido</th>
-                            <th>Cliente</th>
-                            <th>Data do Pedido</th>
-                            <th>Status</th>
-                            <th>Desconto</th>
-                            <th>Total</th>
+                            <th>
+                                <a class="text-muted" href="{{ route('orders.filter', ['order' => 'number', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">Número do Pedido</a>
+                            </th>
+                            <th>
+                                <a class="text-muted" href="{{ route('orders.filter', ['order' => 'client_id', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">Cliente</a>
+                            </th>
+                            <th>
+                                <a class="text-muted" href="{{ route('orders.filter', ['order' => 'date_order', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">Data do Pedido</a>
+                            </th>
+                            <th>
+                                <a class="text-muted" href="{{ route('orders.filter', ['order' => 'status_id', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">Status</a>
+                            </th>
+                            <th>
+                                <a class="text-muted" href="{{ route('orders.filter', ['order' => 'discount', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">Desconto</a>
+                            </th>
+                            <th class="text-muted">Total</th>
                             <th></th>
                         </thead>
 
