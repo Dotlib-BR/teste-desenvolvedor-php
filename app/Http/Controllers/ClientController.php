@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ClientCreateRequest;
 use App\Http\Requests\ClientUpdateRequest;
 use App\Models\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +21,7 @@ class ClientController extends Controller
         $clients = Auth::user()
             ->clients()
             ->orderBy('name')
-            ->get();
+            ->paginate(20);
         
         return view('client.index', compact('clients'));
     }
@@ -112,5 +113,42 @@ class ClientController extends Controller
         return redirect()
             ->route('clients.index')
             ->with('success', 'Cliente removido com sucesso!');
+    }
+
+    /**
+     * Filter clients
+     *
+     * @param  Request $request
+     * @param  Client $client
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filter(Request $request, Client $client)
+    {
+        $page = $request->input('paged');
+        $search = $request->input('search');
+        $filters = $request->input('filter');
+        
+        $query = $client->newQuery()
+            ->where('user_id', Auth::user()->id);
+
+        if ($filters) {
+            if (in_array('name', $filters)) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            }
+    
+            if (in_array('email', $filters)) {
+                $query->where('email', 'LIKE', '%' . $search . '%');
+            }
+            
+            if (in_array('cpf', $filters)) {
+                $query->where('cpf', 'LIKE', '%' . $search . '%');
+            }
+        }
+
+        $clients = $query->paginate($page)
+            ->appends($request->except('page'));
+        
+        return view('client.index', compact('clients'));
     }
 }

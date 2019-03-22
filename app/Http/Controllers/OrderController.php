@@ -27,7 +27,7 @@ class OrderController extends Controller
                 $q->where('user_id', Auth::user()->id);
             })
             ->orderBy('date_order', 'desc')
-            ->get();
+            ->paginate(20);
 
         return view('order.index', compact('orders'));
     }

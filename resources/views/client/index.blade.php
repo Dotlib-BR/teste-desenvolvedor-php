@@ -17,6 +17,30 @@
                 @endcomponent
             </div>
 
+            <div class="col-12 mb-3">
+                    <form action="{{ route('clients.filter') }}" method="get">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                @component('components.card')
+                                    @include('partials.filter', [
+                                        'count_results' => request()->get('filter') ? $clients->count() : '',
+                                        'options' => [
+                                            'name' => 'Nome',
+                                            'email' => 'E-mail',
+                                            'cpf' => 'CPF',
+                                        ],
+                                        'placeholder' => 'Busque pelo nome, e-mail ou cpf do cliente.'
+                                    ])
+                                @endcomponent
+                            </div>
+    
+                            <div class="col-12 col-sm-2 mb-2">
+                                @include('partials.paginate')
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
             <div class="col-12">
                 @if (isset($clients))
                     @component('components.table')
@@ -41,6 +65,10 @@
                             @endforeach          
                         </tbody>
                     @endcomponent
+
+                    <div class="d-flex justify-content-center mt-3">
+                        {{ $clients->links() }}
+                    </div>
                 @endif
             </div>
         </div>

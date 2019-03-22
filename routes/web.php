@@ -20,6 +20,7 @@ Route::middleware(['auth'])
         Route::get('/', 'HomeController@index')->name('home');
 
         // Clients
+        Route::get('clients/filter', 'ClientController@filter')->name('clients.filter');
         Route::resource('clients', 'ClientController');
 
         // Products
