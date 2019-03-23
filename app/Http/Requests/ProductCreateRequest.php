@@ -37,12 +37,16 @@ class ProductCreateRequest extends FormRequest
      */
     public function messages()
     {
-        return [
-            'name.max' => 'Por favor, informe um nome com no máximo 100 caracteres.',
-            'price.required' => 'Por favor, informe um preço.',
-            'price.numeric' => 'O preço informado não é um número válido.',
-            'bar_code.required' => 'Por favor, informe um código de barras.',
-            'bar_code.digits' => 'O código de barras deve conter no máximo 20 digitos.',
-        ];
+        if (! $this->wantsJson()) {
+            return [
+                'name.max' => 'Por favor, informe um nome com no máximo 100 caracteres.',
+                'price.required' => 'Por favor, informe um preço.',
+                'price.numeric' => 'O preço informado não é um número válido.',
+                'bar_code.required' => 'Por favor, informe um código de barras.',
+                'bar_code.digits' => 'O código de barras deve conter no máximo 20 digitos.',
+            ];
+        }
+
+        return parent::messages();
     }
 }
