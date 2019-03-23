@@ -108,6 +108,25 @@ class ProductController extends Controller
     }
 
     /**
+     * Remove the specifieds resources from storage.
+     *
+     * @param  Request  $request
+     * @param  Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function bulkDestroy(Request $request, Product $product)
+    {
+        $ids = $request->input('bulk');
+
+        DB::transaction(function () use ($ids, $product) {
+            $product->whereIn('id', $ids)
+                ->delete();
+        });
+
+        return response()->json(['status' => true], 200);
+    }
+
+    /**
      * Filter products
      *
      * @param  Request $request

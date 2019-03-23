@@ -36665,6 +36665,67 @@ $(function () {
     }
 
     $('.products-added').html(lines);
+  } // Bulk Actions
+
+
+  $('#bulk-option').on('change', function () {
+    var value = $(this).val();
+    var bulkCheckAll = $('#bulk-check-all');
+
+    if (value) {
+      bulkCheckAll.parent().removeClass('d-none');
+      $('.bulk-check').parent().removeClass('d-none');
+    } else {
+      bulkCheckAll.prop('checked', '').parent().addClass('d-none');
+      $('.bulk-check').prop('checked', '').parent().addClass('d-none');
+    }
+  });
+  $('#bulk-check-all').on('change', function () {
+    var checked = this.checked;
+
+    if (checked) {
+      $('.bulk-check').prop('checked', 'checked');
+    } else {
+      $('.bulk-check').prop('checked', '');
+    }
+  });
+  $('#bulk-action').on('click', function () {
+    var checks = {};
+    var tempChecks = [];
+    var bulkOption = $('#bulk-option');
+
+    if (bulkOption.val()) {
+      $('.bulk-check').each(function (i, e) {
+        if (e.checked) {
+          tempChecks.push($(e).val());
+        }
+      });
+      checks.bulk = tempChecks;
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: bulkOption.find(':selected').data('action'),
+        method: 'POST',
+        data: checks,
+        dataType: 'json',
+        success: function success(data) {
+          if (data.status == true) {
+            removeListItem(checks.bulk);
+          }
+        }
+      });
+    }
+  });
+
+  function removeListItem(items) {
+    $('.bulk-check').each(function (i, e) {
+      if ($.inArray($(e).val(), items) != -1) {
+        $(e).parents('tr').fadeOut(function () {
+          $(this).remove();
+        });
+      }
+    });
   } // Paginate
 
 

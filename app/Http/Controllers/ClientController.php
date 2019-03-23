@@ -116,6 +116,25 @@ class ClientController extends Controller
     }
 
     /**
+     * Remove the specifieds resources from storage.
+     *
+     * @param  Request  $request
+     * @param  Client  $client
+     * @return \Illuminate\Http\Response
+     */
+    public function bulkDestroy(Request $request, Client $client)
+    {
+        $ids = $request->input('bulk');
+
+        DB::transaction(function () use ($ids, $client) {
+            $client->whereIn('id', $ids)
+                ->delete();
+        });
+
+        return response()->json(['status' => true], 200);
+    }
+
+    /**
      * Filter clients
      *
      * @param  Request $request

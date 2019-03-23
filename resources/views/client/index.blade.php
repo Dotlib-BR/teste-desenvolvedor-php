@@ -34,8 +34,16 @@
                             @endcomponent
                         </div>
 
-                        <div class="col-12 col-sm-2 mb-2">
+                        <div class="col-12 col-sm-3 col-md-2 mb-2">
                             @include('partials.paginate')
+                        </div>
+                            
+                        <div class="col-12 col-sm-3 col-md-3 d-flex align-items-end mb-2">
+                            @include('partials.bulk-actions', [
+                                'actions' => [
+                                    'delete' => route('clients.bulk-destroy')
+                                ]
+                            ])
                         </div>
                     </div>
                 </form>
@@ -45,6 +53,9 @@
                 @if (isset($clients))
                     @component('components.table')
                         <thead>
+                            <th class="d-none">
+                                <input id="bulk-check-all" type="checkbox">
+                            </th>
                             <th>
                                 <a class="text-muted" href="{{ route('clients.filter', ['order' => 'name', 'sort' => request()->get('sort') == 'asc' ? 'desc' : 'asc']) }}">Nome</a>
                             </th>
@@ -60,6 +71,9 @@
                         <tbody>
                             @foreach ($clients as $client)    
                                 <tr>
+                                    <td class="d-none">
+                                        <input class="bulk-check" type="checkbox" name="bulk[{{ $client->id }}]" value="{{ $client->id }}">
+                                    </td>
                                     <td>
                                         <a href="{{ route('clients.show', $client->id) }}">{{ $client->name }}</a>
                                     </td>

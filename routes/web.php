@@ -21,10 +21,12 @@ Route::middleware(['auth'])
 
         // Clients
         Route::get('clients/filter', 'ClientController@filter')->name('clients.filter');
+        Route::post('clients/bulk-destroy', 'ClientController@bulkDestroy')->name('clients.bulk-destroy');
         Route::resource('clients', 'ClientController');
 
         // Products
         Route::get('products/filter', 'ProductController@filter')->name('products.filter');
+        Route::post('products/bulk-destroy', 'ProductController@bulkDestroy')->name('products.bulk-destroy');
         Route::resource('products', 'ProductController');
 
         // Orders
@@ -32,5 +34,6 @@ Route::middleware(['auth'])
         Route::get('orders/remove-from-cart', 'OrderController@removeFromCart');
         Route::get('orders/filter', 'OrderController@filter')->name('orders.filter');
         Route::get('orders/paginate', 'OrderController@paginate')->name('orders.paginate');
+        Route::post('orders/bulk-destroy', 'OrderController@bulkDestroy')->name('orders.bulk-destroy');
         Route::resource('orders', 'OrderController');
 });

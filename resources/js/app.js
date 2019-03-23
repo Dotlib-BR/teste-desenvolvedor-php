@@ -103,6 +103,81 @@ $(function () {
         $('.products-added').html(lines);
     }
 
+    // Bulk Actions
+    $('#bulk-option').on('change', function () {
+        let value = $(this).val();
+        let bulkCheckAll = $('#bulk-check-all');
+        
+        if (value) {
+            bulkCheckAll.parent()
+                .removeClass('d-none');
+                
+            $('.bulk-check').parent()
+                .removeClass('d-none');
+        } else {
+            bulkCheckAll
+                .prop('checked', '')
+                .parent()
+                .addClass('d-none');
+
+            $('.bulk-check')
+                .prop('checked', '')
+                .parent()
+                .addClass('d-none');
+        }
+    });
+
+    $('#bulk-check-all').on('change', function () {
+        let checked = this.checked;
+        
+        if (checked) {
+            $('.bulk-check').prop('checked', 'checked');
+        } else {
+            $('.bulk-check').prop('checked', '');
+        }
+    });
+
+    $('#bulk-action').on('click', function () {
+        let checks = {};
+        let tempChecks = [];
+        let bulkOption = $('#bulk-option');
+        
+        if (bulkOption.val()) {
+            $('.bulk-check').each(function (i, e) {
+                if (e.checked) {
+                    tempChecks.push($(e).val());
+                }
+            });
+    
+            checks.bulk = tempChecks;
+    
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: bulkOption.find(':selected').data('action'),
+                method: 'POST',
+                data: checks,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status == true) {
+                        removeListItem(checks.bulk)
+                    }
+                }
+            })
+        }
+    });
+
+    function removeListItem(items) {
+        $('.bulk-check').each(function (i, e) {
+            if ($.inArray($(e).val(), items) != -1) {
+                $(e).parents('tr').fadeOut(function () {
+                    $(this).remove();
+                });
+            }
+        });
+    }
+
     // Paginate
     $('#paged').on('change', function () {
         $(this).parents('form')

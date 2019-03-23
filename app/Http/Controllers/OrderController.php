@@ -141,6 +141,34 @@ class OrderController extends Controller
             ->with('success', 'Pedido removido com sucesso com sucesso!');
     }
 
+    /**
+     * Remove the specifieds resources from storage.
+     *
+     * @param  Request  $request
+     * @param  Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function bulkDestroy(Request $request, Order $order)
+    {
+        $ids = $request->input('bulk');
+
+        DB::transaction(function () use ($ids, $order) {
+            $order->whereIn('id', $ids)
+                ->delete();
+        });
+
+        return response()->json(['status' => true], 200);
+    }
+
+    /**
+     * Filter orders.
+     *
+     * @param  Request $request
+     * @param  Order $order
+     * @param  Client $client
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function filter(Request $request, Order $order, Client $client)
     {
         $page = $request->input('paged') ?? 20;
