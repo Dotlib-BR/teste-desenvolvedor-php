@@ -1,3 +1,12 @@
+# Instruções de Implementação:
+- Realizar procedimentos padrões do Laravel;
+- Configurar as variáveis de conexão com o banco de dados;
+- Rodar o comando "php artisan migrate --seed" para popular o banco;
+- Para acessar basta usar o seguinde usuário:
+    - Login: admin@dotlib.com
+    - Sena: secret
+
+
 [![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
 
 # Teste para candidatos à vaga de Desenvolvedor Web.
