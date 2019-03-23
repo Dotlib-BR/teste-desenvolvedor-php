@@ -70,7 +70,9 @@
                             @foreach ($orders as $order)
                                 <tr>
                                     <td>{{ $order->number }}</td>
-                                    <td>{{ $order->client->name }}</td>
+                                    <td>
+                                    <a href="{{ route('clients.show', $order->client->id) }}" target="_blank">{{ $order->client->name }}</a>
+                                    </td>
                                     <td>{{ $order->date_order->format('d/m/Y') }}</td>
                                     <td>{{ $order->status->name }}</td>
                                     <td>R$ {{ $order->discount_full }}</td>
