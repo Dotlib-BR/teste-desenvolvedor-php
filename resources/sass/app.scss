@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 // Variables
 @import 'variables';
@@ -13,6 +13,9 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
+// SweetAlert2
+@import '~sweetalert2/src/sweetalert2';
+
 html, body {
     min-height: 100% !important;
     height: 100%;
@@ -20,4 +23,9 @@ html, body {
 
 .btn-primary {
     color: white;
+}
+
+.navbar {
+    min-height: 100px;
+    padding: 0 30px;
 }

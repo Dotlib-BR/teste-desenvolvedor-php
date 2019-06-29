@@ -13,9 +13,11 @@
             @include('includes.navbar')
         @endauth
 
-        <main class="h-100">
+        <main class="{{ (!auth()->check()) ? 'h-100' : '' }}">
             @yield('content')
         </main>
+
+        @include('components.alert')
 
         <script src="{{ asset('js/app.js') }}"></script>
         @stack('script')

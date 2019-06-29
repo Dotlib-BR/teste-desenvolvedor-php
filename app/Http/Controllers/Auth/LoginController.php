@@ -2,31 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
     /**
      * Create a new controller instance.
      *
@@ -35,5 +15,56 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request)
+    {
+        $validator = validator()->make($request->all(), [
+            'email'    => 'required|email',
+            'password' => 'required'
+        ], [
+            'email.required'    => 'Por favor, insira o seu e-mail.',
+            'email.email'       => 'Por favor, insira um e-mail válido.',
+            'password.required' => 'Por favor, insira a sua senha.'
+        ]);
+
+        if ($validator->passes()) {
+            $credentials = [
+                'email'     => $request->email,
+                'password'  => $request->password,
+            ];
+
+            if (auth()->attempt($credentials, $request->has('remember'))) {
+                flashToast('success', 'Conectado.');
+                return redirect('/');
+            }
+        }
+
+        $validator->getMessageBag()->add('email', 'Por favor, verifique o seu e-mal.');
+        $validator->getMessageBag()->add('password', 'Por favor, verifique a sua senha.');
+
+        flashToast('error', 'Os dados inseridos não correspondem aos nossos registros.');
+        return back()->withErrors($validator);
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        $request->session()->invalidate();
+
+        flashToast('success', 'Desconectado.');
+        return redirect('/');
     }
 }
