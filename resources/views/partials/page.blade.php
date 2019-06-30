@@ -282,53 +282,48 @@
                         @endforeach
                     </div>
                     <div class="col-12 col-sm-4 col-md-3 col-lg-2">
-                        @foreach ($actions as $action => $data)
-                            <form action="{{ $action }}" method="{{ $data['type'] == 'get' ? 'get' : 'post' }}" class="mb-2 {{ $data['type'] == 'delete' ? 'form-delete' : '' }}">
-                                @if ($data['type'] != 'get')
-                                    @csrf
-
-                                    @if ($data['type'] != 'post')
-                                        @method(strtoupper($data['type']))
-                                    @endif
-                                @endif
-
-                                <button type="submit" class="btn btn-{{ $data['type'] == 'delete' ? 'danger' : 'primary' }} btn-block">{{ $data['label'] }}</button>
-                            </form>
-                        @endforeach
+                        <a href="{{ route($route . '.edit', $model->id) }}" class="btn btn-primary btn-block">Editar {{ mb_strtolower($namespace) }}</a>
+                        <a href="{{ route($route . '.destroy', $model->id) }}" class="btn btn-danger btn-block destroy-action">Excluir {{ mb_strtolower($namespace) }}</a>
                     </div>
                 </div>
+
+                <form action="" method="post" id="destroy-single">
+                    @csrf
+                    @method('DELETE')
+                </form>
 
                 @push('script')
                     <script type="text/javascript">
                         $(document).ready(function() {
-                            var submit = false;
+                            function swalConfirm(callback) {
+                                window.swal.fire({
+                                    type: 'warning',
+                                    title: 'Você tem certeza?',
+                                    text: 'Você não poderá reverter esta ação.',
+                                    showCancelButton: true,
+                                    cancelButtonColor: '#b0b0b0',
+                                    cancelButtonText: 'Cancelar',
+                                    confirmButtonColor: '#e3342f',
+                                    confirmButtonText: 'Sim, exclua!'
+                                }).then(function(result) {
+                                    if (result.value) {
+                                        callback();
+                                    }
+                                });
 
-                            $('.form-delete').on('submit', function(e) {
-                                if (!submit) {
-                                    e.preventDefault();
+                                $('body').removeClass('swal2-height-auto');
+                            }
 
-                                    var form = $(this);
+                            $('.destroy-action').on('click', function(e) {
+                                e.preventDefault();
 
-                                    window.swal.fire({
-                                        type: 'warning',
-                                        title: 'Você tem certeza?',
-                                        text: 'Você não poderá reverter esta ação.',
-                                        showCancelButton: true,
-                                        cancelButtonColor: '#b0b0b0',
-                                        cancelButtonText: 'Cancelar',
-                                        confirmButtonColor: '#e3342f',
-                                        confirmButtonText: 'Sim, exclua!'
-                                    }).then(function(result) {
-                                        if (result.value) {
-                                            submit = true;
-                                            form.submit();
-                                        }
-                                    });
+                                var action = $(this).attr('href');
 
-                                    $('body').removeClass('swal2-height-auto');
-                                }
-
-                                submit = false;
+                                swalConfirm(function() {
+                                    $('#destroy-single')
+                                        .attr('action', action)
+                                        .submit();
+                                });
                             });
                         });
                     </script>
@@ -360,7 +355,7 @@
                             </div>
                         @endforeach
                         <div class="col-12 col-sm-6 col-md-4 col-xl-2 offset-sm-3 offset-md-4 offset-xl-5 text-center mt-2">
-                            <button type="submit" class="btn btn-primary btn-block">Atualizar</button>
+                            <button type="submit" class="btn btn-primary btn-block">Editar</button>
                         </div>
                     </div>
                 </form>

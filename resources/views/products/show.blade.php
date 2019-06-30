@@ -9,16 +9,6 @@
                 'name'  => 'Nome',
                 'price' => 'Preço',
                 'code'  => 'Código de barras'
-            ],
-            'actions' => [
-                route($route . '.edit', $model->id)     => [
-                    'label' => 'Atualizar produto',
-                    'type'  => 'get'
-                ],
-                route($route . '.destroy', $model->id)  => [
-                    'label' => 'Excluir produto',
-                    'type'  => 'delete'
-                ]
             ]
         ])
     </div>
