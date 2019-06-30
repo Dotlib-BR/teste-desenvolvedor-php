@@ -1,9 +1,10 @@
 <ul class="pagination justify-content-end">
-    @if ($pagination['current'] > 1)
-        <li class="page-item">
-            <a class="page-link" href="{{ request()->url() }}?page={{ $pagination['current'] - 1 }}">Anterior</a>
-        </li>
-    @endif
+    <li class="page-item {{ $pagination['current'] == 1 ? 'disabled' : '' }}">
+        <a class="page-link" href="{{ $pagination['current'] == 1 ? '#' : request()->url() . '?page=1' }}">Primeira</a>
+    </li>
+    <li class="page-item {{ $pagination['current'] == 1 ? 'disabled' : '' }}">
+        <a class="page-link" href="{{ $pagination['current'] == 1 ? '#' : request()->url() . '?page=' . ($pagination['current'] - 1) }}">Anterior</a>
+    </li>
 
     @php
         $start = $pagination['current'] - 2;
@@ -21,7 +22,7 @@
     @for ($i = $start; $i <= $end; ++$i)
         @if ($i == $pagination['current'])
             <li class="page-item active">
-                <a class="page-link" href="javascript:;">{{ $i }}</a>
+                <span class="page-link">{{ $i }}</span>
             </li>
         @else
             <li class="page-item">
@@ -30,9 +31,10 @@
         @endif
     @endfor
 
-    @if ($pagination['current'] < $pagination['total'])
-        <li class="page-item">
-            <a class="page-link" href="{{ request()->url() }}?page={{ $pagination['current'] + 1 }}">Próxima</a>
-        </li>
-    @endif
+    <li class="page-item {{ $pagination['current'] == $pagination['total'] ? 'disabled' : '' }}">
+        <a class="page-link" href="{{ $pagination['current'] == $pagination['total'] ? '#' : request()->url() . '?page=' . ($pagination['current'] + 1) }}">Próxima</a>
+    </li>
+    <li class="page-item {{ $pagination['current'] == $pagination['total'] ? 'disabled' : '' }}">
+        <a class="page-link" href="{{ $pagination['current'] == $pagination['total'] ? '#' : request()->url() . '?page=' . $pagination['total'] }}">Última</a>
+    </li>
 </ul>
