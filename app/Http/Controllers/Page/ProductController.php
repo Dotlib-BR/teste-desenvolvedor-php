@@ -30,7 +30,7 @@ class ProductController extends Controller
         $select = Product::select(['id', 'name', 'price', 'code', 'created_at', 'updated_at']);
 
         if ($request->has('orderby') && !empty($request->orderby)) {
-            $select = $select->orderBy($request->orderby, $request->order ?? 'desc');
+            $select = $select->orderBy($request->orderby, $request->order ?? 'asc');
         }
 
         if ($request->has('search') && !empty($request->search)) {
@@ -40,13 +40,13 @@ class ProductController extends Controller
         }
 
         $items   = $request->items ?? 20;
-        $product = $select->paginate($items)->toArray();
+        $product = $select->paginate($items);
 
         return view('products.index', [
-            'values'     => $product['data'],
+            'items'      => $product->items(),
             'pagination' => [
-                'current' => $product['current_page'],
-                'total'   => $product['last_page']
+                'current' => $product->currentPage(),
+                'total'   => $product->lastPage()
             ]
         ]);
     }
@@ -99,7 +99,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return view('products.show', [
-            'model' => $product
+            'product' => $product
         ]);
     }
 
@@ -112,7 +112,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return view('products.edit', [
-            'model' => $product
+            'product' => $product
         ]);
     }
 

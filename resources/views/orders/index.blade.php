@@ -13,12 +13,12 @@
                         ];
                     @endphp
 
-                    <h5 class="card-title">Produtos</h5>
+                    <h5 class="card-title">Pedidos</h5>
                     <hr>
 
                     <div class="row mb-2">
                         <div class="col-12 col-md-5 col-lg-4">
-                            <form action="{{ route('products.index') }}" method="get">
+                            <form action="{{ route('orders.index') }}" method="get">
                                 <div class="row form-group mb-2">
                                     <div class="col-12 col-sm-9 pr-sm-2">
                                         <input type="search" name="search" id="search" class="form-control mr-2 mb-2" value="{{ $page['search'] }}" placeholder="Filtrar por">
@@ -30,14 +30,14 @@
                             </form>
                         </div>
                         <div class="col-12 col-md-6 col-lg-5 offset-md-1 offset-lg-3">
-                            <form action="{{ route('products.index') }}" method="get">
+                            <form action="{{ route('orders.index') }}" method="get">
                                 <div class="row form-group mb-2">
                                     <div class="col-12 col-sm-4 pr-sm-2">
                                         <select class="form-control mr-2 mb-2" name="orderby">
                                             <option value="" hidden {{ ($page['order'][0] == '') ? 'selected' : '' }}>Ordenar por</option>
-                                            <option value="name" {{ ($page['order'][0] == 'name') ? 'selected' : '' }}>Nome</option>
-                                            <option value="price" {{ ($page['order'][0] == 'price') ? 'selected' : '' }}>Preço</option>
-                                            <option value="code" {{ ($page['order'][0] == 'code') ? 'selected' : '' }}>Código de barras</option>
+                                            <option value="id" {{ ($page['order'][0] == 'id') ? 'selected' : '' }}>Número do pedido</option>
+                                            <option value="discount" {{ ($page['order'][0] == 'discount') ? 'selected' : '' }}>Desconto</option>
+                                            <option value="status" {{ ($page['order'][0] == 'status') ? 'selected' : '' }}>Status</option>
                                             <option value="created_at" {{ ($page['order'][0] == 'created_at') ? 'selected' : '' }}>Criado em</option>
                                             <option value="updated_at" {{ ($page['order'][0] == 'updated_at') ? 'selected' : '' }}>Atualizado em</option>
                                         </select>
@@ -67,41 +67,86 @@
                         </div>
                     </div>
 
-                    <form action="{{ route('products.mass-destroy') }}" method="post" id="mass-destroy">
+                    <form action="{{ route('orders.mass-destroy') }}" method="post" id="mass-destroy">
                         @csrf
                         <div class="table-responsive mb-2">
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">#</th>
-                                        <th scope="col">Nome</th>
-                                        <th scope="col" class="text-center">Preço</th>
-                                        <th scope="col" class="text-center">Código de barras</th>
+                                        <th scope="col" class="text-center">Número do pedido</th>
+                                        <th scope="col" class="text-center">Produtos</th>
+                                        <th scope="col" class="text-center">Valor</th>
+                                        <th scope="col" class="text-center">Desconto</th>
+                                        <th scope="col" class="text-center">Valor final</th>
+                                        <th scope="col" class="text-center">Status</th>
                                         <th scope="col" class="text-center">Criado em</th>
                                         <th scope="col" class="text-center">Atualizado em</th>
                                         <th scope="col" class="text-center">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($items as $product)
+                                    @foreach ($items as $order)
+                                        @php
+                                            $products = [];
+                                            $price    = 0;
+
+                                            foreach ($order->products as $product) {
+                                                if (!isset($products[$product->product->name])) {
+                                                    $products[$product->product->name] = 0;
+                                                }
+
+                                                $price                             += $product->product->price * $product->amount;
+                                                $products[$product->product->name] += $product->amount;
+                                            }
+
+                                            $products = implode(', ', array_map(function($amount, $name) use(&$count) {
+                                                return sprintf('%02d %s', $amount, $name);
+                                            }, $products, array_keys($products)));
+
+                                            $final    = $price - $order->discount;
+
+                                            if ($final < 0) {
+                                                $final = 0;
+                                            }
+                                        @endphp
                                         <tr>
                                             <td class="text-center">
-                                                <input type="checkbox" name="id[]" value="{{ $product->id }}">
+                                                <input type="checkbox" name="id[]" value="{{ $order->id }}">
                                             </td>
-                                            <td>{{ $product->name }}</td>
-                                            <td class="text-center">R$ {{ number_format($product->price, 2, ',', '.') }}</td>
-                                            <td class="text-center">{{ $product->code }}</td>
-                                            <td class="text-center">{{ $product->created_at->format('d/m/Y H:i') }}</td>
-                                            <td class="text-center">{{ $product->updated_at->format('d/m/Y H:i') }}</td>
+                                            <td class="text-center">{{ sprintf('%08d', $order->id) }}</td>
+                                            <td class="text-center">
+                                                {!! $products !!}
+                                            </td>
+                                            <td class="text-center">R$ {{ number_format($price, 2, ',', '.') }}</td>
+                                            <td class="text-center">R$ {{ number_format($order->discount, 2, ',', '.') }}</td>
+                                            <td class="text-center">R$ {{ number_format($final, 2, ',', '.') }}</td>
+                                            <td class="text-center">
+                                                @switch ($order->status)
+                                                    @case ('open')
+                                                        <span class="badge badge-info">Em aberto</span>
+                                                    @break
+
+                                                    @case ('paid')
+                                                        <span class="badge badge-success">Pago</span>
+                                                    @break
+
+                                                    @case ('canceled')
+                                                        <span class="badge badge-danger">Cancelado</span>
+                                                    @break
+                                                @endswitch
+                                            </td>
+                                            <td class="text-center">{{ $order->created_at->format('d/m/Y H:i') }}</td>
+                                            <td class="text-center">{{ $order->updated_at->format('d/m/Y H:i') }}</td>
                                             <td class="text-center">
                                                 <div class="btn-group" role="group">
-                                                    <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary btn-sm mb-1" data-toggle="tooltip" data-title="Ver produto">
+                                                    <a href="{{ route('orders.show', $order->id) }}" class="btn btn-primary btn-sm mb-1" data-toggle="tooltip" data-title="Ver pedido">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm mb-1"  data-toggle="tooltip" data-title="Editar produto">
+                                                    <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-primary btn-sm mb-1"  data-toggle="tooltip" data-title="Editar pedido">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="{{ route('products.destroy', $product->id) }}" class="btn btn-danger btn-sm mb-1 destroy-action"  data-toggle="tooltip" data-title="Excluir produto">
+                                                    <a href="{{ route('orders.destroy', $order->id) }}" class="btn btn-danger btn-sm mb-1 destroy-action"  data-toggle="tooltip" data-title="Excluir pedido">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </div>
@@ -114,22 +159,22 @@
 
                         <div class="row mb-2 justify-content-end">
                             <div class="col-12 col-sm-4 col-md-3 col-xl-2 mb-2 pr-sm-1">
-                                <button type="submit" class="btn btn-danger btn-block">Excluir produtos</a>
+                                <button type="submit" class="btn btn-danger btn-block">Excluir pedidos</a>
                             </div>
                             <div class="col-12 col-sm-4 col-md-3 col-xl-2 mb-2 pl-sm-1">
-                                <a href="{{ route('products.create') }}" class="btn btn-primary btn-block">Registrar produto</a>
+                                <a href="{{ route('orders.create') }}" class="btn btn-primary btn-block">Registrar pedido</a>
                             </div>
                         </div>
                     </form>
 
                     <ul class="pagination justify-content-end">
                         <li class="page-item {{ $pagination['current'] == 1 ? 'disabled' : '' }}">
-                            <a class="page-link" href="{{ $pagination['current'] == 1 ? '#' : route('products.index') . '?page=1&items=' . $page['items'] }}">
+                            <a class="page-link" href="{{ $pagination['current'] == 1 ? '#' : route('orders.index') . '?page=1&items=' . $page['items'] }}">
                                 <i class="fas fa-angle-double-left"></i>
                             </a>
                         </li>
                         <li class="page-item {{ $pagination['current'] == 1 ? 'disabled' : '' }}">
-                            <a class="page-link" href="{{ $pagination['current'] == 1 ? '#' : route('products.index') . '?page=' . ($pagination['current'] - 1). '&items=' . $page['items'] }}">
+                            <a class="page-link" href="{{ $pagination['current'] == 1 ? '#' : route('orders.index') . '?page=' . ($pagination['current'] - 1). '&items=' . $page['items'] }}">
                                 <i class="fas fa-chevron-left"></i>
                             </a>
                         </li>
@@ -154,18 +199,18 @@
                                 </li>
                             @else
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ route('products.index') . '?page=' . $i . '&items=' . $page['items'] }}">{{ $i }}</a>
+                                    <a class="page-link" href="{{ route('orders.index') . '?page=' . $i . '&items=' . $page['items'] }}">{{ $i }}</a>
                                 </li>
                             @endif
                         @endfor
 
                         <li class="page-item {{ $pagination['current'] == $pagination['total'] ? 'disabled' : '' }}">
-                            <a class="page-link" href="{{ $pagination['current'] == $pagination['total'] ? '#' : route('products.index') . '?page=' . ($pagination['current'] + 1) . '&items=' . $page['items'] }}">
+                            <a class="page-link" href="{{ $pagination['current'] == $pagination['total'] ? '#' : route('orders.index') . '?page=' . ($pagination['current'] + 1) . '&items=' . $page['items'] }}">
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </li>
                         <li class="page-item {{ $pagination['current'] == $pagination['total'] ? 'disabled' : '' }}">
-                            <a class="page-link" href="{{ $pagination['current'] == $pagination['total'] ? '#' : route('products.index') . '?page=' . $pagination['total'] . '&items=' . $page['items'] }}">
+                            <a class="page-link" href="{{ $pagination['current'] == $pagination['total'] ? '#' : route('orders.index') . '?page=' . $pagination['total'] . '&items=' . $page['items'] }}">
                                 <i class="fas fa-angle-double-right"></i>
                             </a>
                         </li>
@@ -233,7 +278,7 @@
                     } else {
                         window.toast.fire({
                             type: 'error',
-                            title: 'Você precisa selecionar os produtos que deseja excluir.'
+                            title: 'Você precisa selecionar os pedidos que deseja excluir.'
                         });
                     }
                 }

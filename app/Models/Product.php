@@ -3,12 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use SoftDeletes;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -17,4 +14,12 @@ class Product extends Model
     protected $fillable = [
         'name', 'price', 'code'
     ];
+
+    /**
+     * Get the orders.
+     */
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_products');
+    }
 }

@@ -31,9 +31,22 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    @include('partials.page', [
-                        'type' => 'welcome'
-                    ])
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="m-5 text-center">
+                                    <p>
+                                        <i class="far fa-smile-beam fa-5x"></i>
+                                    </p>
+                                    <p>
+                                        <h4>Olá! Seja bem-vindo.</h4>
+                                        Aqui você poderá criar, visualizar, alterar e excluir usuários, produtos e pedidos.<br />
+                                        Basta acessar as opções no menu principal.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

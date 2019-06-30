@@ -5,9 +5,9 @@
         <div class="card">
             <div class="card-content">
                 <div class="card-body">
-                    <h5 class="card-title">Editar Produto</h5>
+                    <h5 class="card-title">Editar Pedido</h5>
                     <hr>
-                    <form action="{{ route('products.update', $product->id) }}" method="post">
+                    <form action="{{ route('orders.update', $order->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
@@ -18,7 +18,7 @@
                                             <i class="fas fa-tag }}"></i>
                                         </div>
                                     </span>
-                                    <input type="text" name="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" placeholder="Nome" maxlength="100" value="{{ old('name', $product->name) }}" required>
+                                    <input type="text" name="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" placeholder="Nome" maxlength="100" value="{{ old('name', $order->name) }}" required>
                                     @if ($errors->has('name'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('name') }}
@@ -33,7 +33,7 @@
                                             <i class="fas fa-dollar-sign }}"></i>
                                         </div>
                                     </span>
-                                    <input type="number" name="price" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" placeholder="Preço" step="0.01" maxlength="255" value="{{ old('price', $product->price) }}" required>
+                                    <input type="number" name="price" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" placeholder="Preço" step="0.01" maxlength="255" value="{{ old('price', $order->price) }}" required>
                                     @if ($errors->has('price'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('price') }}
@@ -48,7 +48,7 @@
                                             <i class="fas fa-barcode }}"></i>
                                         </div>
                                     </span>
-                                    <input type="text" name="code" class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" placeholder="Código de barras" maxlength="20" value="{{ old('code', $product->code) }}" required>
+                                    <input type="text" name="code" class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" placeholder="Código de barras" maxlength="20" value="{{ old('code', $order->code) }}" required>
                                     @if ($errors->has('code'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('code') }}

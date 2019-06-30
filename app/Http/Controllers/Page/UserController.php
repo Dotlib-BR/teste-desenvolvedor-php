@@ -30,7 +30,7 @@ class UserController extends Controller
         $select = User::select(['id', 'name', 'email', 'document', 'created_at', 'updated_at']);
 
         if ($request->has('orderby') && !empty($request->orderby)) {
-            $select = $select->orderBy($request->orderby, $request->order ?? 'desc');
+            $select = $select->orderBy($request->orderby, $request->order ?? 'asc');
         }
 
         if ($request->has('search') && !empty($request->search)) {
@@ -41,13 +41,13 @@ class UserController extends Controller
         }
 
         $items = $request->items ?? 20;
-        $user  = $select->paginate($items)->toArray();
+        $user  = $select->paginate($items);
 
         return view('users.index', [
-            'values'     => $user['data'],
+            'items'      => $user->items(),
             'pagination' => [
-                'current' => $user['current_page'],
-                'total'   => $user['last_page']
+                'current' => $user->currentPage(),
+                'total'   => $user->lastPage()
             ]
         ]);
     }
@@ -73,7 +73,7 @@ class UserController extends Controller
         $validator = validator()->make($request->all(), [
             'name'      => 'required|string|min:4|max:100',
             'email'     => 'required|email|max:255|unique:users,email',
-            'password'  => 'required',
+            'password'  => 'required|min:8',
             'document'  => 'required|cpf|unique:users,document'
         ], $this->messages());
 
@@ -101,7 +101,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         return view('users.show', [
-            'model' => $user
+            'user' => $user
         ]);
     }
 
@@ -114,7 +114,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return view('users.edit', [
-            'model' => $user
+            'user' => $user
         ]);
     }
 
@@ -130,6 +130,7 @@ class UserController extends Controller
         $validator = validator()->make($request->all(), [
             'name'      => 'required|string|min:4|max:100',
             'email'     => 'required|email|max:255|unique:users,email,' . $user->id,
+            'password'  => 'nullable|min:8',
             'document'  => 'required|cpf|unique:users,document,' . $user->id
         ], $this->messages());
 
@@ -212,6 +213,7 @@ class UserController extends Controller
             'email.max'         => 'O e-mail deve conter no máximo :max caracteres.',
             'email.unique'      => 'E-mail em uso.',
             'password.required' => 'Insira a senha.',
+            'password.min'      => 'A senha deve conter no mínimo :min caracteres.',
             'document.required' => 'Insira o CPF.',
             'document.cpf'      => 'CPF inválido.',
             'document.unique'   => 'CPF em uso.'

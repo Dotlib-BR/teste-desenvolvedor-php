@@ -18766,3 +18766,7 @@ main {
   cursor: pointer;
 }
 
+.badge-info {
+  color: #fff;
+}
+

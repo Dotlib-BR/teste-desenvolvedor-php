@@ -3,12 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Order;
 
 class User extends Authenticatable
 {
-    use SoftDeletes;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -26,4 +24,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password'
     ];
+
+    /**
+     * Get the orders of user.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

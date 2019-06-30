@@ -3,27 +3,42 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\User;
+use App\Models\Product;
+use App\Models\OrderProduct;
 
 class Order extends Model
 {
-    use SoftDeletes;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id', 'products', 'status'
+        'user_id', 'status', 'discount'
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
+     * Get the user.
      */
-    protected $hidden = [
-        'products' => 'array'
-    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the products.
+     */
+    public function products()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
+
+    /**
+     * Get the product directly.
+     */
+    public function productsDirectly()
+    {
+        return $this->belongsToMany(Product::class, 'order_products', 'order_id', 'product_id');
+    }
 }

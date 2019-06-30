@@ -17,10 +17,9 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->json('products')->nullable();
             $table->enum('status', ['open', 'paid', 'canceled'])->default('open');
+            $table->decimal('discount')->default(0);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
