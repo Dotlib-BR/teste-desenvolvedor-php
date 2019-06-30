@@ -50,7 +50,7 @@ class LoginController extends Controller
         $validator->getMessageBag()->add('password', 'Por favor, verifique a sua senha.');
 
         flashToast('error', 'Os dados inseridos não correspondem aos nossos registros.');
-        return back()->withErrors($validator);
+        return back()->withInput()->withErrors($validator);
     }
 
     /**

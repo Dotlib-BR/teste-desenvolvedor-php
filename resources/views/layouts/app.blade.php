@@ -10,12 +10,16 @@
     </head>
     <body>
         @auth
-            @include('includes.navbar')
+            @include('includes.header')
         @endauth
 
         <main class="{{ (!auth()->check()) ? 'h-100' : '' }}">
             @yield('content')
         </main>
+
+        @auth
+            @include('includes.footer')
+        @endauth
 
         @include('components.alert')
 

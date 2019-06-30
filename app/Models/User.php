@@ -26,15 +26,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password'
     ];
-
-    /**
-     * Set the user's password value.
-     *
-     * @param string $value
-     * @return void
-     */
-    public function setPasswordAttribute($value)
-    {
-        $this->attribute['password'] = bcrypt($value);
-    }
 }
