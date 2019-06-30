@@ -2,10 +2,10 @@
 
 @section('content')
     @auth
-        <div class="container mb-3">
-            <div class="row">
+        <div class="container-fluid mb-3">
+            <div class="row mb-3">
                 <div class="col-md-4 mb-2">
-                    @include('partials.page', [
+                    @include('components.card', [
                         'type'  => 'statistic',
                         'title' => 'Usuários',
                         'icon'  => 'users',
@@ -13,7 +13,7 @@
                     ])
                 </div>
                 <div class="col-md-4 mb-2">
-                    @include('partials.page', [
+                    @include('components.card', [
                         'type'  => 'statistic',
                         'title' => 'Produtos',
                         'icon'  => 'tags',
@@ -21,11 +21,18 @@
                     ])
                 </div>
                 <div class="col-md-4 mb-2">
-                    @include('partials.page', [
+                    @include('components.card', [
                         'type'  => 'statistic',
                         'title' => 'Pedidos',
                         'icon'  => 'shopping-cart',
                         'total' => $total['orders']
+                    ])
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    @include('partials.page', [
+                        'type' => 'welcome'
                     ])
                 </div>
             </div>

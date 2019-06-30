@@ -4,7 +4,7 @@
     <div class="container-fluid">
         @include('partials.page', [
             'type'   => 'edit',
-            'title'  => 'Atualizar Produto',
+            'title'  => 'Editar Produto',
             'fields' => [
                 'name'      => [
                     'type'       => 'text',

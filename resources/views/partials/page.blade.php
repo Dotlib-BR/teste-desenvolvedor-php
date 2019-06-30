@@ -3,6 +3,19 @@
         <div class="card-body">
             @switch ($type)
 
+                @case ('welcome')
+                    <div class="m-5 text-center">
+                        <p>
+                            <i class="far fa-smile-beam fa-5x"></i>
+                        </p>
+                        <p>
+                            <h4>Olá! Seja bem-vindo.</h4>
+                            Aqui você poderá criar, visualizar, alterar e excluir usuários, produtos e pedidos.<br />
+                            Basta acessar as opções no menu principal.
+                        </p>
+                    </div>
+                @break
+
                 @case ('content')
                     <h5 class="card-title">{{ $title }}</h5>
                     <hr>
@@ -46,7 +59,14 @@
                                         </select>
                                     </div>
                                     <div class="col-12 col-sm-2 pr-sm-2 pl-sm-0">
-                                        <input type="text" name="items" value="{{ $items }}" class="form-control" placeholder="Itens">
+                                        <select class="form-control mr-2 mb-2" name="items">
+                                            @php
+                                                $options = [5, 10, 20, 30, 50, 100, 250, 500];
+                                            @endphp
+                                            @foreach ($options as $option)
+                                                <option value="{{ $option }}" {{ ($items == $option || (empty($items) && $option == 20)) ? 'selected' : '' }}>{{ $option }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-12 col-sm-3 pl-sm-0 col-">
                                         <button type="submit" class="btn btn-secondary btn-block mb-2">Ordenar</button>
