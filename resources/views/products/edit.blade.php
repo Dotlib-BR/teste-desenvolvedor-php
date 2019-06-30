@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        @include('components.card', [
+        @include('partials.page', [
             'type'   => 'edit',
             'title'  => 'Atualizar Produto',
             'fields' => [

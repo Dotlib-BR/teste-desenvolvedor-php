@@ -26,11 +26,14 @@ Route::group(['namespace' => 'Page'], function () {
 
     # Users
     Route::resource('users', 'UserController');
+    Route::post('users/mass-destroy', 'UserController@massDestroy')->name('users.mass-destroy');
 
     # Products
     Route::resource('products', 'ProductController');
+    Route::post('products/mass-destroy', 'ProductController@massDestroy')->name('products.mass-destroy');
 
     # Orders
     Route::resource('orders', 'OrderController');
+    Route::post('orders/mass-destroy', 'OrderController@massDestroy')->name('orders.mass-destroy');
 
 });

@@ -93,7 +93,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Product  $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -106,7 +106,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Product  $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -120,7 +120,7 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Product  $product
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
@@ -149,7 +149,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Product  $product
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
@@ -163,6 +163,31 @@ class ProductController extends Controller
     }
 
     /**
+     * Remove the specified resources from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function massDestroy(Request $request)
+    {
+        $validator = validator()->make($request->all(), [
+            'id' => 'required|array',
+        ], $this->messages());
+
+        if ($validator->passes()) {
+            DB::transaction(function() use($request) {
+                Product::whereIn('id', $request->id)->delete();
+            });
+
+            flashToast('success', 'Produtos excluídos.');
+            return redirect()->route('products.index');
+        }
+
+        flashToast('error', 'Não foi possível excluir os produtos selecionados.');
+        return back();
+    }
+
+    /**
      * Validation messages
      *
      * @return array
@@ -170,6 +195,8 @@ class ProductController extends Controller
     private function messages()
     {
         return [
+            'id.required'     => 'Selecione os produtos.',
+            'id.array'        => 'IDs inválidos.',
             'name.required'   => 'Insira o nome.',
             'name.string'     => 'Nome inválido.',
             'name.min'        => 'O nome deve conter no mínimo :min caracteres.',

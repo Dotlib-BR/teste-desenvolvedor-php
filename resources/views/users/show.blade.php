@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        @include('components.card', [
+        @include('partials.page', [
             'type'    => 'show',
             'title'   => 'Informações do Usuário',
             'columns' => [
@@ -11,11 +11,11 @@
                 'document'  => 'CPF'
             ],
             'actions' => [
-                route($namespace . '.edit', $model->id)     => [
+                route($route . '.edit', $model->id)     => [
                     'label' => 'Atualizar usuário',
                     'type'  => 'get'
                 ],
-                route($namespace . '.destroy', $model->id)  => [
+                route($route . '.destroy', $model->id)  => [
                     'label' => 'Excluir usuário',
                     'type'  => 'delete'
                 ]

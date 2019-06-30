@@ -27,9 +27,21 @@ class AppServiceProvider extends ServiceProvider
             $name = explode('.', $view->getName());
 
             if (count($name) > 1) {
-                view()->share('namespace', $name[0]);
+                $names = [
+                    'users'    => 'Usuário',
+                    'products' => 'Produto',
+                    'orders'   => 'Pedido'
+                ];
+
+                view()->share('route', $name[0]);
+
+                if (array_key_exists($name[0], $names)) {
+                    view()->share('namespace', $names[$name[0]]);
+                } else {
+                    view()->share('namespace', 'unknown');
+                }
             } else {
-                view()->share('namespace', 'unknown');
+                view()->share('route', 'unknown');
             }
         });
 

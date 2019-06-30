@@ -5,7 +5,7 @@
         <div class="container mb-3">
             <div class="row">
                 <div class="col-md-4 mb-2">
-                    @include('components.card', [
+                    @include('partials.page', [
                         'type'  => 'statistic',
                         'title' => 'Usuários',
                         'icon'  => 'users',
@@ -13,7 +13,7 @@
                     ])
                 </div>
                 <div class="col-md-4 mb-2">
-                    @include('components.card', [
+                    @include('partials.page', [
                         'type'  => 'statistic',
                         'title' => 'Produtos',
                         'icon'  => 'tags',
@@ -21,7 +21,7 @@
                     ])
                 </div>
                 <div class="col-md-4 mb-2">
-                    @include('components.card', [
+                    @include('partials.page', [
                         'type'  => 'statistic',
                         'title' => 'Pedidos',
                         'icon'  => 'shopping-cart',

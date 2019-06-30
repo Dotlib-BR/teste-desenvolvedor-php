@@ -95,7 +95,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -108,7 +108,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -122,7 +122,7 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -155,7 +155,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
@@ -169,6 +169,31 @@ class UserController extends Controller
     }
 
     /**
+     * Remove the specified resources from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function massDestroy(Request $request)
+    {
+        $validator = validator()->make($request->all(), [
+            'id' => 'required|array',
+        ], $this->messages());
+
+        if ($validator->passes()) {
+            DB::transaction(function() use($request) {
+                User::whereIn('id', $request->id)->delete();
+            });
+
+            flashToast('success', 'Usuários excluídos.');
+            return redirect()->route('users.index');
+        }
+
+        flashToast('error', 'Não foi possível excluir os usuários selecionados.');
+        return back();
+    }
+
+    /**
      * Validation messages
      *
      * @return array
@@ -176,6 +201,8 @@ class UserController extends Controller
     private function messages()
     {
         return [
+            'id.required'       => 'Selecione os usuários.',
+            'id.array'          => 'IDs inválidos.',
             'name.required'     => 'Insira o nome.',
             'name.string'       => 'Nome inválido.',
             'name.min'          => 'O nome deve conter no mínimo :min caracteres.',

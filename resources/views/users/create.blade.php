@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        @include('components.card', [
+        @include('partials.page', [
             'type'   => 'create',
             'title'  => 'Registrar Usuário',
             'fields' => [

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        @include('components.card', [
+        @include('partials.page', [
             'type'       => 'content',
             'title'      => 'Usuários',
             'columns'    => [
@@ -11,8 +11,7 @@
                 'document'   => 'CPF',
                 'created_at' => 'Criado em',
                 'updated_at' => 'Atualizado em'
-            ],
-            'button'     => 'Registrar usuário'
+            ]
         ])
     </div>
 @endsection

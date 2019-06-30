@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        @include('components.card', [
+        @include('partials.page', [
             'type'    => 'show',
             'title'   => 'Informações do Produto',
             'columns' => [
@@ -11,11 +11,11 @@
                 'code'  => 'Código de barras'
             ],
             'actions' => [
-                route($namespace . '.edit', $model->id)     => [
+                route($route . '.edit', $model->id)     => [
                     'label' => 'Atualizar produto',
                     'type'  => 'get'
                 ],
-                route($namespace . '.destroy', $model->id)  => [
+                route($route . '.destroy', $model->id)  => [
                     'label' => 'Excluir produto',
                     'type'  => 'delete'
                 ]
