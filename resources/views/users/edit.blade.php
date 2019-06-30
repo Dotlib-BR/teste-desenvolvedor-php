@@ -3,8 +3,8 @@
 @section('content')
     <div class="container-fluid">
         @include('components.card', [
-            'type'   => 'create',
-            'title'  => 'Registrar Usuário',
+            'type'   => 'edit',
+            'title'  => 'Atualizar Usuário',
             'fields' => [
                 'name'      => [
                     'type'       => 'text',
@@ -23,7 +23,7 @@
                     'type'       => 'password',
                     'label'      => 'Senha',
                     'icon'       => 'lock',
-                    'required'   => true
+                    'required'   => false
                 ],
                 'document'  => [
                     'type'       => 'text',

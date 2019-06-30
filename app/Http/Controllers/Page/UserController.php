@@ -42,7 +42,7 @@ class UserController extends Controller
         $user = $select->paginate(20)->toArray();
 
         return view('users.index', [
-            'users'      => $user['data'],
+            'values'     => $user['data'],
             'pagination' => [
                 'current' => $user['current_page'],
                 'total'   => $user['last_page']
@@ -72,27 +72,18 @@ class UserController extends Controller
             'name'      => 'required|string|min:4|max:100',
             'email'     => 'required|email|max:255|unique:users,email',
             'password'  => 'required',
-            'document'  => 'required|cpf'
-        ], [
-            'name.required'     => 'Insira o nome.',
-            'name.string'       => 'Nome inválido.',
-            'name.min'          => 'O nome deve conter entre :min à :max caracteres.',
-            'name.max'          => 'O nome deve conter entre :min à :max caracteres.',
-            'email.required'    => 'Insira o e-mail.',
-            'email.email'       => 'E-mail inválido.',
-            'email.max'         => 'O e-mail deve conter o máximo de :max caracteres.',
-            'email.unique'      => 'E-mail em uso.',
-            'document.required' => 'Insira o CPF.',
-            'document.cpf'      => 'CPF inválido.'
-        ]);
+            'document'  => 'required|cpf|unique:users,document'
+        ], $this->messages());
 
         if ($validator->passes()) {
-            DB::transaction(function() use($request) {
-                User::create($request->except('_token'));
+            $user = null;
+
+            DB::transaction(function() use($request, &$user) {
+                $user = User::create($request->except('_token'));
             });
 
             flashToast('success', 'Usuário registrado.');
-            return redirect()->route('users.index');
+            return redirect()->route('users.show', $user->id);
         }
 
         flashToast('error', 'Não foi possível registrar o usuário.');
@@ -105,9 +96,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('users.show', [
+            'model' => $user
+        ]);
     }
 
     /**
@@ -116,9 +109,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', [
+            'model' => $user
+        ]);
     }
 
     /**
@@ -128,9 +123,31 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validator = validator()->make($request->all(), [
+            'name'      => 'required|string|min:4|max:100',
+            'email'     => 'required|email|max:255|unique:users,email,' . $user->id,
+            'document'  => 'required|cpf|unique:users,document,' . $user->id
+        ], $this->messages());
+
+        if ($validator->passes()) {
+            $data = $request->only(['name', 'email', 'password', 'document']);
+
+            if ($data['password'] === null) {
+                unset($data['password']);
+            }
+
+            DB::transaction(function() use($user, $data) {
+                $user->update($data);
+            });
+
+            flashToast('success', 'Usuário atualizado.');
+            return redirect()->route('users.show', $user->id);
+        }
+
+        flashToast('error', 'Não foi possível atualizar o usuário.');
+        return back()->withInput()->withErrors($validator);
     }
 
     /**
@@ -139,8 +156,36 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        DB::transaction(function() use($user) {
+            $user->delete();
+        });
+
+        flashToast('success', 'Usuário excluído.');
+        return redirect()->route('users.index');
+    }
+
+    /**
+     * Validation messages
+     *
+     * @return array
+     */
+    private function messages()
+    {
+        return [
+            'name.required'     => 'Insira o nome.',
+            'name.string'       => 'Nome inválido.',
+            'name.min'          => 'O nome deve conter entre :min à :max caracteres.',
+            'name.max'          => 'O nome deve conter entre :min à :max caracteres.',
+            'email.required'    => 'Insira o e-mail.',
+            'email.email'       => 'E-mail inválido.',
+            'email.max'         => 'O e-mail deve conter o máximo de :max caracteres.',
+            'email.unique'      => 'E-mail em uso.',
+            'password.required' => 'Insira a senha.',
+            'document.required' => 'Insira o CPF.',
+            'document.cpf'      => 'CPF inválido.',
+            'document.unique'   => 'CPF em uso.'
+        ];
     }
 }

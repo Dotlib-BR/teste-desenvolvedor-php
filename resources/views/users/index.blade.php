@@ -12,8 +12,6 @@
                 'created_at' => 'Criado em',
                 'updated_at' => 'Atualizado em'
             ],
-            'values'     => $users,
-            'pagination' => $pagination,
             'button'     => 'Registrar usuário'
         ])
     </div>
