@@ -39,7 +39,8 @@ class ProductController extends Controller
                              ->orWhere('code', 'like', $search);
         }
 
-        $product = $select->paginate(20)->toArray();
+        $items   = $request->items ?? 20;
+        $product = $select->paginate($items)->toArray();
 
         return view('products.index', [
             'values'     => $product['data'],

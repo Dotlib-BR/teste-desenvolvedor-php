@@ -40,7 +40,8 @@ class UserController extends Controller
                              ->orWhere('document', 'like', $search);
         }
 
-        $user = $select->paginate(20)->toArray();
+        $items = $request->items ?? 20;
+        $user  = $select->paginate($items)->toArray();
 
         return view('users.index', [
             'values'     => $user['data'],
