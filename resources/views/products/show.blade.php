@@ -4,19 +4,19 @@
     <div class="container-fluid">
         @include('components.card', [
             'type'    => 'show',
-            'title'   => 'Informações do Usuário',
+            'title'   => 'Informações do Produto',
             'columns' => [
-                'name'      => 'Nome',
-                'email'     => 'E-mail',
-                'document'  => 'CPF'
+                'name'  => 'Nome',
+                'price' => 'Preço',
+                'code'  => 'Código de barras'
             ],
             'actions' => [
                 route($namespace . '.edit', $model->id)     => [
-                    'label' => 'Atualizar usuário',
+                    'label' => 'Atualizar produto',
                     'type'  => 'get'
                 ],
                 route($namespace . '.destroy', $model->id)  => [
-                    'label' => 'Excluir usuário',
+                    'label' => 'Excluir produto',
                     'type'  => 'delete'
                 ]
             ]

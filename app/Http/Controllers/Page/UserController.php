@@ -22,6 +22,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -176,11 +177,11 @@ class UserController extends Controller
         return [
             'name.required'     => 'Insira o nome.',
             'name.string'       => 'Nome inválido.',
-            'name.min'          => 'O nome deve conter entre :min à :max caracteres.',
-            'name.max'          => 'O nome deve conter entre :min à :max caracteres.',
+            'name.min'          => 'O nome deve conter no mínimo :min caracteres.',
+            'name.max'          => 'O nome deve conter no máximo :max caracteres.',
             'email.required'    => 'Insira o e-mail.',
             'email.email'       => 'E-mail inválido.',
-            'email.max'         => 'O e-mail deve conter o máximo de :max caracteres.',
+            'email.max'         => 'O e-mail deve conter no máximo :max caracteres.',
             'email.unique'      => 'E-mail em uso.',
             'password.required' => 'Insira a senha.',
             'document.required' => 'Insira o CPF.',

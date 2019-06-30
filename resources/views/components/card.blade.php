@@ -27,18 +27,9 @@
 
                 <hr>
 
-                @include('components.filter', [
-                    'columns' => $columns
-                ])
-
-                @include('components.table', [
-                    'columns'   => $columns,
-                    'values'    => $values,
-                ])
-
-                @include('components.pagination', [
-                    'pagination' => $pagination
-                ])
+                @include('components.filter')
+                @include('components.table')
+                @include('components.pagination')
 
             @elseif ($type == 'create')
 
@@ -55,7 +46,7 @@
                                             <i class="fas fa-{{ $field['icon'] ?? 'question' }}"></i>
                                         </div>
                                     </span>
-                                    <input type="{{ $field['type'] ?? 'text' }}" name="{{ $column }}" class="form-control {{ $errors->has($column) ? 'is-invalid' : '' }}" placeholder="{{ $field['label'] ?? '' }}" maxlength="{{ $field['max_length'] ?? 255 }}" value="{{ ($field['type'] ?? 'text') == 'password' ? '' : old($column) }}" {{ ($field['required'] ?? false) ? 'required' : '' }}>
+                                    <input type="{{ $field['type'] ?? 'text' }}" name="{{ $column }}" class="form-control {{ $errors->has($column) ? 'is-invalid' : '' }}" placeholder="{{ $field['label'] ?? '' }}" maxlength="{{ $field['max_length'] ?? 255 }}" value="{{ ($field['type'] ?? 'text') == 'password' ? '' : old($column) }}" {{ $field['type'] == 'number' ? 'step=0.01' : ''}} {{ ($field['required'] ?? false) ? 'required' : '' }}>
                                     @if ($errors->has($column))
                                         <div class="invalid-feedback">
                                             {{ $errors->first($column) }}
@@ -154,7 +145,7 @@
                                             <i class="fas fa-{{ $field['icon'] ?? 'question' }}"></i>
                                         </div>
                                     </span>
-                                    <input type="{{ $field['type'] ?? 'text' }}" name="{{ $column }}" class="form-control {{ $errors->has($column) ? 'is-invalid' : '' }}" placeholder="{{ $field['label'] ?? '' }}" maxlength="{{ $field['max_length'] ?? 255 }}" value="{{ ($field['type'] ?? 'text') == 'password' ? '' : old($column, $model->$column) }}" {{ ($field['required'] ?? false) ? 'required' : '' }}>
+                                    <input type="{{ $field['type'] ?? 'text' }}" name="{{ $column }}" class="form-control {{ $errors->has($column) ? 'is-invalid' : '' }}" placeholder="{{ $field['label'] ?? '' }}" maxlength="{{ $field['max_length'] ?? 255 }}" value="{{ ($field['type'] ?? 'text') == 'password' ? '' : old($column, $model->$column) }}" {{ $field['type'] == 'number' ? 'step=0.01' : ''}} {{ ($field['required'] ?? false) ? 'required' : '' }}>
                                     @if ($errors->has($column))
                                         <div class="invalid-feedback">
                                             {{ $errors->first($column) }}

@@ -2,19 +2,25 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                @foreach ($columns as $column)
-                    <th scope="col">{{ $column }}</th>
+                @foreach ($columns as $column => $name)
+                    <th scope="col" class="{{ $column == 'name' ? '' : 'text-center' }}">{{ $name }}</th>
                 @endforeach
             </tr>
         </thead>
         <tbody>
             @foreach ($values as $array)
                 <tr onclick="window.location = '{{ route($namespace . '.show', $array['id']) }}'" class="cursor-pointer">
-                    @foreach ($array as $key => $value)
-                        @if ($key == 'id')
-                            @continue
-                        @endif
-                        <td>{{ $value }}</td>
+                    @foreach ($array as $column => $value)
+                        @switch ($column)
+                            @case ('id')
+                                @break
+                            @case ('price')
+                                <td class="text-center">R$ {{ number_format((int)$value, 2, ',', '.') }}</td>
+                                @break
+                            @default
+                                <td class="{{ $column == 'name' ? '' : 'text-center' }}">{{ $value }}</td>
+                                @break
+                        @endswitch
                     @endforeach
                 </tr>
             @endforeach
