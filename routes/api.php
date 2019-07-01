@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('api')->namespace('API')->group(function() {
+
+    # Users
+    Route::resource('users', 'UserController')->except(['create', 'edit']);
+
+    # Products
+    Route::resource('products', 'ProductController');
+
+    # Orders
+    Route::resource('orders', 'OrderController');
+
 });

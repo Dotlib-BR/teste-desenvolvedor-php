@@ -78,6 +78,10 @@ class UserController extends Controller
         ], $this->messages());
 
         if ($validator->passes()) {
+            $request->merge([
+                'password' => bcrypt($request->password)
+            ]);
+
             $user = null;
 
             DB::transaction(function() use($request, &$user) {
@@ -141,6 +145,8 @@ class UserController extends Controller
 
             if ($data['password'] === null) {
                 unset($data['password']);
+            } else {
+                $data['password'] = bcrypt($data['password']);
             }
 
             DB::transaction(function() use($user, $data) {
