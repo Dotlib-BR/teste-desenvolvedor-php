@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderProduct;
+use App\Models\User;
 use DB;
 
 class OrderController extends Controller
@@ -63,7 +64,10 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.create', [
+            'users'     => User::all(),
+            'products'  => Product::all()
+        ]);
     }
 
     /**
@@ -74,7 +78,44 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = validator()->make($request->all(), [
+            'user_id'           => 'required|exists:users,id',
+            'product'           => 'required|array',
+            'product.*.id'      => 'required|exists:products,id',
+            'product.*.amount'  => 'required|integer',
+            'discount'          => 'required|numeric'
+        ], $this->messages());
+
+        if ($validator->passes()) {
+            $order = null;
+
+            DB::transaction(function() use($request, &$order) {
+                $order = Order::create([
+                    'user_id'  => $request->user_id,
+                    'discount' => $request->discount,
+                    'status'   => $request->status
+                ]);
+
+                $products = [];
+
+                foreach ($request->product as $product) {
+                    $products[] = new OrderProduct([
+                        'product_id' => $product['id'],
+                        'amount'     => $product['amount']
+                    ]);
+                }
+
+                $order->products()->saveMany($products);
+            });
+
+            if ($order) {
+                flashToast('success', 'Pedido criado.');
+                return redirect()->route('orders.show', $order->id);
+            }
+        }
+
+        flashToast('error', 'Não foi possível criar o pedido.');
+        return back()->withInput()->withErrors($validator);
     }
 
     /**
@@ -86,8 +127,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return view('orders.show', [
-            'order'     => $order,
-            'products'  => Product::all()
+            'order' => $order
         ]);
     }
 
@@ -101,6 +141,7 @@ class OrderController extends Controller
     {
         return view('orders.edit', [
             'order'     => $order,
+            'users'     => User::all(),
             'products'  => Product::all()
         ]);
     }
@@ -115,6 +156,7 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $validator = validator()->make($request->all(), [
+            'user_id'           => 'required|exists:users,id',
             'product'           => 'required|array',
             'product.*.id'      => 'required|exists:products,id',
             'product.*.amount'  => 'required|integer',
@@ -156,7 +198,37 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        DB::transaction(function() use($order) {
+            $order->delete();
+        });
+
+        flashToast('success', 'Pedido excluído.');
+        return redirect()->route('orders.index');
+    }
+
+    /**
+     * Remove the specified resources from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function massDestroy(Request $request)
+    {
+        $validator = validator()->make($request->all(), [
+            'id' => 'required|array',
+        ], $this->messages());
+
+        if ($validator->passes()) {
+            DB::transaction(function() use($request) {
+                Order::whereIn('id', $request->id)->delete();
+            });
+
+            flashToast('success', 'Pedidos excluídos.');
+            return redirect()->route('orders.index');
+        }
+
+        flashToast('error', 'Não foi possível excluir os pedidos selecionados.');
+        return back();
     }
 
     /**
@@ -167,6 +239,10 @@ class OrderController extends Controller
     private function messages()
     {
         return [
+            'id.required'           => 'Selecione os pedidos.',
+            'id.array'              => 'Pedidos inválidos.',
+            'user_id.required'      => 'Selecione o comprador.',
+            'user_id.exists'        => 'O comprador não foi encontrado.',
             'product.required'      => 'É necessário ter ao menos um produto no pedido.',
             'product.array'         => 'Produtos inválidos.',
             'product.*.id.required' => 'Selecione o produto.',

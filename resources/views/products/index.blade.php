@@ -73,7 +73,7 @@
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="text-center">#</th>
+                                        <th scope="col" class="text-center"><input type="checkbox" id="select-all"></th>
                                         <th scope="col">Nome</th>
                                         <th scope="col" class="text-center">Preço</th>
                                         <th scope="col" class="text-center">Código de barras</th>
@@ -239,6 +239,25 @@
                 }
 
                 massSubmit = false;
+            });
+
+            $('#select-all').on('click', function(e) {
+                var checked = this.checked;
+
+                $('input[type="checkbox"]').each(function() {
+                    this.checked = checked;
+                });
+            });
+
+            $('input[type="checkbox"]').on('click', function() {
+                var checked = $('input[id!="select-all"][type="checkbox"]:checked').length;
+                var total   = $('input[id!="select-all"][type="checkbox"]').length;
+
+                if (checked == total) {
+                    $('#select-all').prop('checked', true);
+                } else {
+                    $('#select-all').prop('checked', false);
+                }
             });
         });
     </script>

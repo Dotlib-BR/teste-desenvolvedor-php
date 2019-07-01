@@ -11,6 +11,59 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
+                            <div class="col-12 col-sm-6">
+                                <div class="input-group mb-2">
+                                    <span class="input-group-prepend">
+                                        <div class="input-group-text bg-transparent">
+                                            <i class="fas fa-user }}"></i>
+                                        </div>
+                                    </span>
+                                    <select name="user_id" class="form-control {{ $errors->has('user_id') ? 'is-invalid' : '' }}" required>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}" {{ (old('user_id', $order->user_id) == $user->id) ? 'selected' : '' }}>{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('user_id'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('user_id') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="input-group mb-2">
+                                    <span class="input-group-prepend">
+                                        <div class="input-group-text bg-transparent">
+                                            <i class="fas fa-bookmark }}"></i>
+                                        </div>
+                                    </span>
+                                    <select name="status" class="form-control" required>
+                                        <option value="open" {{ (old('status', $order->status) == 'open') ? 'selected' : '' }}>Em aberto</option>
+                                        <option value="paid" {{ (old('status', $order->status) == 'paid') ? 'selected' : '' }}>Pago</option>
+                                        <option value="canceled" {{ (old('status', $order->status) == 'canceled') ? 'selected' : '' }}>Cancelado</option>
+                                    </select>
+                                    @if ($errors->has('status'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('status') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="input-group mb-2">
+                                    <span class="input-group-prepend">
+                                        <div class="input-group-text bg-transparent">
+                                            <i class="fas fa-dollar-sign }}"></i>
+                                        </div>
+                                    </span>
+                                    <input type="number" name="discount" class="form-control {{ $errors->has('discount') ? 'is-invalid' : '' }}" placeholder="Desconto" step="0.01" value="{{ old('discount', $order->discount) }}" min="0" required>
+                                    @if ($errors->has('discount'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('discount') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="col-12">
                                 <div class="table-responsive mb-2">
                                     <table class="table table-striped">
@@ -23,20 +76,23 @@
                                         </thead>
                                         <tbody id="row-body">
                                             @php
-                                                $all = old('product', null);
+                                                $all  = old('product', []);
+                                                $last = count($all);
 
-                                                if ($all === null) {
-                                                    $all = [];
-
+                                                if ($last == 0) {
                                                     foreach ($order->products as $product) {
                                                         $all[] = [
                                                             'id'     => $product->product_id,
                                                             'amount' => $product->amount
                                                         ];
                                                     }
+
+                                                    $last = count($all);
                                                 }
 
-                                                $last = ($all === null) ? 0 : count($all);
+                                                if ($last == 0) {
+                                                    $last = 1;
+                                                }
                                             @endphp
                                             @forelse ($all as $row => $current)
                                                 <tr id="row-{{ $row }}">
@@ -126,40 +182,6 @@
                                             @endforelse
                                         </tbody>
                                     </table>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="input-group mb-2">
-                                    <span class="input-group-prepend">
-                                        <div class="input-group-text bg-transparent">
-                                            <i class="fas fa-dollar-sign }}"></i>
-                                        </div>
-                                    </span>
-                                    <input type="number" name="discount" class="form-control {{ $errors->has('discount') ? 'is-invalid' : '' }}" placeholder="Desconto" step="0.01" value="{{ old('discount', $order->discount) }}" min="0" required>
-                                    @if ($errors->has('discount'))
-                                        <div class="invalid-feedback">
-                                            {{ $errors->first('discount') }}
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="input-group mb-2">
-                                    <span class="input-group-prepend">
-                                        <div class="input-group-text bg-transparent">
-                                            <i class="fas fa-bookmark }}"></i>
-                                        </div>
-                                    </span>
-                                    <select name="status" class="form-control">
-                                        <option value="open" {{ ($order->status == 'open') ? 'selected' : '' }}>Em aberto</option>
-                                        <option value="paid" {{ ($order->status == 'paid') ? 'selected' : '' }}>Pago</option>
-                                        <option value="canceled" {{ ($order->status == 'canceled') ? 'selected' : '' }}>Cancelado</option>
-                                    </select>
-                                    @if ($errors->has('status'))
-                                        <div class="invalid-feedback">
-                                            {{ $errors->first('status') }}
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-md-4 col-xl-2 offset-sm-3 offset-md-4 offset-xl-5 text-center mt-2">

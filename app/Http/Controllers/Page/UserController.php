@@ -84,8 +84,10 @@ class UserController extends Controller
                 $user = User::create($request->except('_token'));
             });
 
-            flashToast('success', 'Usuário registrado.');
-            return redirect()->route('users.show', $user->id);
+            if ($user) {
+                flashToast('success', 'Usuário registrado.');
+                return redirect()->route('users.show', $user->id);
+            }
         }
 
         flashToast('error', 'Não foi possível registrar o usuário.');
@@ -203,7 +205,7 @@ class UserController extends Controller
     {
         return [
             'id.required'       => 'Selecione os usuários.',
-            'id.array'          => 'IDs inválidos.',
+            'id.array'          => 'Usuários inválidos.',
             'name.required'     => 'Insira o nome.',
             'name.string'       => 'Nome inválido.',
             'name.min'          => 'O nome deve conter no mínimo :min caracteres.',

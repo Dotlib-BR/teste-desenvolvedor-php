@@ -82,8 +82,10 @@ class ProductController extends Controller
                 $product = Product::create($request->except('_token'));
             });
 
-            flashToast('success', 'Produto registrado.');
-            return redirect()->route('products.show', $product->id);
+            if ($product) {
+                flashToast('success', 'Produto registrado.');
+                return redirect()->route('products.show', $product->id);
+            }
         }
 
         flashToast('error', 'Não foi possível registrar o produto.');
@@ -196,7 +198,7 @@ class ProductController extends Controller
     {
         return [
             'id.required'     => 'Selecione os produtos.',
-            'id.array'        => 'IDs inválidos.',
+            'id.array'        => 'Produtos inválidos.',
             'name.required'   => 'Insira o nome.',
             'name.string'     => 'Nome inválido.',
             'name.min'        => 'O nome deve conter no mínimo :min caracteres.',
