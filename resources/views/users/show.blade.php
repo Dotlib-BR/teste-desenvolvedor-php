@@ -71,7 +71,7 @@
                                         $orders = $user->orders()->latest()->take(15)->get();
                                     @endphp
 
-                                    @foreach ($orders as $order)
+                                    @forelse ($orders as $order)
                                         @php
                                             $products = $order->products->pluck('product.name', 'amount')->toArray();
                                             $products = implode(', ', array_map(function($value, $key) use(&$count) {
@@ -127,7 +127,11 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                        <tr>
+                                            <td colspan="10" class="text-center">Nenhum pedido para ser exibido.</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

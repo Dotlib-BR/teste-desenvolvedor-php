@@ -12,6 +12,7 @@
                         @method('PUT')
                         <div class="row">
                             <div class="col-12 col-sm-6">
+                                <label for="" class="mb-0 font-weight-bold">Comprador</label>
                                 <div class="input-group mb-2">
                                     <span class="input-group-prepend">
                                         <div class="input-group-text bg-transparent">
@@ -31,6 +32,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
+                                <label for="" class="mb-0 font-weight-bold">Status</label>
                                 <div class="input-group mb-2">
                                     <span class="input-group-prepend">
                                         <div class="input-group-text bg-transparent">
@@ -50,6 +52,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
+                                <label for="" class="mb-0 font-weight-bold">Desconto</label>
                                 <div class="input-group mb-2">
                                     <span class="input-group-prepend">
                                         <div class="input-group-text bg-transparent">
@@ -64,7 +67,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-12 mt-3">
                                 <div class="table-responsive mb-2">
                                     <table class="table table-striped">
                                         <thead>

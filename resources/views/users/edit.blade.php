@@ -12,6 +12,7 @@
                         @method('PUT')
                         <div class="row">
                             <div class="col-12 col-sm-6">
+                                <label for="" class="mb-0 font-weight-bold">Nome</label>
                                 <div class="input-group mb-2">
                                     <span class="input-group-prepend">
                                         <div class="input-group-text bg-transparent">
@@ -27,6 +28,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
+                                <label for="" class="mb-0 font-weight-bold">E-mail</label>
                                 <div class="input-group mb-2">
                                     <span class="input-group-prepend">
                                         <div class="input-group-text bg-transparent">
@@ -42,6 +44,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
+                                <label for="" class="mb-0 font-weight-bold">Senha</label>
                                 <div class="input-group mb-2">
                                     <span class="input-group-prepend">
                                         <div class="input-group-text bg-transparent">
@@ -57,6 +60,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
+                                <label for="" class="mb-0 font-weight-bold">CPF</label>
                                 <div class="input-group mb-2">
                                     <span class="input-group-prepend">
                                         <div class="input-group-text bg-transparent">
