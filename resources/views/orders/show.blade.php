@@ -16,6 +16,13 @@
                                 </p>
                             @endif
 
+                            @if ($order->user)
+                                <p>
+                                    <strong>Comprador:</strong><br />
+                                    {{ $order->user->name }}
+                                </p>
+                            @endif
+
                             @php
                                 $price = 0;
                             @endphp
