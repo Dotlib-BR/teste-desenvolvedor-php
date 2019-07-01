@@ -119,16 +119,22 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        DB::transaction(function() use($user) {
-            $user->delete();
-        });
+        $user = User::find($id);
 
-        return response()->json(true);
+        if ($user) {
+            DB::transaction(function() use($user) {
+                $user->delete();
+            });
+
+            return response()->json(true);
+        }
+
+        return response()->json(false, 404);
     }
 
     /**

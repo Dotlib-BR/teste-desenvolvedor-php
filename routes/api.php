@@ -13,15 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('api')->namespace('API')->group(function() {
+Route::group(['namespace' => 'API', 'middleware' => 'api'], function() {
 
     # Users
     Route::resource('users', 'UserController')->except(['create', 'edit']);
 
     # Products
-    Route::resource('products', 'ProductController');
+    Route::resource('products', 'ProductController')->except(['create', 'edit']);
 
     # Orders
-    Route::resource('orders', 'OrderController');
+    Route::resource('orders', 'OrderController')->except(['create', 'edit']);
+    Route::get('orders/user/{id}', 'OrderController@userOrders');
 
 });
