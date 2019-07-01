@@ -37,8 +37,10 @@
                                                             ];
                                                         }
 
+                                                        $value                                        = $product->amount * $product->product->price;
+                                                        $price                                       += $value;
                                                         $products[$product->product->name]['amount'] += $product->amount;
-                                                        $products[$product->product->name]['price']  += ($product->amount * $product->product->price);
+                                                        $products[$product->product->name]['price']  += $value;
                                                     }
                                                 @endphp
                                                 @foreach ($products as $name => $product)
@@ -88,6 +90,25 @@
                                 <p>
                                     <strong>Valor final:</strong><br />
                                     R$ {{ number_format($final, 2, ',', '.') }}
+                                </p>
+                            @endif
+
+                            @if ($order->status)
+                                <p>
+                                    <strong>Status:</strong><br />
+                                    @switch ($order->status)
+                                        @case ('open')
+                                            <span class="badge badge-info">Em aberto</span>
+                                        @break
+
+                                        @case ('paid')
+                                            <span class="badge badge-success">Pago</span>
+                                        @break
+
+                                        @case ('canceled')
+                                            <span class="badge badge-danger">Cancelado</span>
+                                        @break
+                                    @endswitch
                                 </p>
                             @endif
                         </div>

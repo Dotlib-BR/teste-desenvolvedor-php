@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\OrderProduct;
+use DB;
 
 class OrderController extends Controller
 {
@@ -83,7 +86,8 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return view('orders.show', [
-            'order' => $order
+            'order'     => $order,
+            'products'  => Product::all()
         ]);
     }
 
@@ -96,7 +100,8 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         return view('orders.edit', [
-            'order' => $order
+            'order'     => $order,
+            'products'  => Product::all()
         ]);
     }
 
@@ -109,7 +114,38 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $validator = validator()->make($request->all(), [
+            'product'           => 'required|array',
+            'product.*.id'      => 'required|exists:products,id',
+            'product.*.amount'  => 'required|integer',
+            'discount'          => 'required|numeric'
+        ], $this->messages());
+
+        if ($validator->passes()) {
+            DB::transaction(function() use($order, $request) {
+                $order->discount = $request->discount;
+                $order->status   = $request->status;
+                $order->save();
+
+                $products = [];
+
+                foreach ($request->product as $product) {
+                    $products[] = new OrderProduct([
+                        'product_id' => $product['id'],
+                        'amount'     => $product['amount']
+                    ]);
+                }
+
+                $order->products()->delete();
+                $order->products()->saveMany($products);
+            });
+
+            flashToast('success', 'Pedido atualizado.');
+            return redirect()->route('orders.show', $order->id);
+        }
+
+        flashToast('error', 'Não foi possível atualizar o pedido.');
+        return back()->withInput()->withErrors($validator);
     }
 
     /**
@@ -121,5 +157,23 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    /**
+     * Validation messages
+     *
+     * @return array
+     */
+    private function messages()
+    {
+        return [
+            'product.required'      => 'É necessário ter ao menos um produto no pedido.',
+            'product.array'         => 'Produtos inválidos.',
+            'product.*.id.required' => 'Selecione o produto.',
+            'product.*.id.exists'   => 'O produto não foi encontrado.',
+            'product.*.amount'      => 'Insira a quantidade.',
+            'discount.required'     => 'Insira o desconto.',
+            'discount.numeric'      => 'Desconto inválido.'
+        ];
     }
 }

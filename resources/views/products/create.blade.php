@@ -32,7 +32,7 @@
                                             <i class="fas fa-dollar-sign }}"></i>
                                         </div>
                                     </span>
-                                    <input type="number" name="price" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" placeholder="Preço" step="0.01" maxlength="255" value="{{ old('price') }}" required>
+                                    <input type="number" name="price" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" placeholder="Preço" step="0.01" value="{{ old('price') }}" min="0" required>
                                     @if ($errors->has('price'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('price') }}
