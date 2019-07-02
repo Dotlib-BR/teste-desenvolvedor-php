@@ -55,7 +55,7 @@
             <div class="row align-items-center h-100">
                 <div class="col-sm-9 col-md-7 col-lg-6 col-xl-5 mx-auto">
                     <div class="jumbotron bg-white">
-                        <h3 class="text-center">Painel de Usuário</h3>
+                        <h3 class="text-center">Painel Administrativo</h3>
                         <hr class="mb-4">
                         <form action="{{ route('login') }}" method="post">
                             @csrf

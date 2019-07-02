@@ -25,35 +25,13 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $select = Order::select(['id', 'status', 'discount', 'created_at', 'updated_at']);
-
-        if ($request->has('orderby') && !empty($request->orderby)) {
-            $select = $select->orderBy($request->orderby, $request->order ?? 'asc');
-        }
-
-        if ($request->has('search') && !empty($request->search)) {
-            $search = '%' . $request->search . '%';
-            $select = $select->where('status', 'like', $search)
-                             ->orWhere('id', 'like', $search)
-                             ->orWhereHas('productsDirectly', function($query) use($search) {
-                                 $query->where('name', 'like', $search);
-                             });
-        }
-
-        $items = $request->items ?? 20;
-        $order = $select->paginate($items);
-
+        $orders = Order::all();
         return view('orders.index', [
-            'items'      => $order->items(),
-            'pagination' => [
-                'current' => $order->currentPage(),
-                'total'   => $order->lastPage()
-            ]
+            'orders' => $orders
         ]);
     }
 

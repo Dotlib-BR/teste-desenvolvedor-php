@@ -41,8 +41,16 @@ class LoginController extends Controller
             ];
 
             if (auth()->attempt($credentials, $request->has('remember'))) {
-                flashToast('success', 'Conectado.');
-                return redirect('/');
+                if (auth()->user()->role == 'admin') {
+                    flashToast('success', 'Conectado.');
+                    return redirect('/');
+                }
+
+                auth()->logout();
+                $request->session()->invalidate();
+
+                flashToast('error', 'Você não possui permissão para entrar no painel.');
+                return back()->withInput();
             }
         }
 

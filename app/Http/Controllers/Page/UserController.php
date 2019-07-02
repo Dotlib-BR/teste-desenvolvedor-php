@@ -25,30 +25,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $select = User::select(['id', 'name', 'email', 'document', 'created_at', 'updated_at']);
-
-        if ($request->has('orderby') && !empty($request->orderby)) {
-            $select = $select->orderBy($request->orderby, $request->order ?? 'asc');
-        }
-
-        if ($request->has('search') && !empty($request->search)) {
-            $search = '%' . $request->search . '%';
-            $select = $select->where('name', 'like', $search)
-                             ->orWhere('email', 'like', $search)
-                             ->orWhere('document', 'like', $search);
-        }
-
-        $items = $request->items ?? 20;
-        $user  = $select->paginate($items);
-
+        $users = User::all();
         return view('users.index', [
-            'items'      => $user->items(),
-            'pagination' => [
-                'current' => $user->currentPage(),
-                'total'   => $user->lastPage()
-            ]
+            'users' => $users
         ]);
     }
 
@@ -65,7 +46,6 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)

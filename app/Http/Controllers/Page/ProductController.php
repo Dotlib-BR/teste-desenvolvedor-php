@@ -22,32 +22,13 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $select = Product::select(['id', 'name', 'price', 'code', 'created_at', 'updated_at']);
-
-        if ($request->has('orderby') && !empty($request->orderby)) {
-            $select = $select->orderBy($request->orderby, $request->order ?? 'asc');
-        }
-
-        if ($request->has('search') && !empty($request->search)) {
-            $search = '%' . $request->search . '%';
-            $select = $select->where('name', 'like', $search)
-                             ->orWhere('code', 'like', $search);
-        }
-
-        $items   = $request->items ?? 20;
-        $product = $select->paginate($items);
-
+        $products = Product::all();
         return view('products.index', [
-            'items'      => $product->items(),
-            'pagination' => [
-                'current' => $product->currentPage(),
-                'total'   => $product->lastPage()
-            ]
+            'products' => $products
         ]);
     }
 

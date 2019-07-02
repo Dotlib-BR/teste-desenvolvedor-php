@@ -46,96 +46,79 @@
         <div class="card">
             <div class="card-content">
                 <div class="card-body">
-                    <h5 class="card-title">Últimos Pedidos do Usuário</h5>
-                    <hr>
-                    <form action="{{ route('orders.mass-destroy') }}" method="post" id="mass-destroy">
-                        @csrf
-                        <div class="table-responsive mb-2">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="text-center">#</th>
-                                        <th scope="col" class="text-center">Número do pedido</th>
-                                        <th scope="col" class="text-center">Produtos</th>
-                                        <th scope="col" class="text-center">Valor</th>
-                                        <th scope="col" class="text-center">Desconto</th>
-                                        <th scope="col" class="text-center">Valor final</th>
-                                        <th scope="col" class="text-center">Status</th>
-                                        <th scope="col" class="text-center">Criado em</th>
-                                        <th scope="col" class="text-center">Atualizado em</th>
-                                        <th scope="col" class="text-center">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $orders = $user->orders()->latest()->take(15)->get();
-                                    @endphp
+                    <h5 class="card-title">Pedidos do Usuário</h5>
+                    <hr class="mt-1 mb-4">
+                    <table class="table table-striped table-hover" id="data-table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Número do pedido</th>
+                                <th scope="col" class="text-center">Produtos</th>
+                                <th scope="col" class="text-center">Valor</th>
+                                <th scope="col" class="text-center">Desconto</th>
+                                <th scope="col" class="text-center">Valor final</th>
+                                <th scope="col" class="text-center">Status</th>
+                                <th scope="col" class="text-center">Criado em</th>
+                                <th scope="col" class="text-center">Atualizado em</th>
+                                <th scope="col" class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($user->orders as $order)
+                                @php
+                                    $products = $order->products->pluck('product.name', 'amount')->toArray();
+                                    $products = implode(', ', array_map(function($value, $key) use(&$count) {
+                                        return sprintf('%02d %s', $key, $value);
+                                    }, $products, array_keys($products)));
 
-                                    @forelse ($orders as $order)
-                                        @php
-                                            $products = $order->products->pluck('product.name', 'amount')->toArray();
-                                            $products = implode(', ', array_map(function($value, $key) use(&$count) {
-                                                return sprintf('%02d %s', $key, $value);
-                                            }, $products, array_keys($products)));
+                                    $price    = $order->products->sum('product.price');
+                                    $final    = $price - $order->discount;
 
-                                            $price    = $order->products->sum('product.price');
-                                            $final    = $price - $order->discount;
+                                    if ($final < 0) {
+                                        $final = 0;
+                                    }
+                                @endphp
+                                <tr>
+                                    <td class="text-center">{{ sprintf('%08d', $order->id) }}</td>
+                                    <td class="text-center">
+                                        {!! $products !!}
+                                    </td>
+                                    <td class="text-center">R$ {{ number_format($price, 2, ',', '.') }}</td>
+                                    <td class="text-center">R$ {{ number_format($order->discount, 2, ',', '.') }}</td>
+                                    <td class="text-center">R$ {{ number_format($final, 2, ',', '.') }}</td>
+                                    <td class="text-center">
+                                        @switch ($order->status)
+                                            @case ('open')
+                                                <span class="badge badge-info">Em aberto</span>
+                                            @break
 
-                                            if ($final < 0) {
-                                                $final = 0;
-                                            }
-                                        @endphp
-                                        <tr>
-                                            <td class="text-center">
-                                                <input type="checkbox" name="id[]" value="{{ $order->id }}">
-                                            </td>
-                                            <td class="text-center">{{ sprintf('%08d', $order->id) }}</td>
-                                            <td class="text-center">
-                                                {!! $products !!}
-                                            </td>
-                                            <td class="text-center">R$ {{ number_format($price, 2, ',', '.') }}</td>
-                                            <td class="text-center">R$ {{ number_format($order->discount, 2, ',', '.') }}</td>
-                                            <td class="text-center">R$ {{ number_format($final, 2, ',', '.') }}</td>
-                                            <td class="text-center">
-                                                @switch ($order->status)
-                                                    @case ('open')
-                                                        <span class="badge badge-info">Em aberto</span>
-                                                    @break
+                                            @case ('paid')
+                                                <span class="badge badge-success">Pago</span>
+                                            @break
 
-                                                    @case ('paid')
-                                                        <span class="badge badge-success">Pago</span>
-                                                    @break
-
-                                                    @case ('canceled')
-                                                        <span class="badge badge-danger">Cancelado</span>
-                                                    @break
-                                                @endswitch
-                                            </td>
-                                            <td class="text-center">{{ $order->created_at->format('d/m/Y H:i') }}</td>
-                                            <td class="text-center">{{ $order->updated_at->format('d/m/Y H:i') }}</td>
-                                            <td class="text-center">
-                                                <div class="btn-group" role="group">
-                                                    <a href="{{ route('orders.show', $order->id) }}" class="btn btn-primary btn-sm mb-1" data-toggle="tooltip" data-title="Ver pedido">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                    <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-primary btn-sm mb-1"  data-toggle="tooltip" data-title="Editar pedido">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <a href="{{ route('orders.destroy', $order->id) }}" class="btn btn-danger btn-sm mb-1 destroy-action"  data-toggle="tooltip" data-title="Excluir pedido">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="10" class="text-center">Nenhum pedido para ser exibido.</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>
+                                            @case ('canceled')
+                                                <span class="badge badge-danger">Cancelado</span>
+                                            @break
+                                        @endswitch
+                                    </td>
+                                    <td class="text-center">{{ $order->created_at->format('d/m/Y H:i') }}</td>
+                                    <td class="text-center">{{ $order->updated_at->format('d/m/Y H:i') }}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group">
+                                            <a href="{{ route('orders.show', $order->id) }}" class="btn btn-primary btn-sm mb-1" data-toggle="tooltip" data-title="Ver pedido">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-primary btn-sm mb-1"  data-toggle="tooltip" data-title="Editar pedido">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{{ route('orders.destroy', $order->id) }}" class="btn btn-danger btn-sm mb-1 destroy-action"  data-toggle="tooltip" data-title="Excluir pedido">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -199,6 +182,8 @@
 
                 massSubmit = false;
             });
+
+            DataTable(8, 1);
         });
     </script>
 @endpush

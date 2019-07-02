@@ -33,12 +33,4 @@ class Order extends Model
     {
         return $this->hasMany(OrderProduct::class);
     }
-
-    /**
-     * Get the product directly.
-     */
-    public function productsDirectly()
-    {
-        return $this->belongsToMany(Product::class, 'order_products', 'order_id', 'product_id');
-    }
 }

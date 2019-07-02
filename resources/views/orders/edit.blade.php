@@ -138,12 +138,15 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
-                                                        <a href="add" class="btn btn-primary btn-sm action">
-                                                            <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="del" class="btn btn-danger btn-sm action" data-target="{{ $row }}">
-                                                            <i class="fas fa-minus"></i>
-                                                        </a>
+                                                        @if ($row < ($last - 1))
+                                                            <a href="/" class="btn btn-danger btn-sm del-action" data-target="{{ $row }}">
+                                                                <i class="fas fa-minus"></i>
+                                                            </a>
+                                                        @else
+                                                            <a href="/" class="btn btn-primary btn-sm add-action" data-target="{{ $row }}">
+                                                                <i class="fas fa-plus"></i>
+                                                            </a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @empty
@@ -174,11 +177,8 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
-                                                        <a href="add" class="btn btn-primary btn-sm action">
+                                                        <a href="/" class="btn btn-primary btn-sm add-action" data-target="0">
                                                             <i class="fas fa-plus"></i>
-                                                        </a>
-                                                        <a href="del" class="btn btn-danger btn-sm action" data-target="0">
-                                                            <i class="fas fa-minus"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -226,11 +226,8 @@
             </div>
         </td>
         <td class="text-center">
-            <a href="add" class="btn btn-primary btn-sm action">
+            <a href="/" class="btn btn-primary btn-sm add-action">
                 <i class="fas fa-plus"></i>
-            </a>
-            <a href="del" class="btn btn-danger btn-sm action">
-                <i class="fas fa-minus"></i>
             </a>
         </td>
     </tr>
@@ -242,39 +239,19 @@
             var last = {{ $last }};
             var row  = $($.parseHTML(`@yield('row')`));
 
-            $('#products').on('click', '.action', function(e) {
+            $('#products').on('click', '.del-action', function(e) {
                 e.preventDefault();
 
-                var action = $(this).attr('href');
+                var target = $(this).data('target');
+                $('#row-' + target).remove();
 
-                if (action == 'del') {
-                    var target = $(this).data('target');
-                    $('#row-' + target).remove();
+                if ($('#row-body').children().length == 0) {
+                    last = 0;
 
-                    if ($('#row-body').children().length == 0) {
-                        last = 0;
-
-                        var newRow = row.clone()
-                                        .attr('id', 'row-' + last);
-
-                        newRow.find('a[href="del"]')
-                              .attr('data-target', last);
-
-                        newRow.find('select')
-                              .attr('name', 'product['+ last +'][id]');
-
-                        newRow.find('input')
-                              .attr('name', 'product['+ last +'][amount]');
-
-                        $('#row-body').append(newRow);
-
-                        last++;
-                    }
-                } else {
                     var newRow = row.clone()
                                     .attr('id', 'row-' + last);
 
-                    newRow.find('a[href="del"]')
+                    newRow.find('a[href="/"]')
                           .attr('data-target', last);
 
                     newRow.find('select')
@@ -287,6 +264,35 @@
 
                     last++;
                 }
+            });
+
+            $('#products').on('click', '.add-action', function(e) {
+                e.preventDefault();
+
+                var button = $(this);
+
+                button.removeClass('btn-primary add-action')
+                      .addClass('btn-danger del-action');
+
+                button.children('.fa-plus')
+                      .removeClass('fa-plus')
+                      .addClass('fa-minus');
+
+                var newRow = row.clone()
+                                .attr('id', 'row-' + last);
+
+                newRow.find('a[href="/"]')
+                      .attr('data-target', last);
+
+                newRow.find('select')
+                      .attr('name', 'product['+ last +'][id]');
+
+                newRow.find('input')
+                      .attr('name', 'product['+ last +'][amount]');
+
+                $('#row-body').append(newRow);
+
+                last++;
             });
         });
     </script>
