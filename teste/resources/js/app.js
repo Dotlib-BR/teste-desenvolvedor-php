@@ -1,5 +1,5 @@
-// Jquery slim minificado
-require('jquery/dist/jquery.slim.min');
+// Jquery
+window.$ = window.jQuery = require('jquery');
 
-// Bootstrap minificado.
-require('bootstrap/dist/js/bootstrap.min');
+// Bootstrap
+require('bootstrap');
