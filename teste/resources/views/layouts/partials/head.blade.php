@@ -23,3 +23,6 @@
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+<!-- Javascripts -->
+<script src="{{ asset('js/app.js') }}"></script>

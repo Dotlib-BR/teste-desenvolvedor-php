@@ -1,4 +1,4 @@
-//Scss customizado do layout do sistema
+// Scss customizado do layout do sistema
 @import "main";
 
 // Scss customizado do sistema de auth
@@ -7,5 +7,8 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-//Font Awesome
+// Font Awesome
 @import "~font-awesome/scss/font-awesome.scss";
+
+// Bootstrap Select
+@import "~bootstrap-select/sass/bootstrap-select";
