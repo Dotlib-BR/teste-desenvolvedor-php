@@ -21,8 +21,9 @@ class ClientTest extends TestCase
     {
         $user = User::find(rand(1, 50));//pego um usuário aleatório do banco
 
-        $response = $this->get('/api/v1/clients',[
-            'Authorization' => $user->id.'|'.$user->api_token
+        $response = $this->actingAs($user)->get('/zeus/clients',[
+            'Authorization' => 'Zeus '.$user->api_token
+            //passo 'Zeus' para ter mais controle das requisições e organização.
         ]);
 
         $response->assertStatus(200);

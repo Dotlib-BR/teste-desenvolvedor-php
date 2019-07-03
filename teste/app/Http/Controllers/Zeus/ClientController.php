@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\ApiV1;
+namespace App\Http\Controllers\Zeus;
 
 use App\Models\Client;
 use Illuminate\Http\Request;

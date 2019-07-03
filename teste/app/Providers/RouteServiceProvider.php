@@ -39,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapZeusRoutes();
     }
 
     /**
@@ -54,6 +54,21 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
+    }
+
+    /**
+     * Define the "zeus" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapZeusRoutes()
+    {
+        Route::prefix('zeus')
+            ->middleware('token.api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/zeus.php'));
     }
 
     /**

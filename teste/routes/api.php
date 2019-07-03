@@ -13,11 +13,3 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::namespace('ApiV1')
-    ->prefix('v1')
-    ->middleware('token.api')
-    ->group(function () {
-
-        Route::apiResource('clients', 'ClientController');
-    });

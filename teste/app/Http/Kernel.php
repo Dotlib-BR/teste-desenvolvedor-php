@@ -41,6 +41,9 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+        'zeus' => [//nome de zeus apenas para facilitar na organização.
+            \App\Http\Middleware\CheckTokenApi::class
+        ],
     ];
 
     /**
