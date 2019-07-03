@@ -27,10 +27,10 @@
      * Instalar as dependências JavaScript: `npm install`
         * Executar os scripts NPM para compilar os recursos: `npm run dev`
     * Gerar a chave da aplicação: `php artisan key:generate`
-    * Criar banco de dados.
+    * Criar o banco de dados.
 	    * Popular o banco de dados: `php artisan migrate:refresh --seed`.
 
 
 ## TDD
 
-* Parar rodar os testes execute na raíz do projeto: `vendor/phpunit/phpunit/phpunit --verbose`
+* Parar rodar os testes execute na raiz do projeto: `vendor/phpunit/phpunit/phpunit --verbose`
