@@ -1,0 +1,30 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class ClientTest extends TestCase
+{
+    use DatabaseTransactions;//para dar um "rollback" quando inserir algo no banco, de forma automática!
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function testIndex()
+    {
+        $user = User::find(rand(1, 50));//pego um usuário aleatório do banco
+
+        $response = $this->get('/api/v1/clients',[
+            'Authorization' => $user->id.'|'.$user->api_token
+        ]);
+
+        $response->assertStatus(200);
+    }
+}
