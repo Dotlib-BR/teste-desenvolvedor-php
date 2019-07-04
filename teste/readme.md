@@ -34,3 +34,26 @@
 ## TDD
 
 * Parar rodar os testes execute na raiz do projeto: `vendor/phpunit/phpunit/phpunit --verbose`
+
+#### Observação:
+* Como existe diversas formas diferentes para realizar esse teste, optei por faze-lo da forma mais "Manual" possível, 
+para mostrar que não sei apenas usar algo pronto, como também sou capaz de criar uma funcionalidade de forma customizada.
+
+* [Aqui está o link](http://18.228.38.70/) de um projeto que comecei a desenvolver há pouco tempo como freelancer.
+    
+    * Tecnologias e Ferramentas utilizadas:
+        * Nginx
+        * Laravel 5.8
+        * JWT
+        * DataTable
+        * Bootstrap
+        * Jquery
+        * Guzzle, PHP HTTP client
+        * Chart.JS
+        
+    * Credenciais para visualizar
+        * Email: `dev@dev.com`
+        * Senha: `password`
+        * Código da Unidade: `1234`
+
+* Meu linkedin é [Vlademir Manoel](https://www.linkedin.com/in/vlademir-manoel-73b89b153/)

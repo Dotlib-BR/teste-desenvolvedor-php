@@ -19,15 +19,17 @@ class CheckTokenApi
      */
     public function handle($request, Closure $next)
     {
-        if ($request->header('authorization') && auth()->check()) {//usuário precisa está logado para poder usar
+        if ($request->header('authorization')) {
             $authorization = $request->header('authorization');
             //apenas para ficar mais facíl de trabalhar eu armazeno em uma variável
 
             $token = substr($authorization, strpos($authorization, " ") + 1);
             //pego tudo depois do pipe, que é o token do usuário logado que fez a request
 
-            if (! auth()->user()->api_token === $token) {//se o token for diferente do token que eu tenho no banco do usuario logado
-                if (auth()->user()->api_token_old === $token) {//verifico se é igual ao token antigo, se for, o token está expirado
+            $user = User::whereApiToken($token)->first();
+
+            if (! ($user !== null && $user->api_token === $token)) {//se o token for diferente do token que eu tenho no banco do usuario logado
+                if (! ($user !== null && $user->api_token_old === $token)) {//verifico se é igual ao token antigo, se for, o token está expirado
                     return response()->json('Token expired', Response::HTTP_UNAUTHORIZED);
                 } else {//se não for um token expirado é um token inválido mesmo
                     return response()->json('Invalid Token', Response::HTTP_UNAUTHORIZED);
@@ -40,7 +42,7 @@ class CheckTokenApi
         }
 
         //Atualizo para ele sempre gerar um token diferente.
-        auth()->user()->update([
+        $user->update([
             'api_token' => Hash::make(Str::random(100)),
             'api_token_old' => $token
         ]);

@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.page-item.active .page-link {
+  background-color: #1c7430 !important;
+  border-color: #8ebb3d !important;
+}
+
 html,
 body {
   width: 100%;

@@ -13,9 +13,20 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(['data' => [Client::paginate(20)]], 200);
+        //preciso fazer essas simples verificações para não quebrar nos testes.
+        $search = $request->search ?? '';
+        $fieldSort = $request->field_sort ?? 'id';
+        $sort = $request->sort ?? 'asc';
+        $perPage = $request->per_page ?? 20;
+
+        $clients = Client::where('name', 'like', '%'.$search.'%')
+            ->orWhere('email', 'like', '%'.$search.'%')
+            ->orderBy($fieldSort, $sort)
+            ->paginate($perPage);
+
+        return response()->json($clients, 200);
     }
 
     /**
