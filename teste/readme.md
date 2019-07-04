@@ -21,7 +21,7 @@
     * Não precisa informar os dados do servidor de email pois estou utilizando o mailtrap.io.
 
 * Apontar a raiz do servidor web para a pasta `public`.
-* Autorizar a escrita nos diretórios `storage`, `bootstrap/cache` se der erro `permission danied`.
+* Autorizar a escrita nos diretórios `storage/logs`, `storage/framework` e `bootstrap/cache` se der erro `permission danied`.
 * Na raiz do projeto:
     * Intalar as dependências PHP: `composer install`.
      * Instalar as dependências JavaScript: `npm install`
