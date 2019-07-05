@@ -8,7 +8,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ClientTest extends TestCase
+class IndexTest extends TestCase
 {
     use DatabaseTransactions;//para dar um "rollback" quando inserir algo no banco, de forma automática!
 
@@ -19,6 +19,6 @@ class ClientTest extends TestCase
      */
     public function testIndex()
     {
-
+        $this->markTestSkipped('Skipped the testIndex of the IndexTest.');
     }
 }
