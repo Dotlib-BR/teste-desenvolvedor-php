@@ -36,6 +36,6 @@ Route::namespace('Dashboard')
         Route::get('/logout', 'UserController@logout')
             ->name('dashboard.user.logout');
 
-        Route::resource('orders', 'OrderController');
+        Route::resource('clients', 'ClientController');
 
     });
