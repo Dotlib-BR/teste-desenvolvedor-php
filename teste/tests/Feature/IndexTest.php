@@ -19,6 +19,11 @@ class IndexTest extends TestCase
      */
     public function testIndex()
     {
-        $this->markTestSkipped('Skipped the testIndex of the IndexTest.');
+        //Quando o usuário visita a página home do metodo home do IndexController
+        $response = $this->actingAs(User::first())->get('/dashboard/home');
+
+        $response->assertRedirect('/dashboard/home');
+
+        $this->assertAuthenticated();
     }
 }
