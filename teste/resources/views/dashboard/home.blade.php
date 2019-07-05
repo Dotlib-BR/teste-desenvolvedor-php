@@ -81,10 +81,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-2">
+            <div class="col-md-2">
                 <p class="font-weight-bold">Total: <span class="text-light">{{ $pages->total }}</span></p>
             </div>
-            <div class="col-10">
+            <div class="col-md-10">
                 @paginate(['pages' => $pages, 'params' => $params])
                 @endpaginate
             </div>
