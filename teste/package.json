@@ -22,6 +22,8 @@
         "bootstrap-select": "^1.13.10",
         "font-awesome": "^4.7.0",
         "jquery": "^3.4.1",
+        "jquery-mask-plugin": "^1.14.15",
+        "jquery-validation": "^1.19.1",
         "popper.js": "^1.15.0"
     }
 }

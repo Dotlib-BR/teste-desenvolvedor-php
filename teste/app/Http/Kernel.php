@@ -42,6 +42,8 @@ class Kernel extends HttpKernel
             'bindings',
         ],
         'zeus' => [//nome de zeus apenas para facilitar na organização.
+            'throttle:60,1',
+            'bindings',
             \App\Http\Middleware\CheckTokenApi::class
         ],
     ];
@@ -56,6 +58,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'token.api' => \App\Http\Middleware\CheckTokenApi::class,
+        'db.transaction' => \App\Http\Middleware\DBTransaction::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

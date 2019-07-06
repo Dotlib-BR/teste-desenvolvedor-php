@@ -1,12 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Vlademir Junior
- * Date: 02/07/2019
- * Time: 00:22
- */
-?>
-
 <h1>
     Olá!
 </h1>

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Vlademir Junior
- * Date: 02/07/2019
- * Time: 00:14
- */
 
 return [
     /*

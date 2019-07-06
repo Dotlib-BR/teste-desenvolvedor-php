@@ -1,12 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Vlademir Junior
- * Date: 02/07/2019
- * Time: 03:31
- */
-?>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow" />

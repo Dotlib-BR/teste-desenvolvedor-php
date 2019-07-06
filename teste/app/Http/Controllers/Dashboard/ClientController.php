@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Requests\StoreUpdateClientFormRequest;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,9 +14,37 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $request->query->add(['page' => $request->page ?? 1]);
+
+        $url = url('/zeus/clients/?'.http_build_query($request->query->all()));
+
+        try {
+            $response = consumeZeus($url);
+
+            if (! isset($response->data)) {
+                //se der muitos refresh na tela também cai aqui.
+                sleep(5);
+
+                return redirect()->back()
+                    ->with([
+                        'request' => 'Timeout.'
+                    ]);
+            }
+
+        } catch (\Exception $e) {
+            auth()->logout();
+
+            return url('/');
+        }
+
+        $clients = $response->data;
+        $pages = $response;
+
+        $params = removePage($request->query->all());
+
+        return view('dashboard.clients.index', compact('clients', 'pages', 'params'));
     }
 
     /**
@@ -55,9 +85,9 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        //
+        return view('dashboard.clients.form', compact('client'));
     }
 
     /**
@@ -67,9 +97,26 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateClientFormRequest $request, $id)
     {
-        //
+        try {
+            $response = consumeZeus(route('clients.update', $id), 'PUT', $request->all());
+
+        } catch (\Exception $e) {
+            if (env('APP_DEBUG')) {
+                dd($e);
+            }
+
+            auth()->logout();
+
+            return url('/');
+        }
+
+        return redirect()->route('dashboard.clients.index')
+            ->with([
+                'action' => 'Ação realizada.'
+            ]);
+
     }
 
     /**
@@ -80,6 +127,22 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            consumeZeus(route('clients.destroy', $id), 'DELETE');
+
+        } catch (\Exception $e) {
+            if (env('APP_DEBUG')) {
+                dd($e);
+            }
+
+            auth()->logout();
+
+            return url('/');
+        }
+
+        return redirect()->back()
+            ->with([
+                'action' => 'Ação realizada.'
+            ]);
     }
 }

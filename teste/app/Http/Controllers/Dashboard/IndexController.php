@@ -9,26 +9,21 @@ class IndexController extends Controller
 {
     public function home(Request $request)
     {
-        $paramsUrl = [
-            'page' => substr($request->page, 0, strspn($request->page, "0123456789")),
-            'per_page' => $request->per_page ?? 20,
-            'search' => $request->search ?? '', // Apenas pedidos aprovados
-            'field_sort' => $request->field_sort ?? 'id',
-            'sort' => $request->sort ?? 'asc'
-        ];
+        $request->query->add(['page' => $request->page ?? 1]);
 
-        $params = http_build_query($paramsUrl);
-
-        $url = url('/zeus/clients/?'.$params);
+        $url = url('/zeus/clients/?'.http_build_query($request->query->all()));
 
         try {
-            $response = getZeus($url);
+            $response = consumeZeus($url);
 
             if (! isset($response->data)) {
                 //se der muitos refresh na tela também cai aqui.
                 sleep(5);
 
-                return redirect()->route('dashboard.index.home');
+                return redirect()->back()
+                    ->with([
+                        'request' => 'Timeout.'
+                    ]);
             }
 
         } catch (\Exception $e) {
@@ -40,9 +35,7 @@ class IndexController extends Controller
         $clients = $response->data;
         $pages = $response;
 
-        array_shift($paramsUrl);
-
-        $params = http_build_query($paramsUrl);
+        $params = removePage($request->query->all());
 
         return view('dashboard.home', compact('clients', 'pages', 'params'));
     }

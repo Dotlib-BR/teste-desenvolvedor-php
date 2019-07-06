@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\DB;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +47,8 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        DB::rollback();// Ele é o rollback da transaction que iniciei no middleware DBTransaction.
+
         return parent::render($request, $exception);
     }
 }

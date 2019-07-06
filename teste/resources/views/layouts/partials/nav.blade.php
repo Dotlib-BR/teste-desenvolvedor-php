@@ -1,12 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Vlademir Junior
- * Date: 02/07/2019
- * Time: 03:31
- */
-?>
-
 @auth
     <div id="navbarHeader">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -16,16 +7,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('dashboard.index.home') }}">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-item {{ setActive(['dashboard/home*']) }}">
+                        <a class="nav-link" href="{{ route('dashboard.index.home') }}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Clientes</a>
+                    <li class="nav-item {{ setActive(['dashboard/clients*']) }}">
+                        <a class="nav-link" href="{{ route('dashboard.clients.index') }}">Clientes</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ setActive(['dashboard/products*']) }}">
                         <a class="nav-link" href="#">Produtos</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ setActive(['dashboard/orders*']) }}">
                         <a class="nav-link" href="#">Pedidos</a>
                     </li>
                 </ul>

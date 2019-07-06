@@ -2,12 +2,25 @@
 
 namespace App\Http\Controllers\Zeus;
 
+use App\Http\Requests\StoreUpdateClientFormRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        // Caso dê algo errado nos métodos que fazem alterações no banco eu uso o DB::beginTransaction()
+        $this->middleware(
+            'db.transaction',
+            ['except' =>
+                ['index', 'edit', 'show']
+            ]
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +28,7 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
-        //preciso fazer essas simples verificações para não quebrar nos testes.
+        // Preciso fazer essas simples verificações para não quebrar nos testes.
         $search = $request->search ?? '';
         $fieldSort = $request->field_sort ?? 'id';
         $sort = $request->sort ?? 'asc';
@@ -26,7 +39,7 @@ class ClientController extends Controller
             ->orderBy($fieldSort, $sort)
             ->paginate($perPage);
 
-        return response()->json($clients, 200);
+        return response()->json($clients, Response::HTTP_OK);//200
     }
 
     /**
@@ -81,7 +94,11 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        parse_str($request->getContent(), $data);//coloca o que veio do formulário em um array.
+
+        Client::find($id)->update($data);
+
+        return response()->json($id, Response::HTTP_OK);
     }
 
     /**
@@ -92,6 +109,9 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Client::find($id)->delete();
+        // Estou usando observers para remover os registros relacionados.
+
+        return response()->json('', Response::HTTP_NO_CONTENT);
     }
 }

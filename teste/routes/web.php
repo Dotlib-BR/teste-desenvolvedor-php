@@ -28,13 +28,14 @@ Auth::routes();
 // Routes Private
 Route::namespace('Dashboard')
     ->middleware('auth')
+    ->as('dashboard.')
     ->prefix('/dashboard')->group( function(){
 
         Route::get('/home', 'IndexController@home')
-            ->name('dashboard.index.home');
+            ->name('index.home');
 
         Route::get('/logout', 'UserController@logout')
-            ->name('dashboard.user.logout');
+            ->name('user.logout');
 
         Route::resource('clients', 'ClientController');
 
