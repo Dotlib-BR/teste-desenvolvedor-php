@@ -21,7 +21,10 @@
                     </li>
                 </ul>
                 <div class="w-100 text-right">
-                    <a class="text-decoration-none text-light fa fa-sign-out fa-2x" aria-hidden="true" href="{{ route('dashboard.user.logout') }}"></a>
+                    <a class="text-decoration-none text-light fa fa-sign-out fa-2x" aria-hidden="true" onclick="event.preventDefault();document.getElementById('logout-form').submit();" href="{{ route('logout') }}"></a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </nav>

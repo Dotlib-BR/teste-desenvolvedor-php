@@ -43,24 +43,16 @@ class ClientController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateClientFormRequest $request)
     {
-        //
+        Client::create($request->validated());// Se não cair no if acima é por que deu tudo certo  e eu posso cadastrar.
+
+        return response()->json($request->validated(), Response::HTTP_CREATED);
     }
 
     /**
@@ -71,18 +63,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json(Client::find($id), Response::HTTP_OK);
     }
 
     /**
@@ -92,13 +73,11 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateClientFormRequest $request, $id)
     {
-        parse_str($request->getContent(), $data);//coloca o que veio do formulário em um array.
+        Client::find($id)->update($request->validated());
 
-        Client::find($id)->update($data);
-
-        return response()->json($id, Response::HTTP_OK);
+        return response()->json($request->validated(), Response::HTTP_OK);
     }
 
     /**

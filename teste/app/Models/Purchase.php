@@ -19,7 +19,7 @@ class Purchase extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function discounts()
+    public function discount()
     {
         return $this->belongsTo(Discount::class);
     }

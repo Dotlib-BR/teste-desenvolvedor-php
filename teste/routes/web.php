@@ -34,9 +34,5 @@ Route::namespace('Dashboard')
         Route::get('/home', 'IndexController@home')
             ->name('index.home');
 
-        Route::get('/logout', 'UserController@logout')
-            ->name('user.logout');
-
         Route::resource('clients', 'ClientController');
-
     });

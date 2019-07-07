@@ -84,16 +84,4 @@ class UserController extends Controller
     {
         //
     }
-
-    /**
-     * Logout de usuário
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function logout()
-    {
-        Auth::logout();
-
-        return Redirect::route('login');
-    }
 }

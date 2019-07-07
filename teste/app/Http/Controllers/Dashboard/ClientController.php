@@ -54,7 +54,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.clients.form');
     }
 
     /**
@@ -63,9 +63,29 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateClientFormRequest $request)
     {
-        //
+        try {
+            consumeZeus(
+                route('clients.store', $request->all()),
+                'POST',
+                $request->all()
+            );
+
+        } catch (\Exception $e) {
+            if (env('APP_DEBUG')) {
+                dd($e);
+            }
+
+            auth()->logout();
+
+            return url('/');
+        }
+
+        return redirect()->route('dashboard.clients.index')
+            ->with([
+                'action' => 'Ação realizada.'
+            ]);
     }
 
     /**
@@ -74,9 +94,14 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Client $client)
     {
-        //
+        $purchases = $client->purchases()->paginate(5);
+
+        return view(
+            'dashboard.clients.show',
+            compact('client', 'purchases')
+        );
     }
 
     /**
@@ -100,7 +125,11 @@ class ClientController extends Controller
     public function update(StoreUpdateClientFormRequest $request, $id)
     {
         try {
-            $response = consumeZeus(route('clients.update', $id), 'PUT', $request->all());
+            consumeZeus(
+                route('clients.update', $id),
+                'PUT',
+                $request->all()
+            );
 
         } catch (\Exception $e) {
             if (env('APP_DEBUG')) {

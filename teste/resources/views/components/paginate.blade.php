@@ -4,7 +4,7 @@
         @for($i = 1; $i <= $pages->last_page; $i ++)
             @if($i === 1)
                 <li class="page-item {{ $pages->current_page === $i ? 'disabled' : '' }}">
-                    <a class="page-link" href="{{ request()->url().'?'.$params.'&page='.($pages->current_page - 1) }}" tabindex="-1">Anterior</a>
+                    <a class="page-link" href="{{ request()->url().'?'.$params.'&page='.($pages->current_page - 1) }}" tabindex="-1"> < </a>
                 </li>
             @endif
 
@@ -12,7 +12,7 @@
 
             @if($pages->last_page == $i)
                 <li class="page-item {{ $pages->current_page === $i ? 'disabled' : '' }}">
-                    <a class="page-link" href="{{ request()->url().'?'.$params.'&page='.($pages->current_page + 1) }}">Próxima</a>
+                    <a class="page-link" href="{{ request()->url().'?'.$params.'&page='.($pages->current_page + 1) }}"> > </a>
                 </li>
             @endif
         @endfor

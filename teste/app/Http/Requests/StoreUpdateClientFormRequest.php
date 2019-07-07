@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Client;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUpdateClientFormRequest extends FormRequest
@@ -55,7 +54,7 @@ class StoreUpdateClientFormRequest extends FormRequest
             'name.required' => 'O Nome é obrigatório.',
             'name.max' => 'O Nome deve possuir no máximo 255 caracteres.',
             'cpf.required' => 'O CPF é obrigatório.',
-            'cpf.max' => 'O CPF deve possuir no máximo 14 caracteres.',
+            'cpf.max' => 'O CPF deve possuir no máximo 11 caracteres.',
             'cpf.unique' => 'CPF já está cadastrado.',
             'email.max' => 'O Email deve possuir no máximo 255 caracteres.',
             'email.email' => 'O Email não possui formato de um Email válido.',

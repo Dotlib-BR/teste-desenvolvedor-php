@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Edição de Cliente')
+@section('title', isset($client) ? 'Edição de Cliente' : 'Cadastro de Cliente')
 
 @section('content')
     <div class="container-fluid">
@@ -50,8 +50,13 @@
 
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-success" value="Salvar" />
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="submit" class="btn btn-success" value="Salvar" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <a href="{{ route('dashboard.clients.index') }}" class="btn btn-outline-dark">Listagem de clientes</a>
+                    </div>
                 </div>
             </form>
         </div>
@@ -79,15 +84,6 @@
                 },
             });
             //FIM DO SCRIPT DE VALIDAÇÃO COM PLUGIN JQUERY VALIDATION
-            
-            // $('#form-client').on('submit', function () {
-            //     event.preventDefault();
-            //
-            //     $('#cpf').val($('#cpf').val().replace(/[^\d]+/g,''));
-            //     // Preciso retirar a máscara no front e no back
-            //
-            //     this.submit();
-            // });
         })
     </script>
 @endsection
