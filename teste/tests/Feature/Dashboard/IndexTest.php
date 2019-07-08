@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Dashboard;
 
 use App\Models\User;
 use Tests\TestCase;
@@ -8,6 +8,7 @@ use Tests\TestCase;
 class IndexTest extends TestCase
 {
     protected $user;
+    protected $client;
 
     protected function setUp(): void
     {
@@ -17,13 +18,12 @@ class IndexTest extends TestCase
     }
 
     /**
-     * Teste básico que simula o usuário visitando a página home do dashboard.
+     * Teste básico que simula quando o usuário visita a página home.
      *
      * @return void
      */
-    public function testIndex()
+    public function testHome()
     {
-        //Quando o usuário visita a página home do metodo home do IndexController
         $this->actingAs($this->user)
             ->get(route('dashboard.index.home'));
 

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Requests\StoreUpdateClientFormRequest;
-use App\Models\Client;
+use App\Http\Requests\StoreUpdateProductFormRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ClientController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +19,12 @@ class ClientController extends Controller
     {
         $request->query->add(['page' => $request->page ?? 1]);
 
-        $url = url('/zeus/clients/?'.http_build_query($request->query->all()));
+        $url = url('/zeus/products/?'.http_build_query($request->query->all()));
 
         try {
             $response = consumeZeus($url);
 
-            $clients = $response->data;
+            $products = $response->data;
             $pages = $response;
 
             if (! isset($response->data)) {
@@ -48,8 +48,8 @@ class ClientController extends Controller
         $params = removePage($request->query->all());
 
         return view(
-            'dashboard.clients.index',
-            compact('clients', 'pages', 'params')
+            'dashboard.products.index',
+            compact('products', 'pages', 'params')
         );
     }
 
@@ -60,20 +60,20 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('dashboard.clients.form');
+        return view('dashboard.products.form');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreUpdateClientFormRequest $request
+     * @param StoreUpdateProductFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateClientFormRequest $request)
+    public function store(StoreUpdateProductFormRequest $request)
     {
         try {
             consumeZeus(
-                route('clients.store', $request->all()),
+                route('products.store', $request->all()),
                 'POST',
                 $request->all()
             );
@@ -86,7 +86,7 @@ class ClientController extends Controller
             }
         }
 
-        return redirect()->route('dashboard.clients.index')
+        return redirect()->route('dashboard.products.index')
             ->with([
                 'action' => 'Ação realizada.'
             ]);
@@ -95,42 +95,42 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Client $client
+     * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show(Product $product)
     {
-        $purchases = $client->purchases()->paginate(5);
+        $orders = $product->orders()->paginate(5);
 
         return view(
-            'dashboard.clients.show',
-            compact('client', 'purchases')
+            'dashboard.products.show',
+            compact('product', 'orders')
         );
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Client $client
+     * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Client $client)
+    public function edit(Product $product)
     {
-        return view('dashboard.clients.form', compact('client'));
+        return view('dashboard.products.form', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param StoreUpdateClientFormRequest $request
+     * @param StoreUpdateProductFormRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateClientFormRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
             consumeZeus(
-                route('clients.update', $id),
+                route('products.update', $id),
                 'PUT',
                 $request->all()
             );
@@ -143,7 +143,7 @@ class ClientController extends Controller
             }
         }
 
-        return redirect()->route('dashboard.clients.index')
+        return redirect()->route('dashboard.products.index')
             ->with([
                 'action' => 'Ação realizada.'
             ]);
@@ -159,7 +159,7 @@ class ClientController extends Controller
     public function destroy($id)
     {
         try {
-            consumeZeus(route('clients.destroy', $id), 'DELETE');
+            consumeZeus(route('products.destroy', $id), 'DELETE');
 
         } catch (\Exception $e) {
             if (! env('APP_DEBUG')) {

@@ -33,7 +33,6 @@ class CreatePurchasesTable extends Migration
             $table->char('invoice_number', 9);
             $table->decimal('total', 10, 2);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

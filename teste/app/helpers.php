@@ -47,14 +47,16 @@ if (! function_exists('setActive')) {// Adiciona a classe 'active' no 'li' da p�
 
 if (! function_exists('maskCpf')) {// Máscara para CPF
     function maskCpf($cpf) {
+        $cpf = removeMask($cpf);
+
         if (strlen($cpf) === 11) {
-            return  vsprintf('%d%d%d.%d%d%d.%d%d%d-%d%d', str_split($cpf));// Se vier em letras ele vai transaforma em digitos.
+            return  vsprintf('%d%d%d.%d%d%d.%d%d%d-%d%d', str_split($cpf));
+            // Se vier em letras ele vai transaforma em digitos
         } else {
             return '-';
         }
     }
 }
-
 
 if (! function_exists('totalWithDiscount')) {// Calcula o total da compra com desconto.
     function totalWithDiscount($total, $discount = null) {
@@ -62,11 +64,32 @@ if (! function_exists('totalWithDiscount')) {// Calcula o total da compra com de
             $result = ($discount / 100) * $total;
             $result = $total - $result;
 
-            return '$'.number_format($result, 2, ',', '.');
+            return formatMoney($result);
             // Não vai dar o valor exato, o number format arredonda
             // Poderia usar 'composer require cknow/laravel-money' se quisesse mais precisão mas decidi fazer na mão.
         }
 
-        return '$'.number_format($total, 2, ',', '.');
+        return formatMoney($total);
+    }
+}
+
+if (! function_exists('formatMoney')) {// Formata para valor monetário.
+    function formatMoney($value) {
+        return 'R$ '.number_format($value, 2, ',', '.');
+    }
+}
+
+if (! function_exists('removeMask')) {// Remove a mascara do valor, serve para CPF e monetário.
+    function removeMask($value) {
+        return preg_replace('/[^0-9]/','', $value);
+    }
+}
+
+if (! function_exists('convertBrlToDecimal')) { //Converte valor monetário para decimal 10,2
+    function convertBrlToDecimal($value = null)
+    {
+        $value = sprintf('%.2f', (str_replace("." , "" ,str_replace("," , "." ,$value))) / 100); // Depois tira a vírgula
+
+        return str_replace(',','.',$value);
     }
 }

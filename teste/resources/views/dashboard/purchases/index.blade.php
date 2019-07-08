@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Clientes')
+@section('title', 'Pedidos')
 
 @section('content')
     <div class="container-fluid">
@@ -24,9 +24,11 @@
                 </div>
                 <div class="col-md-2 mt-1 mb-1">
                     <select name="field_sort" onchange="this.form.submit()" class="selectpicker" data-width="100%" data-style="btn-success">
-                        <option value="id" {{ 'id' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Id</option>
-                        <option value="name" {{ 'name' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Nome</option>
-                        <option value="email" {{ 'email' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Email</option>
+                        <option value="invoice_number" {{ 'invoice_number' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Número da nota</option>
+                        <option value="client" {{ 'client' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Cliente</option>
+                        <option value="product" {{ 'product' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Produto</option>
+                        <option value="quantity" {{ 'quantity' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Quantidade</option>
+                        <option value="status" {{ 'status' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Status</option>
                     </select>
                 </div>
                 <div class="col-md-3 mt-1 mb-1">
@@ -42,12 +44,12 @@
         </form>
         <div class="row">
             <div class="col-md-12 text-center">
-                <h1>Clientes</h1>
+                <h1>Pedidos de compra</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <a class="text-success" href="{{ route('dashboard.clients.create') }}"><i class="fa fa-plus fa-2x" aria-hidden="true"></i> ADICIONAR</a>
+                <a class="text-success" href="{{ route('dashboard.purchases.create') }}"><i class="fa fa-plus fa-2x" aria-hidden="true"></i> ADICIONAR</a>
             </div>
         </div>
         <div class="row">
@@ -65,38 +67,40 @@
                                 <input type="checkbox" name="id_all" class="id_all" value="">
                             </div>
                         </th>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">CPF</th>
+                        <th scope="col">Número da Nota</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Ações</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    @forelse($clients as $client)
+                    @forelse($purchases as $purchase)
                         <tr>
                             <td>
                                 <div>
-                                    <input type="checkbox" name="id_all" data-id="{{ $client->id }}" class="checked-status" value="">
+                                    <input type="checkbox" name="id_all" data-id="{{ $purchase->id }}" class="checked-status" value="">
                                 </div>
                             </td>
-                            <th scope="row">{{ $client->id }}</th>
-                            <td>{{ $client->name }}</td>
-                            <td>{{ $client->email ?? '-' }}</td>
-                            <td>{{ maskCpf($client->cpf) }}</td>
+                            <th scope="row">{{ $purchase->invoice_number }}</th>
+                            <td>{{ $purchase->client }}</td>
+                            <td>{{ $purchase->product }}</td>
+                            <td>{{ $purchase->quantity }}</td>
+                            <td>{{ $purchase->status }}</td>
                             <td>
-                                <form class="form-inline" action="{{ route('dashboard.clients.destroy', $client->id) }}" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir este registro?')">
+                                <form class="form-inline" action="{{ route('dashboard.purchases.destroy', $purchase->id) }}" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir este registro?')">
                                     @method('DELETE')
                                     @csrf
 
                                     <div class="form-group mr-3">
-                                        <a class="text-decoration-none text-success" href="{{ route('dashboard.clients.show', $client->id) }}">
+                                        <a class="text-decoration-none text-success" href="{{ route('dashboard.purchases.show', $purchase->id) }}">
                                             <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
                                         </a>
                                     </div>
                                     <div class="form-group">
-                                        <a class="text-decoration-none text-light" href="{{ route('dashboard.clients.edit', $client->id) }}">
+                                        <a class="text-decoration-none text-light" href="{{ route('dashboard.purchases.edit', $purchase->id) }}">
                                             <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
                                         </a>
                                     </div>
@@ -150,7 +154,6 @@
                         $(this).prop('checked', false);
                     });
                 }
-
             });
 
             $('#remove').on('click', function () {
@@ -173,7 +176,7 @@
                         url: "{{ route('bulk_action.destroy') }}",
                         data: {
                             ids: ids,
-                            model: 'Client'
+                            model: 'Purchase'
                         },
                         statusCode: {
                             204: function(data) {
@@ -191,6 +194,5 @@
             });
         });
     </script>
-
 @endsection
 

@@ -11,6 +11,13 @@ class StatusesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Status::class, 50)->create();
+//        factory(\App\Models\Status::class, 50)->create();
+        $statuses = array('Em Aberto', 'Pago', 'Cancelado');
+
+        foreach ($statuses as $status) {
+            $newStatus = new \App\Models\Status();
+            $newStatus->title = $status;
+            $newStatus->save();
+        }
     }
 }

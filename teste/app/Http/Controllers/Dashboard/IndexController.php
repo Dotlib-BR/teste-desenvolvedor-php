@@ -16,6 +16,9 @@ class IndexController extends Controller
         try {
             $response = consumeZeus($url);
 
+            $clients = $response->data;
+            $pages = $response;
+
             if (! isset($response->data)) {
                 //se der muitos refresh na tela também cai aqui.
                 sleep(5);
@@ -27,13 +30,12 @@ class IndexController extends Controller
             }
 
         } catch (\Exception $e) {
-            auth()->logout();
+            if (! env('APP_DEBUG')) {
+                auth()->logout();
 
-            return url('/');
+                return url('/');
+            }
         }
-
-        $clients = $response->data;
-        $pages = $response;
 
         $params = removePage($request->query->all());
 

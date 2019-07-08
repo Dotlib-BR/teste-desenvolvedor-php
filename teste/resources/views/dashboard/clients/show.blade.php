@@ -5,25 +5,25 @@
 @section('content')
     <div class="container-fluid mt-3">
         <div class="row">
-            <div class="col-md-3 mb-2">
-                <a href="{{ route('dashboard.clients.index') }}" class="btn btn-outline-light">Listagem de clientes</a>
-            </div>
-            <div class="col-md-3 mb-2">
+            <div class="col-md-3 mb-2 text-center">
                 <h4>NOME</h4>
                 <p>{{ $client->name }}</p>
             </div>
-            <div class="col-md-3 mb-2">
+            <div class="col-md-3 mb-2 text-center">
                 <h4>CPF</h4>
                 <p>{{ maskCpf($client->cpf) }}</p>
             </div>
-            <div class="col-md-3 mb-2">
+            <div class="col-md-3 mb-2 text-center">
                 <h4>EMAIL</h4>
                 <p>{{ $client->email ?? '-' }}</p>
             </div>
         </div>
         <div class="row m-2">
-            <div class="col-md-12 text-center">
-                <h2>Todas as compras</h2>
+            <div class="col-md-9 text-center">
+                <h2>Todos os pedidos de compra</h2>
+            </div>
+            <div class="col-md-3 mb-2">
+                <a href="{{ route('dashboard.clients.index') }}" class="btn btn-outline-light">Listagem de clientes</a>
             </div>
         </div>
         <div class="row mt-4">

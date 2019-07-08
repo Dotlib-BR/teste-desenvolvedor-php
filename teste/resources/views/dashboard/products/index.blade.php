@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Clientes')
+@section('title', 'Produtos')
 
 @section('content')
     <div class="container-fluid">
@@ -26,7 +26,8 @@
                     <select name="field_sort" onchange="this.form.submit()" class="selectpicker" data-width="100%" data-style="btn-success">
                         <option value="id" {{ 'id' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Id</option>
                         <option value="name" {{ 'name' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Nome</option>
-                        <option value="email" {{ 'email' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Email</option>
+                        <option value="barcode" {{ 'barcode' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Código de Barras</option>
+                        <option value="price" {{ 'price' == request()->get('field_sort') && request()->get('field_sort') !== null ? 'selected="selected"' : '' }} data-icon="fa fa-filter">Preço</option>
                     </select>
                 </div>
                 <div class="col-md-3 mt-1 mb-1">
@@ -42,12 +43,12 @@
         </form>
         <div class="row">
             <div class="col-md-12 text-center">
-                <h1>Clientes</h1>
+                <h1>Produtos</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <a class="text-success" href="{{ route('dashboard.clients.create') }}"><i class="fa fa-plus fa-2x" aria-hidden="true"></i> ADICIONAR</a>
+                <a class="text-success" href="{{ route('dashboard.products.create') }}"><i class="fa fa-plus fa-2x" aria-hidden="true"></i> ADICIONAR</a>
             </div>
         </div>
         <div class="row">
@@ -67,36 +68,36 @@
                         </th>
                         <th scope="col">Id</th>
                         <th scope="col">Nome</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">CPF</th>
+                        <th scope="col">Código de Barras</th>
+                        <th scope="col">Preço</th>
                         <th scope="col">Ações</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    @forelse($clients as $client)
+                    @forelse($products as $product)
                         <tr>
                             <td>
                                 <div>
-                                    <input type="checkbox" name="id_all" data-id="{{ $client->id }}" class="checked-status" value="">
+                                    <input type="checkbox" name="id_all" data-id="{{ $product->id }}" class="checked-status" value="">
                                 </div>
                             </td>
-                            <th scope="row">{{ $client->id }}</th>
-                            <td>{{ $client->name }}</td>
-                            <td>{{ $client->email ?? '-' }}</td>
-                            <td>{{ maskCpf($client->cpf) }}</td>
+                            <th scope="row">{{ $product->id }}</th>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->barcode }}</td>
+                            <td>{{ formatMoney($product->price) }}</td>
                             <td>
-                                <form class="form-inline" action="{{ route('dashboard.clients.destroy', $client->id) }}" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir este registro?')">
+                                <form class="form-inline" action="{{ route('dashboard.products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir este registro?')">
                                     @method('DELETE')
                                     @csrf
 
                                     <div class="form-group mr-3">
-                                        <a class="text-decoration-none text-success" href="{{ route('dashboard.clients.show', $client->id) }}">
+                                        <a class="text-decoration-none text-success" href="{{ route('dashboard.products.show', $product->id) }}">
                                             <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
                                         </a>
                                     </div>
                                     <div class="form-group">
-                                        <a class="text-decoration-none text-light" href="{{ route('dashboard.clients.edit', $client->id) }}">
+                                        <a class="text-decoration-none text-light" href="{{ route('dashboard.products.edit', $product->id) }}">
                                             <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
                                         </a>
                                     </div>
@@ -131,7 +132,6 @@
             </div>
         </div>
     </div>
-
     <script defer>
         $(function () {
             var apiToken = <?php echo json_encode(auth()->user()->api_token); ?>;
@@ -173,7 +173,7 @@
                         url: "{{ route('bulk_action.destroy') }}",
                         data: {
                             ids: ids,
-                            model: 'Client'
+                            model: 'Product'
                         },
                         statusCode: {
                             204: function(data) {
@@ -191,6 +191,5 @@
             });
         });
     </script>
-
 @endsection
 

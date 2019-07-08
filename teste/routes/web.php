@@ -34,5 +34,7 @@ Route::namespace('Dashboard')
         Route::get('/home', 'IndexController@home')
             ->name('index.home');
 
-        Route::resource('clients', 'ClientController');
+        Route::resource('clients', 'ClientController');// CRUD de clientes
+        Route::resource('purchases', 'PurchaseController');// CRUD de pedidos de compra
+        Route::resource('products', 'ProductController');// CRUD de produtos
     });

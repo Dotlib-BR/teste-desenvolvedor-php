@@ -35,7 +35,7 @@
 
 * Parar rodar os testes execute na raiz do projeto: `vendor/phpunit/phpunit/phpunit --verbose`
 
-#### Observação:
+#### Observações:
 * Como existe diversas formas diferentes para realizar esse teste, optei por faze-lo da forma mais "Manual" possível, 
 para mostrar que não sei apenas usar algo pronto, como também sou capaz de criar uma funcionalidade de forma customizada.
 
@@ -48,7 +48,7 @@ para mostrar que não sei apenas usar algo pronto, como também sou capaz de cri
         * DataTable
         * Bootstrap
         * Jquery
-        * Guzzle, PHP HTTP client
+        * Guzzle PHP HTTP client
         * Chart.JS
         
     * Credenciais para visualizar

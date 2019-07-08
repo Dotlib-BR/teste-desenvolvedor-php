@@ -14,10 +14,10 @@
                         <a class="nav-link" href="{{ route('dashboard.clients.index') }}">Clientes</a>
                     </li>
                     <li class="nav-item {{ setActive(['dashboard/products*']) }}">
-                        <a class="nav-link" href="#">Produtos</a>
+                        <a class="nav-link" href="{{ route('dashboard.products.index') }}">Produtos</a>
                     </li>
-                    <li class="nav-item {{ setActive(['dashboard/orders*']) }}">
-                        <a class="nav-link" href="#">Pedidos</a>
+                    <li class="nav-item {{ setActive(['dashboard/purchases*']) }}">
+                        <a class="nav-link" href="{{ route('dashboard.purchases.index') }}">Pedidos</a>
                     </li>
                 </ul>
                 <div class="w-100 text-right">

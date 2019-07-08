@@ -17,5 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('Zeus')
     ->group(function () {
 
-        Route::apiResource('clients', 'ClientController');
+        Route::apiResource('clients', 'ClientController');// CRUD de clientes
+        Route::apiResource('purchases', 'PurchaseController');// CRUD de pedidos de compra
+        Route::apiResource('products', 'ProductController');// CRUD de produtos
+
+        Route::post('bulk-action/destroy', 'BulkActionController@destroy')
+            ->name('bulk_action.destroy');// Excluir usuários em massa
     });

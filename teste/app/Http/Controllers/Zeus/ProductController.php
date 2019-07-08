@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Zeus;
 
-use App\Http\Requests\StoreUpdateClientFormRequest;
-use App\Models\Client;
+use App\Http\Requests\StoreUpdateProductFormRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 
-class ClientController extends Controller
+class ProductController extends Controller
 {
     public function __construct()
     {
@@ -34,24 +34,24 @@ class ClientController extends Controller
         $sort = $request->sort ?? 'asc';
         $perPage = $request->per_page ?? 20;
 
-        $clients = Client::where('name', 'like', '%'.$search.'%')
-            ->orWhere('email', 'like', '%'.$search.'%')
-            ->orWhere('cpf', removeMask($search))
+        $products = Product::where('name', 'like', '%'.$search.'%')
+            ->orWhere('barcode', 'like', '%'.$search.'%')
+            ->orWhere('price', substr_replace(removeMask($request->search), '.', -2, 0))
             ->orderBy($fieldSort, $sort)
             ->paginate($perPage);
 
-        return response()->json($clients, Response::HTTP_OK);//200
+        return response()->json($products, Response::HTTP_OK);//200
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreUpdateClientFormRequest $request
+     * @param StoreUpdateProductFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateClientFormRequest $request)
+    public function store(StoreUpdateProductFormRequest $request)
     {
-        Client::create($request->validated());// Se não cair no if acima é por que deu tudo certo  e eu posso cadastrar.
+        Product::create($request->validated());// Se não cair no if acima é por que deu tudo certo  e eu posso cadastrar.
 
         return response()->json($request->validated(), Response::HTTP_CREATED);
     }
@@ -64,19 +64,19 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        return response()->json(Client::find($id), Response::HTTP_OK);
+        return response()->json(Product::find($id), Response::HTTP_OK);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param StoreUpdateClientFormRequest $request
+     * @param StoreUpdateProductFormRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateClientFormRequest $request, $id)
+    public function update(StoreUpdateProductFormRequest $request, $id)
     {
-        Client::find($id)->update($request->validated());
+        Product::find($id)->update($request->validated());
 
         return response()->json($request->validated(), Response::HTTP_OK);
     }
@@ -89,7 +89,7 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::find($id)->delete();
+        Product::find($id)->delete();
         // Estou usando observers para remover os registros relacionados.
 
         return response()->json('', Response::HTTP_NO_CONTENT);

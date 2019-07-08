@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Requests\StoreUpdateClientFormRequest;
+use App\Http\Requests\StoreUpdatePurchaseFormRequest;
 use App\Models\Client;
+use App\Models\Discount;
+use App\Models\Product;
+use App\Models\Purchase;
+use App\Models\Status;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ClientController extends Controller
+class PurchaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +23,12 @@ class ClientController extends Controller
     {
         $request->query->add(['page' => $request->page ?? 1]);
 
-        $url = url('/zeus/clients/?'.http_build_query($request->query->all()));
+        $url = url('/zeus/purchases/?'.http_build_query($request->query->all()));
 
         try {
             $response = consumeZeus($url);
 
-            $clients = $response->data;
+            $purchases = $response->data;
             $pages = $response;
 
             if (! isset($response->data)) {
@@ -48,8 +52,8 @@ class ClientController extends Controller
         $params = removePage($request->query->all());
 
         return view(
-            'dashboard.clients.index',
-            compact('clients', 'pages', 'params')
+            'dashboard.purchases.index',
+            compact('purchases', 'pages', 'params')
         );
     }
 
@@ -60,20 +64,30 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('dashboard.clients.form');
+        $clients = Client::get(['id', 'cpf', 'name']);
+        $products = Product::get(['id', 'name', 'price']);
+        $discounts = Discount::get();
+        $statuses = Status::where('title', '<>', 'Cancelado')->get();
+
+        return view('dashboard.purchases.form',
+            compact(
+                'clients', 'products',
+                'discounts', 'statuses'
+            )
+        );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreUpdateClientFormRequest $request
+     * @param StoreUpdatePurchaseFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateClientFormRequest $request)
+    public function store(StoreUpdatePurchaseFormRequest $request)
     {
         try {
             consumeZeus(
-                route('clients.store', $request->all()),
+                route('purchases.store', $request->all()),
                 'POST',
                 $request->all()
             );
@@ -86,7 +100,7 @@ class ClientController extends Controller
             }
         }
 
-        return redirect()->route('dashboard.clients.index')
+        return redirect()->route('dashboard.purchases.index')
             ->with([
                 'action' => 'Ação realizada.'
             ]);
@@ -95,42 +109,58 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Client $client
-     * @return \Illuminate\Http\Response
+     * @param Purchase $purchase
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Client $client)
+    public function show(Purchase $purchase)
     {
-        $purchases = $client->purchases()->paginate(5);
+        $orders = $purchase->orders()->paginate(5);
 
         return view(
-            'dashboard.clients.show',
-            compact('client', 'purchases')
+            'dashboard.purchases.show',
+            compact('purchase', 'orders')
         );
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Client $client
+     * @param Purchase $purchase
      * @return \Illuminate\Http\Response
      */
-    public function edit(Client $client)
+    public function edit(Purchase $purchase)
     {
-        return view('dashboard.clients.form', compact('client'));
+        $clients = Client::get(['id', 'cpf', 'name']);
+        $products = Product::get(['id', 'name', 'price']);
+        $discounts = Discount::get();
+        $statuses = Status::get();;
+        $firstProduct = $purchase->orders
+            ->first()->product_id;
+        $firstQuantity = $purchase->orders
+            ->first()->quantity;
+        // O pedido está ligado a uma compra, então tenho que manipular a compra.
+
+        return view('dashboard.purchases.form',
+            compact(
+                'clients', 'products',
+                'discounts', 'statuses', 'purchase',
+                'firstProduct', 'firstQuantity'
+            )
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param StoreUpdateClientFormRequest $request
+     * @param StoreUpdatePurchaseFormRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateClientFormRequest $request, $id)
+    public function update(StoreUpdatePurchaseFormRequest $request, $id)
     {
         try {
             consumeZeus(
-                route('clients.update', $id),
+                route('purchases.update', $id),
                 'PUT',
                 $request->all()
             );
@@ -143,23 +173,22 @@ class ClientController extends Controller
             }
         }
 
-        return redirect()->route('dashboard.clients.index')
+        return redirect()->route('dashboard.purchases.index')
             ->with([
                 'action' => 'Ação realizada.'
             ]);
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|\Illuminate\Http\RedirectResponse|string
      */
     public function destroy($id)
     {
         try {
-            consumeZeus(route('clients.destroy', $id), 'DELETE');
+            consumeZeus(route('purchases.destroy', $id), 'DELETE');
 
         } catch (\Exception $e) {
             if (! env('APP_DEBUG')) {

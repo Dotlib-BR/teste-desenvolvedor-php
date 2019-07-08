@@ -177,6 +177,7 @@ return [
 
         //Observers Providers
         App\Providers\ClientServiceProvider::class,
+        App\Providers\ProductServiceProvider::class
 
     ],
 

@@ -41,11 +41,7 @@ class StoreUpdateClientFormRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $this->merge(['cpf'=>
-            str_replace(
-                '.', '', str_replace('-', '', $this->request->get('cpf'))
-            )
-        ]);// Para retirar a máscara do CPF antes de válidar se existe no banco.
+        $this->merge(['cpf'=> removeMask($this->request->get('cpf'))]);// Para retirar a máscara do CPF antes de válidar se existe no banco.
     }
 
     public function messages()
