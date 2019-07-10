@@ -123,7 +123,7 @@
         </div>
         <div class="row">
             <div class="col-md-10">
-                {{ $clients->links() }}
+                {{ $clients->appends(request()->input())->links() }}
             </div>
             <div class="col-md-2">
                 <p class="font-weight-bold">Total: <span class="text-light">{{ $clients->total() }}</span></p>

@@ -67,7 +67,7 @@
                 <p class="font-weight-bold">Total: <span class="text-light">{{$purchases->total() }}</span></p>
             </div>
             <div class="col-md-10 d-flex justify-content-end">
-                {{ $purchases->links() }}
+                {{ $purchases->appends(request()->input())->links()}}
             </div>
         </div>
     </div>

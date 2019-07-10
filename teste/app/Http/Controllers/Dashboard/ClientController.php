@@ -29,7 +29,7 @@ class ClientController extends Controller
         try {
             $clients = Client::where('name', 'like', '%'.request('search', '').'%')
                 ->orWhere('email', 'like', '%'.request('search', '').'%')
-                ->orWhere('cpf', removeMask(request('search', '')))
+                ->orWhere('cpf', removeMask(request('search', '')))// CPF precisa ser inteiro da forma que aparece na view
                 ->orderBy(request('field_sort', 'id'), request('sort', 'asc'))
                 ->paginate(request('per_page', 20));
 

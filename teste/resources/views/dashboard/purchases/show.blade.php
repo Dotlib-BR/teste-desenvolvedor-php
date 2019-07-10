@@ -68,7 +68,7 @@
                 <p class="font-weight-bold">Total: <span class="text-light">{{ $orders->total() }}</span></p>
             </div>
             <div class="col-md-10 d-flex justify-content-end">
-                {{ $orders->links() }}
+                {{ $orders->appends(request()->input())->links() }}
             </div>
         </div>
     </div>

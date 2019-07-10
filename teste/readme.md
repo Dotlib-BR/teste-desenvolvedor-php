@@ -30,6 +30,9 @@
     * Criar o banco de dados.
 	    * Popular o banco de dados: `php artisan migrate:refresh --seed`.
 
+* Email e senha padrão
+    * E-mail: `admin@dotlib.com`
+    * Passowrd: `password`
 
 ## TDD
 

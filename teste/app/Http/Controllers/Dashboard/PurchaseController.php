@@ -53,7 +53,7 @@ class PurchaseController extends Controller
                     $q->whereNull('statuses.deleted_at');
                 })
                 ->whereNull('purchases.deleted_at')
-                ->orWhere('quantity', request('search', ''))
+                ->where('quantity', request('search', ''))
                 ->orWhere('products.name', 'like', '%'.request('search', '').'%')
                 ->orWhere('barcode', 'like', '%'.request('search', '').'%')// Consulta por código de barra do produto
                 ->orWhere('clients.name', 'like', '%'.request('search', '').'%')
@@ -310,7 +310,7 @@ class PurchaseController extends Controller
             return redirect()->route('dashboard.purchases.index')
                 ->with([
                     'notification' => [
-                        'message' => 'A compra que você está tentando remover não existe!',
+                        'message' => 'A compra que você está tentando remover não existe mas pode está atrelado a um item existente!',
                         'color' => 'warning'
                     ]
                 ]);
