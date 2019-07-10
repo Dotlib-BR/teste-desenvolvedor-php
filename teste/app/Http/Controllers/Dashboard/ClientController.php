@@ -4,53 +4,46 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Requests\StoreUpdateClientFormRequest;
 use App\Models\Client;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        // Caso dê algo errado nos métodos que fazem alterações no banco eu uso o DB::beginTransaction()
+        $this->middleware(
+            'db.transaction',
+            [
+                'except' => ['index', 'edit', 'show']
+            ]
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $request->query->add(['page' => $request->page ?? 1]);
-
-        $url = url('/zeus/clients/?'.http_build_query($request->query->all()));
-
         try {
-            $response = consumeZeus($url);
-
-            $clients = $response->data;
-            $pages = $response;
-
-            if (! isset($response->data)) {
-                //se der muitos refresh na tela também cai aqui.
-                sleep(5);
-
-                return redirect()->back()
-                    ->with([
-                        'request' => 'Timeout.'
-                    ]);
-            }
+            $clients = Client::where('name', 'like', '%'.request('search', '').'%')
+                ->orWhere('email', 'like', '%'.request('search', '').'%')
+                ->orWhere('cpf', removeMask(request('search', '')))
+                ->orderBy(request('field_sort', 'id'), request('sort', 'asc'))
+                ->paginate(request('per_page', 20));
 
         } catch (\Exception $e) {
-            if (! env('APP_DEBUG')) {
-                auth()->logout();
-
-                return url('/');
+            if (env('APP_DEBUG')) {
+                dd($e);
             }
+
+            auth()->logout();
+
+            return redirect()->route('login');// TODO retornar com uma mensagem explicando o motivo do logout.
         }
 
-        $params = removePage($request->query->all());
-
-        return view(
-            'dashboard.clients.index',
-            compact('clients', 'pages', 'params')
-        );
+        return view('dashboard.clients.index', compact('clients'));
     }
 
     /**
@@ -72,24 +65,29 @@ class ClientController extends Controller
     public function store(StoreUpdateClientFormRequest $request)
     {
         try {
-            consumeZeus(
-                route('clients.store', $request->all()),
-                'POST',
-                $request->all()
-            );
+            Client::create($request->validated());
+
+            return redirect()->route('dashboard.clients.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'Cliente cadastrado com sucesso!',
+                        'color' => 'success'
+                    ]
+                ]);
 
         } catch (\Exception $e) {
-            if (! env('APP_DEBUG')) {
-                auth()->logout();
-
-                return url('/');
+            if (env('APP_DEBUG')) {
+                dd($e);
             }
-        }
 
-        return redirect()->route('dashboard.clients.index')
-            ->with([
-                'action' => 'Ação realizada.'
-            ]);
+            return redirect()->route('dashboard.clients.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'Algo deu errado, contate o administrador do sistema',
+                        'color' => 'danger'
+                    ]
+                ]);
+        }
     }
 
     /**
@@ -98,7 +96,7 @@ class ClientController extends Controller
      * @param Client $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show(Client $client)// 404 se não existir
     {
         $purchases = $client->purchases()->paginate(5);
 
@@ -114,7 +112,7 @@ class ClientController extends Controller
      * @param Client $client
      * @return \Illuminate\Http\Response
      */
-    public function edit(Client $client)
+    public function edit(Client $client)// 404 se não existir
     {
         return view('dashboard.clients.form', compact('client'));
     }
@@ -129,25 +127,41 @@ class ClientController extends Controller
     public function update(StoreUpdateClientFormRequest $request, $id)
     {
         try {
-            consumeZeus(
-                route('clients.update', $id),
-                'PUT',
-                $request->all()
-            );
+            $client = Client::find($id);
+
+            if (! empty($client)) {
+                $client->update($request->validated());
+
+                return redirect()->route('dashboard.clients.index')
+                    ->with([
+                        'notification' => [
+                            'message' => 'Cliente atualizado com sucesso!',
+                            'color' => 'success'
+                        ]
+                    ]);
+            }
+
+            return redirect()->route('dashboard.clients.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'O cliente que você deseja atualizar não existe!',
+                        'color' => 'warning'
+                    ]
+                ]);
 
         } catch (\Exception $e) {
-            if (! env('APP_DEBUG')) {
-                auth()->logout();
-
-                return url('/');
+            if (env('APP_DEBUG')) {
+                dd($e);
             }
+
+            return redirect()->route('dashboard.clients.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'Algo deu errado, contate o administrador do sistema',
+                        'color' => 'danger'
+                    ]
+                ]);
         }
-
-        return redirect()->route('dashboard.clients.index')
-            ->with([
-                'action' => 'Ação realizada.'
-            ]);
-
     }
 
     /**
@@ -158,20 +172,42 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
+        // Estou usando observers para remover os registros relacionados.
         try {
-            consumeZeus(route('clients.destroy', $id), 'DELETE');
+            $client = Client::find($id);
+
+            if (! empty($client)) {
+                $client->delete();
+
+                return redirect()->route('dashboard.clients.index')
+                    ->with([
+                        'notification' => [
+                            'message' => 'Cliente removido com sucesso!',
+                            'color' => 'success'
+                        ]
+                    ]);
+            }
+
+            return redirect()->route('dashboard.clients.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'O cliente que você está tentando remover não existe!',
+                        'color' => 'warning'
+                    ]
+                ]);
 
         } catch (\Exception $e) {
-            if (! env('APP_DEBUG')) {
-                auth()->logout();
-
-                return url('/');
+            if (env('APP_DEBUG')) {
+                dd($e);
             }
-        }
 
-        return redirect()->back()
-            ->with([
-                'action' => 'Ação realizada.'
-            ]);
+            return redirect()->route('dashboard.clients.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'Algo deu errado, contate o administrador do sistema',
+                        'color' => 'danger'
+                    ]
+                ]);
+        }
     }
 }

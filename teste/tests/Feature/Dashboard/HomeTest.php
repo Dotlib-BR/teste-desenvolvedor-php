@@ -5,7 +5,7 @@ namespace Tests\Feature\Dashboard;
 use App\Models\User;
 use Tests\TestCase;
 
-class IndexTest extends TestCase
+class HomeTest extends TestCase
 {
     protected $user;
     protected $client;

@@ -2,14 +2,26 @@
 
 namespace Tests\Feature\Dashboard;
 
+use App\Models\Client;
+use App\Models\Discount;
+use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Status;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class PurchaseTest extends TestCase
 {
+    use DatabaseTransactions;// Para dar um "rollback" quando inserir algo no banco, de forma automática!
+
     protected $user;
     protected $purchase;
+    protected $product;
+    protected $data;
+    protected $discount;
+    protected $status;
+    protected $client;
 
     protected function setUp(): void
     {
@@ -17,6 +29,10 @@ class PurchaseTest extends TestCase
 
         $this->user = factory(User::class)->create();
         $this->purchase = factory(Purchase::class)->create();
+        $this->product = factory(Product::class)->create();
+        $this->discount = factory(Discount::class)->create();
+        $this->status = factory(Status::class)->create();
+        $this->client = factory(Client::class)->create();
     }
 
     /**
@@ -46,7 +62,34 @@ class PurchaseTest extends TestCase
     }
 
     /**
-     * Teste básico que simula quando o usuário visita o formulário de cadastro/edição de um determinado pedido de compra.
+     * Teste básico que simula o ato cadastrar um determinado pedido de compra pelo formulário
+     * de cadastro/edição de pedido de compra.
+     *
+     * @return void
+     */
+    public function testStore()
+    {
+        $data = [
+            'quantity' => [
+                10
+            ],
+            'product_id' => [
+                $this->product->id
+            ],
+            'discount_id' => $this->discount->id,
+            'status_id' => $this->status->id,
+            'client_id' => $this->client->id
+        ];
+
+        $this->actingAs($this->user)
+            ->put(route('dashboard.purchases.store'), $data);
+
+        $this->assertAuthenticated();
+    }
+
+    /**
+     * Teste básico que simula quando o usuário visita o formulário de cadastro/edição
+     * de um determinado pedido de compra.
      *
      * @return void
      */
@@ -54,6 +97,32 @@ class PurchaseTest extends TestCase
     {
         $this->actingAs($this->user)
             ->get(route('dashboard.purchases.edit', $this->purchase->id));
+
+        $this->assertAuthenticated();
+    }
+
+    /**
+     * Teste básico que simula o ato atualizar de um determinado pedido de compra pelo formulário
+     * de cadastro/edição de pedido de compra.
+     *
+     * @return void
+     */
+    public function testUpdate()
+    {
+        $data = [
+            'quantity' => [
+                10
+            ],
+            'product_id' => [
+                $this->product->id
+            ],
+            'discount_id' => $this->discount->id,
+            'status_id' => $this->status->id,
+            'client_id' => $this->client->id
+        ];
+
+        $this->actingAs($this->user)
+            ->put(route('dashboard.purchases.update', $this->purchase->id), $data);
 
         $this->assertAuthenticated();
     }

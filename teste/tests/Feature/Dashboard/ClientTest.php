@@ -4,10 +4,13 @@ namespace Tests\Feature\Dashboard;
 
 use App\Models\Client;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class ClientTest extends TestCase
 {
+    use DatabaseTransactions;// Para dar um "rollback" quando inserir algo no banco, de forma automática!
+
     protected $user;
     protected $client;
 
@@ -46,6 +49,25 @@ class ClientTest extends TestCase
     }
 
     /**
+     * Teste básico que simula o ato de cadastrar um novo cliente pelo formulário de cadastro/edição de clientes.
+     *
+     * @return void
+     */
+    public function testStore()
+    {
+        $data = [
+            'name' => 'Test Client',
+            'cpf' => '122.075.777-00',
+            'email' => 'teste@client.dev'
+        ];
+
+        $this->actingAs($this->user)
+            ->post(route('dashboard.clients.store'), $data);
+
+        $this->assertAuthenticated();
+    }
+
+    /**
      * Teste básico que simula quando o usuário visita o formulário de cadastro/edição de um determinado cliente.
      *
      * @return void
@@ -54,6 +76,25 @@ class ClientTest extends TestCase
     {
         $this->actingAs($this->user)
             ->get(route('dashboard.clients.edit', $this->client->id));
+
+        $this->assertAuthenticated();
+    }
+
+    /**
+     * Teste básico que simula o ato de atualizar um determinado cliente pelo formulário de cadastro/edição de clientes.
+     *
+     * @return void
+     */
+    public function testUpdate()
+    {
+        $data = [
+            'name' => 'Test Client Update',
+            'cpf' => '122.075.777-00',
+            'email' => 'teste@client.dev'
+        ];
+
+        $this->actingAs($this->user)
+            ->put(route('dashboard.clients.update', $this->client->id), $data);
 
         $this->assertAuthenticated();
     }

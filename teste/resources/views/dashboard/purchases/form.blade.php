@@ -136,6 +136,7 @@
     </div>
     <script defer>
         $(function () {
+
             var i = 1;// Numerador, preciso dele fora e declarado como var para ter escopo global.
 
             $('#add').click(function(){

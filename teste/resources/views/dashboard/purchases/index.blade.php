@@ -16,7 +16,7 @@
                     <select name="per_page" onchange="this.form.submit()" class="selectpicker" data-width="100%" data-style="btn-success">
                         <option value="20" {{ request()->get('per_page') === null ? 'selected="selected"' : '' }} data-subtext="20 por padrão" data-icon="fa fa-sort">Itens por página</option>
 
-                        @for($i = 5; $i <= $pages->total; $i += 5)
+                        @for($i = 5; $i <= $purchases->total(); $i += 5)
                             <option value="{{ $i }}" {{ $i == request()->get('per_page') && request()->get('per_page') !== null ? 'selected="selected"' : '' }} data-subtext="Itens por página">{{ $i }}</option>
                         @endfor
 
@@ -126,12 +126,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
-                <p class="font-weight-bold">Total: <span class="text-light">{{ $pages->total }}</span></p>
-            </div>
             <div class="col-md-10">
-                @paginate(['pages' => $pages, 'params' => $params])
-                @endpaginate
+                {{ $purchases->links() }}
+            </div>
+            <div class="col-md-2">
+                <p class="font-weight-bold">Total: <span class="text-light">{{ $purchases->total() }}</span></p>
             </div>
         </div>
     </div>

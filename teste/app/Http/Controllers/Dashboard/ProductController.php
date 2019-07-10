@@ -4,53 +4,46 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Requests\StoreUpdateProductFormRequest;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        // Caso dê algo errado nos métodos que fazem alterações no banco eu uso o DB::beginTransaction()
+        $this->middleware(
+            'db.transaction',
+            [
+                'except' => ['index', 'edit', 'show']
+            ]
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $request->query->add(['page' => $request->page ?? 1]);
-
-        $url = url('/zeus/products/?'.http_build_query($request->query->all()));
-
         try {
-            $response = consumeZeus($url);
-
-            $products = $response->data;
-            $pages = $response;
-
-            if (! isset($response->data)) {
-                //se der muitos refresh na tela também cai aqui.
-                sleep(5);
-
-                return redirect()->back()
-                    ->with([
-                        'request' => 'Timeout.'
-                    ]);
-            }
+            $products = Product::where('name', 'like', '%'.request('search', '').'%')
+                ->orWhere('barcode', 'like', '%'.request('search', '').'%')
+                ->orWhere('price', substr_replace(removeMask(request('search', '')), '.', -2, 0))
+                ->orderBy(request('field_sort', 'id'), request('sort', 'asc'))
+                ->paginate(request('per_page', 20));
 
         } catch (\Exception $e) {
-            if (! env('APP_DEBUG')) {
-                auth()->logout();
-
-                return url('/');
+            if (env('APP_DEBUG')) {
+                dd($e);
             }
+
+            auth()->logout();
+
+            return redirect()->route('login');// TODO retornar com uma mensagem explicando o motivo do logout.
         }
 
-        $params = removePage($request->query->all());
-
-        return view(
-            'dashboard.products.index',
-            compact('products', 'pages', 'params')
-        );
+        return view('dashboard.products.index', compact('products'));
     }
 
     /**
@@ -72,24 +65,29 @@ class ProductController extends Controller
     public function store(StoreUpdateProductFormRequest $request)
     {
         try {
-            consumeZeus(
-                route('products.store', $request->all()),
-                'POST',
-                $request->all()
-            );
+            Product::create($request->validated());
+
+            return redirect()->route('dashboard.products.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'Produto cadastrado com sucesso!',
+                        'color' => 'success'
+                    ]
+                ]);
 
         } catch (\Exception $e) {
-            if (! env('APP_DEBUG')) {
-                auth()->logout();
-
-                return url('/');
+            if (env('APP_DEBUG')) {
+                dd($e);
             }
-        }
 
-        return redirect()->route('dashboard.products.index')
-            ->with([
-                'action' => 'Ação realizada.'
-            ]);
+            return redirect()->route('dashboard.products.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'Algo deu errado, contate o administrador do sistema',
+                        'color' => 'danger'
+                    ]
+                ]);
+        }
     }
 
     /**
@@ -98,7 +96,7 @@ class ProductController extends Controller
      * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $product)// 404 se não existir
     {
         $orders = $product->orders()->paginate(5);
 
@@ -114,7 +112,7 @@ class ProductController extends Controller
      * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Product $product)// 404 se não existir
     {
         return view('dashboard.products.form', compact('product'));
     }
@@ -126,28 +124,44 @@ class ProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateProductFormRequest $request, $id)
     {
         try {
-            consumeZeus(
-                route('products.update', $id),
-                'PUT',
-                $request->all()
-            );
+            $product = Product::find($id);
+
+            if (! empty($product)) {
+                $product->update($request->validated());
+
+                return redirect()->route('dashboard.products.index')
+                    ->with([
+                        'notification' => [
+                            'message' => 'Produto atualizado com sucesso!',
+                            'color' => 'success'
+                        ]
+                    ]);
+            }
+
+            return redirect()->route('dashboard.products.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'O produto que você deseja atualizar não existe!',
+                        'color' => 'warning'
+                    ]
+                ]);
 
         } catch (\Exception $e) {
-            if (! env('APP_DEBUG')) {
-                auth()->logout();
-
-                return url('/');
+            if (env('APP_DEBUG')) {
+                dd($e);
             }
+
+            return redirect()->route('dashboard.products.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'Algo deu errado, contate o administrador do sistema',
+                        'color' => 'danger'
+                    ]
+                ]);
         }
-
-        return redirect()->route('dashboard.products.index')
-            ->with([
-                'action' => 'Ação realizada.'
-            ]);
-
     }
 
     /**
@@ -158,20 +172,41 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            consumeZeus(route('products.destroy', $id), 'DELETE');
+        try {// Estou usando observers para remover os registros relacionados.
+            $product = Product::find($id);
+
+            if (! empty($product)) {
+                $product->delete();
+
+                return redirect()->route('dashboard.products.index')
+                    ->with([
+                        'notification' => [
+                            'message' => 'Produto removido com sucesso!',
+                            'color' => 'success'
+                        ]
+                    ]);
+            }
+
+            return redirect()->route('dashboard.products.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'O produto que você está tentando remover não existe!',
+                        'color' => 'warning'
+                    ]
+                ]);
 
         } catch (\Exception $e) {
-            if (! env('APP_DEBUG')) {
-                auth()->logout();
-
-                return url('/');
+            if (env('APP_DEBUG')) {
+                dd($e);
             }
-        }
 
-        return redirect()->back()
-            ->with([
-                'action' => 'Ação realizada.'
-            ]);
+            return redirect()->route('dashboard.products.index')
+                ->with([
+                    'notification' => [
+                        'message' => 'Algo deu errado, contate o administrador do sistema',
+                        'color' => 'danger'
+                    ]
+                ]);
+        }
     }
 }

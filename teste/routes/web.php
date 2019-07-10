@@ -31,8 +31,8 @@ Route::namespace('Dashboard')
     ->as('dashboard.')
     ->prefix('/dashboard')->group( function(){
 
-        Route::get('/home', 'IndexController@home')
-            ->name('index.home');
+        Route::get('/home', 'HomeController@index')
+            ->name('home.index');
 
         Route::resource('clients', 'ClientController');// CRUD de clientes
         Route::resource('purchases', 'PurchaseController');// CRUD de pedidos de compra

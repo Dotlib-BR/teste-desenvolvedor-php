@@ -2,44 +2,43 @@
 
 namespace App\Observers;
 
-use App\Models\Product;
-use Illuminate\Support\Facades\DB;
+use App\Models\Purchase;
 
-class ProductObserver
+class PurchaseObserver
 {
     /**
-     * Handle the product "created" event.
+     * Handle the purchase "created" event.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Purchase  $purchase
      * @return void
      */
-    public function created(Product $product)
+    public function created(Purchase $purchase)
     {
         //
     }
 
     /**
-     * Handle the product "updated" event.
+     * Handle the purchase "updated" event.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Purchase  $purchase
      * @return void
      */
-    public function updated(Product $product)
+    public function updated(Purchase $purchase)
     {
         //
     }
 
     /**
-     * Handle the product "deleted" event.
+     * Handle the purchase "deleted" event.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Purchase  $purchase
      * @return void
      */
-    public function deleted(Product $product)
+    public function deleted(Purchase $purchase)
     {
         try {
-            if (count($product->purchases) > 0) {
-                $product->purchases()->forceDelete();// Remove todas as compras definitivamente.
+            if ($purchase->orders->count() > 0) {
+                $purchase->orders()->delete();
             }
 
         } catch (\Exception $e) {
@@ -50,23 +49,23 @@ class ProductObserver
     }
 
     /**
-     * Handle the product "restored" event.
+     * Handle the purchase "restored" event.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Purchase  $purchase
      * @return void
      */
-    public function restored(Product $product)
+    public function restored(Purchase $purchase)
     {
         //
     }
 
     /**
-     * Handle the product "force deleted" event.
+     * Handle the purchase "force deleted" event.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Purchase  $purchase
      * @return void
      */
-    public function forceDeleted(Product $product)
+    public function forceDeleted(Purchase $purchase)
     {
         //
     }

@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7099daf7-1139-4c28-936c-df349e024c05" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/teste/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/ClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/ClientController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/PurchaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/PurchaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/BulkActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/BulkActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/ClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/ClientController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/PurchaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/PurchaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Models/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Models/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Models/Purchase.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Models/Purchase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Observers/ClientObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Observers/ClientObserver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Observers/ProductObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Observers/ProductObserver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Observers/PurchaseObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Observers/PurchaseObserver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/Providers/PurchaseServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/Providers/PurchaseServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/app/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/app/helpers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/database/eer_diagram.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/teste/database/eer_diagram.mwb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/database/eer_diagram.mwb.bak" beforeDir="false" afterPath="$PROJECT_DIR$/teste/database/eer_diagram.mwb.bak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/database/migrations/2019_07_02_013648_create_purchases_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/database/migrations/2019_07_02_013648_create_purchases_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/database/migrations/2019_07_02_013735_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/database/migrations/2019_07_02_013735_create_orders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/resources/views/components/session.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/resources/views/components/session.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/resources/views/dashboard/clients/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/resources/views/dashboard/clients/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/resources/views/dashboard/clients/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/resources/views/dashboard/clients/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/resources/views/dashboard/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/resources/views/dashboard/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/resources/views/dashboard/products/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/resources/views/dashboard/products/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/resources/views/dashboard/products/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/resources/views/dashboard/products/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/resources/views/dashboard/purchases/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/resources/views/dashboard/purchases/form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/resources/views/dashboard/purchases/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/resources/views/dashboard/purchases/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/resources/views/dashboard/purchases/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/resources/views/dashboard/purchases/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/resources/views/layouts/partials/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/resources/views/layouts/partials/nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/tests/Feature/Auth/AuthTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/tests/Feature/Auth/AuthTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/tests/Feature/Dashboard/ClientTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/tests/Feature/Dashboard/ClientTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/tests/Feature/Dashboard/HomeTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/tests/Feature/Dashboard/HomeTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/tests/Feature/Dashboard/ProductTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/tests/Feature/Dashboard/ProductTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/tests/Feature/Dashboard/PurchaseTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/tests/Feature/Dashboard/PurchaseTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste/tests/Feature/Zeus/BulkActionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/teste/tests/Feature/Zeus/BulkActionTest.php" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/teste/composer.json</pharConfigPath>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>purchases</find>
+      <find>Clientes</find>
+      <find>name_list</find>
+      <find>valor selecionado para o campo</find>
+      <find>$purc</find>
+      <find>Order</find>
+      <find>isset($order)</find>
+      <find>$orders</find>
+      <find>$order</find>
+      <find>orders</find>
+      <find>order</find>
+      <find>orders.</find>
+      <find>Cliente</find>
+      <find>dashboard.order</find>
+      <find>$client</find>
+      <find>&lt;select</find>
+      <find>$product-&gt;id }}&quot;</find>
+      <find>Client</find>
+      <find>client</find>
+      <find>producte</find>
+      <find>api_token_old</find>
+      <find>orderIds</find>
+      <find>$pages</find>
+      <find>clients</find>
+      <find>use</find>
+      <find>users</find>
+      <find>IndexControll</find>
+      <find>index.home</find>
+      <find>product</find>
+      <find>Product</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/teste/app/Http/Requests/StoreUpdateProductFormRequest.php" />
+        <option value="$PROJECT_DIR$/teste/routes/zeus.php" />
+        <option value="$PROJECT_DIR$/teste/database/migrations/2014_10_12_000000_create_users_table.php" />
+        <option value="$PROJECT_DIR$/teste/database/factories/UserFactory.php" />
+        <option value="$PROJECT_DIR$/teste/app/Models/User.php" />
+        <option value="$PROJECT_DIR$/teste/app/Http/Controllers/Auth/RegisterController.php" />
+        <option value="$PROJECT_DIR$/teste/app/Http/Middleware/CheckTokenApi.php" />
+        <option value="$PROJECT_DIR$/teste/app/Providers/AppServiceProvider.php" />
+        <option value="$PROJECT_DIR$/teste/resources/views/components/session.blade.php" />
+        <option value="$PROJECT_DIR$/teste/app/Exceptions/Handler.php" />
+        <option value="$PROJECT_DIR$/teste/app/Http/Middleware/DBTransaction.php" />
+        <option value="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/ClientController.php" />
+        <option value="$PROJECT_DIR$/teste/resources/views/dashboard/clients/show.blade.php" />
+        <option value="$PROJECT_DIR$/teste/.env" />
+        <option value="$PROJECT_DIR$/teste/resources/views/dashboard/clients/index.blade.php" />
+        <option value="$PROJECT_DIR$/teste/app/helpers.php" />
+        <option value="$PROJECT_DIR$/teste/resources/views/dashboard/products/index.blade.php" />
+        <option value="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/ProductController.php" />
+        <option value="$PROJECT_DIR$/teste/resources/views/dashboard/products/show.blade.php" />
+        <option value="$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/ClientController.php" />
+        <option value="$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/ProductController.php" />
+        <option value="$PROJECT_DIR$/teste/readme.md" />
+        <option value="$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/IndexController.php" />
+        <option value="$PROJECT_DIR$/teste/routes/web.php" />
+        <option value="$PROJECT_DIR$/teste/tests/Feature/Dashboard/IndexTest.php" />
+        <option value="$PROJECT_DIR$/teste/resources/views/dashboard/purchases/index.blade.php" />
+        <option value="$PROJECT_DIR$/teste/resources/views/dashboard/purchases/form.blade.php" />
+        <option value="$PROJECT_DIR$/teste/app/Models/Purchase.php" />
+        <option value="$PROJECT_DIR$/teste/app/Models/Order.php" />
+        <option value="$PROJECT_DIR$/teste/database/migrations/2019_07_02_013735_create_orders_table.php" />
+        <option value="$PROJECT_DIR$/teste/database/migrations/2019_07_02_013648_create_purchases_table.php" />
+        <option value="$PROJECT_DIR$/teste/app/Providers/PurchaseServiceProvider.php" />
+        <option value="$PROJECT_DIR$/teste/config/app.php" />
+        <option value="$PROJECT_DIR$/teste/resources/views/dashboard/home.blade.php" />
+        <option value="$PROJECT_DIR$/teste/resources/views/dashboard/purchases/show.blade.php" />
+        <option value="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/BulkActionController.php" />
+        <option value="$PROJECT_DIR$/teste/app/Observers/ProductObserver.php" />
+        <option value="$PROJECT_DIR$/teste/app/Observers/PurchaseObserver.php" />
+        <option value="$PROJECT_DIR$/teste/app/Observers/ClientObserver.php" />
+        <option value="$PROJECT_DIR$/teste/resources/views/layouts/partials/nav.blade.php" />
+        <option value="$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/PurchaseController.php" />
+        <option value="$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/PurchaseController.php" />
+        <option value="$PROJECT_DIR$/teste/tests/Feature/Zeus/ProductTest.php" />
+        <option value="$PROJECT_DIR$/teste/tests/Feature/Zeus/ClientTest.php" />
+        <option value="$PROJECT_DIR$/teste/tests/Feature/Zeus/PurchaseTest.php" />
+        <option value="$PROJECT_DIR$/teste/tests/Feature/Zeus/BulkActionTest.php" />
+        <option value="$PROJECT_DIR$/teste/tests/Feature/Auth/AuthTest.php" />
+        <option value="$PROJECT_DIR$/teste/tests/Feature/Dashboard/HomeTest.php" />
+        <option value="$PROJECT_DIR$/teste/tests/Feature/Dashboard/PurchaseTest.php" />
+        <option value="$PROJECT_DIR$/teste/tests/Feature/Dashboard/ProductTest.php" />
+        <option value="$PROJECT_DIR$/teste/tests/Feature/Dashboard/ClientTest.php" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/teste/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/teste/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/teste/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/teste/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/teste/vendor/composer" />
+      <path value="$PROJECT_DIR$/teste/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/teste/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/teste/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/teste/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/teste/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/teste/vendor/beyondcode/laravel-dump-server" />
+      <path value="$PROJECT_DIR$/teste/vendor/erusev/parsedown" />
+      <path value="$PROJECT_DIR$/teste/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/teste/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/teste/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/teste/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/teste/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/teste/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/teste/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/teste/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/teste/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/teste/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/teste/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/teste/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/teste/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/teste/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/teste/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/teste/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/teste/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/teste/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/teste/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/teste/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/teste/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/teste/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/teste/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/teste/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/teste/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/teste/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/teste/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/teste/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/teste/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/teste/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/teste/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/teste/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/teste/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/teste/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/teste/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/teste/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/teste/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/teste/vendor/jakub-onderka/php-console-color" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/teste/vendor/jakub-onderka/php-console-highlighter" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/teste/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/teste/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/teste/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/teste/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/teste/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/teste/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/teste/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/teste/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/teste/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/teste/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/teste/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/teste/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/teste/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/teste/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/teste/vendor/ralouphie/getallheaders" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="680" />
+    <option name="height" value="728" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="teste-desenvolvedor-backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="teste-desenvolvedor-backend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="teste-desenvolvedor-backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="teste-desenvolvedor-backend" type="462c0819:PsiDirectoryNode" />
+              <item name="teste" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="teste-desenvolvedor-backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="teste-desenvolvedor-backend" type="462c0819:PsiDirectoryNode" />
+              <item name="teste" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="teste-desenvolvedor-backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="teste-desenvolvedor-backend" type="462c0819:PsiDirectoryNode" />
+              <item name="teste" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="teste-desenvolvedor-backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="teste-desenvolvedor-backend" type="462c0819:PsiDirectoryNode" />
+              <item name="teste" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="teste-desenvolvedor-backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="teste-desenvolvedor-backend" type="462c0819:PsiDirectoryNode" />
+              <item name="teste" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="Feature" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="teste-desenvolvedor-backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="teste-desenvolvedor-backend" type="462c0819:PsiDirectoryNode" />
+              <item name="teste" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="Feature" type="462c0819:PsiDirectoryNode" />
+              <item name="Auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="teste-desenvolvedor-backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="teste-desenvolvedor-backend" type="462c0819:PsiDirectoryNode" />
+              <item name="teste" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="Feature" type="462c0819:PsiDirectoryNode" />
+              <item name="Dashboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="Configurable.PHP.Blade" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\teste-desenvolvedor-backend\teste\app\Http\Controllers\Zeus" />
+      <recent name="C:\laragon\www\teste-desenvolvedor-backend\teste\tests\Feature\Zeus" />
+      <recent name="C:\laragon\www\teste-desenvolvedor-backend\teste\tests\Feature\Auth" />
+      <recent name="C:\laragon\www\teste-desenvolvedor-backend\teste\tests\Feature\Dashboard" />
+      <recent name="C:\laragon\www\teste-desenvolvedor-backend\teste\resources\views\dashboard" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\teste-desenvolvedor-backend\teste\app\Providers" />
+      <recent name="C:\laragon\www\teste-desenvolvedor-backend\teste\app\Observers" />
+      <recent name="C:\laragon\www\teste-desenvolvedor-backend\teste\tests\Feature\Dashboard" />
+      <recent name="C:\laragon\www\teste-desenvolvedor-backend\teste\tests\Feature\Zeus" />
+      <recent name="C:\laragon\www\teste-desenvolvedor-backend\teste\app\Http\Controllers\Zeus" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7099daf7-1139-4c28-936c-df349e024c05" name="Default Changelist" comment="" />
+      <created>1562029900387</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1562029900387</updated>
+      <workItem from="1562029901765" duration="14971000" />
+      <workItem from="1562114114686" duration="16659000" />
+      <workItem from="1562199305581" duration="183302000" />
+      <workItem from="1562718242739" duration="16797000" />
+      <workItem from="1562735609979" duration="582000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="232311000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2636778" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.328125" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32843137" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49848023" visible="true" weight="0.28125" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50151974" side_tool="true" weight="0.28125" />
+      <window_info anchor="bottom" id="Messages" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/teste/database/migrations/2019_07_02_013127_create_products_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/dashboard/products/form.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-248">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Requests/StoreUpdateProductFormRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/routes/zeus.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Middleware/CheckTokenApi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="42" column="60" lean-forward="true" selection-start-line="42" selection-start-column="60" selection-end-line="42" selection-end-column="60" />
+          <folding>
+            <element signature="e#39#59#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/components/paginate.blade.php" />
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="56" column="7" lean-forward="true" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Providers/AppServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="27" column="61" lean-forward="true" selection-start-line="27" selection-start-column="61" selection-end-line="27" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+          <folding>
+            <element signature="e#7#389#0#PHP" expanded="true" />
+            <element signature="e#391#427#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="23" column="33" lean-forward="true" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
+          <folding>
+            <element signature="e#50#86#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/components/session.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="51" lean-forward="true" selection-start-line="4" selection-start-column="51" selection-end-line="4" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Exceptions/Handler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="34" column="24" lean-forward="true" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Middleware/DBTransaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="94" column="1" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/ClientController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1547">
+          <caret line="91" column="36" lean-forward="true" selection-start-line="91" selection-start-column="36" selection-end-line="91" selection-end-column="36" />
+          <folding>
+            <element signature="e#45#96#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/dashboard/clients/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="33" lean-forward="true" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/dashboard/clients/form.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="35" lean-forward="true" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/dashboard/products/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="170" column="26" lean-forward="true" selection-start-line="170" selection-start-column="26" selection-end-line="170" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/dashboard/clients/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="69" column="41" lean-forward="true" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/dashboard/products/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="51" lean-forward="true" selection-start-line="15" selection-start-column="51" selection-end-line="15" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="128" column="13" lean-forward="true" selection-start-line="128" selection-start-column="13" selection-end-line="128" selection-end-column="13" />
+          <folding>
+            <element signature="e#50#102#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1190">
+          <caret line="89" column="32" lean-forward="true" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="187">
+            <caret line="26" column="57" lean-forward="true" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/dashboard/purchases/form.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="141" column="39" lean-forward="true" selection-start-line="141" selection-start-column="39" selection-end-line="141" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/database/migrations/2019_07_02_013735_create_orders_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/database/migrations/2019_07_02_013648_create_purchases_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="34" column="33" lean-forward="true" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Models/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+          <folding>
+            <element signature="e#30#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Models/Purchase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#30#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Providers/PurchaseServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="19" lean-forward="true" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <folding>
+            <element signature="e#33#56#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="179" column="52" lean-forward="true" selection-start-line="179" selection-start-column="52" selection-end-line="179" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/dashboard/purchases/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="24" lean-forward="true" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/dashboard/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="40" lean-forward="true" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Observers/ClientObserver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Observers/ProductObserver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="41" column="45" lean-forward="true" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Observers/PurchaseObserver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="39" column="49" lean-forward="true" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/BulkActionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+          <folding>
+            <element signature="e#45#81#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/layouts/partials/nav.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="82" lean-forward="true" selection-start-line="15" selection-start-column="82" selection-end-line="15" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/resources/views/dashboard/purchases/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="42" column="28" lean-forward="true" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/PurchaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="279" column="43" lean-forward="true" selection-start-line="279" selection-start-column="43" selection-end-line="279" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Controllers/Dashboard/ClientController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="194" column="44" lean-forward="true" selection-start-line="194" selection-start-column="44" selection-end-line="194" selection-end-column="44" />
+          <folding>
+            <element signature="e#50#101#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/app/Http/Controllers/Zeus/PurchaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="180" column="5" lean-forward="true" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
+          <folding>
+            <element signature="e#45#98#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/tests/Feature/Zeus/ClientTest.php" />
+    <entry file="file://$PROJECT_DIR$/teste/tests/Feature/Zeus/ProductTest.php" />
+    <entry file="file://$PROJECT_DIR$/teste/tests/Feature/Zeus/PurchaseTest.php" />
+    <entry file="file://$PROJECT_DIR$/teste/tests/Feature/Zeus/BulkActionTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding>
+            <element signature="e#38#60#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/tests/Feature/Auth/AuthTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="211" column="5" lean-forward="true" selection-start-line="211" selection-start-column="5" selection-end-line="211" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/tests/Feature/Dashboard/HomeTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="16" column="53" lean-forward="true" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
+          <folding>
+            <element signature="e#43#63#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/tests/Feature/Dashboard/ProductTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/tests/Feature/Dashboard/PurchaseTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teste/tests/Feature/Dashboard/ClientTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+          <folding>
+            <element signature="e#43#65#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

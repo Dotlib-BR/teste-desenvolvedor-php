@@ -4,19 +4,13 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row mt-3">
-            <div class="col-12">
-                @session
-                @endsession
-            </div>
-        </div>
-        <form method="GET">
+        <form method="GET" class="mt-3">
             <div class="form-group row">
                 <div class="col-md-3 mt-1 mb-1">
                     <select name="per_page" onchange="this.form.submit()" class="selectpicker" data-width="100%" data-style="btn-success">
                         <option value="20" {{ request()->get('per_page') === null ? 'selected="selected"' : '' }} data-subtext="20 por padrão" data-icon="fa fa-sort">Itens por página</option>
 
-                        @for($i = 5; $i <= $pages->total; $i += 5)
+                        @for($i = 5; $i <= $users->total(); $i += 5)
                             <option value="{{ $i }}" {{ $i == request()->get('per_page') && request()->get('per_page') !== null ? 'selected="selected"' : '' }} data-subtext="Itens por página">{{ $i }}</option>
                         @endfor
 
@@ -42,7 +36,7 @@
         </form>
         <div class="row">
             <div class="col-md-12 text-center">
-                <h1>Clientes</h1>
+                <h1>Usuários</h1>
             </div>
         </div>
         <div class="row">
@@ -57,11 +51,11 @@
                     </thead>
                     <tbody>
 
-                    @forelse($clients as $client)
+                    @forelse($users as $user)
                         <tr>
-                            <th scope="row">{{ $client->id }}</th>
-                            <td>{{ $client->name }}</td>
-                            <td>{{ $client->email ?? '-' }}</td>
+                            <th scope="row">{{ $user->id }}</th>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
                         </tr>
                     @empty
                         <tr>
@@ -76,12 +70,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
-                <p class="font-weight-bold">Total: <span class="text-light">{{ $pages->total }}</span></p>
-            </div>
             <div class="col-md-10">
-                @paginate(['pages' => $pages, 'params' => $params])
-                @endpaginate
+                {{ $users->links() }}
+            </div>
+            <div class="col-md-2">
+                <p class="font-weight-bold">Total: <span class="text-light">{{ $users->total() }}</span></p>
             </div>
         </div>
     </div>

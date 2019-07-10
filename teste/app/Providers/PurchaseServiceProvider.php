@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Models\Product;
-use App\Observers\ProductObserver;
+use App\Models\Purchase;
+use App\Observers\PurchaseObserver;
 use Illuminate\Support\ServiceProvider;
 
-class ProductServiceProvider extends ServiceProvider
+class PurchaseServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -26,6 +26,6 @@ class ProductServiceProvider extends ServiceProvider
     public function boot()
     {
         //Observer
-        Product::observe(ProductObserver::class);
+        Purchase::observe(PurchaseObserver::class);
     }
 }

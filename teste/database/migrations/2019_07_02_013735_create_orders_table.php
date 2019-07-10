@@ -27,6 +27,7 @@ class CreateOrdersTable extends Migration
                 ->onDelete('cascade');
             $table->unsignedInteger('quantity');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

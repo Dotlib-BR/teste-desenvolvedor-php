@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\DB;
 
 class ProductObserver
 {
@@ -38,8 +37,9 @@ class ProductObserver
     public function deleted(Product $product)
     {
         try {
-            if (count($product->purchases) > 0) {
-                $product->purchases()->forceDelete();// Remove todas as compras definitivamente.
+            if ($product->purchases->count() > 0) {
+                $product->purchases()->delete();
+                $product->orders()->delete();
             }
 
         } catch (\Exception $e) {

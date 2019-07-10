@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\Client;
-use Illuminate\Support\Facades\DB;
 
 class ClientObserver
 {
@@ -39,19 +38,12 @@ class ClientObserver
     {
 
         try {
-            if (count($client->purchases) > 0) {
-
-                foreach ($client->purchases as $purchase) {//preciso percorrer os pedidos de compras para apagar
-
-                    if (count($purchase->orders) > 0) {
-
-                        foreach ($purchase->orders as $order) {
-                            $order->delete();
-                        }
-
-                        $purchase->delete();
-                    }
+            if ($client->purchases->count() > 0) {
+                foreach ($client->purchases as $purchase) {
+                    $purchase->orders()->delete();
                 }
+
+                $client->purchases()->delete();
             }
 
         } catch (\Exception $e) {

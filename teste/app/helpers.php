@@ -85,7 +85,7 @@ if (! function_exists('removeMask')) {// Remove a mascara do valor, serve para C
     }
 }
 
-if (! function_exists('convertBrlToDecimal')) { //Converte valor monetário para decimal 10,2
+if (! function_exists('convertBrlToDecimal')) { // Converte valor monetário para decimal 10,2
     function convertBrlToDecimal($value = null)
     {
         $value = sprintf('%.2f', (str_replace("." , "" ,str_replace("," , "." ,$value))) / 100); // Depois tira a vírgula

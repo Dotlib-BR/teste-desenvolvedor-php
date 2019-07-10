@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
-    use DatabaseTransactions;//para dar um "rollback" quando inserir algo no banco, de forma automática!
+    use DatabaseTransactions;
 
     protected $user;
 

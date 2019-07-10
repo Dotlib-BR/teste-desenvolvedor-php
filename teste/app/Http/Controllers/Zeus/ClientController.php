@@ -15,8 +15,8 @@ class ClientController extends Controller
         // Caso dê algo errado nos métodos que fazem alterações no banco eu uso o DB::beginTransaction()
         $this->middleware(
             'db.transaction',
-            ['except' =>
-                ['index', 'edit', 'show']
+            [
+                'except' => ['index', 'edit', 'show']
             ]
         );
     }
@@ -51,7 +51,7 @@ class ClientController extends Controller
      */
     public function store(StoreUpdateClientFormRequest $request)
     {
-        Client::create($request->validated());// Se não cair no if acima é por que deu tudo certo  e eu posso cadastrar.
+        Client::create($request->validated());
 
         return response()->json($request->validated(), Response::HTTP_CREATED);
     }

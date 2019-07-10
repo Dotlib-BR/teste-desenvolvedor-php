@@ -4,10 +4,13 @@ namespace Tests\Feature\Dashboard;
 
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
+    use DatabaseTransactions;// Para dar um "rollback" quando inserir algo no banco, de forma automática!
+
     protected $user;
     protected $product;
 
@@ -46,6 +49,25 @@ class ProductTest extends TestCase
     }
 
     /**
+     * Teste básico que simula o ato cadastro de um novo produto pelo formulário de cadastro/edição de produtos.
+     *
+     * @return void
+     */
+    public function testStore()
+    {
+        $data = [
+            'name' => 'Test Product',
+            'barcode' => '1D64A6D798D71A23',
+            'price' => '100.00'
+        ];
+
+        $this->actingAs($this->user)
+            ->post(route('dashboard.products.store'), $data);
+
+        $this->assertAuthenticated();
+    }
+
+    /**
      * Teste básico que simula quando o usuário visita o formulário de cadastro/edição de um determinado produto.
      *
      * @return void
@@ -54,6 +76,25 @@ class ProductTest extends TestCase
     {
         $this->actingAs($this->user)
             ->get(route('dashboard.products.edit', $this->product->id));
+
+        $this->assertAuthenticated();
+    }
+
+    /**
+     * Teste básico que simula o ato atualizar de um determinado produto pelo formulário de cadastro/edição de produtos.
+     *
+     * @return void
+     */
+    public function testUpdate()
+    {
+        $data = [
+            'name' => 'Test Product Update',
+            'barcode' => '1D64A6D798D71A23',
+            'price' => '100.00'
+        ];
+
+        $this->actingAs($this->user)
+            ->put(route('dashboard.products.update', $this->product->id), $data);
 
         $this->assertAuthenticated();
     }

@@ -19,8 +19,8 @@ class PurchaseController extends Controller
         // Caso dê algo errado nos métodos que fazem alterações no banco eu uso o DB::beginTransaction()
         $this->middleware(
             'db.transaction',
-            ['except' =>
-                ['index', 'edit', 'show']
+            [
+                'except' => ['index', 'edit', 'show']
             ]
         );
     }
@@ -39,11 +39,23 @@ class PurchaseController extends Controller
         $sort = $request->sort ?? 'asc';
         $perPage = $request->per_page ?? 20;
 
-        $orders = DB::table('purchases')// A forma mais simples e legivél para fazer foi usando o query builder.
-            ->join('orders', 'orders.purchase_id', '=','purchases.id')
-            ->join('products', 'orders.product_id', '=', 'products.id')
-            ->join('clients', 'purchases.client_id', '=','clients.id')
-            ->join('statuses', 'purchases.status_id', '=','statuses.id')
+        $purchases = DB::table('purchases')// A forma mais simples e legivél para fazer foi usando o query builder.
+            ->join('orders', function ($q) {
+                $q->on('orders.purchase_id', '=','purchases.id');
+                $q->whereNull('orders.deleted_at');
+            })
+            ->join('products', function ($q) {
+                $q->on('orders.product_id', '=', 'products.id');
+                $q->whereNull('products.deleted_at');
+            })
+            ->join('clients', function ($q) {
+                $q->on('purchases.client_id', '=','clients.id');
+                $q->whereNull('clients.deleted_at');
+            })
+            ->join('statuses', function ($q) {
+                $q->on('purchases.status_id', '=','statuses.id');
+                $q->whereNull('statuses.deleted_at');
+            })
             ->where('quantity', $search)
             ->orWhere('products.name', 'like', '%'.$search.'%')
             ->orWhere('barcode', 'like', '%'.$search.'%')// Consulta por código de barra do produto
@@ -59,7 +71,7 @@ class PurchaseController extends Controller
             ->orderBy($fieldSort, $sort)
             ->paginate($perPage);
 
-        return response()->json($orders, Response::HTTP_OK);//200
+        return response()->json($purchases, Response::HTTP_OK);//200
     }
 
     /**
@@ -77,18 +89,19 @@ class PurchaseController extends Controller
         $purchase->client_id = $request->validated()['client_id'];
         $purchase->status_id = $request->validated()['status_id'];
         $purchase->invoice_number = Str::random(9);
+        $purchase->total = 0;
 
         if ($request->has('discount_id')) {
             $purchase->discount_id = $request->validated()['discount_id'];
         }
 
-        $purchase->total = 0;
         $purchase->save();
 
         foreach ($request->validated()['quantity'] as $key => $value) {
             array_push(
                 $total,
-                Product::find($request->validated()['product_id'][$key])->price * $value
+                Product::find($request->validated()['product_id'][$key])
+                    ->price * $value
             );
 
             $order = new Order();
@@ -167,7 +180,6 @@ class PurchaseController extends Controller
     public function destroy($id)
     {
         Purchase::find($id)->delete();
-        // Não preciso de observer pois estou utilizando o onDelete('cascade') e deletando com forceDelete().
 
         return response()->json('', Response::HTTP_NO_CONTENT);
     }
