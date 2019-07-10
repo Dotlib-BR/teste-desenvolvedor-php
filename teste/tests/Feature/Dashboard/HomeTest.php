@@ -25,7 +25,7 @@ class IndexTest extends TestCase
     public function testHome()
     {
         $this->actingAs($this->user)
-            ->get(route('dashboard.index.home'));
+            ->get(route('dashboard.home.index'));
 
         $this->assertAuthenticated();
     }
