@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/teste/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/teste/vendor/guzzlehttp/promises" />
+      <excludeFolder url="file://$MODULE_DIR$/teste/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/teste/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/teste/vendor/ralouphie/getallheaders" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

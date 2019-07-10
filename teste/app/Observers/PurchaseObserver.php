@@ -5,7 +5,7 @@ namespace App\Observers;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
-class ProductObserver
+class PurchaseObserver
 {
     /**
      * Handle the product "created" event.

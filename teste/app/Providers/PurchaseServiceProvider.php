@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Observers\ProductObserver;
 use Illuminate\Support\ServiceProvider;
 
-class ProductServiceProvider extends ServiceProvider
+class PurchaseServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
