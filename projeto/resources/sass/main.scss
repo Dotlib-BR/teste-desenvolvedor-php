@@ -1,0 +1,37 @@
+.dashboard{
+    border:2px solid  #838383;
+    border-radius: 3px;
+    color:#ffffff;
+    height: auto;    
+    a{
+       color:#f5f5f5
+    }
+    p{
+        margin:0 !important;
+    }
+    .fas{
+        color:#bad464 !important;
+    }
+}
+#cliente{
+    background-color: #a8c93c;
+}
+#produto{
+    background-color: #b1cf50;
+}
+#pedido{
+    background-color: #bad464;
+}
+
+.card-header{
+    background-color: #bad464 !important;
+    color:#ffffff;    
+    font-size: larger;
+}
+.page-link, .page-link:hover{
+    color:#bad464;
+}
+.page-item.active .page-link {  
+    background-color: #bad464;
+    border-color: #bad464;
+}
