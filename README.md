@@ -1,6 +1,6 @@
 [![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
 
-# Teste para candidatos à vaga de Desenvolvedor Web.
+# Teste para candidatos à vaga de Desenvolvedor PHP (JR).
 
 Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
 
