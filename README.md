@@ -1,60 +1,46 @@
-[![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
+[![](https://dotlib.com/theme/img/logos/logo.png)](http://www.dotlib.com)
 
-# Teste para candidatos à vaga de Desenvolvedor PHP (JR).
+# Nossa empresa
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
+A Dot.Lib distribui conteúdo online científico e acadêmico a centenas de instituições espalhadas pela América Latina. Temos como parceiras algumas das principais editoras científicas nacionais e internacionais. Além de prover conteúdo, criamos soluções que atendem às necessidades de nossos clientes e editoras.
 
-## Instruções
+# Descrição da vaga
 
-O desafio consiste em implementar uma aplicação Web utilizando o framework PHP Laravel (versão 5+), e um banco de dados relacional SQLite, MySQL ou Postgres, a partir de uma modelagem de dados inicial desnormalizada, que deve ser normalizada para a implementação da solução.
+Buscamos profissionais que sejam apaixonados por desenvolvimento, inovação e novas tecnologias, para integrar nosso time em projetos baseados em NodeJS, Laravel, React.JS e React Native.
 
-Você vai criar uma aplicação de cadastro de pedidos de compra, a partir de uma modelagem inicial, com as seguintes funcionalidades:
+## Diferenciais
 
-- CRUD de clientes.
-- CRUD de produtos.
-- CRUD de pedidos de compra, com status (Em Aberto, Pago ou Cancelado).
-- Cada CRUD:
-  - deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
-  - deve possuir formulários para criação e atualização de seus itens.
-  - deve permitir a deleção de qualquer item de sua lista.
-- Barra de navegação entre os CRUDs.
-- Links para os outros CRUDs nas listagens (Ex: link para o detalhe do cliente da compra na lista de pedidos de compra)
+- Equipe unida, divertida e apaixonada por hambúrgueres.
+- Cafeteira sempre cheia :P
+- TECH DAY - Evento trimestral de palestras sobre tecnologia
+- Friday's Talk - Bate papo discontraído sobre tecnologia, apresentação de POCs de estudos, etc
+- Última sexta feira do mês tem happy hour!!!!
+- O gerente às vezes paga o almoço
+- Emendas em feriados nacionais
 
-## Modelo de dados
+## Requisitos
 
-A modelagem inicial para a implementação solução é a seguinte:
+### **Obrigatórios:**
 
-[![](/images/modelo.png)](http://www.dotlib.com)
+- Mínimo 1 ano de experiência em desenvolvimento de sites e sistemas em Laravel
+- Desenvolvimento de APIs RESTful
+- TDD
+- Conhecimentos em Docker
+- Controle de versões (GIT)
+- Conhecimentos em Linux
 
-Você deve alterar esta modelagem para que a mesma cumpra com as três primeiras formas normais.
+### **Diferenciais:**
 
-Além disso, a implementação deste modelo em um banco de dados relacional deve ser realizada levando em consideração os seguintes requisitos:
+- Conhecimentos em Node.JS
+- Consumo de APIs em GraphQL
+- Conhecimentos em serviços AWS
+- Experiência em Scrum como metodologia ágil
 
-- O banco de dados deve ser criado utilizando Migrations do framework Laravel, e também utilizar Seeds e Factorys para popular as informações no banco de dados.
-- Implementação das validações necessárias na camada que julgar melhor.
+## Contratação
 
-## Tecnologias a serem utilizadas
+Regime: CLT, 100% Home Office
 
-Devem ser utilizadas as seguintes tecnologias:
+## Como se candidatar
 
-- HTML
-- CSS
-- Javascript
-- Frameworks Laravel (PHP)
-
-## Entrega
-
-Para iniciar o teste, faça um fork deste repositório, crie uma branch com o seu nome completo e depois envie-nos o pull request. Se você apenas clonar o repositório não vai conseguir fazer push e depois vai ser mais complicado fazer o pull request.
-
-Envie também seu currículo atualizado para o email curriculo@dotlib.com.br.
-
-## Bônus
-
-- Implementar autenticação de usuário na aplicação.
-- Permitir que o usuário mude o número de itens por página.
-- Permitir deleção em massa de itens nos CRUDs.
-- Implementar aplicação de desconto em alguns pedidos de compra.
-- Implementar a camada de Front-End utilizando a biblioteca javascript Bootstrap e ser responsiva.
-- API Rest JSON para todos os CRUDS listados acima.
-
-### Boa sorte!
+Para se candidatar, basta acessar a url e realizar o teste para a vaga:
+[https://github.com/dotlib/teste-desenvolvedor-php-jr](teste.md)
