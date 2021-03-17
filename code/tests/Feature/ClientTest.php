@@ -49,4 +49,23 @@ class ClientTest extends TestCase
         $response->assertViewHas("client", $client);
         $response->assertSuccessful();
     }
+
+    public function test_update_client()
+    {
+        $client = Client::factory()->create();
+        
+        $newName = "Novo Nome";
+        $clientOldName = $client->name;
+
+        $client->name = $newName;
+        $response = $this->put("/client/{$client}", $client->toArray());
+
+        $response->assertViewIs("client.index");
+        $response->assertViewHas("clients");
+        $response->assertSee($client);
+        $response->assertSee("Cliente atualizado");
+        $response->assertSee($newName);
+        $response->assertDontSee($clientOldName);
+        $response->assertSuccessful();
+    }
 }
