@@ -43,7 +43,7 @@ class ClientTest extends TestCase
     public function test_edit_client()
     {
         $client = Client::factory()->create();
-        $response = $this->get("/client/edit/{$client}");
+        $response = $this->get("/client/{$client}/edit");
 
         $response->assertViewIs("client.edit");
         $response->assertViewHas("client", $client);
