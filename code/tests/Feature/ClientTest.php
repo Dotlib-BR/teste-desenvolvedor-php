@@ -18,4 +18,12 @@ class ClientTest extends TestCase
         $response->assertViewHas("clients");
         $response->assertStatus(200);
     }
+
+    public function test_create_client()
+    {
+        $response = $this->get('/client/create');
+
+        $response->assertViewIs("client.create");
+        $response->assertStatus(200);
+    }
 }
