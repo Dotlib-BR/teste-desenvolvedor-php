@@ -39,4 +39,14 @@ class ClientTest extends TestCase
         $response->assertSee("Cliente salvo");
         $response->assertSuccessful();
     }
+
+    public function test_edit_client()
+    {
+        $client = Client::factory()->create();
+        $response = $this->get("/client/edit/{$client}");
+
+        $response->assertViewIs("client.edit");
+        $response->assertViewHas("client", $client);
+        $response->assertSuccessful();
+    }
 }
