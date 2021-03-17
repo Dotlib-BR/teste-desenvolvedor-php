@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Client;
 
 class ClientTest extends TestCase
 {
@@ -16,7 +17,7 @@ class ClientTest extends TestCase
 
         $response->assertViewIs("client.index");
         $response->assertViewHas("clients");
-        $response->assertStatus(200);
+        $response->assertSuccessful();
     }
 
     public function test_create_client()
@@ -24,6 +25,18 @@ class ClientTest extends TestCase
         $response = $this->get('/client/create');
 
         $response->assertViewIs("client.create");
-        $response->assertStatus(200);
+        $response->assertSuccessful();
+    }
+
+    public function test_store_client()
+    {
+        $client = Client::factory()->make();
+        $response = $this->post('/client', $client->toArray());
+
+        $response->assertViewIs("client.index");
+        $response->assertViewHas("clients");
+        $response->assertSee($client);
+        $response->assertSee("Cliente salvo");
+        $response->assertSuccessful();
     }
 }
