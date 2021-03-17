@@ -80,4 +80,14 @@ class ClientTest extends TestCase
         $response->assertSee("Cliente deletado");
         $response->assertSuccessful();
     }
+
+    public function test_show_client()
+    {
+        $client = Client::factory()->create();
+        $response = $this->get("/client/{$client}/show");
+
+        $response->assertViewIs("client.show");
+        $response->assertViewHas("client", $client);
+        $response->assertSuccessful();
+    }
 }
