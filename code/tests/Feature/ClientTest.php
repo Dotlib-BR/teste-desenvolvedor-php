@@ -33,11 +33,10 @@ class ClientTest extends TestCase
         $client = Client::factory()->make();
         $response = $this->post('/client', $client->toArray());
 
-        $response->assertViewIs("client.index");
-        $response->assertViewHas("clients");
-        $response->assertSee($client);
-        $response->assertSee("Cliente salvo");
-        $response->assertSuccessful();
+        $response->assertRedirect(route("client.index"));
+        $response->assertSessionHas("success", "Cliente cadastrado!");
+        $response->assertSessionHasNoErrors();
+        $response->assertStatus(302);
     }
 
     public function test_edit_client()
