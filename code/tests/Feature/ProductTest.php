@@ -37,6 +37,7 @@ class ProductTest extends TestCase
         $response->assertSessionHas("success", "Produto cadastrado!");
         $response->assertSessionHasNoErrors();
         $response->assertStatus(302);
+        $this->assertDatabaseHas('products', $product->toArray());
     }
 
     public function test_edit_product()
@@ -66,6 +67,8 @@ class ProductTest extends TestCase
         $response->assertSessionHas("success", "Produto atualizado!");
         $response->assertSessionHasNoErrors();
         $response->assertStatus(302);
+        $this->assertDatabaseMissing('products', $product->toArray());
+        $this->assertDatabaseHas('products', $newData);
     }
 
     public function test_delete_product()
@@ -77,6 +80,7 @@ class ProductTest extends TestCase
         $response->assertSessionHas("success", "Produto deletado!");
         $response->assertSessionHasNoErrors();
         $response->assertStatus(302);
+        $this->assertDeleted($product);
     }
 
     public function test_show_product()

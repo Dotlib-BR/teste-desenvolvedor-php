@@ -37,6 +37,7 @@ class ClientTest extends TestCase
         $response->assertSessionHas("success", "Cliente cadastrado!");
         $response->assertSessionHasNoErrors();
         $response->assertStatus(302);
+        $this->assertDatabaseHas('clients', $client->toArray());
     }
 
     public function test_edit_client()
@@ -65,6 +66,8 @@ class ClientTest extends TestCase
         $response->assertSessionHas("success", "Cliente atualizado!");
         $response->assertSessionHasNoErrors();
         $response->assertStatus(302);
+        $this->assertDatabaseMissing('clients', $client->toArray());
+        $this->assertDatabaseHas('clients', $newData);
     }
 
     public function test_delete_client()
@@ -76,6 +79,7 @@ class ClientTest extends TestCase
         $response->assertSessionHas("success", "Cliente deletado!");
         $response->assertSessionHasNoErrors();
         $response->assertStatus(302);
+        $this->assertDeleted($client);
     }
 
     public function test_show_client()
