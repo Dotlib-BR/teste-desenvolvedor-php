@@ -13,7 +13,7 @@ class ClientTest extends TestCase
 
     public function test_index_client()
     {
-        $response = $this->get('/client');
+        $response = $this->get(route("client.index"));
 
         $response->assertViewIs("client.index");
         $response->assertViewHas("clients");
@@ -22,7 +22,7 @@ class ClientTest extends TestCase
 
     public function test_create_client()
     {
-        $response = $this->get('/client/create');
+        $response = $this->get(route("client.create"));
 
         $response->assertViewIs("client.create");
         $response->assertSuccessful();
@@ -31,7 +31,7 @@ class ClientTest extends TestCase
     public function test_store_client()
     {
         $client = Client::factory()->make();
-        $response = $this->post('/client', $client->toArray());
+        $response = $this->post(route("client.store"), $client->toArray());
 
         $response->assertRedirect(route("client.index"));
         $response->assertSessionHas("success", "Cliente cadastrado!");
