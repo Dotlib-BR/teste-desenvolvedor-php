@@ -55,8 +55,9 @@ class ProductTest extends TestCase
 
         $newData = [
             "name" => "new name",
-            "email" => "new@email.com",
-            "cpf" => "11111111111"
+            "quantity" => 150,
+            "price" => 14.99,
+            "bar_code" => "1111111111111111111"
         ];
 
         $response = $this->put(route("product.update", $product), $newData);
