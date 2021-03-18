@@ -89,7 +89,9 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = Order::find($id);
+
+        return view('orders.edit', compact('order'));
     }
 
     /**
@@ -101,7 +103,14 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $orderUpdate = Order::find($id);
+        if($orderUpdate){
+            $orderUpdate->update(['status' => $request->order_status]);
+        }else{
+            abort(404);
+        }
+
+        return back()->with('success_message', 'Status atualizado.');
     }
 
     /**
@@ -141,7 +150,7 @@ class OrderController extends Controller
             'CPF' => auth()->user()->CPF,
             'discount' => session()->get('cupom')['discount'] ?? 0,
             'cost' => $sub,
-            'status' => 'Aguardando processamento',
+            'status' => 'Em aberto',
             'user_id' => auth()->user() ? auth()->user()->id : null,
         ]);
 

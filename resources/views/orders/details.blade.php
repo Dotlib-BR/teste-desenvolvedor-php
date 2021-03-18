@@ -120,6 +120,7 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <!-- The string was limited cause the seed generated a long text -->
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         {{ Str::limit($filter->product, 30, '') }}
                                     </td>

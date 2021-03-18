@@ -10,7 +10,7 @@
                         <form action="{{ route('order.search') }}" method="GET">
                             <input type="search" name="query"
                                 class="w-full pl-10 pr-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-                                placeholder="Buscar..." autocomplete="off"/>
+                                placeholder="Buscar..." autocomplete="off" />
 
                             <input type="number" name="perPage"
                                 class="w-full mt-1 pl-10 pr-4 py-2 inline-flex rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium"
@@ -42,11 +42,11 @@
                         <div class="relative">
                             <input type="date"
                                 class="rounded-lg inline-flex items-center bg-white hover:text-blue-500 focus:outline-none 
-                                                                                        focus:shadow-outline text-gray-500 font-semibold py-2 px-2 md:px-4"
+                                                                                            focus:shadow-outline text-gray-500 font-semibold py-2 px-2 md:px-4"
                                 name="start_date" />
                             <input type="date"
                                 class="rounded-lg inline-flex items-center bg-white hover:text-blue-500 focus:outline-none 
-                                                                                        focus:shadow-outline text-gray-500 font-semibold py-2 px-2 md:px-4"
+                                                                                            focus:shadow-outline text-gray-500 font-semibold py-2 px-2 md:px-4"
                                 name="end_date" />
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     </form>
                 </div>
             </div>
-            
+
             <a href="#" id="deleteAllSelected"
                 class="bg-red-800 inline-flex mt-12 text-white rounded-full p-2 hover:bg-red-700">Deletar selecionados</a>
             @if (count($errors) > 0)
@@ -93,15 +93,15 @@
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Posição
-                                </th>
-                                <th
-                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     E-mail
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     CPF
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    Status
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -129,13 +129,6 @@
                                             </div>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                            @if ($filter->role_id == 1)
-                                                <p class="text-gray-900 whitespace-no-wrap">Admin</p>
-                                            @else
-                                                <p class="text-gray-900 whitespace-no-wrap">Usuário</p>
-                                            @endif
-                                        </td>
-                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <p class="text-gray-900 whitespace-no-wrap">
                                                 {{ $filter->email }}
                                             </p>
@@ -146,9 +139,12 @@
                                             </p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <a href="{{ route('orders.edit', $filter->id) }}"
+                                                class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green-400 hover:bg-green-500">Alterar
+                                                status</a>
                                             <a href="javascript:if(confirm('Deseja realmente excluir?')){
-                                                            window.location.href ='{{ route('order.remove', $filter->id) }}'
-                                                        }"
+                                                                window.location.href ='{{ route('order.remove', $filter->id) }}'
+                                                            }"
                                                 class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-red-400 hover:bg-red-500">Excluir</a>
                                         </td>
                                     </tr>
@@ -172,13 +168,6 @@
                                             </div>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                            @if ($pedido->role_id == 1)
-                                                <p class="text-gray-900 whitespace-no-wrap">Admin</p>
-                                            @else
-                                                <p class="text-gray-900 whitespace-no-wrap">Usuário</p>
-                                            @endif
-                                        </td>
-                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <p class="text-gray-900 whitespace-no-wrap">
                                                 {{ $pedido->email }}
                                             </p>
@@ -189,11 +178,18 @@
                                             </p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                            <a href="javascript:if(confirm('Deseja realmente excluir?')){
-                                                            window.location.href ='{{ route('order.remove', $pedido->id) }}'
-                                                        }"
-                                                class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-red-400 hover:bg-red-500">Excluir</a>
+                                            <p class="text-gray-900 whitespace-no-wrap">
+                                                {{ $pedido->status }}
+                                            </p>
                                         </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <a href="{{ route('orders.edit', $pedido->id) }}"
+                                                class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green-400 hover:bg-green-500">Alterar
+                                                status</a>
+                                            <a href="javascript:if(confirm('Deseja realmente excluir?')){
+                                                                window.location.href ='{{ route('order.remove', $pedido->id) }}'
+                                                            }"
+                                                class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-red-400 hover:bg-red-500">Excluir</a>
                                         </td>
                                     </tr>
                                 @endforeach
