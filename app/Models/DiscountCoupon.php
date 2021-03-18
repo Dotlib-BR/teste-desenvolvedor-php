@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class DiscountCoupon extends Model
 {
     protected $fillable = [
-        "codigo",
-        "tipo",
-        "valor",
-        "porcento"
+        'code',
+        'type',
+        'value',
+        'percent',
     ];
     use HasFactory;
     

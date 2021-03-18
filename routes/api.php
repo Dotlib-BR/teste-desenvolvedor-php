@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\api\ApiOrderController;
+use App\Http\Controllers\api\ApiProductController;
+use App\Http\Controllers\api\ApiUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::resource('product/list', ApiProductController::class);
+Route::resource('user/receive', ApiUserController::class);
+Route::resource('orders/bought', ApiOrderController::class);
