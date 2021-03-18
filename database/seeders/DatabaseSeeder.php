@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'role_id' => 2,
                 'CPF' => $faker->randomNumber($nbDigits = NULL, $strict = false) . "\n",
+                'created_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = null),
             ]);
         }
 
