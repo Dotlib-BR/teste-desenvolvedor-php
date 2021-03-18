@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Role;
 
 class HomeController extends Controller
 {
@@ -114,8 +115,56 @@ class HomeController extends Controller
         }
     }
 
+    /**
+     *  Delete specified ID of user. 
+     * 
+     *  @param $id;
+     * 
+     *  @return \Illuminate\Http\Response
+     */
+    public function editPermissions($id)
+    {
+        if(Auth::user()->role_id != 1){
+            abort(404);
+        }
+
+        $roles = Role::all();
+        $user = User::find($id);
+
+        return view('users.edit', compact('user', 'roles'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePermissions(Request $request, $id)
+    {
+        if(Auth::user()->role_id != 1){
+            abort(404);
+        }
+
+        $orderUpdate = User::find($id);
+        if($orderUpdate){
+            if($orderUpdate->role_id == $request->role_id){
+                return back()->withErrors('O usuário já está nessa posição.');
+            }else{
+                $orderUpdate->update(['role_id' => $request->role_id]);
+            }
+        }else{
+            abort(404);
+        }
+
+        return back()->with('success_message', 'Permissões atualizadas.');
+    }
+
     /** 
      *  Method to create a register in db.
+     * 
+     *  @return \Illuminate\Http\Response
      */
     public function create()
     {

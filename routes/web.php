@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/create', [App\Http\Controllers\HomeController::class, 'create'])->name('create.user');
     Route::post('/user/create', [App\Http\Controllers\HomeController::class, 'store'])->name('store.user');
     Route::get('/user/edit/{id}', [App\Http\Controllers\HomeController::class, 'edit'])->name('edit.user');
+    Route::get('/user/permission/{id}', [App\Http\Controllers\HomeController::class, 'editPermissions'])->name('edit.permission');
+    Route::put('/user/permission/update/{id}', [App\Http\Controllers\HomeController::class, 'updatePermissions'])->name('users.update');
     Route::put('/user/update/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('update.user');
     Route::delete('/discount/forget', [App\Http\Controllers\DiscountCouponController::class, 'forget'])->name('discount.forget');
     

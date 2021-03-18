@@ -149,6 +149,8 @@
                                             </p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <a href="{{ route('edit.permission', $filter->id) }}"
+                                                class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue-400 hover:bg-blue-500">Permissões</a>
                                             <a href="{{ route('edit.user', $filter->id) }}"
                                                 class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green-400 hover:bg-green-500">Editar</a>
                                             <a href="javascript:if(confirm('Deseja realmente excluir?')){
@@ -194,6 +196,8 @@
                                             </p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <a href="{{ route('edit.permission', $user->id) }}"
+                                                class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue-400 hover:bg-blue-500">Permissões</a>
                                             <a href="{{ route('edit.user', $user->id) }}"
                                                 class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green-400 hover:bg-green-500">Editar</a>
                                             <a href="javascript:if(confirm('Deseja realmente excluir?')){
