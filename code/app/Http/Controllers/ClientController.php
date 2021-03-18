@@ -77,7 +77,16 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        // 
+        $request->validate([
+            "name" => "string|required|max:100",
+            "email" => "email|required|max:100|unique:clients",
+            "cpf" => "string|required|max:11"
+        ]);
+
+        $client->fill($request->only("name", "email", "cpf"));
+        $client->save();
+
+        return redirect()->route("client.index")->with("success","Cliente atualizado!");
     }
 
     /**
