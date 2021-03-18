@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +19,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $faker = \Faker\Factory::create();
+
+        Role::create([
+            'position' => 'admin',
+        ]);
+
+        Role::create([
+            'position' => 'user',
+        ]);
+
         for ($i=0; $i < 50; $i++) {
             User::create([
                 'name' => $faker->userName,

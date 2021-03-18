@@ -38,13 +38,22 @@
                                 <div class="mx-auto max-w-lg">
                                     <div class="py-2">
                                         <span class="px-1 text-sm text-gray-600">Usuário</span>
-                                        <input placeholder="Insira um nome de usuário" type="text" name="name" value="{{ old('name') }}"
+                                        <input placeholder="Insira um nome de usuário" type="text" name="name"
+                                            value="{{ old('name') }}"
                                             class="text-md block px-3 py-2  rounded-lg w-full 
                               bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none">
                                     </div>
                                     <div class="py-2">
                                         <span class="px-1 text-sm text-gray-600">E-mail</span>
-                                        <input placeholder="Insira um e-mail" type="email" name="email" value="{{ old('email') }}"
+                                        <input placeholder="Insira um e-mail" type="email" name="email"
+                                            value="{{ old('email') }}"
+                                            class="text-md block px-3 py-2  rounded-lg w-full 
+                              bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none">
+                                    </div>
+                                    <div class="py-2">
+                                        <span class="px-1 text-sm text-gray-600">CPF</span>
+                                        <input placeholder="Insira um CPF" type="text" maxlength="11" name="CPF"
+                                            value="{{ old('email') }}"
                                             class="text-md block px-3 py-2  rounded-lg w-full 
                               bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none">
                                     </div>

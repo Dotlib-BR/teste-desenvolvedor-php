@@ -18,6 +18,11 @@ class CreateOrdersTable extends Migration
             $table->string('name', 60);
             $table->string('email', 100);
             $table->string('CPF', 11);
+            $table->string('product');
+            $table->integer('qty');
+            $table->decimal('cost', 10,2);
+            $table->decimal('discount', 10,2)->nullable();
+            $table->string('status')->default('Em aberto.');
             $table->timestamps();
         });
     }
