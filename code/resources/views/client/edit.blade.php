@@ -6,7 +6,7 @@
     <title>Clientes</title>
 </head>
 <body>
-    <form method="POST" action="{{ route('client.edit', $client) }}">
+    <form method="POST" action="{{ route('client.update', $client) }}">
         <input type="text" value="{{ $client->name }}" name="name">
         <input type="email" value="{{ $client->email }}" name="email">
         <input type="text" value="{{ $client->cpf }}" name="cpf">

@@ -6,7 +6,7 @@
     <title>Produtos</title>
 </head>
 <body>
-    <form method="POST" action="{{ route('product.edit', $product) }}">
+    <form method="POST" action="{{ route('product.update', $product) }}">
         <input type="text" value="{{ $product->name }}" name="name">
         <<input type="number" value="{{ $product->quantity }}" name="quantity">
         <input type="number" value="{{ $product->price }}" name="price">
