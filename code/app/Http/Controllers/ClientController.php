@@ -65,7 +65,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view("client.edit", ["client" => $client]);
     }
 
     /**
@@ -77,7 +77,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        // 
     }
 
     /**
