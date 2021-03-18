@@ -30,7 +30,19 @@ class OrderTest extends TestCase
     public function test_store_order()
     {
         $order = Order::factory()->make();
-        $response = $this->post(route("order.store"), $order->toArray());
+        $products = Order::factory(2)->make();
+
+        $productsIds = $products->map(fn($product) => $product->id);
+        $productsQuantity = $products->map(fn($product) => $product->quantity * 0.2);
+
+        $data = [
+            ...$order->toArray(),
+            "products" => $productsIds,
+            "quantities" => $productsQuantity
+        ];
+
+
+        $response = $this->post(route("order.store"), $data);
 
         $response->assertRedirect(route("order.index"));
         $response->assertSessionHas("success", "Pedido cadastrado!");
