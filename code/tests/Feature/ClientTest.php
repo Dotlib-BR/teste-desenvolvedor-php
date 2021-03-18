@@ -70,13 +70,12 @@ class ClientTest extends TestCase
     public function test_delete_client()
     {
         $client = Client::factory()->create();
-        $response = $this->delete("/client/{$client}");
+        $response = $this->delete(route("client.destroy", $client));
 
-        $response->assertViewIs("client.index");
-        $response->assertViewHas("clients");
-        $response->assertDontSee($client);
-        $response->assertSee("Cliente deletado");
-        $response->assertSuccessful();
+        $response->assertRedirect(route("client.index"));
+        $response->assertSessionHas("success", "Cliente deletado!");
+        $response->assertSessionHasNoErrors();
+        $response->assertStatus(302);
     }
 
     public function test_show_client()
