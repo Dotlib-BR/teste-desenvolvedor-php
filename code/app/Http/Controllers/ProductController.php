@@ -35,7 +35,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "name" => "string|required|max:100",
+            "bar_code" => "string|required|max:20",
+            "price" => "numeric|required",
+            "quantity" => "integer|required"
+        ]);
+
+        Product::create($request->only("name", "bar_code", "price", "quantity"));
+
+        return redirect()->route("product.index")->with("success","Produto cadastrado!");
     }
 
     /**
