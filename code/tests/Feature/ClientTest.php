@@ -53,19 +53,18 @@ class ClientTest extends TestCase
     {
         $client = Client::factory()->create();
 
-        $newName = "Novo Nome";
-        $clientOldName = $client->name;
+        $newData = [
+            "name" => "new name",
+            "email" => "new@email.com",
+            "cpf" => "11111111111"
+        ];
 
-        $client->name = $newName;
-        $response = $this->put("/client/{$client}", $client->toArray());
+        $response = $this->put(route("client.update", $client), $newData);
 
-        $response->assertViewIs("client.index");
-        $response->assertViewHas("clients");
-        $response->assertSee($client);
-        $response->assertSee("Cliente atualizado");
-        $response->assertSee($newName);
-        $response->assertDontSee($clientOldName);
-        $response->assertSuccessful();
+        $response->assertRedirect(route("client.index"));
+        $response->assertSessionHas("success", "Cliente atualizado!");
+        $response->assertSessionHasNoErrors();
+        $response->assertStatus(302);
     }
 
     public function test_delete_client()
