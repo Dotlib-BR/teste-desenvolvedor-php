@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Client;
+use App\Models\User;
 
 class ClientTest extends TestCase
 {
@@ -13,7 +14,9 @@ class ClientTest extends TestCase
 
     public function test_index_client()
     {
-        $response = $this->get(route("client.index"));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("client.index"));
 
         $response->assertViewIs("client.index");
         $response->assertViewHas("clients");
@@ -22,7 +25,9 @@ class ClientTest extends TestCase
 
     public function test_create_client()
     {
-        $response = $this->get(route("client.create"));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("client.create"));
 
         $response->assertViewIs("client.create");
         $response->assertSuccessful();
@@ -31,7 +36,9 @@ class ClientTest extends TestCase
     public function test_store_client()
     {
         $client = Client::factory()->make();
-        $response = $this->post(route("client.store"), $client->toArray());
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(route("client.store"), $client->toArray());
 
         $response->assertRedirect(route("client.index"));
         $response->assertSessionHas("success", "Cliente cadastrado!");
@@ -43,7 +50,9 @@ class ClientTest extends TestCase
     public function test_edit_client()
     {
         $client = Client::factory()->create();
-        $response = $this->get(route("client.edit", $client));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("client.edit", $client));
 
         $response->assertViewIs("client.edit");
         $response->assertViewHas("client", $client);
@@ -60,7 +69,9 @@ class ClientTest extends TestCase
             "cpf" => "11111111111"
         ];
 
-        $response = $this->put(route("client.update", $client), $newData);
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->put(route("client.update", $client), $newData);
 
         $response->assertRedirect(route("client.index"));
         $response->assertSessionHas("success", "Cliente atualizado!");
@@ -73,7 +84,9 @@ class ClientTest extends TestCase
     public function test_delete_client()
     {
         $client = Client::factory()->create();
-        $response = $this->delete(route("client.destroy", $client));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->delete(route("client.destroy", $client));
 
         $response->assertRedirect(route("client.index"));
         $response->assertSessionHas("success", "Cliente deletado!");
@@ -85,7 +98,9 @@ class ClientTest extends TestCase
     public function test_show_client()
     {
         $client = Client::factory()->create();
-        $response = $this->get(route("client.show", $client));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("client.show", $client));
 
         $response->assertViewIs("client.show");
         $response->assertViewHas("client", $client);

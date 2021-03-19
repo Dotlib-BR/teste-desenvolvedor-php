@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Product;
+use App\Models\User;
 
 class ProductTest extends TestCase
 {
@@ -13,7 +14,9 @@ class ProductTest extends TestCase
 
     public function test_index_product()
     {
-        $response = $this->get(route("product.index"));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("product.index"));
 
         $response->assertViewIs("product.index");
         $response->assertViewHas("products");
@@ -22,7 +25,9 @@ class ProductTest extends TestCase
 
     public function test_create_product()
     {
-        $response = $this->get(route("product.create"));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("product.create"));
 
         $response->assertViewIs("product.create");
         $response->assertSuccessful();
@@ -31,7 +36,9 @@ class ProductTest extends TestCase
     public function test_store_product()
     {
         $product = Product::factory()->make();
-        $response = $this->post(route("product.store"), $product->toArray());
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(route("product.store"), $product->toArray());
 
         $response->assertRedirect(route("product.index"));
         $response->assertSessionHas("success", "Produto cadastrado!");
@@ -43,7 +50,9 @@ class ProductTest extends TestCase
     public function test_edit_product()
     {
         $product = Product::factory()->create();
-        $response = $this->get(route("product.edit", $product));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("product.edit", $product));
 
         $response->assertViewIs("product.edit");
         $response->assertViewHas("product", $product);
@@ -61,7 +70,9 @@ class ProductTest extends TestCase
             "bar_code" => "1111111111111111111"
         ];
 
-        $response = $this->put(route("product.update", $product), $newData);
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->put(route("product.update", $product), $newData);
 
         $response->assertRedirect(route("product.index"));
         $response->assertSessionHas("success", "Produto atualizado!");
@@ -74,7 +85,9 @@ class ProductTest extends TestCase
     public function test_delete_product()
     {
         $product = Product::factory()->create();
-        $response = $this->delete(route("product.destroy", $product));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->delete(route("product.destroy", $product));
 
         $response->assertRedirect(route("product.index"));
         $response->assertSessionHas("success", "Produto deletado!");
@@ -86,7 +99,9 @@ class ProductTest extends TestCase
     public function test_show_product()
     {
         $product = Product::factory()->create();
-        $response = $this->get(route("product.show", $product));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("product.show", $product));
 
         $response->assertViewIs("product.show");
         $response->assertViewHas("product", $product);

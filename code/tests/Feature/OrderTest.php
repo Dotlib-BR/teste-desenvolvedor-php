@@ -8,6 +8,7 @@ use Tests\TestCase;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Client;
+use App\Models\User;
 
 class OrderTest extends TestCase
 {
@@ -15,7 +16,9 @@ class OrderTest extends TestCase
 
     public function test_index_order()
     {
-        $response = $this->get(route("order.index"));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("order.index"));
 
         $response->assertViewIs("order.index");
         $response->assertViewHas("orders");
@@ -24,7 +27,9 @@ class OrderTest extends TestCase
 
     public function test_create_order()
     {
-        $response = $this->get(route("order.create"));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("order.create"));
 
         $response->assertViewIs("order.create");
         $response->assertViewHas("products", Product::all());
@@ -46,7 +51,9 @@ class OrderTest extends TestCase
         ];
         $data = array_merge($order->toArray(), $productData);
 
-        $response = $this->post(route("order.store"), $data);
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(route("order.store"), $data);
 
         $response->assertRedirect(route("order.index"));
         $response->assertSessionHas("success", "Pedido cadastrado!");
@@ -58,7 +65,9 @@ class OrderTest extends TestCase
     public function test_edit_order()
     {
         $order = Order::factory()->create();
-        $response = $this->get(route("order.edit", $order));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("order.edit", $order));
 
         $response->assertViewIs("order.edit");
         $response->assertViewHas("order", $order);
@@ -81,7 +90,9 @@ class OrderTest extends TestCase
         $orderData = ["status" => $order->status == "opened" ? "canceled" : "opened", "date" => $order->date];
         $data = array_merge($orderData, $productData);
 
-        $response = $this->put(route("order.update", $order), $data);
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->put(route("order.update", $order), $data);
 
         $response->assertRedirect(route("order.index"));
         $response->assertSessionHas("success", "Pedido atualizado!");
@@ -93,7 +104,9 @@ class OrderTest extends TestCase
     public function test_delete_order()
     {
         $order = Order::factory()->create();
-        $response = $this->delete(route("order.destroy", $order));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->delete(route("order.destroy", $order));
 
         $response->assertRedirect(route("order.index"));
         $response->assertSessionHas("success", "Pedido deletado!");
@@ -105,7 +118,9 @@ class OrderTest extends TestCase
     public function test_show_order()
     {
         $order = Order::factory()->create();
-        $response = $this->get(route("order.show", $order));
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("order.show", $order));
 
         $response->assertViewIs("order.show");
         $response->assertViewHas("order", $order);
