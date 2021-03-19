@@ -26,6 +26,7 @@ class OrderTest extends TestCase
         $response = $this->get(route("order.create"));
 
         $response->assertViewIs("order.create");
+        $response->assertViewHas("products", Product::all());
         $response->assertSuccessful();
     }
     public function test_store_order()
@@ -58,6 +59,7 @@ class OrderTest extends TestCase
 
         $response->assertViewIs("order.edit");
         $response->assertViewHas("order", $order);
+        $response->assertViewHas("products", Product::all());
         $response->assertSuccessful();
     }
 
