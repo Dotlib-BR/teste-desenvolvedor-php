@@ -59,7 +59,7 @@ class OrderTest extends TestCase
 
         $response->assertViewIs("order.edit");
         $response->assertViewHas("order", $order);
-        $response->assertViewHas("products", Product::all());
+        $response->assertViewHas("allProducts", Product::all());
         $response->assertSuccessful();
     }
 
