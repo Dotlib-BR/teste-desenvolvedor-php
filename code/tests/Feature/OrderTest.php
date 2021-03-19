@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Order;
+use App\Models\Product;
 
 class OrderTest extends TestCase
 {
@@ -30,17 +31,16 @@ class OrderTest extends TestCase
     public function test_store_order()
     {
         $order = Order::factory()->make();
-        $products = Order::factory(2)->make();
+        $products = Product::factory(2)->create();
 
-        $productsIds = $products->map(fn($product) => $product->id);
-        $productsQuantity = $products->map(fn($product) => $product->quantity * 0.2);
+        $productsIds = $products->map(fn($product) => $product->id)->toArray();
+        $productsQuantity = $products->map(fn($product) => $product->quantity * 0.2)->toArray();
 
-        $data = [
-            ...$order->toArray(),
+        $productData = [
             "products" => $productsIds,
             "quantities" => $productsQuantity
         ];
-
+        $data = array_merge($order->toArray(), $productData);
 
         $response = $this->post(route("order.store"), $data);
 
