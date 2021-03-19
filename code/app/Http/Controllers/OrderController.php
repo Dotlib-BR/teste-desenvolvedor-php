@@ -72,7 +72,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view("order.edit", ["order" => $order->with("products")->first(), "allProducts" => Product::all()]);
     }
 
     /**
