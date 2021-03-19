@@ -19,13 +19,14 @@
                     <div class="w-full flex flex-row-reverse mb-2.5">
                         <a href="{{ route('client.create') }}" class="bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded text-white focus:outline-none">Cadastrar novo Cliente</a>
                     </div>
-                    <table class="table-auto rounded border-b border-gray-200 min-w-full">
-                        <thead class="bg-gray-800 text-white">
+                    <div class="w-full py-1">
+                      <table id="table" class="stripe hover">
+                        <thead>
                           <tr>
-                            <th class="text-center">#</th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">E-mail</th>
-                            <th class="text-center">CPF</th>
+                            <th data-priority="1" class="text-center">#</th>
+                            <th data-priority="2" class="text-center">Name</th>
+                            <th data-priority="3" class="text-center">E-mail</th>
+                            <th data-priority="4" class="text-center">CPF</th>
                             <th class="text-center">Ação</th>
                           </tr>
                         </thead>
@@ -48,6 +49,7 @@
                           @endforelse
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

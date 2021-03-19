@@ -15,6 +15,9 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        {{-- Data Table Scripts --}}
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>        
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -32,5 +35,15 @@
                 {{ $slot }}
             </main>
         </div>
+        <script>
+            $(document).ready(function() {
+                var table = $('#table').DataTable({
+                    responsive: true,
+                    "language": { "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Portuguese-Brasil.json" }
+                })
+                .columns.adjust()
+                .responsive.recalc();
+            });
+        </script>
     </body>
 </html>
