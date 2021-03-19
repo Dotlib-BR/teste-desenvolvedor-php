@@ -6,7 +6,8 @@
     <title>Pedidos</title>
 </head>
 <body>
-    <form method="POST" action="{{ route('order.create') }}">
+    <form method="POST" action="{{ route('order.store') }}">
+        @csrf
         <div>
             <select name="products[]">
                 @foreach ($products as $product)
@@ -15,7 +16,7 @@
             </select>
             <input type="number" name="quantities[]">
         </div>
-        <input type="datetime" name="date">
+        <input type="date" name="date">
         <select name="status">
             <option value="opened">Em Aberto</option>
             <option value="paid_out">Pago</option>
