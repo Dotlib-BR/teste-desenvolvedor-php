@@ -36,7 +36,21 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "date" => "date|required",
+            "status" => "string|required",
+            "products" => "array|required|min:1",
+            "quantities" => "array|required|min:1"
+        ]);
+
+        $order = Order::create($request->only("date", "status"));
+        
+        $quantities = $request->get("quantities");
+        $products = collect($request->get("products"))->mapWithKeys(fn($id, $key) => [$id => ["quantity" => $quantities[$key]]]);
+
+        $order->products()->attach($products);
+
+        return redirect()->route("order.index")->with("success","Pedido cadastrado!");
     }
 
     /**
