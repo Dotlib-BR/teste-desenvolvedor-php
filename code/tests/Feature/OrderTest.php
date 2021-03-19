@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Client;
 
 class OrderTest extends TestCase
 {
@@ -33,13 +34,15 @@ class OrderTest extends TestCase
     {
         $order = Order::factory()->make();
         $products = Product::factory(2)->create();
+        $client = Client::factory()->create();
 
         $productsIds = $products->map(fn($product) => $product->id)->toArray();
         $productsQuantity = $products->map(fn($product) => $product->quantity * 0.2)->toArray();
 
         $productData = [
             "products" => $productsIds,
-            "quantities" => $productsQuantity
+            "quantities" => $productsQuantity,
+            "client_id" => $client->id
         ];
         $data = array_merge($order->toArray(), $productData);
 
