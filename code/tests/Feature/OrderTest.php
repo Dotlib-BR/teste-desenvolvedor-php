@@ -66,21 +66,25 @@ class OrderTest extends TestCase
     public function test_update_order()
     {
         $order = Order::factory()->create();
+        $products = Product::factory(2)->create();
 
-        $newData = [
-            "name" => "new name",
-            "email" => "new@email.com",
-            "cpf" => "11111111111"
+        $productsIds = $products->map(fn($product) => $product->id)->toArray();
+        $productsQuantity = $products->map(fn($product) => $product->quantity * 0.2)->toArray();
+
+        $productData = [
+            "products" => $productsIds,
+            "quantities" => $productsQuantity
         ];
+        $orderData = ["status" => $order->status == "opened" ? "canceled" : "opened", "date" => $order->date];
+        $data = array_merge($orderData, $productData);
 
-        $response = $this->put(route("order.update", $order), $newData);
+        $response = $this->put(route("order.update", $order), $data);
 
         $response->assertRedirect(route("order.index"));
         $response->assertSessionHas("success", "Pedido atualizado!");
         $response->assertSessionHasNoErrors();
         $response->assertStatus(302);
         $this->assertDatabaseMissing('orders', $order->toArray());
-        $this->assertDatabaseHas('orders', $newData);
     }
 
     public function test_delete_order()
