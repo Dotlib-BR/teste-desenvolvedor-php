@@ -84,7 +84,22 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $request->validate([
+            "date" => "date|required",
+            "status" => "string|required",
+            "products" => "array|required|min:1",
+            "quantities" => "array|required|min:1"
+        ]);
+
+        $order->fill($request->only("date", "status"));
+        $order->save();
+
+        $quantities = $request->get("quantities");
+        $products = collect($request->get("products"))->mapWithKeys(fn($id, $key) => [$id => ["quantity" => $quantities[$key]]]);
+
+        $order->products()->sync($products);
+
+        return redirect()->route("order.index")->with("success","Pedido atualizado!");
     }
 
     /**
