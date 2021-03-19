@@ -20,11 +20,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resources([
-    "client" => ClientController::class,
-    "product" => ProductController::class,
-    "order" => OrderController::class
-]);
+Route::group(['middleware' => 'auth'], function() {
+    Route::resources([
+        "client" => ClientController::class,
+        "product" => ProductController::class,
+        "order" => OrderController::class
+    ]);
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
