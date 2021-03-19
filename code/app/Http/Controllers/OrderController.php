@@ -44,7 +44,7 @@ class OrderController extends Controller
         ]);
 
         $order = Order::create($request->only("date", "status"));
-        
+
         $quantities = $request->get("quantities");
         $products = collect($request->get("products"))->mapWithKeys(fn($id, $key) => [$id => ["quantity" => $quantities[$key]]]);
 
@@ -61,7 +61,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view("order.show", ["order" => $order]);
     }
 
     /**
