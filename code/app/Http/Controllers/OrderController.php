@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -25,7 +26,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view("order.create", ["products" => Product::all()]);
+        return view("order.create", ["products" => Product::all(), "clients" => CLient::all()]);
     }
 
     /**
@@ -40,10 +41,11 @@ class OrderController extends Controller
             "date" => "date|required",
             "status" => "string|required",
             "products" => "array|required|min:1",
-            "quantities" => "array|required|min:1"
+            "quantities" => "array|required|min:1",
+            "client_id" => "required|integer"
         ]);
 
-        $order = Order::create($request->only("date", "status"));
+        $order = Client::find($request->get("client_id"))->orders()->create($request->only("date", "status"));
 
         $quantities = $request->get("quantities");
         $products = collect($request->get("products"))->mapWithKeys(fn($id, $key) => [$id => ["quantity" => $quantities[$key]]]);
