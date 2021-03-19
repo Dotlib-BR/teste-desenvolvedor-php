@@ -22,6 +22,11 @@
             <option value="paid_out">Pago</option>
             <option value="canceled">Cancelado</option>
         </select>
+        <select name="client_id">
+            @foreach ($clients as $client)
+                <option value="{{ $client->id }}">{{ $client->name }}</option>
+            @endforeach
+        </select>
         <button type="submit">Enviar</button>
     </form>
 </body>
