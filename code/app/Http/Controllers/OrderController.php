@@ -110,6 +110,9 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->products()->detach();
+        $order->delete();
+
+        return redirect()->route("order.index")->with("success","Pedido deletado!");
     }
 }
