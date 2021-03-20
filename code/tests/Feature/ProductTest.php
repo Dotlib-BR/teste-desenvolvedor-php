@@ -107,4 +107,19 @@ class ProductTest extends TestCase
         $response->assertViewHas("product", $product);
         $response->assertSuccessful();
     }
+
+    public function test_mult_delete_product()
+    {
+        Product::factory(5)->create();
+        $products = Product::take(5);
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->delete(route("product.multDestroy"), ["products_id" => $products->pluck("id")->toArray()]);
+
+        $response->assertRedirect(route("product.index"));
+        $response->assertSessionHasNoErrors();
+        $response->assertSessionHas("success", "Produtos deletados!");
+        $response->assertStatus(302);
+        $this->assertDeleted($products);
+    }
 }
