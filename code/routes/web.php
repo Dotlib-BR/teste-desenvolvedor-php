@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function() {
     Route::delete("client/mult", [ClientController::class, "multDestroy"])->name("client.multDestroy");
+    Route::delete("product/mult", [ProductController::class, "multDestroy"])->name("product.multDestroy");
     Route::resources([
         "client" => ClientController::class,
         "product" => ProductController::class,
