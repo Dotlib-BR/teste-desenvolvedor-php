@@ -45,6 +45,44 @@
                 .columns.adjust()
                 .responsive.recalc();
             });
+            const checkbox = document.getElementsByClassName("checkbox")
+        const form = document.getElementById("destroy-form-mult")
+        const button = document.getElementById("button-mult")
+
+        const countElements = () => form.childElementCount
+
+        const generateInput = (value) => {
+            const input = document.createElement("input")
+            input.type = "hidden"
+            input.value = value
+            input.name = "clients_id[]"
+            input.id = "client-" + value
+
+            return input
+        }
+
+        const insertId = (id) => {
+          const input = generateInput(id)
+          form.appendChild(input)
+          if(countElements() > 2) button.disabled = false
+        }
+
+        const removeId = (id) => {
+          const element = document.getElementById("client-" + id)
+          form.removeChild(element)
+          if(countElements() == 2) button.disabled = true
+        }
+
+        const handleChange = (event) => {
+          const element = event.target
+
+          if(element.checked) insertId(element.value)
+          else removeId(element.value)
+        }
+
+        Array.from(checkbox).forEach(element => {
+          element.addEventListener("change", handleChange)
+        })
         </script>
         {{ $scripts ?? '' }}
     </body>
