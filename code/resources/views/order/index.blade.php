@@ -35,7 +35,7 @@
                           <tr class="{{ $loop->index % 2 != 0 ? 'bg-gray-100' : '' }}">
                               <td class="text-center">{{ $order->id }}</td>
                               <td class="text-center"><a class="hover:text-blue-600" href="{{ route('order.show', $order) }}">{{ $order->status_formated }}</a></td>
-                              <td class="text-center">{{ $order->client->name }}</td>
+                              <td class="text-center">{{ $order->client->name ?? "Usuário inexistente" }}</td>
                               <td class="text-center">{{ $order->date->format("d/m/Y") }}</td>
                               <td class="text-center">
                                   <a href="{{ route("order.edit", $order) }}" class="bg-yellow-400 hover:bg-yellow-600 px-3 py-1 rounded text-white focus:outline-none">Editar</a>

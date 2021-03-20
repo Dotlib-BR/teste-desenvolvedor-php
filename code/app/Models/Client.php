@@ -18,7 +18,10 @@ class Client extends Model
     }
 
     public function delete() {
-        $this->orders()->detach();
+        foreach($this->orders()->get() as $order) {
+            $order->client()->dissociate();
+            $order->save();
+        }
         parent::delete();
     }
 }

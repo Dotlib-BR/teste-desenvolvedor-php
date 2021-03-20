@@ -7,7 +7,7 @@
             <ol class="list-reset flex text-grey-dark">
               <li><a href="{{ route('dashboard') }}" class="text-indigo-500 font-bold">Dashboard</a></li>
               <li><span class="mx-2">/</span></li>
-              <li><a href="{{ route('product.index') }}" class="text-indigo-500 font-bold">Pedidos</a></li>
+              <li><a href="{{ route('order.index') }}" class="text-indigo-500 font-bold">Pedidos</a></li>
               <li><span class="mx-2">/</span></li>
               <li class="text-indigo-400">Editar Pedido</li>
             </ol>
@@ -28,7 +28,7 @@
 
                         <input disabled value="{{ $order->date->format("Y-m-d") }}" type="date">
                         <input type="text" disabled value="{{ $order->status_formated }}">  
-                        <input type="text" disabled value="{{ $order->client->name }}">  
+                        <input type="text" disabled value="{{ $order->client->name ?? "Usuário inexistente" }}">  
                         <a href="{{ route('order.edit', $order) }}" class="text-center bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded text-white focus:outline-none">Editar</a>               
                     </div>
                 </div>
