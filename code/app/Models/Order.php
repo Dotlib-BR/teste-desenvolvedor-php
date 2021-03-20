@@ -34,4 +34,9 @@ class Order extends Model
 
         return $data[$this->attributes['status']];
     }
+
+    public function delete() {
+        $this->products()->detach();
+        parent::delete();
+    }
 }
