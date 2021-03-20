@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,8 +14,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->expectsJson())
+            return new ProductCollection(Product::all());
+
         return view("product.index", ["products" => Product::all()]);
     }
 
@@ -42,7 +47,10 @@ class ProductController extends Controller
             "quantity" => "integer|required"
         ]);
 
-        Product::create($request->only("name", "bar_code", "price", "quantity"));
+        $product = Product::create($request->only("name", "bar_code", "price", "quantity"));
+
+        if($request->expectsJson())
+            return new ProductResource($product);
 
         return redirect()->route("product.index")->with("success","Produto cadastrado!");
     }
@@ -53,8 +61,11 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Request $request, Product $product)
     {
+        if($request->expectsJson())
+            return new ProductResource($product);
+
         return view("product.show", ["product" => $product]);
     }
 
@@ -88,6 +99,9 @@ class ProductController extends Controller
         $product->fill($request->only("name", "bar_code", "price", "quantity"));
         $product->save();
 
+        if($request->expectsJson())
+            return new ProductResource($product);
+
         return redirect()->route("product.index")->with("success","Produto atualizado!");
     }
 
@@ -100,6 +114,9 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+
+        if($request->expectsJson())
+            return response()->json()->setStatusCode(204);
 
         return redirect()->route("product.index")->with("success","Produto deletado!");
     }
