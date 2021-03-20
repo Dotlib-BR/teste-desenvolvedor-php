@@ -45,44 +45,45 @@
                 .columns.adjust()
                 .responsive.recalc();
             });
+            
             const checkbox = document.getElementsByClassName("checkbox")
-        const form = document.getElementById("destroy-form-mult")
-        const button = document.getElementById("button-mult")
+            const form = document.getElementById("destroy-form-mult")
+            const button = document.getElementById("button-mult")
 
-        const countElements = () => form.childElementCount
+            const countElements = () => form.childElementCount
 
-        const generateInput = (value) => {
-            const input = document.createElement("input")
-            input.type = "hidden"
-            input.value = value
-            input.name = "clients_id[]"
-            input.id = "client-" + value
+            const generateInput = (value, mType) => {
+                const input = document.createElement("input")
+                input.type = "hidden"
+                input.value = value
+                input.name = mType + "s_id[]"
+                input.id = mType + "-" + value
 
-            return input
-        }
+                return input
+            }
 
-        const insertId = (id) => {
-          const input = generateInput(id)
-          form.appendChild(input)
-          if(countElements() > 2) button.disabled = false
-        }
+            const insertId = (id, mType) => {
+            const input = generateInput(id, mType)
+            form.appendChild(input)
+            if(countElements() > 2) button.disabled = false
+            }
 
-        const removeId = (id) => {
-          const element = document.getElementById("client-" + id)
-          form.removeChild(element)
-          if(countElements() == 2) button.disabled = true
-        }
+            const removeId = (id, mType) => {
+            const element = document.getElementById(mType + "-" + id)
+            form.removeChild(element)
+            if(countElements() == 2) button.disabled = true
+            }
 
-        const handleChange = (event) => {
-          const element = event.target
+            const handleChange = (event) => {
+            const element = event.target
 
-          if(element.checked) insertId(element.value)
-          else removeId(element.value)
-        }
+            if(element.checked) insertId(element.value, element.getAttribute("m-type"))
+            else removeId(element.value, element.getAttribute("m-type"))
+            }
 
-        Array.from(checkbox).forEach(element => {
-          element.addEventListener("change", handleChange)
-        })
+            Array.from(checkbox).forEach(element => {
+            element.addEventListener("change", handleChange)
+            })
         </script>
         {{ $scripts ?? '' }}
     </body>

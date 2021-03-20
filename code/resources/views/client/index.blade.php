@@ -61,7 +61,7 @@
                                     </form>
                                 </td>
                                 <td class="text-center">
-                                  <input value="{{ $client->id }}" class="checkbox" type="checkbox">  
+                                  <input value="{{ $client->id }}" m-type="client" class="checkbox" type="checkbox">  
                                 </td>
                             </tr>
                           @empty
