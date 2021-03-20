@@ -39,7 +39,15 @@
                                 <td class="text-center">{{ $client->cpf }}</td>
                                 <td class="text-center">
                                     <a href="{{ route("client.edit", $client) }}" class="bg-yellow-400 hover:bg-yellow-600 px-3 py-1 rounded text-white focus:outline-none">Editar</a>
-                                    <button class="bg-red-400 hover:bg-red-600 px-3 py-1 rounded text-white focus:outline-none">Deletar</button>
+                                    <button
+                                     class="bg-red-400 hover:bg-red-600 px-3 py-1 rounded text-white focus:outline-none"
+                                     onclick="event.preventDefault(); if(confirm('Tem certeza que deseja deletar o cliente {{ $client->name }}?')) { document.getElementById('destroy-form-{{$client->id}}').submit(); }"
+                                     >Deletar</button>
+                                    <form id="destroy-form-{{$client->id}}" action="{{ route('client.destroy',$client->id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+
                                 </td>
                             </tr>
                           @empty
