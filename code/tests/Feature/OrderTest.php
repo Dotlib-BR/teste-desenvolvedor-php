@@ -126,4 +126,19 @@ class OrderTest extends TestCase
         $response->assertViewHas("order", $order);
         $response->assertSuccessful();
     }
+
+    public function test_mult_delete_order()
+    {
+        Order::factory(5)->create();
+        $orders = Order::take(5);
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->delete(route("order.multDestroy"), ["orders_id" => $orders->pluck("id")->toArray()]);
+
+        $response->assertRedirect(route("order.index"));
+        $response->assertSessionHasNoErrors();
+        $response->assertSessionHas("success", "Pedidos deletados!");
+        $response->assertStatus(302);
+        $this->assertDeleted($orders);
+    }
 }
