@@ -46,5 +46,6 @@
                 .responsive.recalc();
             });
         </script>
+        {{ $scripts }}
     </body>
 </html>
