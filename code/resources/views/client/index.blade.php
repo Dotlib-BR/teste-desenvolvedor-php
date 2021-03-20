@@ -38,13 +38,13 @@
                                 <td class="text-center">{{ $client->email }}</td>
                                 <td class="text-center">{{ $client->cpf }}</td>
                                 <td class="text-center">
-                                    <button class="bg-yellow-400 hover:bg-yellow-600 px-3 py-1 rounded text-white focus:outline-none">Editar</button>
+                                    <a href="{{ route("client.edit", $client) }}" class="bg-yellow-400 hover:bg-yellow-600 px-3 py-1 rounded text-white focus:outline-none">Editar</a>
                                     <button class="bg-red-400 hover:bg-red-600 px-3 py-1 rounded text-white focus:outline-none">Deletar</button>
                                 </td>
                             </tr>
                           @empty
                             <tr>
-                                <td class="text-center" colspan="4">Sem clientes cadastrados</td>
+                                <td class="text-center" colspan="5">Sem clientes cadastrados</td>
                             </tr>
                           @endforelse
                         </tbody>
