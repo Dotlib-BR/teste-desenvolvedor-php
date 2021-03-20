@@ -117,4 +117,15 @@ class OrderController extends Controller
 
         return redirect()->route("order.index")->with("success","Pedido deletado!");
     }
+
+    public function multDestroy(Request $request)
+    {
+        $request->validate([
+            "orders_id" => "required|array"
+        ]);
+
+        Order::destroy($request->get("orders_id"));
+
+        return redirect()->route("order.index")->with("success","Pedidos deletados!");
+    }
 }
