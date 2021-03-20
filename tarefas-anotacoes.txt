@@ -1,0 +1,44 @@
+(1) Clientes
+nome
+email
+cpf
+password (null)
+
+
+(2) Produtos
+nome
+cod_barras
+valor
+qtd_estoque
+ativo (0)
+
+
+(3) Status_pedidos
+nome
+
+
+(4) Cupom_descontos
+nome
+codigo
+tipo (porcentagem, valor)
+valor
+
+
+(5) Pedidos
+cliente_id
+num_pedido (20180001)
+quantidade
+status_id
+valor_pedido
+valor_desconto
+valor_total
+cupon_desconto_id
+data_pedido
+
+
+(6) Pedido_produtos
+pedido_id
+produto_id
+valor_unitario
+subtotal
+quantidade
