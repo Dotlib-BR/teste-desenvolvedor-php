@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderCollection;
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Client;
@@ -14,8 +16,11 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->expectsJson())
+            return new OrderCollection(Order::with('client')->get());
+
         return view("order.index", ["orders" => Order::with("client")->get()]);
     }
 
@@ -52,6 +57,9 @@ class OrderController extends Controller
 
         $order->products()->attach($products);
 
+        if($request->expectsJson())
+            return new OrderResource($order->with(['client', 'products'])->first());
+
         return redirect()->route("order.index")->with("success","Pedido cadastrado!");
     }
 
@@ -61,8 +69,11 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Request $request, Order $order)
     {
+        if($request->expectsJson())
+            return new OrderResource($order->with(['client', 'products'])->first());
+
         return view("order.show", ["order" => $order]);
     }
 
@@ -101,6 +112,9 @@ class OrderController extends Controller
 
         $order->products()->sync($products);
 
+        if($request->expectsJson())
+            return new OrderResource($order->with(['client', 'products'])->first());
+
         return redirect()->route("order.index")->with("success","Pedido atualizado!");
     }
 
@@ -110,10 +124,13 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy(Request $request, Order $order)
     {
         $order->products()->detach();
         $order->delete();
+
+        if($request->expectsJson())
+            return response()->json()->setStatusCode(204);
 
         return redirect()->route("order.index")->with("success","Pedido deletado!");
     }
