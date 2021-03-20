@@ -22,7 +22,7 @@
                         @csrf
                         <input required placeholder="Nome do cliente" type="text" name="name">
                         <input required placeholder="E-mail do cliente" type="email" name="email">
-                        <input required placeholder="CPF do cliente" type="text" name="cpf">
+                        <input required placeholder="CPF do cliente" maxlength="11" type="text" name="cpf">
                         <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 px-3 py-2 rounded text-white focus:outline-none">Salvar</button>
                     </form>
                 </div>
