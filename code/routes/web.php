@@ -21,11 +21,13 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function() {
+    Route::delete("client/mult", [ClientController::class, "multDestroy"])->name("client.multDestroy");
     Route::resources([
         "client" => ClientController::class,
         "product" => ProductController::class,
         "order" => OrderController::class
     ]);
+
 });
 
 Route::get('/dashboard', function () {
