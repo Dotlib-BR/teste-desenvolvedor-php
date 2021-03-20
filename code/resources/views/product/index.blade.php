@@ -17,7 +17,7 @@
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
               <div class="p-6 bg-white border-b border-gray-200 flex flex-col">
                   <div class="w-full flex flex-row-reverse mb-2.5">
-                      <a href="{{ route('product.create') }}" class="bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded text-white focus:outline-none">Cadastrar novo produto</a>
+                      <a href="{{ route('product.create') }}" class="bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded text-white focus:outline-none">Cadastrar novo Produto</a>
                   </div>
                   <div class="w-full py-1">
                     <table id="table" class="stripe hover">
@@ -41,7 +41,7 @@
                                   <a href="{{ route("product.edit", $product) }}" class="bg-yellow-400 hover:bg-yellow-600 px-3 py-1 rounded text-white focus:outline-none">Editar</a>
                                   <button
                                    class="bg-red-400 hover:bg-red-600 px-3 py-1 rounded text-white focus:outline-none"
-                                   onclick="event.preventDefault(); if(confirm('Tem certeza que deseja deletar o producte {{ $product->name }}?')) { document.getElementById('destroy-form-{{$product->id}}').submit(); }"
+                                   onclick="event.preventDefault(); if(confirm('Tem certeza que deseja deletar o produto {{ $product->name }}?')) { document.getElementById('destroy-form-{{$product->id}}').submit(); }"
                                    >Deletar</button>
                                   <form id="destroy-form-{{$product->id}}" action="{{ route('product.destroy',$product->id) }}" method="POST" style="display: none;">
                                       @csrf
@@ -52,7 +52,7 @@
                           </tr>
                         @empty
                           <tr>
-                              <td class="text-center" colspan="5">Sem Produtos cadastrados</td>
+                              <td class="text-center" colspan="5">Sem Ps cadastrados</td>
                           </tr>
                         @endforelse
                       </tbody>
