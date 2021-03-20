@@ -35,16 +35,18 @@
                         @csrf
                         @method("PUT")
                         @foreach ($order->products as $item)
-                        <div class="w-full flex flex-row mb-2 flex-wrap">
-                            <select class="w-1/2 my-1" name="products[]">
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @foreach ($allProducts->filter(fn($product) => $product->id != $item->id) as $productOption)
-                                    <option value="{{ $productOption->id }}">{{ $productOption->name }}</option>
-                                @endforeach
-                            </select>
-                            <input class="w-1/2 my-1" type="number" value="{{ $item->pivot->quantity }}" name="quantities[]">
+                            <div id="prod-div" class="w-full flex flex-row mb-2 flex-wrap">
+                                <select class="w-1/2 my-1" name="products[]">
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @foreach ($allProducts->filter(fn($product) => $product->id != $item->id) as $productOption)
+                                        <option value="{{ $productOption->id }}">{{ $productOption->name }}</option>
+                                    @endforeach
+                                </select>
+                                <input class="w-1/2 my-1" type="number" value="{{ $item->pivot->quantity }}" name="quantities[]">
                             </div>
                         @endforeach
+                        <button id="add-prod" class="bg-green-500 hover:bg-green-600 px-3 py-2 rounded text-white focus:outline-none">Adicionar Produto</button>
+
                         <input value="{{ $order->date->format("Y-m-d") }}" type="date" name="date">
                         <select name="status">
                             <option {{ $order->status == "opened" ? "selected" : "" }} value="opened">Em Aberto</option>
@@ -57,4 +59,52 @@
             </div>
         </div>
     </div>
+    <x-slot name="scripts">
+        <script>
+            const generateSelect = () => {
+                const select = document.createElement("select")
+                const products = JSON.parse("{{ $allProducts ? $allProducts->toJson() : [] }}".replaceAll("&quot;", "\""))
+
+                select.classList.add("w-1/2")
+                select.classList.add("my-1")
+                select.name = "products[]"
+                const defaultOption = document.createElement("option")
+                defaultOption.text = "Selectione o produto"
+                defaultOption.disabled = true
+                select.appendChild(defaultOption)
+
+                products.forEach( (item) => {
+                    const option = document.createElement("option")
+                    option.value = item.id
+                    option.text = item.name
+                    select.appendChild(option)
+                })
+
+                return select
+            }
+
+            const generateQuantity = () => {
+                const input = document.createElement("input")
+                input.classList.add("w-1/2")
+                input.classList.add("my-1")
+                input.placeholder = "Quantidade do produto"
+                input.type = "number"
+                input.name = "quantities[]"
+
+                return input
+            }
+
+            const addProduct = (event) => {
+                event.preventDefault()
+                const prodDiv = document.getElementById("prod-div")
+
+                const select  = generateSelect()
+                const quantity = generateQuantity()
+
+                prodDiv.appendChild(select)
+                prodDiv.appendChild(quantity)
+            }
+            document.getElementById("add-prod").addEventListener("click", addProduct)
+        </script>
+    </x-slot>
 </x-app-layout>
