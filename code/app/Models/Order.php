@@ -20,4 +20,18 @@ class Order extends Model
     public function products() {
         return $this->belongsToMany(Product::class)->withPivot("quantity");
     }
+
+    public function client() {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function getStatusFormatedAttribute() {
+        $data = [
+            "opened" => "Em Aberto",
+            "paid_out" => "Pago",
+            "canceled" => "Cancelado"
+        ];
+
+        return $data[$this->attributes['status']];
+    }
 }
