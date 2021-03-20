@@ -106,4 +106,20 @@ class ClientTest extends TestCase
         $response->assertViewHas("client", $client);
         $response->assertSuccessful();
     }
+
+    public function test_mult_delete_client()
+    {
+        Client::factory(5)->create();
+        $clients = Client::take(5);
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->delete(route("client.multDestroy"), ["clients_id" => $clients->pluck("id")->toArray()]);
+
+        $response->assertRedirect(route("client.index"));
+        $response->assertSessionHasNoErrors();
+        $response->assertSessionHas("success", "Clientes deletados!");
+        $response->assertStatus(302);
+        $this->assertDeleted($clients);
+    }
+
 }
