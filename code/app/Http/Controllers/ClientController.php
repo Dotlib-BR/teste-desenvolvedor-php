@@ -79,7 +79,7 @@ class ClientController extends Controller
     {
         $request->validate([
             "name" => "string|required|max:100",
-            "email" => "email|required|max:100|unique:clients,email,{$client->id}",
+            "email" => "email|required|max:100|unique:clients",
             "cpf" => "string|required|max:11"
         ]);
 
