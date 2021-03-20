@@ -103,4 +103,15 @@ class ProductController extends Controller
 
         return redirect()->route("product.index")->with("success","Produto deletado!");
     }
+
+    public function multDestroy(Request $request)
+    {
+        $request->validate([
+            "products_id" => "required|array"
+        ]);
+
+        Product::destroy($request->get("products_id"));
+
+        return redirect()->route("product.index")->with("success","Produtos deletados!");
+    }
 }
