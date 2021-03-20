@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ClientCollection;
+use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -12,8 +14,11 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->expectsJson())
+            return new ClientCollection(Client::with('orders')->get());
+
         return view("client.index", ["clients" => Client::all()]);
     }
 
@@ -41,7 +46,10 @@ class ClientController extends Controller
             "cpf" => "string|required|max:11"
         ]);
 
-        Client::create($request->only("name", "email", "cpf"));
+        $client = Client::create($request->only("name", "email", "cpf"));
+
+        if($request->expectsJson())
+            return new ClientResource($client->with('orders')->first());
 
         return redirect()->route("client.index")->with("success","Cliente cadastrado!");
     }
@@ -52,8 +60,11 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show(Request $request, Client $client)
     {
+        if($request->expectsJson())
+            return new ClientResource($client->with('orders')->first());
+
         return view("client.show", ["client" => $client]);
     }
 
@@ -86,6 +97,9 @@ class ClientController extends Controller
         $client->fill($request->only("name", "email", "cpf"));
         $client->save();
 
+        if($request->expectsJson())
+            return new ClientResource($client->with('orders')->first());
+
         return redirect()->route("client.index")->with("success","Cliente atualizado!");
     }
 
@@ -95,9 +109,12 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $client)
+    public function destroy(Request $request, Client $client)
     {
         $client->delete();
+
+        if($request->expectsJson())
+            return response()->json()->setStatusCode(204);
 
         return redirect()->route("client.index")->with("success","Cliente deletado!");
     }
