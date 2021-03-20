@@ -17,6 +17,19 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                @if ($errors->any())
+                    <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500 flex flex-col">
+                        <span class="text-xl">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <b class="capitalize">Erro!</b> os seguintes erros foram encontrados:
+                        </span>
+                        <ul class="ml-5 list-disc list-outside ">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form class="flex flex-col space-y-3" method="POST" action="{{ route('client.store') }}">
                         @csrf
