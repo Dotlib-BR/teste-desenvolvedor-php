@@ -101,4 +101,15 @@ class ClientController extends Controller
 
         return redirect()->route("client.index")->with("success","Cliente deletado!");
     }
+
+    public function multDestroy(Request $request)
+    {
+        $request->validate([
+            "clients_id" => "required|array"
+        ]);
+
+        Client::destroy($request->get("clients_id"));
+
+        return redirect()->route("client.index")->with("success","Clientes deletados!");
+    }
 }
