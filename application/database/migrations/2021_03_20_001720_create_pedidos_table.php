@@ -18,7 +18,7 @@ class CreatePedidosTable extends Migration
             $table->bigInteger('cliente_id')->unsigned();
             $table->bigInteger('status_pedido_id')->unsigned();
             $table->bigInteger('cupom_desconto_id')->unsigned()->nullable();
-            $table->string('numero_pedido', 100);
+            $table->string('numero_pedido', 100)->unique();
             $table->decimal('valor_pedido', 10, 2);
             $table->decimal('valor_desconto', 10, 2)->nullable();
             $table->decimal('valor_total', 10, 2);

@@ -2,20 +2,27 @@
 
 namespace App\Services;
 
-use App\Repositories\PedidoRepository;
+use App\Contracts\Repositories\PedidoInterface;
 
 class PedidoService
 {
 
     protected $pedidoRepository;
 
-    public function __construct(PedidoRepository $pedidoRepository)
+    public function __construct(PedidoInterface $pedidoRepository)
     {
         $this->pedidoRepository = $pedidoRepository;
     }
 
     public function novoNumeroPedido($id)
     {
-        return str_pad($id, 5, '0', STR_PAD_LEFT);
+        $numero = $this->formataNumero($id);
+
+        return $numero;
+    }
+
+    private function formataNumero($num)
+    {
+        return str_pad($num, 8, '0', STR_PAD_LEFT);
     }
 }

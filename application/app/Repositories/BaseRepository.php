@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
-class BaseRepository
+use App\Contracts\Repositories\BaseInterface;
+
+class BaseRepository implements BaseInterface
 {
 
     protected $model;
@@ -31,4 +33,10 @@ class BaseRepository
     {
         return $this->model->updateOrCreate($where, $input);
     }
+
+    public function where($where, $value)
+    {
+        return $this->model->where($where, $value);
+    }
+
 }

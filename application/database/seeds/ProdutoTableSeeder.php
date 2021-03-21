@@ -1,8 +1,7 @@
 <?php
 
-use App\Repositories\ProdutoRepository;
+use App\Contracts\Repositories\ProdutoInterface;
 use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
 
 class ProdutoTableSeeder extends Seeder
 {
@@ -11,8 +10,8 @@ class ProdutoTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run(ProdutoRepository $produtoRepository)
+    public function run(ProdutoInterface $produtoInterface)
     {
-        $test = factory($produtoRepository->getModel(), 10)->create();
+        $test = factory($produtoInterface->getModel(), 10)->create();
     }
 }

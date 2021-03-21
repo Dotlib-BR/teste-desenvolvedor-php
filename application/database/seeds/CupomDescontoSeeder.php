@@ -1,6 +1,6 @@
 <?php
 
-use App\Repositories\CupomDescontoRepository;
+use App\Contracts\Repositories\CupomDescontoInterface;
 use Illuminate\Database\Seeder;
 
 class CupomDescontoSeeder extends Seeder
@@ -10,8 +10,8 @@ class CupomDescontoSeeder extends Seeder
      *
      * @return void
      */
-    public function run(CupomDescontoRepository $cupomDescontoRepository)
+    public function run(CupomDescontoInterface $cupomDescontoInterface)
     {
-        factory($cupomDescontoRepository->getModel(), 5)->create();
+        factory($cupomDescontoInterface->getModel(), 5)->create();
     }
 }

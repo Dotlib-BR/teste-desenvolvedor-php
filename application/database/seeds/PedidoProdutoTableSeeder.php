@@ -1,6 +1,6 @@
 <?php
 
-use App\Repositories\PedidoProdutoRepository;
+use App\Contracts\Repositories\PedidoProdutoInterface;
 use Illuminate\Database\Seeder;
 
 class PedidoProdutoTableSeeder extends Seeder
@@ -10,8 +10,8 @@ class PedidoProdutoTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run(PedidoProdutoRepository $pedidoProdutoRepository)
+    public function run(PedidoProdutoInterface $pedidoProdutoInterface)
     {
-        factory($pedidoProdutoRepository->getModel(), 10)->create();
+        factory($pedidoProdutoInterface->getModel(), 10)->create();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Repositories\StatusPedidoRepository;
+use App\Contracts\Repositories\StatusPedidoInterface;
 use Illuminate\Database\Seeder;
 
 class StatusPedidoTableSeeder extends Seeder
@@ -10,12 +10,12 @@ class StatusPedidoTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run(StatusPedidoRepository $statusPedidoRepository)
+    public function run(StatusPedidoInterface $statusPedidoInterface)
     {
         $statuses = ['Em Aberto', 'Pago', 'Cancelado'];
 
         foreach ($statuses as $status) {
-            $statusPedidoRepository->updateOrCreate(['nome' => $status], ['nome' => $status]);
+            $statusPedidoInterface->updateOrCreate(['nome' => $status], ['nome' => $status]);
         }
     }
 }

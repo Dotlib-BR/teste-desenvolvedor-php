@@ -1,6 +1,6 @@
 <?php
 
-use App\Repositories\ClienteRepository;
+use App\Contracts\Repositories\ClienteInterface;
 use Illuminate\Database\Seeder;
 
 class ClienteSeeder extends Seeder
@@ -10,8 +10,8 @@ class ClienteSeeder extends Seeder
      *
      * @return void
      */
-    public function run(ClienteRepository $clienteRepository)
+    public function run(ClienteInterface $clienteInterface)
     {
-        factory($clienteRepository->getModel(), 10)->create();
+        factory($clienteInterface->getModel(), 10)->create();
     }
 }

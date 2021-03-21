@@ -1,6 +1,6 @@
 <?php
 
-use App\Repositories\UserRepository;
+use App\Contracts\Repositories\UserInterface;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -10,9 +10,9 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run(UserRepository $userRepository)
+    public function run(UserInterface $userInterface)
     {
-        $userRepository->updateOrCreate([
+        $userInterface->updateOrCreate([
             'email' => 'admin@admin.com',
         ],
         [
