@@ -16,10 +16,12 @@ class ProductResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'quantity' => $this->quantity,
+            'total_quantity' => $this->quantity,
             'unit_price'=> $this->price,
-            'ber_code' => $this->ber_code,
-            'orders' => $this->whenLoaded("orders")
+            'bar_code' => $this->bar_code,
+            'orders' => $this->whenLoaded("orders"),
+            "quantity_purchased" => $this->whenPivotLoaded('order_product', fn() => $this->pivot->quantity),
+            "total_price" => $this->whenPivotLoaded('order_product', fn() => $this->pivot->quantity * $this->price),
         ];
     }
 }
