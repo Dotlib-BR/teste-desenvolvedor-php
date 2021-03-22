@@ -10,6 +10,6 @@ class Product extends Model
      'updated_at'];
 
     public function orders(){
-        return $this->hasMany(Order::class);
+        return $this->belongToMany(Order::class);
     }
 }
