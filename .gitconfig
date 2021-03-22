@@ -1,0 +1,40 @@
+[filesystem "Oracle Corporation|13.0.1|/dev/disk1s5"]
+	timestampResolution = 13000 nanoseconds
+	minRacyThreshold = 0 nanoseconds
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = airton.garcia
+	email = airtonjsg@gmail.com
+[core]
+	editor = code --wait
+[diff]
+    tool = default-difftool
+[difftool "default-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+[color]
+	ui = true
+	diff = auto
+	grep = auto
+	interactive = auto
+	status = always
+	branch = always
+	status = always
+	commit = always
+	merge = always
+	pull = always
+	push = always
+	checkout = always
+[alias]
+	st = status
+	br = branch
+	ci = commit
+	ps = push
+	pl = pull
+	pom = pull origin master
+	pod = pull origin develop
+	co = checkout
+	df = diff
