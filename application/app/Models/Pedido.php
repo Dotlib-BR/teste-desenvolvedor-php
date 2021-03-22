@@ -15,4 +15,14 @@ class Pedido extends Model
         'valor_desconto',
         'valor_total',
     ];
+
+    /**
+     * Get all of the produtos for the Pedido
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function produtos()
+    {
+        return $this->hasMany(PedidoProduto::class);
+    }
 }

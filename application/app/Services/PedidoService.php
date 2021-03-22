@@ -2,27 +2,62 @@
 
 namespace App\Services;
 
-use App\Contracts\Repositories\PedidoInterface;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
-class PedidoService
+class PedidoService extends PedidoHelperService
 {
-
-    protected $pedidoRepository;
-
-    public function __construct(PedidoInterface $pedidoRepository)
+    public function create(int $cliente_id, array $produtosArr = [], $cupom_desconto_id = null)
     {
-        $this->pedidoRepository = $pedidoRepository;
-    }
+        DB::beginTransaction();
 
-    public function novoNumeroPedido($id)
-    {
-        $numero = $this->formataNumero($id);
+        try {
+            $idProdutos = Arr::pluck($produtosArr, ['produto_id']);
 
-        return $numero;
-    }
+            $recuperaProdutos = $this->produtoService->recuperaProdutos($idProdutos);
 
-    private function formataNumero($num)
-    {
-        return str_pad($num, 8, '0', STR_PAD_LEFT);
+            if (count($recuperaProdutos) < count($produtosArr)) {
+                throw new \Exception("Alguns produtos não estão disponiveis", 1);
+            }
+
+            $valorTotalProdutos = $this->produtoService->somaProdutos($recuperaProdutos, $produtosArr);
+
+            $valorTotal = $valorTotalProdutos['subtotal'];
+
+            $valorDesconto = null;
+
+            if ($cupom_desconto_id) {
+                $valorDesconto = $this->calculaDesconto($valorTotal, $cupom_desconto_id);
+                if ($valorDesconto > 0) {
+                    $valorTotal -= $valorDesconto;
+                }
+            }
+
+            $pedido = $this->repository->create([
+                'cliente_id'        => $cliente_id,
+                'status_pedido_id'  => self::$statusPedidos['aberto'],
+                'cupom_desconto_id' => $cupom_desconto_id,
+                // 'numero_pedido',
+                'valor_pedido' => $valorTotalProdutos['subtotal'],
+                'valor_desconto' => $valorDesconto,
+                'valor_total' => $valorTotal,
+            ]);
+
+            $this->cadastraProdutosEmPedido($pedido->id, $recuperaProdutos);
+
+            $pedido->update([
+                'numero_pedido' => $this->novoNumeroPedido($pedido->id),
+            ]);
+
+            $pedido = $this->repository->find($pedido->id);
+
+            DB::commit();
+
+            return $pedido;
+        } catch (\Exception $e) {
+
+            DB::rollback();
+            throw $e;
+        }
     }
 }

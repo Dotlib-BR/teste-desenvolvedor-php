@@ -19,6 +19,14 @@ class BaseRepository implements BaseInterface
         return get_class($this->model);
     }
 
+    public function get(?array $ids = null)
+    {
+        if ($ids !== null || is_array($ids)) {
+            return $this->model->whereIn('id', $ids)->get();
+        }
+        return $this->model->get();
+    }
+
     public function create(array $input)
     {
         return $this->model->create($input);
@@ -37,6 +45,21 @@ class BaseRepository implements BaseInterface
     public function where($where, $value)
     {
         return $this->model->where($where, $value);
+    }
+
+
+    public function update(int $id, array $input)
+    {
+        return $this->find($id)->update($input);
+    }
+
+    public function delete($id)
+    {
+        if (is_array($id)) {
+            return $this->model->whereIn('id', $id)->delete();
+        }
+
+        return $this->find($id)->delete();
     }
 
 }

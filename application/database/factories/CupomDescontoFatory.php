@@ -7,9 +7,9 @@ use Faker\Generator as Faker;
 
 $factory->define(CupomDesconto::class, function (Faker $faker) {
     return [
-        'nome' => $faker->words(2, true),
+        'nome'  => $faker->words(2, true),
         'codigo' => strtoupper(substr($faker->md5, 0, 10)),
-        'tipo' => 'porcentagem',
+        'tipo'  => 'porcentagem',
         'valor' => $faker->numberBetween(5, 60)
     ];
 });

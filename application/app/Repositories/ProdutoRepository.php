@@ -13,4 +13,12 @@ class ProdutoRepository extends BaseRepository implements ProdutoInterface
     {
         parent::__construct($produto);
     }
+
+    public function getAtivos(?array $ids = null)
+    {
+        if ($ids !== null || is_array($ids)) {
+            return $this->model->where('ativo', 1)->whereIn('id', $ids)->get();
+        }
+        return $this->model->where('ativo', 1)->get();
+    }
 }
