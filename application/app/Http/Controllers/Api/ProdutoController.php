@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Controle;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Log;
 
 class ProdutoController extends Controller
 {
-
     protected $produtoService;
 
     public function __construct(ProdutoService $produtoService)
     {
         $this->produtoService = $produtoService;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,19 +25,9 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = $this->produtoService->paginate();
+        $produtos = $this->produtoService->get();
 
-        return view('controle.produtos.index', ['produtos' => $produtos]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('controle.produtos.create');
+        return response($produtos);
     }
 
     /**
@@ -56,10 +46,11 @@ class ProdutoController extends Controller
             $produto = $this->produtoService->create($input['nome'], (int) $input['cod_barras'], $input['valor'], null, $input['ativo'] ?? 0);
 
             DB::commit();
-            return redirect()->route('controle.produtos.index')->with('msg', 'Registro cadastrado com sucesso!');
+            return response(['produto' => $produto, 'msg' => 'registro criado com sucesso!', 'error' => false]);
+
         } catch (\Exception $e) {
             Log::error($e);
-            return redirect()->back()->with('msg', "Erro ao cadastrar")->with('error', true)->withInput();
+            return response(['msg' => 'houve um erro ao salvar os dados', 'error' => true], 500);
         }
     }
 
@@ -71,20 +62,9 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
         $produto = $this->produtoService->find($id);
 
-        return view('controle.produtos.create', ['produto' => $produto]);
+        return $produto;
     }
 
     /**
@@ -105,11 +85,12 @@ class ProdutoController extends Controller
 
             DB::commit();
 
-            return redirect()->route('controle.produtos.index')->with('msg', 'Registro atualizado com sucesso!');
+            return response(['produto' => $produto, 'msg' => 'registro atualizado com sucesso!', 'error' => false]);
+
         } catch (\Exception $e) {
             Log::error($e);
 
-            return redirect()->back()->with('msg', "Erro ao cadastrar registro")->with('error', true)->withInput();
+            return response(['msg' => 'houve um erro ao salvar os dados', 'error' => true], 500);
         }
     }
 
@@ -122,13 +103,19 @@ class ProdutoController extends Controller
     public function destroy($id)
     {
         try {
+            $produto = $this->produtoService->find($id);
 
-            $this->produtoService->delete($id);
+            if (!isset($produto->id)) {
+                return response(['msg' => 'o registro com este id não foi encontrado', 'error' => true], 500);
+            }
 
-            return redirect()->route('controle.produtos.index')->with('msg', 'Registro excluido com sucesso!');
+            $deletado = $this->produtoService->delete($id);
+
+            return response(['produto' => $deletado, 'msg' => 'registro deletado com sucesso!', 'error' => false]);
+
         } catch (\Exception $e) {
             Log::error($e);
-            return redirect()->back()->with('msg', "Erro ao excluir registro")->with('error', true);
+            return response(['msg' => 'houve um erro ao excluir o registro', 'error' => true], 500);
         }
     }
 }

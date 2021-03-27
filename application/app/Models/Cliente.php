@@ -14,7 +14,8 @@ class Cliente extends Model
         'nome',
         'email',
         'cpf',
-        'password'
+        'password',
+        'api_token',
     ];
 
     protected $hidden = [

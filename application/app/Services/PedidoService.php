@@ -37,7 +37,6 @@ class PedidoService extends PedidoHelperService
                 'cliente_id'        => $cliente_id,
                 'status_pedido_id'  => self::$statusPedidos['aberto'],
                 'cupom_desconto_id' => $cupom_desconto_id,
-                // 'numero_pedido',
                 'valor_pedido' => $valorTotalProdutos['subtotal'],
                 'valor_desconto' => $valorDesconto,
                 'valor_total' => $valorTotal,

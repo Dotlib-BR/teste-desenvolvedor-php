@@ -38,10 +38,10 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <td>Nome</td>
-                                        <td>Quant.</td>
-                                        <td>Valor Uni.</td>
-                                        <td>Subtotal</td>
+                                        <th>Nome</th>
+                                        <th>Quant.</th>
+                                        <th>Valor Uni.</th>
+                                        <th>Subtotal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,8 +49,8 @@
                                     <tr>
                                         <td width="70%">{{ $produto->produto->nome }}</td>
                                         <td>{{ $produto->quantidade }}</td>
-                                        <td>{{ $produto->valor_unitario }}</td>
-                                        <td>{{ $produto->subtotal }}</td>
+                                        <td>{{ decimalParaPagina($produto->valor_unitario) }}</td>
+                                        <td>{{ decimalParaPagina($produto->subtotal) }}</td>
                                     </tr>
                                     @empty
                                 @endforelse
@@ -68,9 +68,9 @@
                     <tr>
                         <td>
                             Desconto
-                            {{ (isset($pedido->cupomDesconto->codigo)) ? 'CUPOM: ' . $pedido->cupomDesconto->codigo : '' }}
+                            {{ (isset($pedido->cupomDesconto->codigo)) ? '(CUPOM: ' . $pedido->cupomDesconto->codigo . ')' : '' }}
                         </td>
-                        <td class="text-right">{{ decimalParaPagina($pedido->valor_desconto ?? null) }}</td>
+                        <td class="text-right">-{{ decimalParaPagina($pedido->valor_desconto ?? null) }}</td>
                     </tr>
                     <tr class="bg-info">
                         <td>Total</td>

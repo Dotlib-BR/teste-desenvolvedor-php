@@ -68,14 +68,13 @@ class PedidoController extends Controller
 
         $input = $request->all();
         $produtos = [];
-        $cupom_id = null;
 
         DB::beginTransaction();
 
         $produtos = $this->formataArray($input);
 
         try {
-            $pedido = $this->pedidoService->create($input['cliente_id'], $produtos,  $cupom_id);
+            $pedido = $this->pedidoService->create($input['cliente_id'], $produtos,  $input['cupom_desconto_id'] ?? null);
 
             DB::commit();
             return redirect()->route('controle.pedidos.index')->with('msg', 'Registro cadastrado com sucesso!');
@@ -132,7 +131,6 @@ class PedidoController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        // dd($input, $request->get('status_pedido_id'));
 
         DB::beginTransaction();
 

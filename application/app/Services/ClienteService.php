@@ -30,6 +30,10 @@ class ClienteService extends BaseService
 
     public function update(int $id, array $input)
     {
+        if (isset($input['cpf'])) {
+            $input['cpf'] = preg_replace('/[^0-9]/', '', $input['cpf']);
+        }
+
         if (!empty($input['password'])) {
             $input['password'] = bcrypt($input['password']);
         }

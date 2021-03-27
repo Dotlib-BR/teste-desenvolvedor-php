@@ -51,12 +51,12 @@
                 <tr>
                     <td>{{ $pedido->numero_pedido }}</td>
                     <td>{{ $pedido->cliente->nome ?? '' }}</td>
-                    <td>{{ $pedido->cliente->email }}</td>
-                    <td>{{ decimalParaPagina($pedido->valor_pedido) }}</td>
-                    <td>{{ decimalParaPagina($pedido->valor_desconto) }}</td>
-                    <td>{{ decimalParaPagina($pedido->valor_total) }}</td>
+                    <td>{{ $pedido->cliente->email ?? '' }}</td>
+                    <td>{{ decimalParaPagina($pedido->valor_pedido ?? null) }}</td>
+                    <td>{{ decimalParaPagina($pedido->valor_desconto ?? null) }}</td>
+                    <td>{{ decimalParaPagina($pedido->valor_total ?? null) }}</td>
                     <td>
-                        <label class="badge badge-{{ statusPedidoColor($pedido->status_pedido_id) }}">{{ $pedido->statusPedido->nome }}</label>
+                        <label class="badge badge-{{ statusPedidoColor($pedido->status_pedido_id) }}">{{ $pedido->statusPedido->nome ?? '' }}</label>
                     </td>
                     <td>{{ $pedido->created_at->format('d/m/Y') }}</td>
                     <td>
