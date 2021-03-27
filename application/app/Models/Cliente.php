@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\FilterModel;
 
 class Cliente extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, FilterModel;
 
     protected $fillable = [
         'nome',
@@ -19,4 +20,6 @@ class Cliente extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
 }

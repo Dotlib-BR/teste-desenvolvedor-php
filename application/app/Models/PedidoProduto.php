@@ -13,4 +13,14 @@ class PedidoProduto extends Model
         'valor_unitario',
         'subtotal',
     ];
+
+    /**
+     * Get the produto associated with the PedidoProduto
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function produto()
+    {
+        return $this->hasOne(Produto::class, 'id', 'produto_id');
+    }
 }

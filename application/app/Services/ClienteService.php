@@ -27,4 +27,13 @@ class ClienteService extends BaseService
             'password' => $password,
         ]);
     }
+
+    public function update(int $id, array $input)
+    {
+        if (!empty($input['password'])) {
+            $input['password'] = bcrypt($input['password']);
+        }
+
+        return $this->repository->update($id, $input);
+    }
 }

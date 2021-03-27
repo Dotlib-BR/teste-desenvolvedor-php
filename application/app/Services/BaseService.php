@@ -18,6 +18,11 @@ class BaseService
         return $this->repository->get($ids);
     }
 
+    public function paginate($pag = 20)
+    {
+        return $this->repository->paginate($pag);
+    }
+
     public function update(int $id, array $input)
     {
         return $this->repository->update($id, $input);
@@ -30,6 +35,10 @@ class BaseService
     public function where($where, $value)
     {
         return $this->repository->where($where, $value);
+    }
+    public function find($id)
+    {
+        return $this->repository->find($id);
     }
     public function findColumn($where, $value)
     {

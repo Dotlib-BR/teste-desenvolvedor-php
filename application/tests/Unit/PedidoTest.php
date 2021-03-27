@@ -67,7 +67,7 @@ class PedidoTest extends TestCase
             $produtosArr[$produto->produto_id]['produto_id'] = $produto->produto_id;
             $produtosArr[$produto->produto_id]['quantidade'] = $produto->quantidade;
         }
-
+        dd($produtosArr);
         $novoPedido = $this->pedidoService->create($cliente->id, $produtosArr, $cupomDesconto->id);
 
         $this->assertDatabaseHas('pedidos', ['cliente_id' => $cliente->id, 'id' => $novoPedido->id]);

@@ -13,4 +13,9 @@ class ClienteRepository extends BaseRepository implements ClienteInterface
     {
         parent::__construct($cliente);
     }
+
+    public function paginate($pag = 20)
+    {
+        return $this->model->filter()->paginate($pag);
+    }
 }

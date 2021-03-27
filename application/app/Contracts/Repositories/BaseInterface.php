@@ -9,6 +9,8 @@ interface BaseInterface
 
     public function get(array $ids = null);
 
+    public function paginate($pag = 20);
+
     public function create(array $input);
 
     public function find($id);
@@ -20,5 +22,7 @@ interface BaseInterface
     public function update(int $id, array $input);
 
     public function delete($id);
+
+    public function newQuery();
 
 }

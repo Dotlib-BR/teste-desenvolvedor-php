@@ -27,6 +27,11 @@ class BaseRepository implements BaseInterface
         return $this->model->get();
     }
 
+    public function paginate($pag = 20)
+    {
+        return $this->model->paginate($pag);
+    }
+
     public function create(array $input)
     {
         return $this->model->create($input);
@@ -62,4 +67,8 @@ class BaseRepository implements BaseInterface
         return $this->find($id)->delete();
     }
 
+    public function newQuery()
+    {
+        return $this->model;
+    }
 }

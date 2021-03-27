@@ -13,4 +13,9 @@ class CupomDescontoRepository extends BaseRepository implements CupomDescontoInt
     {
         parent::__construct($cupomDesconto);
     }
+
+    public function paginate($pag = 20)
+    {
+        return $this->model->filter()->paginate($pag);
+    }
 }

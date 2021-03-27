@@ -12,7 +12,7 @@ class ProdutoService extends BaseService
         parent::__construct($produtoInterface);
     }
 
-    public function create(string $nome, int $cod_barras, float $valor, int $qtd_estoque, bool $ativo)
+    public function create(string $nome, int $cod_barras, float $valor, int $qtd_estoque = null, bool $ativo)
     {
         return $this->repository->create([
             'nome'          => $nome,

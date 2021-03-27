@@ -60,4 +60,16 @@ class PedidoService extends PedidoHelperService
             throw $e;
         }
     }
+
+    public function listarPedidos($pag)
+    {
+        return $this->repository->newQuery()->with('statusPedido')->filter()->orderBy('status_pedido_id')->orderBy('created_at', 'asc')->paginate($pag);
+    }
+
+    public function getPedido($id)
+    {
+        return $this->repository->newQuery()->with(['cliente', 'pedidoProdutos.produto', 'cupomDesconto'])->find($id);
+    }
+
+
 }

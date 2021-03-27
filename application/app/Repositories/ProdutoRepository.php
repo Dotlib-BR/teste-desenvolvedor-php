@@ -21,4 +21,9 @@ class ProdutoRepository extends BaseRepository implements ProdutoInterface
         }
         return $this->model->where('ativo', 1)->get();
     }
+
+    public function paginate($pag = 20)
+    {
+        return $this->model->filter()->paginate($pag);
+    }
 }
