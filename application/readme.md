@@ -7,6 +7,37 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## Instalação do projeto
+após instalação e configuração do DB:
+```
+//migrando as tabelas
+php artisan migrate
+
+//Adicionando dados para todas as tabelas
+php artisan db:seed
+
+```
+
+## Acesso para área administrativa
+
+exemplo: http://127.0.0.1:8000/controle
+
+Login e senha:
+```
+admin@admin.com
+
+12345678
+```
+
+## Testes unitários
+- ClienteCrudTest
+- ProdutoCrudTest
+- PedidoTest
+
+## Documentação da Api
+
+https://documenter.getpostman.com/view/163974/TzCJfpR6#d2939d17-d1c0-4868-b902-9a51e00dd7ff
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
