@@ -32,8 +32,8 @@ class ClienteCrudTest extends TestCase
         $this->clienteInterface = app(ClienteInterface::class);
 
         $this->cliente = new stdClass;
-        $this->cliente->nome = 'leonel rodrigo alves de souza';
-        $this->cliente->email = 'rd7.rodrigo@gmail.com';
+        $this->cliente->nome = 'Rodrigo de souza';
+        $this->cliente->email = time().'.rodrigo@gmail.com';
         $this->cliente->cpf = '000.000.000-09';
         $this->cliente->password = 12345678;
 

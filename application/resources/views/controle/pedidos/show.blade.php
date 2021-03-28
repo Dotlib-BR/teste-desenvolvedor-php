@@ -17,15 +17,15 @@
                 <tbody>
                     <tr>
                         <td><strong>Cliente:</strong></td>
-                        <td>{{ $pedido->cliente->nome }}</td>
+                        <td>{{ $pedido->cliente->nome ?? '-' }}</td>
                     </tr>
                     <tr>
                         <td><strong>E-mail:</strong></td>
-                        <td>{{ $pedido->cliente->email }}</td>
+                        <td>{{ $pedido->cliente->email ?? '-' }}</td>
                     </tr>
                     <tr>
                         <td><strong>CPF:</strong></td>
-                        <td>{{ $pedido->cliente->cpf }}</td>
+                        <td>{{ $pedido->cliente->cpf ?? '-' }}</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="text-center">
@@ -47,7 +47,7 @@
                                 <tbody>
                                 @forelse($pedido->pedidoProdutos as $produto)
                                     <tr>
-                                        <td width="70%">{{ $produto->produto->nome }}</td>
+                                        <td width="70%">{{ $produto->produto->nome ?? '-' }}</td>
                                         <td>{{ $produto->quantidade }}</td>
                                         <td>{{ decimalParaPagina($produto->valor_unitario) }}</td>
                                         <td>{{ decimalParaPagina($produto->subtotal) }}</td>

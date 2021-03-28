@@ -45,4 +45,9 @@ class ProdutoService extends BaseService
     {
         return $this->repository->getAtivos($idProdutos);
     }
+
+    public function getProdutosAtivos()
+    {
+        return $this->repository->newQuery()->whereAtivo(1)->pluck('nome', 'id')->toArray();
+    }
 }

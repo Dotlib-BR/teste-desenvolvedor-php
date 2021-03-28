@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Controle;
 
 use App\Contracts\Repositories\ClienteInterface;
 use App\Contracts\Repositories\CupomDescontoInterface;
-use App\Contracts\Repositories\ProdutoInterface;
 use App\Contracts\Repositories\StatusPedidoInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\PedidoService;
+use App\Services\ProdutoService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -41,13 +41,11 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(CupomDescontoInterface $cupomDescontoInterface, ProdutoInterface $produtoInterface)
+    public function create(CupomDescontoInterface $cupomDescontoInterface, ProdutoService $produtoService)
     {
         $clientes = $this->clienteRepository->newQuery()->pluck('nome', 'id')->toArray();
         $cupoms = $cupomDescontoInterface->newQuery()->pluck('codigo', 'id')->toArray();
-        $produtos = $produtoInterface->newQuery()->pluck('nome', 'id')->toArray();
-
-        // dd($clientes, $cupoms);
+        $produtos = $produtoService->getProdutosAtivos();
 
         return view('controle.pedidos.create', compact(['clientes', 'cupoms', 'produtos']));
     }
@@ -62,19 +60,15 @@ class PedidoController extends Controller
     {
         $request->validate([
             'cliente_id' => 'required|integer',
-            'quantidade' => 'required|array',
-            'produto_id' => 'required|array',
+            'produtos' => 'required|array',
         ]);
 
         $input = $request->all();
-        $produtos = [];
 
         DB::beginTransaction();
 
-        $produtos = $this->formataArray($input);
-
         try {
-            $pedido = $this->pedidoService->create($input['cliente_id'], $produtos,  $input['cupom_desconto_id'] ?? null);
+            $pedido = $this->pedidoService->create($input['cliente_id'], $input['produtos'],  $input['cupom_desconto_id'] ?? null);
 
             DB::commit();
             return redirect()->route('controle.pedidos.index')->with('msg', 'Registro cadastrado com sucesso!');
@@ -82,16 +76,6 @@ class PedidoController extends Controller
             Log::error($e);
             return redirect()->back()->with('msg', "Erro ao cadastrar")->with('error', true)->withInput();
         }
-    }
-
-    private function formataArray($input)
-    {
-        $produtos = [];
-        foreach ($input['produto_id'] as $produto) {
-            $produtos[$produto]['produto_id'] = $produto;
-            $produtos[$produto]['quantidade'] = $input['quantidade'][$produto];
-        }
-        return $produtos;
     }
 
     /**

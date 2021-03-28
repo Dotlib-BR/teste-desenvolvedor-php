@@ -53,7 +53,7 @@ class ProdutoController extends Controller
         DB::beginTransaction();
 
         try {
-            $produto = $this->produtoService->create($input['nome'], (int) $input['cod_barras'], $input['valor'], null, $input['ativo'] ?? 0);
+            $produto = $this->produtoService->create($input['nome'], (int) $input['cod_barras'], decimalParaBanco($input['valor']), null, $input['ativo'] ?? 0);
 
             DB::commit();
             return redirect()->route('controle.produtos.index')->with('msg', 'Registro cadastrado com sucesso!');
@@ -96,7 +96,8 @@ class ProdutoController extends Controller
      */
     public function update(ProdutoRequest $request, $id)
     {
-        $input = $request->all();
+        $input          = $request->all();
+        $input['valor'] = decimalParaBanco($input['valor'] ?? null);
 
         DB::beginTransaction();
 
@@ -122,7 +123,6 @@ class ProdutoController extends Controller
     public function destroy($id)
     {
         try {
-
             $this->produtoService->delete($id);
 
             return redirect()->route('controle.produtos.index')->with('msg', 'Registro excluido com sucesso!');

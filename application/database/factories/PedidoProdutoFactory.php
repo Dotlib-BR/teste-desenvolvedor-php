@@ -12,8 +12,8 @@ $factory->define(PedidoProduto::class, function (Faker $faker) {
     $subtotal = $qtd * $valorUnitario;
 
     return [
-        'pedido_id'     => $faker->numberBetween(1, 10),
-        'produto_id'    => $faker->numberBetween(1, 5),
+        'pedido_id'     => $faker->numberBetween(1, 25),
+        'produto_id'    => $faker->numberBetween(1, 25),
         'quantidade'    => $qtd,
         'valor_unitario' => $valorUnitario,
         'subtotal'      => $subtotal,

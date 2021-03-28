@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\FilterModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CupomDesconto extends Model
 {
-    use FilterModel;
+    use FilterModel, SoftDeletes;
 
     protected $fillable = [
         'nome',
@@ -16,8 +17,8 @@ class CupomDesconto extends Model
         'valor'
     ];
 
-    public function getValorAttribute($valor)
-    {
-        return formatoCupomValor($valor);
-    }
+    // public function getValorAttribute($valor)
+    // {
+    //     return formatoCupomValor($valor);
+    // }
 }

@@ -12,6 +12,6 @@ class ClienteSeeder extends Seeder
      */
     public function run(ClienteInterface $clienteInterface)
     {
-        factory($clienteInterface->getModel(), 10)->create();
+        factory($clienteInterface->getModel(), 50)->create();
     }
 }

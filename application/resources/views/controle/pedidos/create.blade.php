@@ -90,15 +90,15 @@ $(document).ready(function() {
             let linha = '<li class="list-group-item" data-produto-id="' + produto.val() + '">\
                             <span class="badge badge-primary">' + quantidade + '</span>\
                             ' + produto.text() + ' <button type="button" class="btn btn-danger btn-sm float-right excluir" data-produto_id="' + produto.val() + '">Excluir</button>\
-                            <input type="hidden" name="quantidade[' + produto.val() + ']" value="' + quantidade + '"/>\
-                            <input type="hidden" name="produto_id[' + produto.val() + ']" value="' + produto.val() + '"/>\
+                            <input type="hidden" name="produtos[' + produto.val() + '][quantidade]" value="' + quantidade + '"/>\
+                            <input type="hidden" name="produtos[' + produto.val() + '][produto_id]" value="' + produto.val() + '"/>\
                         </li>';
-            $('#lista-produtos').append(linha)
+            $('#lista-produtos').append(linha);
         } else {
-            let pro = verificaProduto.find('[type="hidden"]').val()
-            let qtd = parseInt(pro) + parseInt(quantidade);
+            let qtdAtual = verificaProduto.find('[name="produtos[' + produto.val() + '][quantidade]"]');//.val()
+            let qtd = parseInt(qtdAtual.val()) + parseInt(quantidade);
             verificaProduto.find('.badge').text(qtd);
-            verificaProduto.find('[type="hidden"]').val(qtd)
+            qtdAtual.val(qtd)
         }
         $("#exampleModal").modal('hide')
 
@@ -106,6 +106,14 @@ $(document).ready(function() {
     $('#lista-produtos').delegate('.excluir', 'click', function() {
         $(this).parents('.list-group-item').remove()
     })
+
+    $('form').on('submit', function() {
+        let totalProdutos = $("#lista-produtos").find('[data-produto-id]').length
+        if (totalProdutos === 0) {
+            alert('Adicione produtos para finalizar o pedido.')
+            return false;
+        }
+    });
 })
 </script>
 @endsection

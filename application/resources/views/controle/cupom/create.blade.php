@@ -23,7 +23,14 @@
             </div>
             <div class="form-group">
               <label for="valor">Valor</label>
-              {!! Form::text('valor', null, ['class' => 'form-control', 'placeholder' => 'Valor', 'maxlength' => 255, 'required']) !!}
+              <div class="input-group mb-3">
+                {!! Form::text('valor', null, ['class' => 'form-control decimal', 'placeholder' => 'Valor', 'maxlength' => 255, 'required']) !!}
+                <div class="input-group-append">
+                    <span class="input-group-text">%</span>
+                </div>
+              </div>
+
+
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a href="{{ route('controle.cupom.index') }}" class="btn btn-default float-right">Calcelar</a>

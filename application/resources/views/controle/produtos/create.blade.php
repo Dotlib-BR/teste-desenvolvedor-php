@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
               <label for="valor">Valor</label>
-              {!! Form::text('valor', null, ['class' => 'form-control', 'placeholder' => 'Valor', 'maxlength' => 255, 'required']) !!}
+              {!! Form::text('valor', null, ['class' => 'form-control decimal', 'placeholder' => 'Valor', 'maxlength' => 255, 'required']) !!}
             </div>
 
             <div class="form-group form-check">

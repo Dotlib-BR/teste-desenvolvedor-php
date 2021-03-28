@@ -12,6 +12,6 @@ class CupomDescontoSeeder extends Seeder
      */
     public function run(CupomDescontoInterface $cupomDescontoInterface)
     {
-        factory($cupomDescontoInterface->getModel(), 5)->create();
+        factory($cupomDescontoInterface->getModel(), 25)->create();
     }
 }

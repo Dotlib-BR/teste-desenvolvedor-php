@@ -12,6 +12,6 @@ class ProdutoTableSeeder extends Seeder
      */
     public function run(ProdutoInterface $produtoInterface)
     {
-        $test = factory($produtoInterface->getModel(), 10)->create();
+        $test = factory($produtoInterface->getModel(), 25)->create();
     }
 }

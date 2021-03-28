@@ -55,6 +55,7 @@ class CupomDescontoController extends Controller
         ]);
 
         $input = $request->all();
+        $input['valor'] = decimalParaBanco($input['valor'] ?? null);
 
         DB::beginTransaction();
 
@@ -103,6 +104,7 @@ class CupomDescontoController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
+        $input['valor'] = decimalParaBanco($input['valor'] ?? null);
 
         DB::beginTransaction();
 
@@ -128,7 +130,6 @@ class CupomDescontoController extends Controller
     public function destroy($id)
     {
         try {
-
             $this->cupomDesconto->delete($id);
 
             return redirect()->route('controle.cupom.index')->with('msg', 'Registro excluido com sucesso!');

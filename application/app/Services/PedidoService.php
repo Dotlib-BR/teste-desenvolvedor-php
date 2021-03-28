@@ -12,6 +12,8 @@ class PedidoService extends PedidoHelperService
         DB::beginTransaction();
 
         try {
+            $produtosArr = $this->formataArray($produtosArr);
+
             $idProdutos = Arr::pluck($produtosArr, ['produto_id']);
 
             $recuperaProdutos = $this->produtoService->recuperaProdutos($idProdutos);
@@ -70,5 +72,15 @@ class PedidoService extends PedidoHelperService
         return $this->repository->newQuery()->with(['cliente', 'pedidoProdutos.produto', 'cupomDesconto'])->find($id);
     }
 
+    private function formataArray($produtosArr)
+    {
+        $produtos = [];
+
+        foreach ($produtosArr as $produto) {
+            $produtos[$produto['produto_id']]['produto_id'] = $produto['produto_id'];
+            $produtos[$produto['produto_id']]['quantidade'] = $produto['quantidade'];
+        }
+        return $produtos;
+    }
 
 }

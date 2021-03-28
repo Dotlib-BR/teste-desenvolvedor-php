@@ -77,9 +77,17 @@
             return false;
         }
     });
-    $('.select2').select2({
-        placeholder: 'Selecione'
-    });
+    if ($('.select2').length > 0) {
+        $('.select2').select2({
+            placeholder: 'Selecione'
+        });
+    }
+    if ($('.cpf').length) {
+        $('.cpf').mask('000.000.000-00');
+    }
+    if ($('.decimal').length) {
+        $('.decimal').mask('000.000.000.000.000,00', {reverse: true});
+    }
   </script>
 
   @yield('scripts')

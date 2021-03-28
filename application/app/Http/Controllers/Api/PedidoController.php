@@ -48,10 +48,10 @@ class PedidoController extends Controller
 
         DB::beginTransaction();
 
-        $produtos = $this->formataArray($input);
+        // $produtos = $this->formataArray($input);
 
         try {
-            $pedido = $this->pedidoService->create($input['cliente_id'], $produtos,  $input['cupom_desconto_id'] ?? null);
+            $pedido = $this->pedidoService->create($input['cliente_id'], $input['produtos'],  $input['cupom_desconto_id'] ?? null);
 
             DB::commit();
             return response(['pedido' => $pedido, 'msg' => 'registro criado com sucesso!', 'error' => false]);
@@ -59,17 +59,6 @@ class PedidoController extends Controller
             Log::error($e);
             return response(['msg' => 'houve um erro ao salvar os dados', 'error' => true], 500);
         }
-    }
-
-    private function formataArray($input)
-    {
-        $produtos = [];
-
-        foreach ($input['produtos'] as $produto) {
-            $produtos[$produto['produto_id']]['produto_id'] = $produto['produto_id'];
-            $produtos[$produto['produto_id']]['quantidade'] = $produto['quantidade'];
-        }
-        return $produtos;
     }
 
     /**

@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
               <label for="cpf">CPF</label>
-              {!! Form::text('cpf', null, ['class' => 'form-control', 'placeholder' => 'CPF', 'maxlength' => 255, 'required']) !!}
+              {!! Form::text('cpf', null, ['class' => 'form-control cpf', 'placeholder' => 'CPF', 'maxlength' => 255, 'required']) !!}
             </div>
             {{--
             <div class="form-group">

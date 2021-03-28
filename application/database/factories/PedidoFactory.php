@@ -13,7 +13,7 @@ $factory->define(Pedido::class, function (Faker $faker) use($pedidoService, $fac
     $valor = $faker->randomFloat(2, 20, 200);
 
     return [
-        'cliente_id'        => $faker->numberBetween(1, 10),
+        'cliente_id'        => $faker->numberBetween(1, 50),
         'status_pedido_id'  => $faker->numberBetween(1, 3),
         'cupom_desconto_id' => null,
         'numero_pedido'     =>  $pedidoService->novoNumeroPedido(uniqid()),
