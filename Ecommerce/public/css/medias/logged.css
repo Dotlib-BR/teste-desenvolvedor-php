@@ -1,0 +1,38 @@
+@media(max-width: 1025px) {
+
+}
+@media(max-width: 769px) {
+    
+}
+@media(max-width: 426px) {
+    .order__product--item {
+        padding: 30px 12px
+    }
+
+    .order__product--destroy {
+        right: 5px;
+    }
+
+    .order__product--img {
+        height: 160px;
+    }
+
+    .order__product--info {
+        text-align: center;
+    }
+
+    .order__product--quantity {
+        justify-content: center;
+    }
+
+    .order__product--subtotal, .order__product--subtotal-discount, .order__product--total, .order__number, .order__status {
+        margin: 0 auto;
+        padding: 12px 30px
+    }
+
+    .order__actions {
+        padding-left: 0;
+        text-align: center;
+    }
+    
+}

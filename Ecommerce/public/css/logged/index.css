@@ -1,0 +1,177 @@
+body {
+    padding-top: 60px;
+}
+.welcome {
+    font-size: 28px;
+}
+
+.filter__checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.product__image {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.product__item {
+    padding: 12px;
+    transition: 0.5s all;
+    position: relative;
+}
+.product__item:hover {
+    box-shadow: 0px 0px 10px 10px #cccc;
+}
+
+.product__price--line {
+    text-decoration: line-through;
+}
+
+.product__bascket {
+    position:absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.product__bascket svg {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.product__bascket svg g path {
+    transition: .5s all;
+} 
+
+.product__bascket svg:hover g path{
+    fill: #198754;
+}
+
+.logged__main {
+    position: relative;
+}
+
+.finish {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
+
+.finish__link.hidden {
+    display: none;
+}
+
+.finish__link {
+    display: block;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    transform-origin: bottom;
+}
+
+.finish__link svg {
+    width: 70px;
+    height: 70px;
+}
+.flutuation {
+    animation-name: flutuation;
+    animation-timing-function: ease;
+}
+@keyframes flutuation {
+    0%   { transform: translateY(0); }
+    30%  { transform: translateY(-10px); }
+    50%  { transform: translateY(0); }
+    100% { transform: translateY(0); }
+}
+
+.order__product--item {
+    padding: 12px;
+    border-bottom: 1px solid #cecece;
+    position: relative;
+}
+
+.order__product--img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.order__product--info {
+    padding-left: 20px;
+}
+
+.order__product--destroy {
+    position: absolute;
+    top: 0;
+    max-width: 30px;
+    cursor: pointer;
+    text-align: center;
+    right: 0;
+    font-size: 20px;
+}
+
+.order__product--quantity {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.product__quantity {
+    max-width: 50px;
+    margin: 0 10px;
+    text-align: center;
+    padding: 0;
+}
+
+.order__product--add, .order__product--remove {
+    font-size: 18px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.order__product--subtotal, .order__product--subtotal-discount, .order__product--total, .order__number, .order__status {
+    display: flex;
+    justify-content: space-between;
+    max-width: 320px;
+    padding: 12px 12px 12px 30px;
+    margin: 0;
+}
+
+.order__product--subtotal, .order__product--subtotal-discount {
+    color: #888;
+    font-size: 14px;
+}
+
+.order__product--total {
+    font-size: 18px;
+    color: #333 ;
+}
+
+.order__actions {
+    padding-left: 30px;
+}
+
+.empty__cart img {
+    width: 100%;
+    max-width: 200px;
+}
+
+.empty__cart {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.order__number, .order__status {
+    font-size: 14px;
+    color: #666;
+}
+
+.order__quantity {
+    display: flex;
+    justify-content: center;
+}
