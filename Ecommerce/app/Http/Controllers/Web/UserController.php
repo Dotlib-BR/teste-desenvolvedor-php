@@ -26,7 +26,7 @@ class UserController extends Controller
             return view('user.index', ['products' => $filter['data'], 'filter' => $filterInfo]);
         }
 
-        return redirect()->route('home')->with('error', 'Erro ao fazer o filtro');
+        return redirect()->route('order')->with('error', 'Error when making the filter');
     }
 
     /**
@@ -77,7 +77,7 @@ class UserController extends Controller
         $updated = UserFacade::update($currentUserId, $fields);
 
         if($updated['error'] === 0) {
-            return back()->with('success', 'Atualização feita com sucesso');
+            return back()->with('success', 'Update successfully');
         }
     }
 

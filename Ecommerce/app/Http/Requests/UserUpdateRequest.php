@@ -26,8 +26,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => 'string',
             'last_name' => 'string',
-            'email' => 'unique:users,email',
-            'password' => 'min:6|max:16',
+            'password' => 'min:6|max:16|nullable',
             'image' => 'image|mimes:jpeg,png,jpg|max:1920|nullable'
         ];
     }
@@ -35,11 +34,10 @@ class UserUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.unique' => 'E-mail já existente, por favor insira outro',
-            'password.min' => 'A senha deve possuir 6 ou mais caracteres',
-            'password.max' => 'A senha deve possuir até 16 caracteres',
-            'image.mime' => 'Insira um formato de imagem válido (jpeg,png ou jpg).',
-            'image.image' => 'Insira uma imagem válida (jpeg,png ou jpg).'
+            'password.min' => 'Password must have 6 or more characters',
+            'password.max' => 'Password must have up to 16 characters',
+            'image.mimes' => 'Enter a valid image format (jpeg,png ou jpg).',
+            'image.image' => 'Enter a valid image file (jpeg,png ou jpg).'
         ];
     }
 }

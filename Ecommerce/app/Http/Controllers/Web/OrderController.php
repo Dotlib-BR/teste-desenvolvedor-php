@@ -10,8 +10,17 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index($id)
+    public function index(Request $request)
     {
+        $filterInfo = $request->only(['perPage', 'filter', 'page', 'status']);
+        $filterInfo['user'] = ['status' => 'current'];
+        $filter = OrderFacade::index($filterInfo);
+        $filterInfo['page'] = $filterInfo['page'] ?? 1;
+        if($filter['error'] === 0){
+            return view('user.order.index', ['orders' => $filter['data'], 'filter' => $filterInfo]);
+        }
+
+        return redirect()->route('home')->with('error', 'Erro ao fazer o filtro');
     }
 
     public function editView()

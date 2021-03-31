@@ -45,7 +45,7 @@ class UserStoreRequest extends FormRequest
             'password.min' => 'A senha deve possuir 6 ou mais caracteres.',
             'password.max' => 'A senha deve possuir até 16 caracteres.',
             'password.required' => 'Campo Obrigatorio.',
-            'image.mime' => 'Insira um formato de imagem válido (jpeg,png ou jpg).',
+            'image.mimes' => 'Insira um formato de imagem válido (jpeg,png ou jpg).',
             'image.image' => 'Insira uma imagem válida (jpeg,png ou jpg).',
             'document.cpf' => 'Cpf Invalido'
         ];

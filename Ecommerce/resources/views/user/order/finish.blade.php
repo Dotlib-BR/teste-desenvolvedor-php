@@ -3,7 +3,7 @@
 @section('content')
     {{-- @dd($products); --}}
     <section class="orders container">
-        <h3 class="h3 mt-3">Finish Order</h3>
+        <h3 class="h3 mt-3">Shopping Cart</h3>
 
         <p>Products</p>
         <div class="row">

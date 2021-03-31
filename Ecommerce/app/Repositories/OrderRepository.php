@@ -7,6 +7,7 @@ use App\Models\OrderProduct;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -28,22 +29,31 @@ class OrderRepository implements OrderRepositoryInterface
     public function index(array $data = [])
     {
         try {
-            $perPage = (int) (!empty($data['perPage'])) ? $data['perPage'] : 20;
+            $perPage = (int) (!empty($data['perPage'])) ? $data['perPage'] : 10;
             $list = [];
-
             if (!empty($data['all'])) {
                 $list = $this->model->get();
             }
-
+            
             if (!count($list)) {
-
+                
                 $list = $this->model;
-                if (!empty($data['filter'])) {
-                    $list = $list->orderBy($data['filter'], $data['order']);
-                    // dd($list->toSql());
+
+                if(!empty($data['user']['status'])){
+                    $id = ($data['user']['status'] === 'current')? Auth::user()->id : $data['user']['id'];
+                    $list = $list->where('id_user', $id);
                 }
 
+                if(!empty($data['status'])){
+                    $status = (string) ($data['status'] - 1);
+                    $list = $list->where('status', $status);
+                }
+                
+                if (!empty($data['filter'])) {
+                    $list = $list->orderBy($data['filter'], $data['order']);
+                }
                 $list = $list->paginate($perPage, ['*'], 'page', $data['page'] ?? null);
+                
             }
 
             if ($list) {

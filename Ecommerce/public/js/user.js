@@ -25,4 +25,10 @@ $(function () {
         });
     }
 
+    const $money = $('.format__money');
+
+    $money.map((index, element) => {
+        let value = $(element).text();
+        $(element).text(formatNumber(value, { style: 'currency', currency: 'BRL' }, 'pt-BR'));
+    })
 });

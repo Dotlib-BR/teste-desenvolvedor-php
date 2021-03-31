@@ -24,7 +24,7 @@ class ProductRepository implements ProductRepositoryInterface
     public function index(array $data = [])
     {
         try {
-            $perPage = (int) (!empty($data['perPage'])) ? $data['perPage'] : 20;
+            $perPage = (int) (!empty($data['perPage'])) ? $data['perPage'] : 10;
             $list = [];
 
             if (!empty($data['all'])) {

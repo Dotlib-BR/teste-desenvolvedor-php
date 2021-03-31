@@ -34,5 +34,26 @@
         padding-left: 0;
         text-align: center;
     }
+
+    .render__image {
+        height: 200px;
+        width: 200px;
+    }
     
+    .order__item {
+        font-size: 11px;
+    }
+
+    .welcome {
+        font-size: 20px;
+    }
+
+    .home__user--avatar {
+        width: 70px;
+        height: 70px;
+    }
+
+    a.footer__menu--link {
+        font-size: 13px;
+    }
 }

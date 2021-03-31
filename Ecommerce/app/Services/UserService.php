@@ -25,7 +25,7 @@ class UserService
     {
         try {
 
-            if(!empty($data['image'])){
+            if (!empty($data['image'])) {
                 $image = $data['image'];
                 unset($data['image']);
                 $imageName = time() . '.' . $image->extension();
@@ -99,9 +99,23 @@ class UserService
     {
         try {
 
+            if (!empty($data['image'])) {
+                $image = $data['image'];
+                unset($data['image']);
+                $imageName = time() . '.' . $image->extension();
+                $image->storeAs('public/img/users', $imageName);
+                $data['avatar'] = $imageName;
+            }
+
+            foreach ($data as $key => $info) {
+                if (!$info) {
+                    unset($data[$key]);
+                }
+            }
+
             $update = $this->repository->update($id, $data);
 
-            if($update) {
+            if ($update) {
                 return [
                     'error' => 0
                 ];
@@ -111,8 +125,7 @@ class UserService
                 'error' => 1,
                 'description' => 'Erro ao atualizar.'
             ];
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::error('CLIENTE_SERVICE_UPDATE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
@@ -131,7 +144,8 @@ class UserService
      * @param string $doc Document to be cleaned
      * @return string The document string
      */
-    private function clearDoc(string $doc) {
+    private function clearDoc(string $doc)
+    {
         $doc = str_replace(array(".", ',', "-", "/"), "", $doc);
         return $doc;
     }
@@ -140,7 +154,7 @@ class UserService
      * Add punctuation to the document 
      * @param
      */
-    private function formatDocument(string $doc) {
-
+    private function formatDocument(string $doc)
+    {
     }
 }

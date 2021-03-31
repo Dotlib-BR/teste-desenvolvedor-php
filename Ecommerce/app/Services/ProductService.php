@@ -26,7 +26,6 @@ class ProductService
             $data = [];
             
             if(!empty($filter['filter'])){
-                
                 $filter['order'] = 'DESC';
                 
                 if($filter['filter'] === 'name' || $filter['filter'] === 'low'){
@@ -108,14 +107,14 @@ class ProductService
 
     /**
      * Get a Product
-     * @param int $id Product id
+     * @param array $ids Product id
      * @return array A array with error and data or error with description error
      */
-    public function show($id)
+    public function show(array $ids)
     {
 
         try {
-            $product = $this->repository->show($id);
+            $product = $this->repository->show($ids);
 
             if ($product['error'] === 0) {
                 return [

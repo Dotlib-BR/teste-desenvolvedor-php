@@ -2,31 +2,37 @@
 @section('title', 'Home')
 @section('content')
     <section class="container">
-        <div class="mt-5">
+        <div class="mt-5 home__welcome">
+            @php
+                $photo = $currentUser->avatar ?? 'user.svg';
+            @endphp
+            <figure class="home__user--avatar-container">
+                <img class="home__user--avatar" src="{{ url('storage/img/users/' . $photo) }}" alt="">
+            </figure>
             <p class="welcome">
-                Olá <b>{{ ucwords($currentUser['name'] . ' ' . $currentUser['last_name']) }}</b>, seja bem vindo!
+                Hey <b>{{ ucwords($currentUser['name'] . ' ' . $currentUser['last_name']) }}</b>, welcome!
             </p>
         </div>
     </section>
     <section class="container mt-5 products">
-        <h2 class="products__title">Produtos</h2>
+        <h2 class="products__title">Products</h2>
         <form action="#filter" method="get" class="mb-5" id="#filter">
             <input type="hidden" name="page" value="{{ $filter['page'] }}">
             <div class="row">
                 <div class="col-md-2">
                     <select class="form-control" onchange="this.form.submit()" name="perPage">
-                        <option @if (!empty($filter['perPage']) && $filter['perPage'] === '20') selected @endif value="10">10 por página</option>
-                        <option @if (!empty($filter['perPage']) && $filter['perPage'] === '20') selected @endif value="20">20 por página</option>
-                        <option @if (!empty($filter['perPage']) && $filter['perPage'] === '30') selected @endif value="30">30 por página</option>
-                        <option @if (!empty($filter['perPage']) && $filter['perPage'] === '40') selected @endif value="40">40 por página</option>
+                        <option @if (!empty($filter['perPage']) && $filter['perPage'] === '20') selected @endif value="10">10 per Page</option>
+                        <option @if (!empty($filter['perPage']) && $filter['perPage'] === '20') selected @endif value="20">20 per Page</option>
+                        <option @if (!empty($filter['perPage']) && $filter['perPage'] === '30') selected @endif value="30">30 per Page</option>
+                        <option @if (!empty($filter['perPage']) && $filter['perPage'] === '40') selected @endif value="40">40 per Page</option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
                     <select class="form-control" onchange="this.form.submit()" name="filter" id="">
-                        <option value="">Classificar por</option>
-                        <option @if (!empty($filter['filter']) && $filter['filter'] === 'name') selected @endif value="name">Nome</option>
-                        <option @if (!empty($filter['filter']) && $filter['filter'] === 'low') selected @endif value="low">Menor preço</option>
-                        <option @if (!empty($filter['filter']) && $filter['filter'] === 'high') selected @endif value="high">Maior Preço</option>
+                        <option value="">Sort By</option>
+                        <option @if (!empty($filter['filter']) && $filter['filter'] === 'name') selected @endif value="name">Name</option>
+                        <option @if (!empty($filter['filter']) && $filter['filter'] === 'low') selected @endif value="low">Low value</option>
+                        <option @if (!empty($filter['filter']) && $filter['filter'] === 'high') selected @endif value="high">High value</option>
                     </select>
                 </div>
             </div>
@@ -60,11 +66,12 @@
                             {{ $product->name_product }}
                         </p>
                         @if (!empty($finalPrice))
-                            <p class="product__price">De <span
-                                    class="h6 product__price--line">R${{ $product->price }}</span> por apenas <span
-                                    class=" text-danger h6 product__discount">R${{ $finalPrice }}</span></p>
+                            <p class="product__price">Was <span
+                                    class="h6 format__money product__price--line">{{ $product->price }}</span> now only
+                                <span class="format__money text-danger h6 product__discount">{{ $finalPrice }}</span>
+                            </p>
                         @else
-                            <p class="product__price">Por apenas <span class="h6">R${{ $product->price }}</span> </p>
+                            <p class="format__money product__price"><span class="h6">{{ $product->price }}</span> </p>
                         @endif
                     </div>
                 @endforeach
@@ -79,6 +86,7 @@
                     if (!empty($filter['perPage'])) {
                         $nextPage .= '&perPage=' . $filter['perPage'];
                         $previousPage .= '&perPage=' . $filter['perPage'];
+                        $filter['perPage'] = (int) $filter['perPage'];
                     }
                     
                     if (!empty($filter['filter'])) {
@@ -88,16 +96,24 @@
                     
                     $nextPage .= '#filter';
                     $previousPage .= '#filter';
+                    $filter['page'] = (int) $filter['page'];
+                    $last = $products->lastPage();
                 @endphp
                 <div class="pagination">
-                    <a class="pagination__link" href="/{{ $previousPage }}">Anterior</a>
-                    <a class="pagination__link" href="/{{ $nextPage }}">Proximo</a>
+                    @if ($last === $filter['page'] && $filter['page'] > 1)
+                        <a class="pagination__link" href="{{ url(route('home') . $previousPage) }}">Prev</a>
+                    @elseif($last > $filter['page'] && $filter['page'] > 1)
+                        <a class="pagination__link" href="{{ url(route('home') . $previousPage) }}">Prev</a>
+                        <a class="pagination__link" href="{{ url(route('home') . $nextPage) }}">Next</a>
+                    @elseif($filter['page'] === 1 && $last > 1)
+                        <a class="pagination__link" href="{{ url(route('home') . $nextPage) }}">Next</a>
+                    @endif
                 </div>
             </div>
         @endif
     </section>
     <div class="finish">
-        <a class="finish__link flutuation hidden" href="{{route('finishOrder')}}">
+        <a class="finish__link flutuation hidden" href="{{ route('finishOrder') }}">
             <svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512"
                 xmlns="http://www.w3.org/2000/svg">
                 <g>

@@ -30,7 +30,20 @@ class OrderService
         try {
             $data = [];
 
-            $filter = $this->filter($filter);
+            if (!empty($filter['filter'])) {
+
+                $filter['order'] = 'DESC';
+
+
+
+                if ($filter['filter'] === "older" || $filter['filter'] === "low") {
+                    $filter['order'] = 'ASC';
+                }
+
+                $filter['filter'] = ($filter['filter'] === 'high' || $filter['filter'] == 'low') ? 'total_price' : $filter['filter'];
+
+                $filter['filter'] = ($filter['filter'] === 'newer' || $filter['filter'] === 'older') ? 'dt_order' : $filter['filter'];
+            }
 
             $data = $this->repository->index($filter ?? []);
 
@@ -103,7 +116,7 @@ class OrderService
                 }
             }
 
-            if(count($data['items'])){
+            if (count($data['items'])) {
                 foreach ($data['items'] as $item) {
                     $sumAdjuste[] = $item;
                 }
@@ -112,7 +125,7 @@ class OrderService
             $last = $this->showLastCreated();
 
             $lastOrderId = 1;
-            
+
             $sum = $this->sumPrice($sumAdjuste ?? $data);
             $productsInformation = [];
             if ($sum['data']['itens']) {
@@ -394,7 +407,7 @@ class OrderService
         try {
 
             $ids = [];
-            foreach($data as $item){
+            foreach ($data as $item) {
                 $ids[] = $item['id'];
             }
 
@@ -470,27 +483,6 @@ class OrderService
         return $cart;
     }
 
-    /**
-     * Clears filter items
-     * @param array $filter Array with filter options
-     * @return array Array with the clean filter
-     */
-    private function filter(array $filter)
-    {
-        if (!empty($filter['filter'])) {
-
-            $filter['order'] = 'ASC';
-
-            if ($filter['filter'] === 'date_recent' || $filter['filter'] === 'high') {
-                $filter['filter'] = ($filter['filter'] === 'date_recent') ? 'dt_order' : 'total_price';
-                $filter['order'] = 'DESC';
-            }
-
-            $filter['filter'] = ($filter['filter'] === 'high') ? 'price' : $filter['filter'];
-        }
-    }
-
-
     public function finishItems()
     {
         try {
@@ -499,7 +491,7 @@ class OrderService
 
             $productsId = [];
 
-            foreach($cart as $item) {
+            foreach ($cart as $item) {
                 $productsId[] = $item['id'];
             }
             $products = new ProductRepository();
@@ -507,9 +499,9 @@ class OrderService
             $productsOrder = $products->getProductsByIds($productsId);
 
             $productsOrderFinal = [];
-            foreach($productsOrder['data'] as $item) {
-                foreach($cart as $cartItem) {
-                    if($item['id'] == $cartItem['id']) {
+            foreach ($productsOrder['data'] as $item) {
+                foreach ($cart as $cartItem) {
+                    if ($item['id'] == $cartItem['id']) {
                         $productsOrderFinal[] = [
                             'product' => $item,
                             'quantity' => $cartItem['quantity'],
