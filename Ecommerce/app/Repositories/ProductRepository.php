@@ -31,12 +31,15 @@ class ProductRepository implements ProductRepositoryInterface
                 $list = $this->model->get();
             }
 
+            if(!empty($data['ids'])) {
+                $list = $this->model->whereIn('id', $data['ids'])->get();
+            }
+
             if (!count($list)) {
 
                 $list = $this->model;
                 if (!empty($data['filter'])) {
                     $list = $list->orderBy($data['filter'], $data['order']);
-                    // dd($list->toSql());
                 }
 
                 $list = $list->paginate($perPage, ['*'], 'page', $data['page'] ?? null);
@@ -166,13 +169,13 @@ class ProductRepository implements ProductRepositoryInterface
 
     /**
      * Get a Product
-     * @param array $id Product id
+     * @param int $id Product id
      * @return array A array with error and data or error with description error
      */
-    public function show(array $id)
+    public function show(int $id)
     {
         try {
-            $product = $this->model->whereIn('id', $id)->get();
+            $product = $this->model::find($id);
             if ($product) {
                 return [
                     'error' => 0,

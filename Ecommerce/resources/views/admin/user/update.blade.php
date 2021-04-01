@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Update Account')
+@section('title', 'Admin - Update User')
 @section('content')
     <section class="container">
         <h3 class="card-title h3">My Account</h3>

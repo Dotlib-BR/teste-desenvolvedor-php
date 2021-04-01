@@ -2,60 +2,79 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Facades\AdminFacade;
-use App\Facades\OrderFacade;
-use App\Facades\ProductFacade;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
-class AdminController extends Controller {
+class AdminController extends Controller
+{
 
     /**
      * Return view for admin Home
-     * @return view Admin home
+     * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $products = ProductFacade::index();
-        $order = OrderFacade::index(10);
-        return view('admin.index',[
-            'products' => $products,
-            'orders' => $order
-        ]);
+    public function index()
+    {
+        try {
+            return view('admin.index');
+        } catch (\Exception $e) {
+            Log::error('ADMIN_CONTROLLER_INDEX', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('adminHome')->with('error', 'An unexpected error has occurred');
+        }
     }
 
     /**
      * Return view of login for admin
-     * @return view Admin home
+     * @return \Illuminate\Http\Response
      */
-    public function loginView() {
-        return view('admin.auth.login');
+    public function loginView()
+    {
+        try {
+            return view('admin.auth.login');
+        } catch (\Exception $e) {
+            Log::error('ADMIN_CONTROLLER_LOGIN_VIEW', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+            return redirect()->route('loginAdmin')->with('error', 'An unexpected error has occurred');
+        }
     }
 
     /**
      * Authenticates the admin
-     * @return redirect Redirect for admin home
+     * @return \Illuminate\Http\Response
      */
-    public function login(Request $request) {
-        $credentials = $request->only(['email', 'password']);
+    public function login(Request $request)
+    {
+        try {
 
-        if(Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('adminHome');
+            $credentials = $request->only(['email', 'password']);
+
+            if (Auth::guard('admin')->attempt($credentials)) {
+                return redirect()->route('adminHome');
+            }
+        } catch (\Exception $e) {
+            Log::error('ADMIN_CONTROLLER_LOGIN', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+            return redirect()->route('loginAdmin')->with('error', 'An unexpected error has occurred');
         }
     }
 
     /**
      * Log out the admin
-     * @return redirect Redirect for login screen of admin
+     * @return @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
     {
-        Auth::guard('admin')->logout();
+        try {
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            Auth::guard('admin')->logout();
 
-        return redirect()->route('loginAdmin');
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('loginAdmin');
+        } catch (\Exception $e) {
+            Log::error('ADMIN_CONTROLLER_LOGIN', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+            return redirect()->route('loginAdmin')->with('error', 'An unexpected error has occurred');
+        }
     }
-    
 }

@@ -2,7 +2,6 @@ $(function(){
 
     const $deleteOrder = $('.delete__order');
     const currentUrl = window.location.href;
-    const deleteOrderUrl = window.location.origin + '/admin/pedido'; 
     const $deleteProduct =$('.delete__product');
     // const deleteUrl
     
@@ -65,7 +64,7 @@ $(function(){
 
             if(ids.length > 0){
                 $.ajax({
-                    url: window.location.origin + '/admin/pedido',
+                    url: window.location.origin + '/admin/orders',
 
                     method: 'DELETE',
                     headers: {
@@ -76,54 +75,13 @@ $(function(){
                     }
                 }).done(function(resp){
                     if(resp.error === 0) {
-                        window.location.replace(window.location.href);
+                        document.location.reload(true);
+                        window.location.replace();
                     } else {
-                        console.log('não deletou')
+                        console.log('error')
                     }
                 }).fail(function(resp){
-                    console.log('deu erro na requisição ');
-                    console.log(resp);
-                });
-            }
-            
-        });
-
-    }
-
-
-    const $massDeletionProduct = $('.mass__deletion--product');
-    const $deleteAllProduct = $('.delete__all--product');
-
-    if($massDeletionProduct && $deleteAllProduct){
-        $deleteAllProduct.on('click', function() {
-            let ids = [];
-            $massDeletionProduct.map(function(index, element){
-                if($(element).prop('checked')){
-                    ids.push(parseInt($(element).val()));
-                    
-                }
-            });
-
-            if(ids.length > 0){
-                $.ajax({
-                    url: window.location.origin + '/admin/produto',
-                    async: true,
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-Token': $('input[name="_token"]').val()
-                    },
-                    data: {
-                        id: ids
-                    }
-                }).done(function(resp){
-                    if(resp.error === 0) {
-                        window.location.replace(window.location.href);
-                    } else {
-                        console.log('não deletou')
-                    }
-                }).fail(function(resp){
-                    console.log('deu erro na requisição ');
-                    console.log(resp);
+                    console.log('fail');
                 });
             }
             

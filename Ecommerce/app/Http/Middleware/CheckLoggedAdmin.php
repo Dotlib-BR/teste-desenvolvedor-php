@@ -22,6 +22,8 @@ class CheckLoggedAdmin
             return redirect()->route('loginAdmin');
         }
 
+        View::share([ 'currentUser' => Auth::guard('admin')->user()]);
+        
         return $next($request);
     }
 }

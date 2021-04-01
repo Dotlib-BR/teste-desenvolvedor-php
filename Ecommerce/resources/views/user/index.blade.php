@@ -2,7 +2,7 @@
 @section('title', 'Home')
 @section('content')
     <section class="container">
-        <div class="mt-5 home__welcome">
+        <div class="mt-5 home__welcome---admin">
             @php
                 $photo = $currentUser->avatar ?? 'user.svg';
             @endphp
@@ -102,10 +102,12 @@
                 <div class="pagination">
                     @if ($last === $filter['page'] && $filter['page'] > 1)
                         <a class="pagination__link" href="{{ url(route('home') . $previousPage) }}">Prev</a>
+                        <span class="pagination__link">Next</span>
                     @elseif($last > $filter['page'] && $filter['page'] > 1)
                         <a class="pagination__link" href="{{ url(route('home') . $previousPage) }}">Prev</a>
                         <a class="pagination__link" href="{{ url(route('home') . $nextPage) }}">Next</a>
                     @elseif($filter['page'] === 1 && $last > 1)
+                        <span class="pagination__link">Prev</span>
                         <a class="pagination__link" href="{{ url(route('home') . $nextPage) }}">Next</a>
                     @endif
                 </div>

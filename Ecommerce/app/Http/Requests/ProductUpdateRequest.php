@@ -35,8 +35,8 @@ class ProductUpdateRequest extends FormRequest
     public function messages()
 	{
 		return [
-            'image.image' => 'Insira uma imagem válida (jpeg,png ou jpg).',
-            'image.mimes' => 'Insira um formato de imagem válido (jpeg,png ou jpg).'
+            'image.image' => 'Enter a valid image file (jpeg,png ou jpg).',
+            'image.mimes' => 'Enter a valid image format (jpeg,png ou jpg).'
 		];
 	}
 

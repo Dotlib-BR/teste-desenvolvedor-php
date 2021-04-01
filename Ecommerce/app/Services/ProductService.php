@@ -74,7 +74,7 @@ class ProductService
                 $image = $data['image'];
                 unset($data['image']);
                 $imageName = time() . '.' . $image->extension();
-                $image->storeAs('public/img/products', $imageName);
+                $image->storeAs('public/img/product', $imageName);
                 $data['product_image'] = $imageName;
             }
 
@@ -107,14 +107,14 @@ class ProductService
 
     /**
      * Get a Product
-     * @param array $ids Product id
+     * @param int $ids Product id
      * @return array A array with error and data or error with description error
      */
-    public function show(array $ids)
+    public function show(int $id)
     {
 
         try {
-            $product = $this->repository->show($ids);
+            $product = $this->repository->show($id);
 
             if ($product['error'] === 0) {
                 return [

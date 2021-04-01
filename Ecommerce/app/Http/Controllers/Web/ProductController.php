@@ -7,87 +7,162 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
 
     public function index(Request $request)
     {
-        $pages = $request->page ?? 10;
-        $products = ProductFacade::index($pages);
-        return view('user.product.index', ['products' => $products]);
-    }
+        try {
+            $filterInfo = $request->only(['perPage', 'filter', 'page']);
+            $filter = ProductFacade::index($filterInfo);
+            $filterInfo['page'] = $filterInfo['page'] ?? 1;
+            if ($filter['error'] === 0) {
+                return view('user.index', ['products' => $filter['data'], 'filter' => $filterInfo]);
+            }
 
-    public function show($id)
-    {
+            return redirect()->route('home')->with('error', 'Error bringing products');
+        } catch (\Exception $e) {
+            Log::error('PRODUCT_CONTROLLER_INDEX', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('home')->with('error', 'An unexpected error has occurred');
+        }
     }
 
     /**
-     * Return edit screen of admin for update Product 
-     * @return view Edit Screen
+     * Admin Product page
+     * @return @return \Illuminate\Http\Response
      */
-    public function editView($id)
+    public function indexAdmin(Request $request)
     {
-        $product = ProductFacade::show($id);
+        try {
+            $filterInfo = $request->only(['perPage', 'filter', 'page']);
+            $filter = ProductFacade::index($filterInfo);
+            $filterInfo['page'] = $filterInfo['page'] ?? 1;
+            if ($filter['error'] === 0) {
+                return view('admin.product.index', ['products' => $filter['data'], 'filter' => $filterInfo]);
+            }
 
-        if ($product === 1) {
-            return redirect('/Produtos')->with('fail', 'Produto não encontrado');
+            return redirect()->route('productAdmin')->with('error', 'Error bringing products');
+        } catch (\Exception $e) {
+            Log::error('PRODUCT_CONTROLLER_INDEX_ADMIN', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('adminHome')->with('error', 'An unexpected error has occurred');
         }
+    }
 
-        return view('admin.product.update', ['product' => $product['data']]);
+
+    /**
+     * Show product for admin
+     * @param int $id
+     * @return @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try {
+            $product = ProductFacade::show($id);
+
+            if ($product === 1) {
+                return redirect()->route('productAdmin')->with('error', 'Product not found');
+            }
+
+            return view('admin.product.update', ['product' => $product['data']]);
+        } catch (\Exception $e) {
+            Log::error('PRODUCT_CONTROLLER_SHOW', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('adminHome')->with('error', 'An unexpected error has occurred');
+        }
     }
 
     /**
      * Update product action 
-     * @return redirect Products or back to the edit screen
+     * @return @return \Illuminate\Http\Response
      */
     public function update(ProductUpdateRequest $request, $id)
     {
-        $data = $request->validated();
-        $update = ProductFacade::update($id, $data);
+        try {
+            $data = $request->validated();
+            $update = ProductFacade::update($id, $data);
 
-        if ($update['error'] == 0) {
-            return redirect()->route('adminHome')->with('success', 'Mudança feita com sucesso sucesso!');
+            if ($update['error'] == 0) {
+                return back()->with('success', 'Update Successfully');
+            }
+
+            return back()->with('error', 'Error updating');
+        } catch (\Exception $e) {
+            Log::error('PRODUCT_CONTROLLER_INDEX_ADMIN', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('adminHome')->with('error', 'An unexpected error has occurred');
         }
-
-        return back()->with('error', 'Este nome de produto já existe');
     }
 
-
-    public function registerView()
+    /**
+     * Add product page 
+     * @return @return \Illuminate\Http\Response
+     */
+    public function addView()
     {
-        return view('admin.product.store');
+        try {
+            return view('admin.product.store');
+        } catch (\Exception $e) {
+            Log::error('PRODUCT_CONTROLLER_ADD_VIEW', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('adminHome')->with('error', 'An unexpected error has occurred');
+        }
     }
 
     /**
      * Delete a many products
      * @param mixed $id Orders id
+     * @return @return \Illuminate\Http\Response
      */
-    public function delete(Request $request, $id = null){
-        $manyIds = $request->only('id');
+    public function delete(Request $request, $id = null)
+    {
+        try {
+            $manyIds = $request->only('id');
 
-        $deleted = ProductFacade::delete($id ?? $manyIds);
-        return $deleted;
-        if($deleted['error'] === 0) {
+            $deleted = ProductFacade::delete($id ?? $manyIds);
+            return $deleted;
+            if ($deleted['error'] === 0) {
+                return [
+                    'error' => 0,
+                    'message' => 'success'
+                ];
+            }
+
             return [
-                'error' => 0,
-                'message' => 'success'
+                'error' => 1,
+                'description' => 'Error when trying delete a product.'
+            ];
+        } catch (\Exception $e) {
+            Log::error('PRODUCT_CONTROLLER_DELETE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return [
+                'error' => 1,
+                'description' => 'Error when trying delete a product.'
             ];
         }
-
-        return [
-            'error' => 1,
-            'description' => 'Error when trying delete a product.'
-        ];
     }
 
-    public function store(ProductStoreRequest $request) {
+    /**
+     * Store Action
+     * @return @return \Illuminate\Http\Response
+     */
+    public function store(ProductStoreRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            $store = ProductFacade::store($data);
 
-        $data = $request->validated();
-        $store = ProductFacade::store($data);
+            if ($store['error'] === 0) {
+                return redirect()->route('productAdmin');
+            }
 
-        if($store['error'] === 0) {
-            return redirect()->route('adminHome');
+        } catch (\Exception $e) {
+            Log::error('PRODUCT_CONTROLLER_STORE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('adminHome')->with('error', 'An unexpected error has occurred');
         }
     }
 }

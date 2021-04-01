@@ -36,18 +36,18 @@ class UserStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Campo Obrigatorio.',
-            'last_name.required' => 'Campo Obrigatorio.',
-            'email.unique' => 'E-mail já existente, por favor insira outro.',
-            'email.required' => 'Campo Obrigatorio.',
-            'document.unique' => 'CPF já cadastrado.',
-            'document.required' => 'Campo Obrigatorio.',
-            'password.min' => 'A senha deve possuir 6 ou mais caracteres.',
-            'password.max' => 'A senha deve possuir até 16 caracteres.',
-            'password.required' => 'Campo Obrigatorio.',
-            'image.mimes' => 'Insira um formato de imagem válido (jpeg,png ou jpg).',
-            'image.image' => 'Insira uma imagem válida (jpeg,png ou jpg).',
-            'document.cpf' => 'Cpf Invalido'
+            'name.required' => 'Name is required.',
+            'last_name.required' => 'Last name is required',
+            'email.unique' => 'E-mail already registered',
+            'email.required' => 'E-mail is required.',
+            'document.unique' => 'CPF already registered.',
+            'document.required' => 'Document is required.',
+            'document.cpf' => 'Invalid Cpf.',
+            'password.required' => 'Password is required.',
+            'password.min' => 'Password must have 6 or more characters',
+            'password.max' => 'Password must have up to 16 characters',
+            'image.mimes' => 'Enter a valid image format (jpeg,png ou jpg).',
+            'image.image' => 'Enter a valid image file (jpeg,png ou jpg).',
         ];
     }
 }

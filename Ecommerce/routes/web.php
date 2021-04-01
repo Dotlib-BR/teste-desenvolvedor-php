@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 // User Logged Routes
 Route::prefix('/')->middleware('checkLogged')->group(function () {
 
-    Route::get('/', 'UserController@index')->name('home');
+    Route::get('/', 'ProductController@index')->name('home');
+    
     Route::get('config', 'UserController@editView')->name('config');
     Route::put('config', 'UserController@update')->name('validateConfig');
 
@@ -50,26 +51,33 @@ Route::prefix('/')->middleware('checkLogged')->group(function () {
 Route::prefix('admin')->middleware('checkLoggedAdmin')->group(function () {
     Route::get('/', 'AdminController@index')->name('adminHome');
 
-    Route::prefix('produto')->group(function () {
+    Route::prefix('orders')->group(function () {
+        Route::get('/', 'AdminController@order')->name('orderAdmin');
+    });
 
-        Route::get('/register', 'ProductController@registerView')->name('registerView');
+    Route::prefix('products')->group(function () {
+        
+        Route::get('/', 'ProductController@indexAdmin')->name('productAdmin');
+        Route::get('/register', 'ProductController@addView')->name('registerView');
         Route::post('/register', 'ProductController@store')->name('storeProduct');
         Route::delete('/', 'ProductController@delete');
         
         Route::prefix('{id}')->group(function () {
             Route::delete('/', 'ProductController@delete');
-            Route::get('/', 'ProductController@editView')->name('editProduct');
+            Route::get('/', 'ProductController@show')->name('editProduct');
             Route::put('/', 'ProductController@update')->name('updateProduct');
         });
     });
     
-    Route::prefix('pedido')->group(function () {
+    Route::prefix('orders')->group(function () {
+
+        Route::get('/', 'OrderController@indexAdmin')->name('ordersAdmin');
 
         Route::delete('/', 'OrderController@delete');
 
         Route::prefix('{id}')->group(function () {
+            Route::get('/', 'OrderController@showAdmin')->name('showOrderAdmin');
             Route::delete('/', 'OrderController@delete');
-            Route::get('/', 'OrderController@showAdmin')->name('showAdmin');
             Route::put('/', 'OrderController@update')->name('updateOrderAdmin');
         });
     });

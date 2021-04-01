@@ -2,50 +2,52 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Facades\ProductFacade;
 use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
-
     /**
-     * User home page
-     * @return \Illuminate\Http\Response 
+     * List all users
+     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        $filterInfo = $request->only(['perPage', 'filter', 'page']);
-        $filter = ProductFacade::index($filterInfo);
-        $filterInfo['page'] = $filterInfo['page'] ?? 1;
-        if($filter['error'] === 0){
-            return view('user.index', ['products' => $filter['data'], 'filter' => $filterInfo]);
-        }
+    public function index() {
 
-        return redirect()->route('order')->with('error', 'Error when making the filter');
     }
-
     /**
      * Login Screen
      * @return \Illuminate\Http\Response
      */
     public function loginView()
     {
-        return view('user.auth.login');
+        try {
+            return view('user.auth.login');
+        } catch (\Exception $e) {
+            Log::error('USER_CONTROLLER_LOGIN_VIEW', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('login')->with('error', 'An unexpected error has occurred');
+        }
     }
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-        if(Auth::attempt($credentials)) {
-            return redirect()->route('home');
-        }
+        try {
+            $credentials = $request->only('email', 'password');
+            if (Auth::attempt($credentials)) {
+                return redirect()->route('home');
+            }
 
-        return back()->with('error', 'Usuario não existe e/ou credenciais erradas');
+            return back()->with('error', 'User does not exist and / or wrong credentials');
+        } catch (\Exception $e) {
+            Log::error('USER_CONTROLLER_LOGIN', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('login')->with('error', 'An unexpected error has occurred');
+        }
     }
 
     /**
@@ -54,30 +56,50 @@ class UserController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::logout();
+        try {
+            Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
+            return redirect()->route('login');
+        } catch (\Exception $e) {
+            Log::error('USER_CONTROLLER_LOGOUT', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
-        $request->session()->regenerateToken();
-
-        return redirect()->route('login');
+            return redirect()->route('login')->with('error', 'An unexpected error has occurred');
+        }
     }
 
-    public function editView(){
-        return view('user.config.update');
+    /**
+     * Edit User page
+     * @return \Illuminate\Http\Response
+     */
+    public function editView()
+    {
+        try {
+            return view('user.config.update');
+        } catch (\Exception $e) {
+            Log::error('USER_CONTROLLER_EDIT_VIEW', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('home')->with('error', 'An unexpected error has occurred');
+        }
     }
 
     /**
      * Update current User
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request) {
-        $fields = $request->validated();
-        $currentUserId = Auth::user()->id;
-        $updated = UserFacade::update($currentUserId, $fields);
+    public function update(UserUpdateRequest $request)
+    {
+        try {
+            $fields = $request->validated();
+            $currentUserId = Auth::user()->id;
+            $updated = UserFacade::update($currentUserId, $fields);
 
-        if($updated['error'] === 0) {
-            return back()->with('success', 'Update successfully');
+            if ($updated['error'] === 0) {
+                return back()->with('success', 'Update successfully');
+            }
+        } catch (\Exception $e) {
+            Log::error('USER_CONTROLLER_UPDATE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('home')->with('error', 'An unexpected error has occurred');
         }
     }
 
@@ -85,9 +107,15 @@ class UserController extends Controller
      * Register screen
      * @return \Illuminate\Http\Response
      */
-    public function registerView() {
+    public function registerView()
+    {
+        try {
+            return view('user.auth.register');
+        } catch (\Exception $e) {
+            Log::error('USER_CONTROLLER_REGISTER_VIRE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
-        return view('user.auth.register');
+            return redirect()->route('login')->with('error', 'An unexpected error has occurred');
+        }
     }
 
     /**
@@ -96,14 +124,20 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        $validated  = $request->validated();
+        try {
+            $validated  = $request->validated();
 
-        $newUser = UserFacade::store($validated);
-    
-        if($newUser['error'] === 0) {
-            return redirect()->route('login');
+            $newUser = UserFacade::store($validated);
+
+            if ($newUser['error'] === 0) {
+                return redirect()->route('login');
+            }
+
+            return back()->with('error', $newUser['message']);
+        } catch (\Exception $e) {
+            Log::error('USER_CONTROLLER_STORE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return redirect()->route('login')->with('error', 'An unexpected error has occurred');
         }
-    
-        return back()->with('error', $newUser['message']);
     }
 }

@@ -13,9 +13,9 @@ interface ProductRepositoryInterface
 
     /**
      * Get a single product
-     * @param array $id Product id
+     * @param int $id Product id
      */
-    public function show(array $id);
+    public function show(int $id);
 
     /**
      * Create a product

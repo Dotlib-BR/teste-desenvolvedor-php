@@ -27,7 +27,7 @@ class ProductStoreRequest extends FormRequest
             'name_product' => 'required|string|unique:products,name_product',
             'price' => 'required|numeric',
             'code' => 'numeric|required|unique:products,code',
-            'discount' => 'numeric|nullable',
+            'discount' => 'numeric|nullable|max:10|min:10',
             'discount_status' => 'nullable',
             'image' => 'image|mimes:jpeg,png,jpg|max:1920|nullable'
         ];
@@ -36,13 +36,13 @@ class ProductStoreRequest extends FormRequest
     public function messages()
 	{
 		return [
-            'name_product.required' => 'O nome do produto é obrigatório.',
-            'name_product.unique' => 'Este nome já esta em uso.',
-            'price.required' => 'O Preço é obrigatório.',
-            'code.required' => 'O código de barras é obrigatório.',
-            'code.unique' => 'Este código de barras já esta em uso.',
-            'image.image' => 'Insira uma imagem válida (jpeg,png ou jpg).',
-            'image.mimes' => 'Insira um formato de imagem válido (jpeg,png ou jpg).'
+            'name_product.required' => 'The product name is required.',
+            'name_product.unique' => 'This name is already in use.',
+            'price.required' => 'The price is required.',
+            'code.required' => 'The barcode is required.',
+            'code.unique' => 'This barcode is already in use.',
+            'image.image' => 'Enter a valid image file (jpeg,png ou jpg).',
+            'image.mimes' => 'Enter a valid image format (jpeg,png ou jpg).'
 		];
 	}
 }

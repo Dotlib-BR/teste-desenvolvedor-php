@@ -1,6 +1,6 @@
 @include('include.headerAdmin')
 
-<main>
+<main class="admin__wrapper">
 
         @yield('content')
 

@@ -240,17 +240,26 @@ class OrderRepository implements OrderRepositoryInterface
             $productsId = [];
             $orderProduct = [];
             foreach ($data[0]['OrderProduct'] as $item) {
-                $productsId[] = $item->id_product;
+                $productsId['ids'][] = $item->id_product;
                 $orderProduct[] = $item;
             }
-            $productRepository = new ProductRepository();
-            $products = $productRepository->show($productsId);
 
+            $userRepository = new UserRepository();
+
+            $user = $userRepository->show($order->id_user);
+
+            $productRepository = new ProductRepository();
+            $products = $productRepository->index($productsId);
+            
             $final = [
                 'order' => $order,
                 'orderProduct' => $orderProduct,
                 'products' => $products
             ];
+
+            if(!empty($user['data'])){
+                $final['user'] = $user['data'];
+            }
             
             if (!empty($final)) {
                 return [

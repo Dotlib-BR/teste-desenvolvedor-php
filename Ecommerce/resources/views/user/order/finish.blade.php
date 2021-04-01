@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Pedidos')
+@section('title', 'Finish Order')
 @section('content')
     {{-- @dd($products); --}}
     <section class="orders container">

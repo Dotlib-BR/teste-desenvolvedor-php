@@ -150,11 +150,4 @@ class UserService
         return $doc;
     }
 
-    /**
-     * Add punctuation to the document 
-     * @param
-     */
-    private function formatDocument(string $doc)
-    {
-    }
 }

@@ -1,0 +1,76 @@
+.admin__wrapper {
+    min-height: 100%;
+}
+
+.home__welcome--admin {
+    padding-top: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-user {
+    background-color: #8d9093;
+    border-color: #8d9093;
+    color: #fff;
+}
+
+.change__status {
+    max-width: 290px;
+    margin-left: 30px;
+}
+
+.delete__order {
+    margin-left: 30px;
+}
+
+.user__order--text {
+    font-size: 18px;
+}
+
+.order__itens {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.order__itens .order__item {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.order__itens input {
+    margin-right: 10px;
+}
+
+.product__delete {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.product__delete svg {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.product__delete.selected svg path {
+    fill: #ff0000;
+}
+
+.finish.hidden {
+    display: none;
+}
+
+.product__item .mass__deletion--product {
+    display: none;
+}
+
+.product__update--title {
+    padding-top: 60px;
+}
+
+.product__item a {
+    text-decoration: none;
+    color: #212529;
+}

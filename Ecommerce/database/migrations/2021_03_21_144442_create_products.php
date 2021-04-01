@@ -18,7 +18,7 @@ class CreateProducts extends Migration
             $table->string('name_product', 100);
             $table->decimal('price', 8, 2);
             $table->char('code', 10)->unique();
-            $table->decimal('discount',3,2)->nullable();
+            $table->tinyInteger('discount')->nullable();
             $table->enum('discount_status', ['0', '1'])->default(0);
             $table->string('product_image', 20)->nullable();
         });
