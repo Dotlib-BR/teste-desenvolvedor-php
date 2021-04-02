@@ -1,8 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ProductStoreRequest extends FormRequest
 {
@@ -26,7 +30,7 @@ class ProductStoreRequest extends FormRequest
         return [
             'name_product' => 'required|string|unique:products,name_product',
             'price' => 'required|numeric',
-            'code' => 'numeric|required|unique:products,code',
+            'code' => 'numeric|required|unique:products,code|max:9999999999|min:1000000000',
             'discount' => 'numeric|nullable|max:100|min:0',
             'discount_status' => 'nullable',
             'image' => 'image|mimes:jpeg,png,jpg|max:1920|nullable'
@@ -45,4 +49,15 @@ class ProductStoreRequest extends FormRequest
             'image.mimes' => 'Enter a valid image format (jpeg,png ou jpg).'
 		];
 	}
+
+    protected function failedValidation(Validator $validator)
+	{
+		$errors = (new ValidationException($validator))->errors();
+		$errors = str_replace("\n", ". \n", implode("\n" , array_map(function ($arr) {
+			return implode("\n" , $arr);
+		}, $errors)));
+		throw new HttpResponseException(
+			response()->json(['error' => 1, 'description' => $errors], JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+		);
+    }
 }

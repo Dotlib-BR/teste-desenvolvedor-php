@@ -102,9 +102,8 @@ class OrderController extends Controller
         try {
             $idRequest = $request->only('id');
             $status = $request->only('status');
-            $type = $request->only('type')['type'];
 
-            $updated = OrderFacade::update($id ?? $idRequest, $status, $type);
+            $updated = OrderFacade::update($id ?? $idRequest, $status);
 
             if ($updated['error'] === 0) {
                 return $updated;
@@ -127,6 +126,7 @@ class OrderController extends Controller
     {
         try {
             $items = $request->only('items');
+
             $stored = OrderFacade::store($items);
 
             if ($stored['error'] === 0) {
@@ -187,7 +187,7 @@ class OrderController extends Controller
     /**
      * Show order for user
      * @param int $id order id
-     * @return @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function show(int $id)
     {
@@ -208,7 +208,7 @@ class OrderController extends Controller
     /**
      * Show order for admin
      * @param int $id
-     * @return @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function showAdmin(int $id)
     {
@@ -230,8 +230,8 @@ class OrderController extends Controller
     /**
      * Delete a many orders
      * @param \Illuminate\Http\Request $request
-     * @param mixed $id Orders id
-     * @return @return \Illuminate\Http\Response
+     * @param mixed $id
+     * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, $id = null)
     {

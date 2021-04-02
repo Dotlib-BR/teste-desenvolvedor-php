@@ -23,8 +23,8 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
     /**
      * Create a orderProduct
-     * @param array $data orderProduct info
-     * @return array A array with error and data or error with description error
+     * @param array $data
+     * @return array 
      */
     public function store(array $data) {
         try {
@@ -68,8 +68,8 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
     /**
      * Get the Order related to OrderProduct
-     * @param int $id Order id
-     * @return array A array with error and data or error with description error
+     * @param int $id 
+     * @return array 
      */
     public function showOrderFromOrderProduct(int $id) {
         try {
@@ -100,8 +100,8 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
     /**
      * Traz o Produto relacionado a PedidoProduto
-     * @param int $id Product id
-     * @return array A array with error and data or error with description error
+     * @param int $id 
+     * @return array 
      */
     public function showProductFromOrderProduct(int $id) {
         try {
@@ -132,8 +132,8 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
     /**
      * Traz o Produto relacionado a PedidoProduto
-     * @param array $id Product id array
-     * @return array A array with error and data or error with description error
+     * @param array $id 
+     * @return array 
      */
     public function showProductFromOrderProductMultiple(array $id) {
         try {

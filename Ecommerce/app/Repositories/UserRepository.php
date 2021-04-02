@@ -20,8 +20,8 @@ class UserRepository implements UserRepositoryInterface
 
     /**
      * List all users
-     * @param array $data Filter info
-     * @return array A array with error and data or error with description error
+     * @param array $data 
+     * @return array 
      */
     public function index(array $data = [])
     {
@@ -29,7 +29,7 @@ class UserRepository implements UserRepositoryInterface
             $perPage = (int) (!empty($data['perPage'])) ? $data['perPage'] : 10;
             $list = [];
 
-            if (!empty($data['all'])) {
+            if (!empty($data['filter']) && $data['filter'] === 'all') {
                 $list = $this->model->get();
             }
 
@@ -71,8 +71,8 @@ class UserRepository implements UserRepositoryInterface
 
     /**
      * Create a new User
-     * @param array $data User info
-     * @return array A array with error and data or error with description error
+     * @param array $data
+     * @return array 
      */
     public function store(array $data)
     {
@@ -112,13 +112,17 @@ class UserRepository implements UserRepositoryInterface
 
     /**
      * Update a user
-     * @param int $id User id
-     * @param array $data User info
-     * @return array A array with error and data or error with description error
+     * @param int $id
+     * @param array $data 
+     * @return array 
      */
     public function update(int $id, array $data)
     {
         try {
+
+            if(!empty($data['password'])) {
+                $data['password'] = Hash::make($data['password']);
+            }
 
             $update = $this->model::where('id', $id)->update($data);
 
@@ -144,8 +148,8 @@ class UserRepository implements UserRepositoryInterface
 
     /**
      * Delete a Product
-     * @param array $ids Product id
-     * @return array A array with error and data or error with description error
+     * @param array $ids 
+     * @return array 
      */
     public function delete(array $ids)
     {
@@ -176,8 +180,8 @@ class UserRepository implements UserRepositoryInterface
 
     /**
      * Get a user
-     * @param int $id User id
-     * @return array A array with error and data or error with description error
+     * @param int $id 
+     * @return array 
      */
     public function show(int $id)
     {
@@ -193,7 +197,7 @@ class UserRepository implements UserRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Error bringing the user.'
+                'description' => 'User not found.'
             ];
         } catch (\Exception $e) {
             Log::error('USER_REPOSITORY_SHOW', [$e->getMessage(), $e->getFile(), $e->getLine()]);

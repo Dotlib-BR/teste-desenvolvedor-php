@@ -18,8 +18,8 @@ class ProductRepository implements ProductRepositoryInterface
 
     /**
      * List all Products
-     * @param array $data Filter info
-     * @return array A array with error and data or error with description error
+     * @param array $data 
+     * @return array 
      */
     public function index(array $data = [])
     {
@@ -69,8 +69,8 @@ class ProductRepository implements ProductRepositoryInterface
 
     /**
      * Store a new Product
-     * @param array $data Product info
-     * @return array A array with error and data or error with description error
+     * @param array $data 
+     * @return array 
      */
     public function store(array $data)
     {
@@ -103,8 +103,8 @@ class ProductRepository implements ProductRepositoryInterface
     /**
      * Update a Product
      * @param int $id Product id
-     * @param array $data Product info
-     * @return array A array with error and data or error with description error
+     * @param array $data 
+     * @return array 
      */
     public function update(int $id, array $data)
     {
@@ -136,8 +136,8 @@ class ProductRepository implements ProductRepositoryInterface
 
     /**
      * Delete a Product
-     * @param array $ids Product id
-     * @return array A array with error and data or error with description error
+     * @param array $ids 
+     * @return array 
      */
     public function delete(array $ids)
     {
@@ -169,8 +169,8 @@ class ProductRepository implements ProductRepositoryInterface
 
     /**
      * Get a Product
-     * @param int $id Product id
-     * @return array A array with error and data or error with description error
+     * @param int $id
+     * @return array 
      */
     public function show(int $id)
     {
@@ -185,7 +185,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Error bringing product.'
+                'description' => 'Product not found.'
             ];
         } catch (\Exception $e) {
             Log::error('PRODUCT_REPOSITORY_SHOW', [$e->getMessage(), $e->getFile(), $e->getLine()]);
@@ -199,8 +199,8 @@ class ProductRepository implements ProductRepositoryInterface
 
     /**
      * Get some Products
-     * @param array $id Product id array
-     * @return array A array with error and data or error with description error
+     * @param array $id 
+     * @return array 
      */
     public function showMultiple(array $id)
     {
@@ -230,8 +230,8 @@ class ProductRepository implements ProductRepositoryInterface
 
     /**
      * Get the sum of the price of the products
-     * @param array $data Array with id and quantity
-     * @return array A array with error and data or error with description error
+     * @param array $data 
+     * @return array 
      */
     public function sumPrice(array $data)
     {
@@ -290,8 +290,8 @@ class ProductRepository implements ProductRepositoryInterface
 
     /**
      * Check if product Has a imgane name
-     * @param int $id Product id
-     * @return array A array with error and data or error with description error
+     * @param int $id 
+     * @return array 
      */
     public function checkIfProductHasImage(int $id)
     {
@@ -324,8 +324,8 @@ class ProductRepository implements ProductRepositoryInterface
 
     /**
      * Get products by Ids
-     * @param array $ids ProductsIds
-     * @return array A array with error and data or error with description error
+     * @param array $ids 
+     * @return array 
      */
     public function getProductsByIds(array $ids)
     {

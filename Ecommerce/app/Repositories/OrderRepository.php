@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Order;
-use App\Models\OrderProduct;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -13,25 +12,24 @@ class OrderRepository implements OrderRepositoryInterface
 {
 
     private $model;
-    private $userRepository;
 
     public function __construct()
     {
         $this->model = new order();
-        $this->userRepository = new UserRepository();
     }
 
     /**
      * List all Order
-     * @param array $data Filter info
-     * @return array A array with error and data or error with description error
+     * @param array $data
+     * @return array 
      */
     public function index(array $data = [])
     {
         try {
             $perPage = (int) (!empty($data['perPage'])) ? $data['perPage'] : 10;
             $list = [];
-            if (!empty($data['all'])) {
+
+            if (!empty($data['filter']) && $data['filter'] === 'all') {
                 $list = $this->model->get();
             }
             
@@ -78,41 +76,10 @@ class OrderRepository implements OrderRepositoryInterface
         }
     }
 
-
-    /**
-     * List Order with pagination
-     * @param int $perPage Products per page
-     * @return array A array with error and data or error with description error
-     */
-    public function indexPage(int $perPage)
-    {
-        try {
-            $data = $this->model->paginate($perPage);
-            if ($data) {
-                return [
-                    'error' => 0,
-                    'data' => $data
-                ];
-            }
-
-            return [
-                'error' => 1,
-                'description' => 'Error picking up products.'
-            ];
-        } catch (\Exception $e) {
-            Log::error('ORDER_REPOSITORY_INDEX_PAGE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
-
-            return [
-                'error' => 1,
-                'description' => 'Error picking up products.'
-            ];
-        }
-    }
-
     /**
      * Store Order and Store orderProduct
-     * @param array $data Array with order description and products
-     * @return array A array with error and data or error with description error
+     * @param array $data 
+     * @return array 
      */
     public function store(array $data)
     {
@@ -163,8 +130,8 @@ class OrderRepository implements OrderRepositoryInterface
     /**
      * Update order
      * @param int $id Order id
-     * @param array $data Order info 
-     * @return array A array with error and data or error with description error
+     * @param array $data 
+     * @return array 
      */
     public function update(int $id, array $data)
     {
@@ -196,7 +163,7 @@ class OrderRepository implements OrderRepositoryInterface
     /**
      * Delete one order or many order
      * @param array $id
-     * @return array A array with error and data or error with description error
+     * @return array 
      */
     public function delete(array $id)
     {
@@ -227,8 +194,8 @@ class OrderRepository implements OrderRepositoryInterface
 
     /**
      * Show order with orderProducts
-     * @param int $id Order id
-     * @return array A array with error and data or error with description error
+     * @param int $id 
+     * @return array 
      */
     public function show(int $id)
     {
@@ -270,7 +237,7 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'data' => 'Error bringing order.'
+                'data' => 'Order not found.'
             ];
         } catch (\Exception $e) {
             Log::error('ORDER_REPOSITORY_SHOW', [$e->getMessage(), $e->getFile(), $e->getLine()]);
@@ -283,8 +250,8 @@ class OrderRepository implements OrderRepositoryInterface
 
     /**
      * Get Products related with order
-     * @param int $id Order id
-     * @return array A array with error and data or error with description error
+     * @param int $id 
+     * @return array 
      */
     public function showProductsFromOrderProduct(int $id)
     {
@@ -315,8 +282,8 @@ class OrderRepository implements OrderRepositoryInterface
 
     /**
      * Check if already exist order number
-     * @param string $number Order Number
-     * @return array A array with error and data or error with description error
+     * @param string $number 
+     * @return array 
      */
     public function showOrderFromNumber(string $number)
     {
@@ -348,7 +315,7 @@ class OrderRepository implements OrderRepositoryInterface
 
     /**
      * Get last stored
-     * @return array A array with error and data or error with description error
+     * @return array 
      */
 
     public function showLastCreated()

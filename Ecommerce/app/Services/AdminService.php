@@ -18,9 +18,9 @@ class AdminService
 
     /**
      * Update a user
-     * @param int $id User id
-     * @param array $data User info
-     * @return array A array with error and data or error with description error
+     * @param int $id
+     * @param array $data
+     * @return array 
      */
     public function update(array $data)
     {

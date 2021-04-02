@@ -18,27 +18,14 @@ class UserService
 
     /**
      * List all users with per page or not
-     * @param array $data Filter for users
-     * @return array A array with error and data or error with description error
+     * @param array $data 
+     * @return array 
      */
     public function index(array $filter = [])
     {
         try {
-            $data = [];
-
-            if (!empty($filter['filter'])) {
-                $filter['order'] = 'DESC';
-
-                if ($filter['filter'] === 'name' || $filter['filter'] === 'low') {
-                    $filter['filter'] = ($filter['filter'] === 'name') ? 'name_product' : 'price';
-                    $filter['order'] = 'ASC';
-                }
-
-                $filter['filter'] = ($filter['filter'] === 'high') ? 'price' : $filter['filter'];
-            }
 
             $data = $this->repository->index($filter ?? []);
-
 
             if ($data) {
                 return [
@@ -65,8 +52,8 @@ class UserService
 
     /**
      * Create a new User
-     * @param array $data User info
-     * @return array A array with error and data or error with description error
+     * @param array $data 
+     * @return array 
      */
     public function store(array $data)
     {
@@ -97,7 +84,7 @@ class UserService
             ];
         } catch (\Exception $e) {
 
-            Log::error('CLIENTE_SERVICE_UPDATE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+            Log::error('CLIENTE_SERVICE_STORE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
                 'error' => 1,
@@ -108,8 +95,8 @@ class UserService
 
     /**
      * Get a user
-     * @param int $id User id
-     * @return array A array with error and data or error with description error
+     * @param int $id 
+     * @return array 
      */
     public function show(int $id)
     {
@@ -139,9 +126,9 @@ class UserService
 
     /**
      * Update a user
-     * @param int $id User id
-     * @param array $data User info
-     * @return array A array with error and data or error with description error
+     * @param int $id
+     * @param array $data
+     * @return array 
      */
     public function update(int $id, array $data)
     {
@@ -157,14 +144,15 @@ class UserService
             
 
             foreach ($data as $key => $info) {
-                if (!$info) {
+                if (!$info || $key == '_method') {
                     unset($data[$key]);
                 }
 
-                if($key === 'document') {
+                if($key === 'document' && !empty($info)) {
                     $data[$key] = $this->clearDoc($info);
                 }
             }
+
             $update = $this->repository->update($id, $data);
 
             if ($update) {
@@ -189,8 +177,8 @@ class UserService
 
     /** 
      * Delete a user
-     * @param mixed $id user id
-     * @return array A array with error and data or error with description error
+     * @param mixed $id
+     * @return array 
      */
     public function delete($id)
     {
@@ -212,7 +200,6 @@ class UserService
             if ($delete['error'] === 0) {
                 return [
                     'error' => 0,
-                    'data' => true
                 ];
             }
 
@@ -228,7 +215,7 @@ class UserService
 
     /**
      * Removes punctuation from the document
-     * @param string $doc Document to be cleaned
+     * @param string $doc
      * @return string The document string
      */
     private function clearDoc(string $doc)

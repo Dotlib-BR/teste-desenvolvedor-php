@@ -39,7 +39,7 @@ class ProductController extends Controller
     /**
      * Admin Product page
      * @param \Illuminate\Http\Request $request
-     * @return @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function indexAdmin(Request $request)
     {
@@ -63,7 +63,7 @@ class ProductController extends Controller
     /**
      * Show product for admin
      * @param int $id
-     * @return @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -84,7 +84,7 @@ class ProductController extends Controller
 
     /**
      * Update product action 
-     * @return @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function update(ProductUpdateRequest $request, $id)
     {
@@ -106,7 +106,7 @@ class ProductController extends Controller
 
     /**
      * Add product page 
-     * @return @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function addView()
     {
@@ -122,8 +122,8 @@ class ProductController extends Controller
     /**
      * Delete a many products
      * @param \Illuminate\Http\Request $request
-     * @param mixed $id Orders id
-     * @return @return \Illuminate\Http\Response
+     * @param mixed $id
+     * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, $id = null)
     {
@@ -157,7 +157,7 @@ class ProductController extends Controller
     /**
      * Store Action
      * @param \App\Http\Requests\ProductStoreRequest $request
-     * @return @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function store(ProductStoreRequest $request)
     {

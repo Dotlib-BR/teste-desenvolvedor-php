@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     /**
      * List all users
-     * @param Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -73,7 +73,7 @@ class UserController extends Controller
 
     /**
      * Login validation
-     * @param Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function login(Request $request)
@@ -94,7 +94,7 @@ class UserController extends Controller
 
     /**
      * Delete Users
-     * @param Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, int $id = null)
@@ -107,7 +107,7 @@ class UserController extends Controller
             if ($deleted['error'] === 0) {
                 return [
                     'error' => 0,
-                    'message' => 'success'
+                    'description' => 'success'
                 ];
             }
 
@@ -227,7 +227,7 @@ class UserController extends Controller
                 return redirect()->route('login');
             }
 
-            return back()->with('error', $newUser['message']);
+            return back()->with('error', $newUser['description']);
         } catch (\Exception $e) {
             Log::error('USER_CONTROLLER_STORE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 

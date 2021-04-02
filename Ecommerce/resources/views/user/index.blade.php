@@ -13,13 +13,11 @@
             <p class="welcome">
                 Hey <b>{{ ucwords($currentUser['name'] . ' ' . $currentUser['last_name']) }}</b>, welcome!
             </p>
-
-
         </div>
+        @if (Session::get('error'))
+            <h3 class="text-danger">{{ Session::get('error') }}</h3>
+        @endif
     </section>
-    @if (Session::get('error'))
-        <h3 class="text-danger">{{ Session::get('error') }}</h3>
-    @endif
     <section class="container mt-5 products">
         <h2 class="products__title">Products</h2>
         <form action="#filter" method="get" class="mb-5" id="#filter">

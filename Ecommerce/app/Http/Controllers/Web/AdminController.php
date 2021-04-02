@@ -87,7 +87,7 @@ class AdminController extends Controller
     /**
      * Log out the admin
      * @param \Illuminate\Http\Request $request
-     * @return @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
     {

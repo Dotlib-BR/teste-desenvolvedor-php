@@ -19,7 +19,7 @@ class OrderProductService
     /**
      * Get the Order related to OrderProduct
      * @param int $id Order id
-     * @return array A array with error and data or error with description error
+     * @return array
      */
     public function showOrderFromOrderProduct($id)
     {

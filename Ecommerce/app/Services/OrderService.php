@@ -22,7 +22,7 @@ class OrderService
     /**
      * List all Order with per page or not
      * @param int $perPage Itens per page
-     * @return array A array with error and data or error with description error
+     * @return array
      */
     public function index(array $filter = [])
     {
@@ -72,7 +72,7 @@ class OrderService
     /**
      * Show order with orderProducts
      * @param int $id Order id
-     * @return array A array with error and data or error with description error
+     * @return array
      */
     public function show(int $id)
     {
@@ -103,7 +103,7 @@ class OrderService
     /**
      * Store Order and Store orderProduct
      * @param array $data Array with Products id
-     * @return array A array with error and data or error with description error
+     * @return array
      */
     public function store(array $data)
     {
@@ -114,6 +114,12 @@ class OrderService
                 foreach ($data['id'] as $item) {
                     $sumAdjuste[]['id'] = $item;
                 }
+            }
+
+
+            $userId = $data['user_id'] ?? '';
+            if (!empty(Auth::user()->id)) {
+                $userId = Auth::user()->id;
             }
 
             if (count($data['items'])) {
@@ -139,7 +145,7 @@ class OrderService
 
 
             $store['order']['n_order'] = '#' . str_pad($lastOrderId, 8, "0", STR_PAD_LEFT);
-            $store['order']['id_user'] = Auth::user()->id;
+            $store['order']['id_user'] = $userId;
             $store['order']['total_price'] = $sum['data']['total'];
             $store['order']['dt_order'] = now('America/Sao_paulo');
             $store['product'] = $productsInformation;
@@ -170,7 +176,7 @@ class OrderService
     /**
      * Store Order In Session and return Products
      * @param $request Product ID
-     * @return \Illuminate\Http\Response A array with error and data or error with description error
+     * @return \Illuminate\Http\Response
      */
     public function cartStore($request)
     {
@@ -226,15 +232,12 @@ class OrderService
      * @param int $id Order ID
      * @param array $data Order info
      * @param string $type Type of update
-     * @return array A array with error and data or error with description error
+     * @return array
      */
-    public function update(int $id, array $data, string $type)
+    public function update(int $id, array $data)
     {
         try {
-            $info = [];
-            if ($type === 'status') {
-                $info['status'] = (string) $data['status'];
-            }
+            $info['status'] = (string) $data['status'];
 
             $updated = $this->repository->update($id, $info);
 
@@ -262,7 +265,7 @@ class OrderService
     /**
      * Get Products related with order
      * @param int $id Order id
-     * @return array A array with error and data or error with description error
+     * @return array
      */
     public function showProductsFromOrderProduct(int $id)
     {
@@ -292,8 +295,8 @@ class OrderService
 
     /**
      * delete a many orders or single
-     * @param mixed $id Many Orders id
-     * @return array A array with error and data or error with description error
+     * @param mixed $id
+     * @return array
      */
     public function delete($id)
     {
@@ -335,8 +338,8 @@ class OrderService
 
     /**
      * Check if already exist order number
-     * @param string $number Order Number
-     * @return array A array with error and data or error with description error
+     * @param string $number
+     * @return array
      */
     public function showOrderFromNumber($number)
     {
@@ -368,7 +371,7 @@ class OrderService
 
     /**
      * Get last stored
-     * @return array A array with error and data or error with description error
+     * @return array
      */
     public function showLastCreated()
     {
@@ -399,8 +402,8 @@ class OrderService
 
     /**
      * Get the sum of the price of the products
-     * @param array $data Array with id and quantity
-     * @return array A array with error and data or error with description error
+     * @param array $data
+     * @return array
      */
     private function sumPrice(array $data)
     {
@@ -440,10 +443,10 @@ class OrderService
 
     /**
      * searches for an item according to the parameter
-     * @param array $array The base array
-     * @param string $key The key to be searched 
-     * @param mixed $value Key value to be searched
-     * @return array Array found 
+     * @param array $array
+     * @param string $key
+     * @param mixed $value
+     * @return array
      */
     private function searchArray($array, $key, $value)
     {
@@ -469,9 +472,9 @@ class OrderService
 
     /**
      * Increase the quantity of products in the session
-     * @param array $arr_product Product with quantity to be increased
-     * @param array $cart Products in session
-     * @return array Array with the updated quantity
+     * @param array $arr_product
+     * @param array $cart
+     * @return array 
      */
     private function addQuantity($arr_product, $cart)
     {
@@ -483,6 +486,10 @@ class OrderService
         return $cart;
     }
 
+    /**
+     * Finish order
+     * @return array
+     */
     public function finishItems()
     {
         try {

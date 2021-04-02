@@ -19,6 +19,11 @@ class AdminRepository implements AdminRepositoryInterface
     }
 
 
+    /**
+     * Update admin info
+     * @param array $data
+     * @return array
+     */
     public function update(array $data)
     {
         try {

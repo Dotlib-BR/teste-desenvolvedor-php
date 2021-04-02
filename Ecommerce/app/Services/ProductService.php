@@ -17,35 +17,35 @@ class ProductService
 
     /**
      * List all Products with per page or not
-     * @param array $data Filter for products
-     * @return array A array with error and data or error with description error
+     * @param array $data
+     * @return array 
      */
     public function index(array $filter = [])
     {
         try {
             $data = [];
-            
-            if(!empty($filter['filter'])){
+
+            if (!empty($filter['filter']) && empty($data)) {
                 $filter['order'] = 'DESC';
-                
-                if($filter['filter'] === 'name' || $filter['filter'] === 'low'){
-                    $filter['filter'] = ($filter['filter'] === 'name')? 'name_product': 'price';
+
+                if ($filter['filter'] === 'name' || $filter['filter'] === 'low') {
+                    $filter['filter'] = ($filter['filter'] === 'name') ? 'name_product' : 'price';
                     $filter['order'] = 'ASC';
                 }
-                
-                $filter['filter'] = ($filter['filter'] === 'high')? 'price': $filter['filter'];
+
+                $filter['filter'] = ($filter['filter'] === 'high') ? 'price' : $filter['filter'];
             }
 
             $data = $this->repository->index($filter ?? []);
 
 
-            if($data) {
+            if ($data) {
                 return [
                     'error' => 0,
                     'data' => $data['data']
                 ];
             }
-        
+
             return [
                 'error' => 1,
                 'description' => 'Error bringing all products.'
@@ -63,8 +63,8 @@ class ProductService
 
     /**
      * Store a new Product
-     * @param array $data Product info
-     * @return array A array with error and data or error with description error
+     * @param array $data
+     * @return array 
      */
     public function store(array $data)
     {
@@ -107,8 +107,8 @@ class ProductService
 
     /**
      * Get a Product
-     * @param int $ids Product id
-     * @return array A array with error and data or error with description error
+     * @param int $ids 
+     * @return array 
      */
     public function show(int $id)
     {
@@ -140,7 +140,7 @@ class ProductService
     /**
      * Update a Product
      * @param int $id Product id
-     * @return array A array with error and data or error with description error
+     * @return array 
      */
     public function update(int $id, array $data)
     {
@@ -154,11 +154,14 @@ class ProductService
                 $data['product_image'] = $imageName;
             }
 
+            if(!empty($data['_method'])) {
+                unset($data['_method']);
+            }
+
             if (!empty($data['discount_status'])) {
                 $data['discount_status'] = '1';
             }
 
-            // dd($data);
             $update = $this->repository->update($id, $data);
 
             if ($update['error'] === 0) {
@@ -184,8 +187,8 @@ class ProductService
 
     /**
      * delete a many products or single
-     * @param mixed $id Many products id
-     * @return array A array with error and data or error with description error
+     * @param mixed $id
+     * @return array 
      */
     public function delete($id)
     {
@@ -227,8 +230,8 @@ class ProductService
 
     /**
      * Check if product Has a imgane name
-     * @param int $id Product id
-     * @return array A array with error and data or error with description error
+     * @param int $id
+     * @return array 
      */
     public function checkIfProductHasImage(int $id)
     {
