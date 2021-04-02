@@ -17,6 +17,53 @@ class UserService
     }
 
     /**
+     * List all users with per page or not
+     * @param array $data Filter for users
+     * @return array A array with error and data or error with description error
+     */
+    public function index(array $filter = [])
+    {
+        try {
+            $data = [];
+
+            if (!empty($filter['filter'])) {
+                $filter['order'] = 'DESC';
+
+                if ($filter['filter'] === 'name' || $filter['filter'] === 'low') {
+                    $filter['filter'] = ($filter['filter'] === 'name') ? 'name_product' : 'price';
+                    $filter['order'] = 'ASC';
+                }
+
+                $filter['filter'] = ($filter['filter'] === 'high') ? 'price' : $filter['filter'];
+            }
+
+            $data = $this->repository->index($filter ?? []);
+
+
+            if ($data) {
+                return [
+                    'error' => 0,
+                    'data' => $data['data']
+                ];
+            }
+
+            return [
+                'error' => 1,
+                'description' => 'Error bringing users.'
+            ];
+
+        } catch (\Exception $e) {
+
+            Log::error('USER_SERVICE_INDEX', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return [
+                'error' => 1,
+                'description' => 'Error bringing users.'
+            ];
+        }
+    }
+
+    /**
      * Create a new User
      * @param array $data User info
      * @return array A array with error and data or error with description error
@@ -54,7 +101,7 @@ class UserService
 
             return [
                 'error' => 1,
-                'description' => 'Erro na validação do cadastro.'
+                'description' => 'Error in validating the registration.'
             ];
         }
     }
@@ -70,7 +117,8 @@ class UserService
         try {
 
             $user = $this->repository->show($id);
-            if (!empty($user['error'])) {
+
+            if ($user['error'] === 0) {
                 return $user;
             }
 
@@ -84,7 +132,7 @@ class UserService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer o usuario.'
+                'description' => 'Error bringing the user.'
             ];
         }
     }
@@ -106,13 +154,17 @@ class UserService
                 $image->storeAs('public/img/users', $imageName);
                 $data['avatar'] = $imageName;
             }
+            
 
             foreach ($data as $key => $info) {
                 if (!$info) {
                     unset($data[$key]);
                 }
-            }
 
+                if($key === 'document') {
+                    $data[$key] = $this->clearDoc($info);
+                }
+            }
             $update = $this->repository->update($id, $data);
 
             if ($update) {
@@ -123,20 +175,55 @@ class UserService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao atualizar.'
+                'description' => 'Error updating.'
             ];
         } catch (\Exception $e) {
             Log::error('CLIENTE_SERVICE_UPDATE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao atualizar.'
+                'description' => 'Error updating.'
             ];
         }
     }
 
+    /** 
+     * Delete a user
+     * @param mixed $id user id
+     * @return array A array with error and data or error with description error
+     */
     public function delete($id)
     {
+        try{
+
+            $data = [];
+            if (is_integer($id) || is_string($id)) {
+                $data[] = (int) $id;
+            }
+
+            if (is_array($id)) {
+                foreach ($id['id'] as $item) {
+                    $data[] = (int) $item;
+                }
+            }
+
+            $delete = $this->repository->delete($data);
+
+            if ($delete['error'] === 0) {
+                return [
+                    'error' => 0,
+                    'data' => true
+                ];
+            }
+
+            return [
+                'error' => 1,
+                'description' => $delete['description']
+            ];
+
+        } catch(\Exception $e) {
+            
+        }
     }
 
     /**
@@ -149,5 +236,4 @@ class UserService
         $doc = str_replace(array(".", ',', "-", "/"), "", $doc);
         return $doc;
     }
-
 }

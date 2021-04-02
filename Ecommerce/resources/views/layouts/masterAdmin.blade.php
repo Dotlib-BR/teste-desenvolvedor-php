@@ -5,6 +5,6 @@
         @yield('content')
 
 </main>
-
+@section('utilities', url('js/utilities.js'))
 @section('js', url('js/admin.js'))    
-@include('include.footer')
+@include('include.footerAdmin')

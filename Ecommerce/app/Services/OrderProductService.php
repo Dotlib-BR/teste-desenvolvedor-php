@@ -43,7 +43,7 @@ class OrderProductService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer o pedido.'
+                'description' => 'Error bringing order.'
             ];
         }
     }

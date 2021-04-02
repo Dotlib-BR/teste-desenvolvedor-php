@@ -57,14 +57,14 @@ class OrderService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao Trazer todos os produtos.'
+                'description' => 'Error when bringing the products.'
             ];
         } catch (\Exception $e) {
             Log::error('ORDER_SERVICE_INDEX', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao tarzer os pedidos.'
+                'description' => 'Error when bringing the products.'
             ];
         }
     }
@@ -96,7 +96,7 @@ class OrderService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao tarzer pedido.'
+                'description' => 'Error bringing order.'
             ];
         }
     }
@@ -162,7 +162,7 @@ class OrderService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao criar Pedido.'
+                'description' => 'Error creating Order.'
             ];
         }
     }
@@ -209,14 +209,14 @@ class OrderService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao adicionar no carrinho.'
+                'description' => 'Error adding to cart.'
             ];
         } catch (\Exception $e) {
             Log::error('ORDER_SERVICE_STORE_SESSION', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao adicionar produto ao carrinho.'
+                'description' => 'Error adding to cart.'
             ];
         }
     }
@@ -247,14 +247,14 @@ class OrderService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao atualizar o pedido.'
+                'description' => 'Error updating order.'
             ];
         } catch (\Exception $e) {
             Log::error('ORDER_SERVICE_UPDATE', $e->getMessage(), $e->getFile(), $e->getLine());
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao atualizar o pedido.'
+                'description' => 'Error updating order.'
             ];
         }
     }
@@ -285,7 +285,7 @@ class OrderService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer os produtos.'
+                'description' => 'Error bringing the products.'
             ];
         }
     }
@@ -328,7 +328,7 @@ class OrderService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao checar o numero.'
+                'description' => 'Error deleting order.'
             ];
         }
     }
@@ -361,7 +361,7 @@ class OrderService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao checar o numero.'
+                'description' => 'Error when checking the number.'
             ];
         }
     }
@@ -392,7 +392,7 @@ class OrderService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer o ultimo pedido.'
+                'description' => 'Error bringing the last order.'
             ];
         }
     }
@@ -432,7 +432,7 @@ class OrderService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao somar os preços.'
+                'description' => 'Error adding prices.'
             ];
         }
     }

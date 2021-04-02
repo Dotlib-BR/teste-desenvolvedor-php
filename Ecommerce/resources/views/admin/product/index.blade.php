@@ -4,7 +4,10 @@
 
     <section class="container mt-5 products">
         <h2 class="products__title">All Products</h2>
-        <a class="btn btn-dark" href="{{route('registerView')}}">Add Product</a>
+        @if (Session::get('error'))
+            <h3 class="text-danger">{{ Session::get('error') }}</h3>
+        @endif
+        <a class="btn btn-dark" href="{{ route('registerView') }}">Add Product</a>
         <form action="#filter" method="get" class="mb-5" id="#filter">
             <input type="hidden" name="page" value="{{ $filter['page'] }}">
             <div class="row">
@@ -30,7 +33,7 @@
             <div class="row">
                 @foreach ($products as $product)
                     <div class="product__item col-md-3 mt-3 mb-3">
-                        <input type="checkbox" class="mass__deletion--product" name="product[]" value="{{$product->id}}">
+                        <input type="checkbox" class="mass__deletion--product" name="product[]" value="{{ $product->id }}">
                         <span data-product-id="{{ $product->id }}" class="product__delete">
                             <svg height="329pt" viewBox="0 0 329.26933 329" width="329pt"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +64,8 @@
                                     <span class="format__money text-danger h6 product__discount">{{ $finalPrice }}</span>
                                 </p>
                             @else
-                                <p class="format__money product__price"><span class="h6">{{ $product->price }}</span> </p>
+                                <p class="format__money product__price"><span class="h6">{{ $product->price }}</span>
+                                </p>
                             @endif
                         </a>
                     </div>

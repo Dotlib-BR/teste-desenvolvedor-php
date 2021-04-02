@@ -30,7 +30,7 @@
                             <a class="nav-link" href="{{ route('ordersAdmin') }}" class="menu__nave--item">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('config') }}" class="menu__nave--item">Users</a>
+                            <a class="nav-link" href="{{ route('users') }}" class="menu__nave--item">Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logoutAdmin') }}" class="menu__nave--item">Logout</a>

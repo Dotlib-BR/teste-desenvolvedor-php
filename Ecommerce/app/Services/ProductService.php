@@ -48,7 +48,7 @@ class ProductService
         
             return [
                 'error' => 1,
-                'description' => 'Erro ao Trazer todos os produtos.'
+                'description' => 'Error bringing all products.'
             ];
         } catch (\Exception $e) {
 
@@ -56,7 +56,7 @@ class ProductService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao Trazer todos os produtos.'
+                'description' => 'Error bringing all products.'
             ];
         }
     }
@@ -100,7 +100,7 @@ class ProductService
 
             return [
                 'error' => 1,
-                'description' => 'Houve um erro inesperado ao cadastrar'
+                'description' => 'There was an unexpected error when registering.'
             ];
         }
     }
@@ -132,7 +132,7 @@ class ProductService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer produto.'
+                'description' => 'Error bringing product.'
             ];
         }
     }
@@ -177,7 +177,7 @@ class ProductService
 
             return [
                 'error' => 1,
-                'description' => 'Houve um erro inesperado ao atualizar'
+                'description' => 'There was an unexpected error while updating.'
             ];
         }
     }
@@ -220,7 +220,7 @@ class ProductService
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao deletar o produto'
+                'description' => 'Error deleting the product.'
             ];
         }
     }

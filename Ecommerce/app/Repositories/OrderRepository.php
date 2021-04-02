@@ -65,7 +65,7 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao Trazer todos os produtos.'
+                'description' => 'Error bringing all products.'
             ];
         } catch (\Exception $e) {
 
@@ -73,7 +73,7 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao Trazer todos os produtos.'
+                'description' => 'Error bringing all products.'
             ];
         }
     }
@@ -97,14 +97,14 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao pegar os produtos.'
+                'description' => 'Error picking up products.'
             ];
         } catch (\Exception $e) {
             Log::error('ORDER_REPOSITORY_INDEX_PAGE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao pegar os produtos.'
+                'description' => 'Error picking up products.'
             ];
         }
     }
@@ -155,7 +155,7 @@ class OrderRepository implements OrderRepositoryInterface
             Log::error('ORDER_REPOSITORY_STORE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
             return [
                 'error' => 1,
-                'description' => 'Erro ao cadastrar pedido'
+                'description' => 'Error registering order'
             ];
         }
     }
@@ -181,14 +181,14 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro nas informações do pedido.'
+                'description' => 'Order information error.'
             ];
         } catch (\Exception $e) {
             Log::error('ORDER_REPOSITORY_UPDATE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
                 'error' => 1,
-                'description' => 'Erro nas informações do pedido.'
+                'description' => 'Order information error.'
             ];
         }
     }
@@ -212,7 +212,7 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao deletar pedidos.'
+                'description' => 'Error deleting orders.'
             ];
         } catch (\Exception $e) {
 
@@ -220,7 +220,7 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao deletar pedidos.'
+                'description' => 'Error deleting orders.'
             ];
         }
     }
@@ -270,13 +270,13 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'data' => 'Erro ao trazer pedido.'
+                'data' => 'Error bringing order.'
             ];
         } catch (\Exception $e) {
             Log::error('ORDER_REPOSITORY_SHOW', [$e->getMessage(), $e->getFile(), $e->getLine()]);
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer pedido.'
+                'description' => 'Error bringing order.'
             ];
         }
     }
@@ -300,7 +300,7 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer os produtos.'
+                'description' => 'Error bringing the products.'
             ];
         } catch (\Exception $e) {
 
@@ -308,7 +308,7 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer os produtos.'
+                'description' => 'Error bringing the products.'
             ];
         }
     }
@@ -333,7 +333,7 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao checar o numero.'
+                'description' => 'Error when checking the number.'
             ];
         } catch (\Exception $e) {
 
@@ -341,7 +341,7 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao checar o numero.'
+                'description' => 'Error when checking the number.'
             ];
         }
     }
@@ -366,7 +366,7 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer o ultimo pedido.'
+                'description' => 'Error bringing the last order.'
             ];
         } catch (\Exception $e) {
 
@@ -374,7 +374,7 @@ class OrderRepository implements OrderRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer o ultimo pedido.'
+                'description' => 'Error bringing the last order.'
             ];
         }
     }

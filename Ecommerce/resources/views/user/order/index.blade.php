@@ -1,10 +1,12 @@
 @extends('layouts.master')
 @section('title', 'Orders')
 @section('content')
-    {{-- @dd(); --}}
+
     <section class="orders container">
         <h3 class="h3 mt-3">My orders</h3>
-        {{-- @dd($orders) --}}
+        @if (Session::get('error'))
+            <h3 class="text-danger">{{ Session::get('error') }}</h3>
+        @endif
         <div class="row">
             <form action="#filter" method="get" class="mb-5" id="#filter">
                 <input type="hidden" name="page" value="{{ $filter['page'] }}">

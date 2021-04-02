@@ -6,4 +6,4 @@
 
 </main>
 @section('utilities', url('js/utilities.js'))
-@include('include.footer')
+@include('include.footerOut')

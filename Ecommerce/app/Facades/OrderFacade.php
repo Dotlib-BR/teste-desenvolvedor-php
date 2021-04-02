@@ -6,12 +6,12 @@ use App\Services\OrderService;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static store($data)
- * @method static cartStore($id)
- * @method static show($id)
- * @method static update($id, array $data)
- * @method static delete($id)
- * @method static index($filter)
+ * @method static store(array $data)
+ * @method static cartStore(\Illuminate\Http\Request $request)
+ * @method static show(int $id)
+ * @method static update(int $id, array $data)
+ * @method static delete(mixed $id)
+ * @method static index(array $filter)
  * @method static finishItems()
  * 
 */

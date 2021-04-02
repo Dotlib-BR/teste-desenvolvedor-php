@@ -6,10 +6,11 @@ use App\Services\UserService;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static store($data)
- * @method static show($id)
- * @method static update($id, array $data)
- * @method static delete($id)
+ * @method static store(array $data)
+ * @method static show(int $id)
+ * @method static update(int $id, array $data)
+ * @method static delete(array $id)
+ * @method static index(array $data)
 */
 class UserFacade extends Facade{
 

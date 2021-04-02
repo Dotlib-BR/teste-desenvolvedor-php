@@ -3,17 +3,13 @@
         <div class="footer__menu--top">
             <h2 class="navbar-brand mb-0 h1"><a class="text-light home__url" href="{{ route('home') }}">Lucas Store
                     Test</a></h2>
-            <nav class="footer__menu">
-                <a class="footer__menu--link" href="{{ route('home') }}">Home</a>
-                <a class="footer__menu--link" href="{{ route('order') }}">Orders</a>
-                <a class="footer__menu--link" href="{{ route('config') }}">Account</a>
-            </nav>
         </div>
         <div class="footer__menu--bottom">
             <div class="footer__contact">
                 <p>Contact</p>
                 <div class="footer__info">
-                    <a href="mailto:lucasdasilvamendes123456@hotmail.com">E-mail: <span>lucasdasilvamendes123456@hotmail.com</span></a>
+                    <a href="mailto:lucasdasilvamendes123456@hotmail.com">E-mail:
+                        <span>lucasdasilvamendes123456@hotmail.com</span></a>
                     <a href="tel:11932303094">Tel: <span>(11) 93230-3094</span></a>
                     <a href="https://api.whatsapp.com/send?phone=5511932303094">WhatsApp</a>
                     <a href="https://www.linkedin.com/in/lucasmendes0402/">LinkedIn</a>

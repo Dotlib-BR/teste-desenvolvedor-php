@@ -4,9 +4,10 @@
             <h2 class="navbar-brand mb-0 h1"><a class="text-light home__url" href="{{ route('home') }}">Lucas Store
                     Test</a></h2>
             <nav class="footer__menu">
-                <a class="footer__menu--link" href="{{ route('home') }}">Home</a>
-                <a class="footer__menu--link" href="{{ route('order') }}">Orders</a>
-                <a class="footer__menu--link" href="{{ route('config') }}">Account</a>
+                <a class="footer__menu--link" href="{{ route('adminHome') }}">Home</a>
+                <a class="footer__menu--link" href="{{ route('productAdmin') }}">Products</a>
+                <a class="footer__menu--link" href="{{ route('ordersAdmin') }}">Orders</a>
+                <a class="footer__menu--link" href="{{ route('users') }}">Users</a>
             </nav>
         </div>
         <div class="footer__menu--bottom">

@@ -15,4 +15,50 @@ class AdminService
     {
         $this->repository = new AdminRepository();
     }
+
+    /**
+     * Update a user
+     * @param int $id User id
+     * @param array $data User info
+     * @return array A array with error and data or error with description error
+     */
+    public function update(array $data)
+    {
+        try {
+
+            if (!empty($data['image'])) {
+                $image = $data['image'];
+                unset($data['image']);
+                $imageName = time() . '.' . $image->extension();
+                $image->storeAs('public/img/users', $imageName);
+                $data['avatar'] = $imageName;
+            }
+
+
+            foreach ($data as $key => $info) {
+                if (!$info) {
+                    unset($data[$key]);
+                }
+            }
+            $update = $this->repository->update($data);
+
+            if ($update) {
+                return [
+                    'error' => 0,
+                ];
+            }
+
+            return [
+                'error' => 1,
+                'description' => 'Error updating.'
+            ];
+        } catch (\Exception $e) {
+            Log::error('ADMIN_SERVICE_UPDATE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+
+            return [
+                'error' => 1,
+                'description' => 'Error updating.'
+            ];
+        }
+    }
 }

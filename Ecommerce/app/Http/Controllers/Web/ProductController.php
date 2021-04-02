@@ -12,14 +12,20 @@ use Illuminate\Support\Facades\Log;
 class ProductController extends Controller
 {
 
+    /**
+     * List products
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         try {
             $filterInfo = $request->only(['perPage', 'filter', 'page']);
             $filter = ProductFacade::index($filterInfo);
             $filterInfo['page'] = $filterInfo['page'] ?? 1;
+            $cart = session()->get('cart');
             if ($filter['error'] === 0) {
-                return view('user.index', ['products' => $filter['data'], 'filter' => $filterInfo]);
+                return view('user.index', ['products' => $filter['data'], 'filter' => $filterInfo, 'cart' => $cart]);
             }
 
             return redirect()->route('home')->with('error', 'Error bringing products');
@@ -32,6 +38,7 @@ class ProductController extends Controller
 
     /**
      * Admin Product page
+     * @param \Illuminate\Http\Request $request
      * @return @return \Illuminate\Http\Response
      */
     public function indexAdmin(Request $request)
@@ -114,6 +121,7 @@ class ProductController extends Controller
 
     /**
      * Delete a many products
+     * @param \Illuminate\Http\Request $request
      * @param mixed $id Orders id
      * @return @return \Illuminate\Http\Response
      */
@@ -123,7 +131,7 @@ class ProductController extends Controller
             $manyIds = $request->only('id');
 
             $deleted = ProductFacade::delete($id ?? $manyIds);
-            return $deleted;
+
             if ($deleted['error'] === 0) {
                 return [
                     'error' => 0,
@@ -135,6 +143,7 @@ class ProductController extends Controller
                 'error' => 1,
                 'description' => 'Error when trying delete a product.'
             ];
+            
         } catch (\Exception $e) {
             Log::error('PRODUCT_CONTROLLER_DELETE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
@@ -147,6 +156,7 @@ class ProductController extends Controller
 
     /**
      * Store Action
+     * @param \App\Http\Requests\ProductStoreRequest $request
      * @return @return \Illuminate\Http\Response
      */
     public function store(ProductStoreRequest $request)

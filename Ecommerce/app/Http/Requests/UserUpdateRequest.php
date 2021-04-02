@@ -26,6 +26,8 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => 'string',
             'last_name' => 'string',
+            'document' => 'cpf',
+            'email' => 'required',
             'password' => 'min:6|max:16|nullable',
             'image' => 'image|mimes:jpeg,png,jpg|max:1920|nullable'
         ];
@@ -37,7 +39,9 @@ class UserUpdateRequest extends FormRequest
             'password.min' => 'Password must have 6 or more characters',
             'password.max' => 'Password must have up to 16 characters',
             'image.mimes' => 'Enter a valid image format (jpeg,png ou jpg).',
-            'image.image' => 'Enter a valid image file (jpeg,png ou jpg).'
+            'image.image' => 'Enter a valid image file (jpeg,png ou jpg).',
+            'email.required' => 'E-mail is required.',
+            'document.cpf' => 'Invalid Cpf.'
         ];
     }
 }

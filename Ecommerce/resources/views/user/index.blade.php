@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
+{{-- @dd($cart) --}}
     <section class="container">
         <div class="mt-5 home__welcome---admin">
             @php
@@ -12,8 +13,13 @@
             <p class="welcome">
                 Hey <b>{{ ucwords($currentUser['name'] . ' ' . $currentUser['last_name']) }}</b>, welcome!
             </p>
+
+
         </div>
     </section>
+    @if (Session::get('error'))
+        <h3 class="text-danger">{{ Session::get('error') }}</h3>
+    @endif
     <section class="container mt-5 products">
         <h2 class="products__title">Products</h2>
         <form action="#filter" method="get" class="mb-5" id="#filter">
@@ -115,7 +121,7 @@
         @endif
     </section>
     <div class="finish">
-        <a class="finish__link flutuation hidden" href="{{ route('finishOrder') }}">
+        <a class="finish__link flutuation @if(empty($cart)) hidden @endif" href="{{ route('finishOrder') }}">
             <svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512"
                 xmlns="http://www.w3.org/2000/svg">
                 <g>

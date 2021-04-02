@@ -11,6 +11,7 @@ class OrderController extends Controller
 {
     /**
      * User Order Index
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -34,6 +35,7 @@ class OrderController extends Controller
 
     /**
      * Admin Order Index
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function indexAdmin(Request $request)
@@ -91,9 +93,11 @@ class OrderController extends Controller
     }
     /**
      * Used for change order status
+     * @param \Illuminate\Http\Request $request
+     * @param int $id null
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id = null)
+    public function update(Request $request, int $id = null)
     {
         try {
             $idRequest = $request->only('id');
@@ -116,6 +120,7 @@ class OrderController extends Controller
 
     /**
      * Store order action
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -139,6 +144,7 @@ class OrderController extends Controller
 
     /**
      * Stor cart in session
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function cartStore(Request $request)
@@ -223,6 +229,7 @@ class OrderController extends Controller
 
     /**
      * Delete a many orders
+     * @param \Illuminate\Http\Request $request
      * @param mixed $id Orders id
      * @return @return \Illuminate\Http\Response
      */

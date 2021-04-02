@@ -3,6 +3,9 @@
 @section('content')
     <section class="orders container">
         <h3 class="h3 mt-3">All orders</h3>
+        @if (Session::get('error'))
+            <h3 class="text-danger">{{ Session::get('error') }}</h3>
+        @endif
         <div class="row">
             <form action="#filter" method="get" class="mb-5 col-md-10" id="#filter">
                 <input type="hidden" name="page" value="{{ $filter['page'] }}">
@@ -104,9 +107,9 @@
                 @endif
             </div>
             @if (!empty($orders))
-            <div class="col-md-4">
-                <button class="delete__all btn btn-danger">Delete selected orders</button>
-            </div>
+                <div class="col-md-4">
+                    <button class="delete__all btn btn-danger">Delete selected orders</button>
+                </div>
             @endif
         </div>
     </section>

@@ -40,7 +40,7 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro cadastrar os produtos no pedido.'
+                'description' => 'Error registering the products in the order.'
             ];
 
         } catch(\Exception $e) {
@@ -49,7 +49,7 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro cadastrar os produtos no pedido.'
+                'description' => 'Error registering the products in the order.'
             ];
         }
     }
@@ -84,7 +84,7 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer o pedido.'
+                'description' => 'Error bringing order.'
             ];
 
         } catch(\Exception $e) {
@@ -93,7 +93,7 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer o pedido.'
+                'description' => 'Error bringing order.'
             ];
         }
     }
@@ -116,7 +116,7 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer o produto.'
+                'description' => 'Error bringing the product.'
             ];
 
         } catch(\Exception $e) {
@@ -125,7 +125,7 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer o produto.'
+                'description' => 'Error bringing the product.'
             ];
         }
     }
@@ -148,7 +148,7 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer o produto.'
+                'description' => 'Error bringing the product.'
             ];
 
         } catch(\Exception $e) {
@@ -157,7 +157,7 @@ class OrderProductRepository implements OrderProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer o produto.'
+                'description' => 'Error bringing the product.'
             ];
         }
     }

@@ -54,7 +54,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao Trazer todos os produtos.'
+                'description' => 'Error bringing all products.'
             ];
         } catch (\Exception $e) {
 
@@ -62,7 +62,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao Trazer todos os produtos.'
+                'description' => 'Error bringing all products.'
             ];
         }
     }
@@ -87,7 +87,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao cadastrar produto.'
+                'description' => 'Error registering product.'
             ];
         } catch (\Exception $e) {
 
@@ -95,7 +95,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao cadastrar produto.'
+                'description' => 'Error registering product.'
             ];
         }
     }
@@ -121,7 +121,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao atualizar produto.'
+                'description' => 'Error updating product.'
             ];
         } catch (\Exception $e) {
 
@@ -129,14 +129,14 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao atualizar produto.'
+                'description' => 'Error updating product.'
             ];
         }
     }
 
     /**
      * Delete a Product
-     * @param int $id Product id
+     * @param array $ids Product id
      * @return array A array with error and data or error with description error
      */
     public function delete(array $ids)
@@ -155,14 +155,14 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao deletar produto.'
+                'description' => 'Error deleting the product.'
             ];
         } catch (\Exception $e) {
             Log::error('PRODUCT_REPOSITORY_DELETE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao deletar produto.'
+                'description' => 'Error deleting the product.'
             ];
         }
     }
@@ -185,14 +185,14 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer produto.'
+                'description' => 'Error bringing product.'
             ];
         } catch (\Exception $e) {
             Log::error('PRODUCT_REPOSITORY_SHOW', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer produto.'
+                'description' => 'Error bringing product.'
             ];
         }
     }
@@ -215,44 +215,14 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer os produtos.'
+                'description' => 'Error bringing the products.'
             ];
         } catch (\Exception $e) {
             Log::error('PRODUCT_REPOSITORY_SHOW_MULTIPLE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao trazer os produtos.'
-            ];
-        }
-    }
-
-    /**
-     * List Products with pagination
-     * @param int $perPage Products per page
-     * @return array A array with error and data or error with description error
-     */
-    public function indexPage(int $perPage)
-    {
-        try {
-            $data = $this->model->paginate($perPage);
-            if ($data) {
-                return [
-                    'error' => 0,
-                    'data' => $data
-                ];
-            }
-
-            return [
-                'error' => 1,
-                'description' => 'Erro ao pegar os produtos.'
-            ];
-        } catch (\Exception $e) {
-            Log::error('PRODUCT_REPOSITORY_INDEX_PAGE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
-
-            return [
-                'error' => 1,
-                'description' => 'Erro ao pegar os produtos.'
+                'description' => 'Error bringing the products.'
             ];
         }
     }
@@ -306,14 +276,14 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao somar os preços.'
+                'description' => 'Error adding prices.'
             ];
         } catch (\Exception $e) {
             Log::error('PRODUCT_REPOSITORY_SUM_PRICE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao somar os preços.'
+                'description' => 'Error adding prices.'
             ];
         }
     }
@@ -339,14 +309,14 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao checar.'
+                'description' => 'Error checking.'
             ];
         } catch (\Exception $e) {
             Log::error('PRODUCT_REPOSITORY_CHECK_IF_PRODUCTS_HAS_IMAGE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
 
             return [
                 'error' => 1,
-                'description' => 'Erro ao checar.'
+                'description' => 'Error checking.'
             ];
         }
     }

@@ -31,7 +31,7 @@ interface UserRepositoryInterface
 
     /**
      * Delete a user
-     * @param int $id User id
+     * @param array $id User id
      */
-    public function delete(int $id);
+    public function delete(array $id);
 }

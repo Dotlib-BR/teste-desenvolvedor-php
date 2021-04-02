@@ -74,3 +74,49 @@
     text-decoration: none;
     color: #212529;
 }
+
+.user__item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.user__item--info {
+    display: flex;
+    align-items: center;
+}
+
+.user__link {
+    text-decoration: none;
+
+}
+
+.user__img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    object-fit: cover;
+    object-position: center;
+}
+
+.user__info {
+    padding-left: 20px;
+}
+
+.user__item--info figure {
+    margin: 0;
+}
+
+.mass__deletion--users {
+    margin-right: 10px;
+    margin-left: 12px;
+    height: 20px;
+    width: 20px;
+}
+
+.user__info p {
+    font-size: 16px;
+    color: #444;
+}

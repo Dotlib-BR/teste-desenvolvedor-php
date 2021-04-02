@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Facades\AdminFacade;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +42,31 @@ class AdminController extends Controller
 
     /**
      * Authenticates the admin
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        try {
+
+            $inputs = $request->only(['name', 'email', 'password', 'image']);
+            $updated = AdminFacade::update($inputs);
+
+            if($updated['error'] === 0) {
+                return back()->with('success', 'Information updated successfully');
+            }
+
+            return back()->with('error', 'Error updating information');
+
+        } catch (\Exception $e) {
+            Log::error('ADMIN_CONTROLLER_UPDATE', [$e->getMessage(), $e->getFile(), $e->getLine()]);
+            return back('adminHome')->with('error', 'An unexpected error has occurred');
+        }
+    }
+
+    /**
+     * Authenticates the admin
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function login(Request $request)
@@ -60,6 +86,7 @@ class AdminController extends Controller
 
     /**
      * Log out the admin
+     * @param \Illuminate\Http\Request $request
      * @return @return \Illuminate\Http\Response
      */
     public function logout(Request $request)

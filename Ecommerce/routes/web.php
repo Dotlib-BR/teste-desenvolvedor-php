@@ -50,9 +50,19 @@ Route::prefix('/')->middleware('checkLogged')->group(function () {
 // Admin Logged Routes
 Route::prefix('admin')->middleware('checkLoggedAdmin')->group(function () {
     Route::get('/', 'AdminController@index')->name('adminHome');
+    Route::put('/', 'AdminController@update')->name('updateAdmin');
 
-    Route::prefix('orders')->group(function () {
-        Route::get('/', 'AdminController@order')->name('orderAdmin');
+    Route::prefix('users')->group(function() {
+        Route::get('/', 'UserController@index')->name('users');
+        Route::get('/register', 'UserController@registerViewAdmin')->name('registerUserAdmin');
+        Route::post('/', 'UserController@store')->name('registerUserAdminAction');
+
+        Route::delete('/', 'UserController@delete')->name('deleteUser');
+
+        Route::prefix('{id}')->group(function () {
+            Route::put('/', 'UserController@update')->name('updateUserAdmin');
+            Route::get('/', 'UserController@show')->name('singleUser');
+        });
     });
 
     Route::prefix('products')->group(function () {
