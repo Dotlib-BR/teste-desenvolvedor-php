@@ -1,2 +1,7 @@
-*
-!.gitignore
+img/product/*
+!img/product/default-placeholder.png
+
+!img/site/*
+
+img/users/*
+!img/users/user.svg
