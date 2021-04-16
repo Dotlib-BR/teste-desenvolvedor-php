@@ -1,0 +1,60 @@
+
+  .invoice{
+    width:970px !important;
+    margin:50px auto;}
+    .invoice-header{
+      padding:25px 25px 15px;}
+      h1{
+        margin:0
+      }
+     
+        .media-body{
+          font-size:.9em;
+          margin:0;
+        }
+      
+    
+    .invoice-body{
+      border-radius:10px;
+      padding:25px;
+      background:#FFF;
+    }
+    .invoice-footer{
+      padding:15px;
+      font-size:0.9em;
+      text-align:center;
+      color:#999;
+    }
+  
+  .logo{
+    max-height:70px;
+    border-radius:10px;
+  }
+  .dl-horizontal{
+    margin:0;}
+    dt{
+          float: left;
+      width: 80px;
+      overflow: hidden;
+      clear: left;
+      text-align: right;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    dd{
+      margin-left:90px;
+    }
+  
+  .rowamount{
+    padding-top:15px !important;
+  }
+  .rowtotal{
+    font-size:1.3em;
+  }
+  .colfix{
+    width:12%;
+  }
+  .mono{
+    font-family:monospace;
+  }
+  
