@@ -9,7 +9,6 @@ Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclu
 O desafio consiste em implementar uma aplicação Web utilizando o framework PHP Laravel, e um banco de dados relacional SQLite, MySQL ou Postgres, a partir de uma modelagem de dados inicial desnormalizada, que deve ser normalizada para a implementação da solução.
 
 Você vai criar uma aplicação de cadastro de pedidos de compra, a partir de uma modelagem inicial, com as seguintes funcionalidades:
-eu vi
 
 - CRUD de clientes.
 - CRUD de produtos.
@@ -50,7 +49,7 @@ Devem ser utilizadas as seguintes tecnologias:
 - Crie uma branch com o seu nome completo;
 - Altere o arquivo teste.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
 - Depois de finalizado, envie-nos o pull request;
-- Preencha o formulário com suas informações pessoais:
+- Preencha o formulário https://forms.gle/YKMoZVMe28qgX7qH8 e envie seu currículo.
 
 ## Bônus
 
