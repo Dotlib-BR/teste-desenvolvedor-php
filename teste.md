@@ -1,15 +1,16 @@
 [![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
 
-# Teste para candidatos à vaga de Desenvolvedor PHP (JR).
+# Teste para candidatos à vaga de Desenvolvedor PHP
 
 Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
 
 ## Instruções
 
-O desafio consiste em implementar uma aplicação Web utilizando o framework PHP Laravel (versão 5+), e um banco de dados relacional SQLite, MySQL ou Postgres, a partir de uma modelagem de dados inicial desnormalizada, que deve ser normalizada para a implementação da solução.
+O desafio consiste em implementar uma aplicação Web utilizando o framework PHP Laravel, e um banco de dados relacional SQLite, MySQL ou Postgres, a partir de uma modelagem de dados inicial desnormalizada, que deve ser normalizada para a implementação da solução.
 
 Você vai criar uma aplicação de cadastro de pedidos de compra, a partir de uma modelagem inicial, com as seguintes funcionalidades:
 eu vi
+
 - CRUD de clientes.
 - CRUD de produtos.
 - CRUD de pedidos de compra, com status (Em Aberto, Pago ou Cancelado).
@@ -41,12 +42,15 @@ Devem ser utilizadas as seguintes tecnologias:
 - CSS
 - Javascript
 - Frameworks Laravel (PHP)
+- Docker (construção do ambiente de desenvolvimento)
 
 ## Entrega
 
-Para iniciar o teste, faça um fork deste repositório, crie uma branch com o seu nome completo e depois envie-nos o pull request. Se você apenas clonar o repositório não vai conseguir fazer push e depois vai ser mais complicado fazer o pull request.
-
-Envie também seu currículo atualizado para o email curriculo@dotlib.com.br.
+- Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
+- Crie uma branch com o seu nome completo;
+- Altere o arquivo teste.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
+- Depois de finalizado, envie-nos o pull request;
+- Preencha o formulário com suas informações pessoais:
 
 ## Bônus
 
@@ -56,5 +60,14 @@ Envie também seu currículo atualizado para o email curriculo@dotlib.com.br.
 - Implementar aplicação de desconto em alguns pedidos de compra.
 - Implementar a camada de Front-End utilizando a biblioteca javascript Bootstrap e ser responsiva.
 - API Rest JSON para todos os CRUDS listados acima.
+
+## O que iremos analisar
+
+- Organização do código;
+- Aplicação de design patterns;
+- Testes;
+- Separação de módulos e componentes;
+- Legibilidade;
+- Criação do ambiente com Docker.
 
 ### Boa sorte!
