@@ -7,6 +7,7 @@
 ## Laravel - Teste Processo Seletivo - Vaga Remota - Laravel 
 
 Protótipo simples de uma aplicação em Laravel que cadastra produtos, clientes e simula compras.
+Não há Gateway de pagamentos. 
 <p align="center">
   <img src="./screenshots/img01.png"  width="100%">
 </p>
@@ -21,6 +22,21 @@ Login cliente
 - login: cliente@cliente.com
 - senha: password
 ou cadastre um novo usuário
+
+## Instalação - Docker
+
+- Acesse a pasta /laradock e rode o seguinte comando: sudo docker-compose up -d nginx mysql phpmyadmin
+- Em caso de conflito de portas, altere os valores default no arquivo .env localizado nessa pasta
+- Rode sudo docker-compose ps para listar os container levantados e verificar se todos foram carregados corretamente
+- Login e acesso ao workspace: sudo docker-compose  exec --user=laradock workspace bash
+- Será redirecionado para /var/www
+- Comando ll para listar todos os arquivos da pasta e verificar se todos os arquivos do projeto foram corretamente carregados
+- A partir desse momento você poderá utilizar o php artisan dentro de /var/www
+- Rode sudo npm install e sudo npm run dev para que o frontend seja compilado
+- Rode php artisan migrate para criar as tabelas necessárias
+- Rode php artisan db:seed para criar automaticamente produtos, categorias e usuários
+- Usuário admin criado : admin@admin.com / password  - Usuário cliente criado: cliente@cliente.com
+
 
 ## Instalação
 
