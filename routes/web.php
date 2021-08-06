@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\ClienteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/',[ClienteController::class, 'index'])->name('cliente.index');
+
+
+Route::group([
+    'prefix' => 'cliente'
+], function () {
+    Route::get('/edit/{id}',[ClienteController::class, 'edit'])->name('cliente.edit');
+    Route::put('/edit/{id}',[ClienteController::class, 'update'])->name('cliente.update');
+    Route::get('/create',[ClienteController::class, 'create'])->name('cliente.create');
+    Route::post('/store',[ClienteController::class, 'store'])->name('cliente.store');
+    Route::delete('/delete/{id}',[ClienteController::class, 'destroy'])->name('cliente.delete');
 });

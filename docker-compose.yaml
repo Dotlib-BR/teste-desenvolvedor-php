@@ -1,12 +1,19 @@
-version: "3"
+version: "3.7"
 
 services:
   laravel-app:
-    build: .
-    ports:
-      - "8080:80"
+    build:
+      args:
+        user: rocha
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: travellist
+    container_name: app
+    restart: unless-stopped
+    working_dir: /var/www/
     volumes:
-      - ./:/usr/share/nginx
+      - ./:/var/www
     networks:
       - app-network
 
@@ -17,8 +24,22 @@ services:
     environment:
       MYSQL_DATABASE: laravel
       MYSQL_ROOT_PASSWORD: laravel
+    container_name: mysql
+    restart: unless-stopped
     volumes:
-      - .docker/dbdata:/var/lib/mysql
+      - .docker-compose/mysql:/var/lib/mysql
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
     networks:
       - app-network
 networks:
