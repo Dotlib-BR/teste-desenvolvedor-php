@@ -68,7 +68,7 @@ class PedidoController extends Controller
         $pedido->ValorTotal = $valor;
 
         $pedido->save();
-        return redirect()->route('pedido.index.index')->with('success', "Pedido criado com sucesso.");
+        return redirect()->route('pedido.index')->with('success', "Pedido criado com sucesso.");
 
     }
 
@@ -80,7 +80,11 @@ class PedidoController extends Controller
      */
     public function show($id)
     {
-        //
+        $pedido = Pedido::find($id);
+        return view('cruds.pedidos.show')
+            ->with([
+                'pedido' => $pedido
+            ]);
     }
 
     /**
@@ -91,7 +95,20 @@ class PedidoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pedido = Pedido::find($id);
+        $ids = array();
+        $quantidades = array();
+        foreach ($pedido->produtos as $produto){
+            array_push($ids,$produto->id);
+            array_push($quantidades,$produto->pivot->quantidade);
+        }
+        $produtos = Produto::all();
+        return view('cruds.pedidos.edit', [
+            'pedido' => $pedido,
+            'produtos' => $produtos,
+            'ids' => $ids,
+            'quantidades' => $quantidades
+            ]);
     }
 
     /**
@@ -103,7 +120,35 @@ class PedidoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $produtos = $request->input('produtos');
+        $quantidades = array();
+        $valores = $request->input('quantidade');
+        for($i = 0; $i<count($valores);$i++){
+
+            if($valores[$i] != "Quantidade"){
+                array_push($quantidades,$valores[$i]);
+            }
+        }
+
+        $valor = 0;
+        $pedido = Pedido::find($id);
+        $pedido->produtos()->detach();
+        $pedido->ValorTotal = $valor;
+        $pedido->save();
+        foreach ($produtos as $produto){
+            $prod = Produto::find($produto);
+            foreach ($quantidades as $qtd){
+                $pedido->produtos()->attach($prod,['quantidade'=>$qtd]);
+                $valor+= $prod->Valor * $qtd;
+                array_shift($quantidades);
+                break;
+            }
+        }
+        $pedido->ValorTotal = $valor;
+
+        $pedido->save();
+        return redirect()->route('pedido.index')->with('success', "Pedido atualizado com sucesso.");
+
     }
 
     /**
@@ -114,6 +159,8 @@ class PedidoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pedido = Pedido::find($id);
+        $pedido->delete();
+        return redirect()->route('pedido.index')->with('success', "Pedido Excluido com sucesso.");
     }
 }

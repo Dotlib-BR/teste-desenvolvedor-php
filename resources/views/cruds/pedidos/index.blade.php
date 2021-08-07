@@ -23,7 +23,8 @@
                     <td>{{$pedido->Cliente->NomeCliente}}</td>
                     <td>R$ {{$pedido->ValorTotal}}</td>
                     <td>{{count($pedido->produtos)}}</td>
-                    <td><a type="button" class="btn btn-dark" href="{{ route('pedido.edit', $pedido->id) }}"> Editar </a>
+                    <td><a type="button" class="btn btn-primary" href="{{ route('pedido.show', $pedido->id) }}"> Ver </a>
+                        <a type="button" class="btn btn-dark" href="{{ route('pedido.edit', $pedido->id) }}"> Editar </a>
                         <form method="POST" action="{{ route('pedido.delete', $pedido->id) }}"
                               style="display: inline;">
                             @csrf

@@ -43,6 +43,7 @@ Route::group([
     'prefix' => 'pedidos'
 ], function () {
     Route::get('/',[PedidoController::class, 'index'])->name('pedido.index');
+    Route::get('/show/{id}',[PedidoController::class, 'show'])->name('pedido.show');
     Route::get('/edit/{id}',[PedidoController::class, 'edit'])->name('pedido.edit');
     Route::put('/edit/{id}',[PedidoController::class, 'update'])->name('pedido.update');
     Route::get('/create',[PedidoController::class, 'create'])->name('pedido.create');
