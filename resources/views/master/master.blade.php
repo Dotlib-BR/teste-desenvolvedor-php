@@ -7,6 +7,7 @@
     <title>{{env('APP_NAME')}}</title>
 
     <link rel="stylesheet" href="{{ mix('css/app.css')}}"/>
+    <link rel="stylesheet" href="{{ mix('css/datatable.css')}}"/>
     @hasSection('css')
         @yield('css')
     @endif
