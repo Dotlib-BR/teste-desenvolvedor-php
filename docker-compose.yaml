@@ -27,7 +27,7 @@ services:
     container_name: mysql
     restart: unless-stopped
     volumes:
-      - docker-compose/mysql:/var/lib/mysql
+      - ./docker-compose/mysql:/var/lib/mysql
     networks:
       - app-network
 
