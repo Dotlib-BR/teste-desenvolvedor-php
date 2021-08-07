@@ -11,11 +11,11 @@
                         Cruds
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                        <li><a class="dropdown-item" href="#">Clientes</a></li>
+                        <li><a class="dropdown-item" href="{{route('cliente.index')}}">Clientes</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Produtos</a></li>
+                        <li><a class="dropdown-item" href="{{route('produto.index')}}">Produtos</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Pedidos</a></li>
+                        <li><a class="dropdown-item" href="{{route('pedido.index')}}">Pedidos</a></li>
                     </ul>
                 </li>
             </ul>

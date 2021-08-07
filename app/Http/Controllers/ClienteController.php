@@ -118,7 +118,7 @@ class ClienteController extends Controller
         try{
             $cliente = Cliente::find($id);
             $cliente->delete();
-            return redirect()->route('cliente.index')->with('success', "Cliente atualizado com sucesso.");
+            return redirect()->route('cliente.index')->with('success', "Cliente apagado com sucesso.");
         }catch (\Exception $e){
             return redirect()->route('cliente.index')->with('error', $e->getMessage());
 
