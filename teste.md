@@ -2,47 +2,58 @@
 
 # Teste para candidatos à vaga de Desenvolvedor PHP
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
-
 ## Instruções
 
-O desafio consiste em implementar uma aplicação Web utilizando o framework PHP Laravel, e um banco de dados relacional SQLite, MySQL ou Postgres, a partir de uma modelagem de dados inicial desnormalizada, que deve ser normalizada para a implementação da solução.
+Primeiramente tem que clonar o repositório na sua máquina e dentro dele trocar de branch
+```bash
+git clone https://github.com/theusrsilva/teste-desenvolvedor-php.git
 
-Você vai criar uma aplicação de cadastro de pedidos de compra, a partir de uma modelagem inicial, com as seguintes funcionalidades:
+cd teste-desenvolvedor-php
 
-- CRUD de clientes.
-- CRUD de produtos.
-- CRUD de pedidos de compra, com status (Em Aberto, Pago ou Cancelado).
-- Cada CRUD:
-  - deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
-  - deve possuir formulários para criação e atualização de seus itens.
-  - deve permitir a deleção de qualquer item de sua lista.
-- Barra de navegação entre os CRUDs.
-- Links para os outros CRUDs nas listagens (Ex: link para o detalhe do cliente da compra na lista de pedidos de compra)
+git checkout Matheus-Rocha-Da-Silva
 
-## Modelo de dados
+```
+Depois tem que configurar o arquivo .env 
+```bash
+cp .env.example .env
 
-A modelagem inicial para a implementação solução é a seguinte:
+DB_CONNECTION=mysql
+DB_HOST=mysql-app //container do mysql
+DB_PORT=3306
+DB_DATABASE=laravel //tudo aqui foi criado no yaml do docker compose
+DB_USERNAME=root
+DB_PASSWORD=laravel
 
-[![](/images/modelo.png)](http://www.dotlib.com)
+```
+Agora é hora de iniciar os containers e acessar seu terminal
+```bash
+docker-compose up --build -d
 
-Você deve alterar esta modelagem para que a mesma cumpra com as três primeiras formas normais.
+docker exec -it app bash //app é o nome do container do php
 
-Além disso, a implementação deste modelo em um banco de dados relacional deve ser realizada levando em consideração os seguintes requisitos:
+```
 
-- O banco de dados deve ser criado utilizando Migrations do framework Laravel, e também utilizar Seeds e Factorys para popular as informações no banco de dados.
-- Implementação das validações necessárias na camada que julgar melhor.
+Já dentro do container algumas configurações são necessárias, e partimos para popular o banco de dados
+```bash
+composer install && composer dump-autoload
 
-## Tecnologias a serem utilizadas
+php artisan key:generate
 
-Devem ser utilizadas as seguintes tecnologias:
+php artisan migrate --seed
 
-- HTML
-- CSS
-- Javascript
-- Frameworks Laravel (PHP)
-- Docker (construção do ambiente de desenvolvimento)
+```
 
+Agora pra finalizar, dentro do terminal na sua máquina, dentro da pasta do projeto
+```bash
+cd /diretorio/teste-desenvolvedor-php
+
+npm install && npm run dev
+
+```
+Agora está funcionando, só acessar o localhost certo na porta 8080 que foi colocada no yaml, caso esteja no windows vai ser necessario uns passoas a mais do docker para acessar o ip da sua máquina virtual
+```bash
+http://localhost:8080/
+```
 ## Entrega
 
 - Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
@@ -51,22 +62,4 @@ Devem ser utilizadas as seguintes tecnologias:
 - Depois de finalizado, envie-nos o pull request;
 - Preencha o formulário https://forms.gle/YKMoZVMe28qgX7qH8 e envie seu currículo.
 
-## Bônus
 
-- Implementar autenticação de usuário na aplicação.
-- Permitir que o usuário mude o número de itens por página.
-- Permitir deleção em massa de itens nos CRUDs.
-- Implementar aplicação de desconto em alguns pedidos de compra.
-- Implementar a camada de Front-End utilizando a biblioteca javascript Bootstrap e ser responsiva.
-- API Rest JSON para todos os CRUDS listados acima.
-
-## O que iremos analisar
-
-- Organização do código;
-- Aplicação de design patterns;
-- Testes;
-- Separação de módulos e componentes;
-- Legibilidade;
-- Criação do ambiente com Docker.
-
-### Boa sorte!
