@@ -39,7 +39,7 @@ Buscamos profissionais que sejam apaixonados por desenvolvimento, inovação e n
 - Plano de Saúde e Odontológico;
 - Equipe unida, divertida e apaixonada por hambúrgueres;
 - TECH DAY - Evento trimestral de palestras sobre tecnologia;
-- Friday's Talk - Bate papo discontraído sobre tecnologia, apresentação de POCs de estudos, etc;
+- Friday's Talk - Bate papo descontraído sobre tecnologia, apresentação de POCs de estudos, etc;
 - Emendas em feriados nacionais.
 
 ## Contratação
