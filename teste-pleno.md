@@ -1,4 +1,3 @@
-teste-pleno.md
 [![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
 
 # Teste para candidatos à vaga de Desenvolvedor PHP Pleno
