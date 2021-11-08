@@ -21,12 +21,12 @@ Buscamos profissionais que sejam apaixonados por desenvolvimento, inovação e n
 - Mínimo 1 ano de experiência em desenvolvimento de sites e sistemas em Laravel;
 - Desenvolvimento de APIs RESTful;
 - Conhecimentos em SQL e NoSQL;
-- TDD;
 - Conhecimentos em Docker;
 - Controle de versões (GIT).
 
 ### **Diferenciais:**
 
+- TDD;
 - Conhecimentos em Node.JS;
 - Conhecimentos em Elasticsearch;
 - Conhecimentos em serviços AWS;
@@ -38,7 +38,6 @@ Buscamos profissionais que sejam apaixonados por desenvolvimento, inovação e n
 - Vale Refeição ou Vale Alimentação;
 - Plano de Saúde e Odontológico;
 - Equipe unida, divertida e apaixonada por hambúrgueres;
-- Home Office :P
 - TECH DAY - Evento trimestral de palestras sobre tecnologia;
 - Friday's Talk - Bate papo discontraído sobre tecnologia, apresentação de POCs de estudos, etc;
 - Emendas em feriados nacionais.
@@ -47,7 +46,13 @@ Buscamos profissionais que sejam apaixonados por desenvolvimento, inovação e n
 
 Regime: CLT
 
+## Alocação
+
+100% Remoto
+
 ## Como se candidatar
 
-Para se candidatar, basta acessar a url e realizar o teste para a vaga:
-[https://github.com/dotlib/teste-desenvolvedor-php](teste.md)
+Para se candidatar, basta acessar a url de acordo com o nível e realizar o teste para a vaga:
+
+- [Desenvolvedor PHP Júnior](teste-junior.md)
+- [Desenvolvedor PHP Pleno](teste-pleno.md)

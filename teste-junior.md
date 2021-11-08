@@ -1,6 +1,6 @@
 [![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
 
-# Teste para candidatos à vaga de Desenvolvedor PHP
+# Teste para candidatos à vaga de Desenvolvedor PHP Júnior
 
 Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
 
@@ -40,14 +40,14 @@ Devem ser utilizadas as seguintes tecnologias:
 - HTML
 - CSS
 - Javascript
-- Frameworks Laravel (PHP)
+- Framework Laravel (PHP)
 - Docker (construção do ambiente de desenvolvimento)
 
 ## Entrega
 
 - Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
 - Crie uma branch com o seu nome completo;
-- Altere o arquivo teste.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
+- Altere o arquivo teste-junior.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
 - Depois de finalizado, envie-nos o pull request;
 - Preencha o formulário https://forms.gle/YKMoZVMe28qgX7qH8 e envie seu currículo.
 
@@ -64,7 +64,6 @@ Devem ser utilizadas as seguintes tecnologias:
 
 - Organização do código;
 - Aplicação de design patterns;
-- Testes;
 - Separação de módulos e componentes;
 - Legibilidade;
 - Criação do ambiente com Docker.
