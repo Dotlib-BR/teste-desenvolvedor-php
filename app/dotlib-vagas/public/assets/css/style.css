@@ -1,0 +1,58 @@
+/** navbar */
+.navbar{
+    background-color: #86bc42!important;
+}
+
+/** conteudo */
+.conteudo {
+    min-height: 550px;
+    background: rgb(255, 255, 255);
+    margin-bottom: 60px;
+    box-shadow: inset 0 0 0 #bdbcb8, 0 0 10px #d0c6c6;
+    padding: 7px;
+    margin-top: 10px;
+}
+
+.conteudo-titulo {
+    min-height: 140px;
+    background: rgb(255, 255, 255);
+    margin-top: 10px;
+    box-shadow: inset 0 0 0 #bdbcb8, 0 0 10px #d0c6c6;
+    padding: 16px;
+}
+
+.conteudo-titulo h3 {
+    color: #787b8d;
+    font-size: 18px!important;
+}
+
+.div-botoes {
+    margin: 10px;
+}
+
+.modal-pessoa {
+    min-width: 750px;
+}
+
+.btn-info,
+.btn-danger {
+    margin: 1px;
+}
+
+.scroll-table {
+    max-height: 570px;
+    overflow-y: auto;
+}
+
+.menu-lateral{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.menu{
+   text-align: left!important;
+}
+.menu a{
+    width: 100%;
+    text-align: left;
+}
