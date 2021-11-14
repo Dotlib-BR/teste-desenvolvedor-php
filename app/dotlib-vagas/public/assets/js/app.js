@@ -68,6 +68,36 @@ function deleteRegistro(url) {
     })
 }
 
+function alterarRegistro(url) {
+
+    let token = document.getElementsByName("_token")[0].value;
+
+    axios({
+        method: 'get',
+        url: url,
+        headers: {'X-CSRF-TOKEN': token}
+    })
+    .then(function (response) {
+        swalWithBootstrapButtons.fire(
+            'Alteração realizada!',
+            '',
+            'success'
+        ).then((result) => {
+            if (result.isConfirmed) {
+                location.reload();
+            }
+        })
+    })
+    .catch(function (error) {
+        console.log(error)
+        swalWithBootstrapButtons.fire(
+            'Não foi possível alterar o registro',
+            '',
+            'error'
+        )
+    });
+}
+
 
 
 

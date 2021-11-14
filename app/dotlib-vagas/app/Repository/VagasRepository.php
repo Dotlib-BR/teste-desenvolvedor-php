@@ -123,6 +123,23 @@ class VagasRepository
             \Log::info($e);
             return false;
         }
-
     }
+
+    public function pausarVaga($id){
+        try{
+            $obj = $this->model::find($id);
+            $obj->pausada = true;
+            $obj->save();
+
+            return true;
+        }catch (QueryException $e){
+            \Log::info($e);
+            return false;
+        }catch (\Exception $e){
+            \Log::info($e);
+            return false;
+        }
+    }
+
+
 }

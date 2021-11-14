@@ -10,7 +10,7 @@
                 </a>
             </div>
             <div class="col-md-10">
-                <form action="/pesquisar" method="POST">
+                <form action="/users/pesquisar" method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="form-row">
                         <div class="form-group mb-2 col-12 col-sm-10 col-md-10 col-lg-10" >
@@ -39,7 +39,7 @@
                             <th class="col-md-1" scope="col">
                                 <a
                                     class="ordenar"
-                                    href="{{url("pesquisar/id")}}"
+                                    href="{{url("users/pesquisar/id")}}"
                                 >
                                     Código
                                     <i class="fas fa-arrows-alt-v"></i>
@@ -49,7 +49,7 @@
                             <th class="col-md-3" scope="col">
                                 <a
                                     class="ordenar"
-                                    href="{{url("pesquisar/name")}}"
+                                    href="{{url("users/pesquisar/name")}}"
                                 >
                                     Nome
                                     <i class="fas fa-arrows-alt-v"></i>
@@ -59,7 +59,7 @@
                             <th  class="col-md-3"  scope="col">
                                 <a
                                     class="ordenar"
-                                    href="{{url("pesquisar/last_name")}}"
+                                    href="{{url("users/pesquisar/last_name")}}"
                                 >
                                     Sobre Nome
                                     <i class="fas fa-arrows-alt-v"></i>
@@ -68,7 +68,7 @@
                             <th class="col-md-3"  scope="col-2">
                                 <a
                                     class="ordenar"
-                                    href="{{url("pesquisar/email")}}"
+                                    href="{{url("users/pesquisar/email")}}"
                                 >
                                     Email
                                     <i class="fas fa-arrows-alt-v"></i>
@@ -90,8 +90,8 @@
                                             href="{{url("users/$obj->id/edit")}}"
                                         ><i class="fas fa-edit"></i></a
                                         >
-                                        <button type="button"  id="{{url("users/$obj->id")}}"
-                                                onclick="deleteRegistro(this.id)"  class="btn btn-danger">
+                                        <button type="button"  name="{{url("users/$obj->id")}}"
+                                                onclick="deleteRegistro(this.name)"  class="btn btn-danger">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
@@ -102,12 +102,12 @@
                 </div>
 
                 @if ( sizeof($users) <= 0)
-                    <h3 style="text-align: center;">Nenhum candidato cadastrado</h3>
+                    <h3 style="text-align: center;">Nenhum candidato encontrado</h3>
                 @endif
 
             </div>
             <div class="pagination-initial d-flex justify-content-center">
-               <label class="label-pagination">{{$users->lastItem() }} de {{$users->total()}}</label> {{$users->links()}}
+               <label class="label-pagination">{{$users->lastItem() ?? '0' }} de {{$users->total() ?? '0'}}</label> {{$users->links()}}
             </div>
         </div>
     </div>

@@ -63,6 +63,24 @@
     background-color: transparent;
 }
 
+.vaga-pausada,
+.vaga-pausada:hover
+{
+    background-color: #9ba2a7;
+}
+
+.legenda{
+    text-align: left!important;
+    color: #9ba2a7;
+}
+.legenda > i{
+    margin-left: 10px;
+}
+
+.legenda > label{
+    margin-left: 5px;
+}
+
 /** Paginação */
 .pagination-initial {
     width: 100%;

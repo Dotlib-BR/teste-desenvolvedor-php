@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="col-md-10">
-                <form action="/pesquisar" method="POST">
+                <form action="/vagas/pesquisar" method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="form-row">
                         <div class="form-group mb-2 col-12 col-sm-10 col-md-10 col-lg-10" >
@@ -38,7 +38,7 @@
                             <th class="col-md-1" scope="col">
                                 <a
                                     class="ordenar"
-                                    href="{{url("pesquisar/id")}}"
+                                    href="{{url("vagas/pesquisar/id")}}"
                                 >
                                     Código
                                     <i class="fas fa-arrows-alt-v"></i>
@@ -48,7 +48,7 @@
                             <th class="col-md-2" scope="col">
                                 <a
                                     class="ordenar"
-                                    href="{{url("pesquisar/titulo")}}"
+                                    href="{{url("vagas/pesquisar/titulo")}}"
                                 >
                                     Título
                                     <i class="fas fa-arrows-alt-v"></i>
@@ -58,7 +58,7 @@
                             <th  class="col-md-3"  scope="col">
                                 <a
                                     class="ordenar"
-                                    href="{{url("pesquisar/descricao")}}"
+                                    href="{{url("vagas/pesquisar/descricao")}}"
                                 >
                                     Descrição
                                     <i class="fas fa-arrows-alt-v"></i>
@@ -67,7 +67,7 @@
                             <th class="col-md-2"  scope="col-2">
                                 <a
                                     class="ordenar"
-                                    href="{{url("pesquisar/tipo_contratacao")}}"
+                                    href="{{url("vagas/pesquisar/tipo_contratacao")}}"
                                 >
                                     Contratação
                                     <i class="fas fa-arrows-alt-v"></i>
@@ -76,7 +76,7 @@
                             <th class="col-md-1"  scope="col-2">
                                 <a
                                     class="ordenar"
-                                    href="{{url("pesquisar/alocacao")}}"
+                                    href="{{url("vagas/pesquisar/alocacao")}}"
                                 >
                                     Alocação
                                     <i class="fas fa-arrows-alt-v"></i>
@@ -85,7 +85,7 @@
                             <th class="col-md-1"  scope="col-1">
                                 <a
                                     class="ordenar"
-                                    href="{{url("pesquisar/salario")}}"
+                                    href="{{url("vagas/pesquisar/salario")}}"
                                 >
                                     Salário
                                     <i class="fas fa-arrows-alt-v"></i>
@@ -96,7 +96,7 @@
                         </thead>
                         <tbody>
                             @foreach($vagas as $obj)
-                                <tr>
+                                <tr class="{{ $obj->pausada ? 'vaga-pausada' : '' }}">
                                     <td class="col-md-1" scope="row">{{ $obj->id }}</td>
                                     <td class="col-md-2" >{{ $obj->titulo }}</td>
                                     <td class="col-md-3" >{{ $obj->descricao }}</td>
@@ -104,13 +104,23 @@
                                     <td class="col-md-1" >{{ $obj->alocacao }}</td>
                                     <td class="col-md-1" >{{ $obj->getSalario() }}</td>
                                     <td class="col-md-2 col-lg-2 text-center">
+                                        @if(!$obj->pausada)
+                                            <button type="button"  name="{{url("vagas/pausar/$obj->id")}}"
+                                                    data-toggle="tooltip" data-placement="top" title="Pausar a vaga"
+                                                    onclick="alterarRegistro(this.name)"  class="btn btn-secondary">
+                                                <i class="fas fa-pause-circle"></i>
+                                            </button>
+                                        @endif
                                         <a
+                                            data-toggle="tooltip" data-placement="top" title="Editar a vaga"
                                             class="btn btn-info"
                                             href="{{url("vagas/$obj->id/edit")}}"
                                         ><i class="fas fa-edit"></i></a
                                         >
-                                        <button type="button"  id="{{url("vagas/$obj->id")}}"
-                                                onclick="deleteRegistro(this.id)"  class="btn btn-danger">
+                                        <button type="button"
+                                                data-toggle="tooltip" data-placement="top" title="Excluir a vaga"
+                                                name="{{url("vagas/$obj->id")}}"
+                                                onclick="deleteRegistro(this.name)"  class="btn btn-danger">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
@@ -121,12 +131,16 @@
                 </div>
 
                 @if ( sizeof($vagas) <= 0)
-                    <h3 style="text-align: center;">Nenhuma vaga cadastrada</h3>
+                    <h3 style="text-align: center;">Nenhuma vaga encontrada</h3>
                 @endif
 
             </div>
+            <div class="legenda">
+                <i class="fas fa-square"></i><label>Vaga pausada</label>
+            </div>
+
             <div class="pagination-initial d-flex justify-content-center">
-               <label class="label-pagination">{{$vagas->lastItem() }} de {{$vagas->total()}}</label> {{$vagas->links()}}
+                <label class="label-pagination">{{$vagas->lastItem() ?? '0' }} de {{$vagas->total() ?? '0'}}</label> {{$vagas->links()}}
             </div>
         </div>
     </div>

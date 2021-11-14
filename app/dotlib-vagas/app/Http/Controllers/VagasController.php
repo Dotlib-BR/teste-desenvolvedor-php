@@ -135,4 +135,21 @@ class VagasController extends Controller
 
         return view('vagas.index')->with(compact('vagas'));
     }
+
+    /**
+     * @param $id
+     */
+    public function pausarVaga($id)
+    {
+        $status = $this->vagasRepository->pausarVaga($id);
+
+        if(!$status){
+            return response()->json([],400);
+        }
+
+        session()->flash('direcao_order',null);
+
+        return $status;
+    }
+
 }

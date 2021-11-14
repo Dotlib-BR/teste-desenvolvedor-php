@@ -193,21 +193,21 @@
                             <option value="">Selecione</option>
                             <option value="1"
                                     @if(isset($vaga))
-                                        @if ($vaga->pausada == true)
+                                        @if ($vaga->pausada == '1')
                                             selected="selected"
                                         @endif
                                     @endif
-                                    @if (old('pausada') == true)
+                                    @if (old('pausada') == '1')
                                         selected="selected"
                                     @endif> Sim
                             </option>
                             <option value="0"
                                     @if(isset($vaga))
-                                        @if ($vaga->pausada == false)
+                                        @if ($vaga->pausada == '0')
                                             selected="selected"
                                         @endif
                                     @endif
-                                    @if (old('pausada') == false)
+                                    @if (old('pausada') == '0')
                                          selected="selected"
                                     @endif> Não
                             </option>
