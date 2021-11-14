@@ -52,7 +52,6 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    {{old('descricao')}}
                     <div class="form-group col-md-12">
                         <label for="descricao">Descrição *</label>
                         <textarea

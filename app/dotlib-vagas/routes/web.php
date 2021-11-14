@@ -20,3 +20,9 @@ Route::get('/', 'App\Http\Controllers\HomeController@index');
 Route::resource('/vagas', 'App\Http\Controllers\VagasController');
 Route::post('/pesquisar', 'App\Http\Controllers\VagasController@pesquisar');
 Route::get('/pesquisar/{order?}', 'App\Http\Controllers\VagasController@index');
+
+
+/** Users */
+Route::resource('/users', 'App\Http\Controllers\UsersController');
+Route::post('/pesquisar', 'App\Http\Controllers\UsersController@pesquisar');
+Route::get('/pesquisar/{order?}', 'App\Http\Controllers\UsersController@index');

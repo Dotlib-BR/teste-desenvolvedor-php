@@ -4,28 +4,23 @@
 namespace App\Repository;
 
 
-use App\Models\Vaga;
-use App\Util\AppUtil;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 
-class VagasRepository
+class UsersRepository
 {
+    public function __construct(public User $model){}
 
-    public function __construct(public Vaga $model){}
-
-    public function pesquisar($data, $coluna = 'vagas.id', $order = 'desc'){
+    public function pesquisar($data, $coluna = 'id', $order = 'desc'){
 
         $termoBuscaAtual = session()->get('texto_busca') ? session()->get('texto_busca') : '';
         $termoBusca = isset($data['texto_busca']) ? $data['texto_busca'] : $termoBuscaAtual;
 
         try{
-            $vagas = $this->model::select('vagas.*','tc.descricao as tipo_contratacao')
-                    ->join('tipo_contratacao as tc', 'tc.id', '=', 'vagas.tipo_contratacao_id')
-                    ->where('vagas.id', $termoBusca)
-                    ->orwhere('titulo', 'like','%'.$termoBusca.'%')
-                    ->orwhere('vagas.descricao', 'like','%'.$termoBusca.'%')
-                    ->orwhere('alocacao', 'like','%'.$termoBusca.'%')
-                    ->orwhere('tc.descricao', 'like','%'.$termoBusca.'%')
+            $vagas = $this->model::where('id', $termoBusca)
+                    ->orwhere('name', 'like','%'.$termoBusca.'%')
+                    ->orwhere('last_name', 'like','%'.$termoBusca.'%')
+                    ->orwhere('email', 'like','%'.$termoBusca.'%')
                     ->orderBy($coluna, $order)
                     ->paginate(20);
 
@@ -36,7 +31,7 @@ class VagasRepository
         }
     }
 
-    public function getVaga($id){
+    public function getUser($id){
         try{
             return $this->model::find($id);
         }catch (\Exception $e){
@@ -45,19 +40,10 @@ class VagasRepository
         }
     }
 
-    public function getListaVagas(){
-        try{
-            return $this->model::all();
-        }catch (\Exception $e){
-            \Log::info($e);
-            return false;
-        }
-    }
-
-    public function getVagas($orderColuna, $paginacao = false){
+    public function getUsers($orderColuna, $paginacao = false){
         try{
 
-            $coluna = $orderColuna ? : 'vagas.id';
+            $coluna = $orderColuna ? : 'id';
             $orderAtual =  session()->get('direcao_order_atual');
             $order = session()->get('direcao_order') ? session()->get('direcao_order') : ($orderAtual ?: 'desc');
 
@@ -91,8 +77,6 @@ class VagasRepository
     public function update($id,$data){
         try{
             unset($data['id']);
-
-            $data['salario'] = AppUtil::limpaValor($data['salario']);
 
             $obj =  $this->model::find($id);
 
