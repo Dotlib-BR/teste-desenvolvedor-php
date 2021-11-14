@@ -13,16 +13,22 @@ class VagasRepository
 
     public function __construct(public Vaga $model){}
 
-    public function pesquisar($data){
+    public function pesquisar($data, $coluna = 'vagas.id', $order = 'desc'){
+
+        $termoBuscaAtual = session()->get('texto_busca') ? session()->get('texto_busca') : '';
+        $termoBusca = isset($data['texto_busca']) ? $data['texto_busca'] : $termoBuscaAtual;
+
+        \Log::info($termoBuscaAtual);
 
         try{
             $vagas = $this->model::select('vagas.*','tc.descricao as tipo_contratacao')
                     ->join('tipo_contratacao as tc', 'tc.id', '=', 'vagas.tipo_contratacao_id')
-                    ->where('vagas.id', $data['texto_busca'])
-                    ->orwhere('titulo', 'like','%'.$data['texto_busca'].'%')
-                    ->orwhere('vagas.descricao', 'like','%'.$data['texto_busca'].'%')
-                    ->orwhere('alocacao', 'like','%'.$data['texto_busca'].'%')
-                    ->orwhere('tc.descricao', 'like','%'.$data['texto_busca'].'%')
+                    ->where('vagas.id', $termoBusca)
+                    ->orwhere('titulo', 'like','%'.$termoBusca.'%')
+                    ->orwhere('vagas.descricao', 'like','%'.$termoBusca.'%')
+                    ->orwhere('alocacao', 'like','%'.$termoBusca.'%')
+                    ->orwhere('tc.descricao', 'like','%'.$termoBusca.'%')
+                    ->orderBy($coluna, $order)
                     ->paginate(20);
 
             return $vagas;
@@ -53,7 +59,7 @@ class VagasRepository
     public function getVagas($orderColuna, $paginacao = false){
         try{
 
-            $coluna = $orderColuna ? : 'created_at';
+            $coluna = $orderColuna ? : 'vagas.id';
             $orderAtual =  session()->get('direcao_order_atual');
             $order = session()->get('direcao_order') ? session()->get('direcao_order') : ($orderAtual ?: 'desc');
 
@@ -66,10 +72,7 @@ class VagasRepository
 
             $order = $paginacao && $orderAtual ? $orderAtual : $order;
 
-            return $this->model::select('vagas.*','tc.descricao as tipo_contratacao')
-                                ->join('tipo_contratacao as tc', 'tc.id', '=', 'vagas.tipo_contratacao_id')
-                                ->orderBy($coluna, $order)
-                                ->paginate(20);
+            return $this->pesquisar(null, $coluna, $order);
 
         }catch (\Exception $e){
             \Log::info($e);

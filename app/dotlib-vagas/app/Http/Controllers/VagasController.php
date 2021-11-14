@@ -22,9 +22,11 @@ class VagasController extends Controller
     {
         $paginacao = isset($request->page);
 
+
         if (!$request->order){
-            $request->session()->flash('direcao_order',null);
-            $request->session()->flash('direcao_order_atual', null);
+            $request->session()->forget('texto_busca');
+            $request->session()->forget('direcao_order');
+            $request->session()->forget('direcao_order_atual');
         }
 
         $vagas = $this->vagasRepository->getVagas($request->order,$paginacao);
@@ -125,9 +127,9 @@ class VagasController extends Controller
     {
         $data = $request->all();
 
-        $request->session()->flash('texto_busca',$data['texto_busca']);
-        $request->session()->flash('direcao_order',null);
-        $request->session()->flash('direcao_order_atual', null);
+        $request->session()->put('texto_busca',$data['texto_busca']);
+        $request->session()->put('direcao_order',null);
+        $request->session()->put('direcao_order_atual', null);
 
         $vagas = $this->vagasRepository->pesquisar($data);
 

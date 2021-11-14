@@ -64,7 +64,7 @@
                                     <i class="fas fa-arrows-alt-v"></i>
                                 </a>
                              </th>
-                            <th class="col-md-1"  scope="col-2">
+                            <th class="col-md-2"  scope="col-2">
                                 <a
                                     class="ordenar"
                                     href="{{url("pesquisar/tipo_contratacao")}}"
@@ -73,7 +73,7 @@
                                     <i class="fas fa-arrows-alt-v"></i>
                                 </a>
                             </th>
-                            <th class="col-md-2"  scope="col-2">
+                            <th class="col-md-1"  scope="col-2">
                                 <a
                                     class="ordenar"
                                     href="{{url("pesquisar/alocacao")}}"
@@ -100,8 +100,8 @@
                                     <td class="col-md-1" scope="row">{{ $obj->id }}</td>
                                     <td class="col-md-2" >{{ $obj->titulo }}</td>
                                     <td class="col-md-3" >{{ $obj->descricao }}</td>
-                                    <td class="col-md-1" >{{ $obj->tipo_contratacao }}</td>
-                                    <td class="col-md-2" >{{ $obj->alocacao }}</td>
+                                    <td class="col-md-2" >{{ $obj->tipo_contratacao }}</td>
+                                    <td class="col-md-1" >{{ $obj->alocacao }}</td>
                                     <td class="col-md-1" >{{ $obj->getSalario() }}</td>
                                     <td class="col-md-2 col-lg-2 text-center">
                                         <a
