@@ -9,7 +9,6 @@
     background: rgb(255, 255, 255);
     margin-bottom: 60px;
     box-shadow: inset 0 0 0 #bdbcb8, 0 0 10px #d0c6c6;
-    padding: 7px;
     margin-top: 10px;
 }
 
@@ -44,15 +43,22 @@
     overflow-y: auto;
 }
 
-.menu-lateral{
-    padding-right: 0px;
-    padding-left: 0px;
+/** order table */
+.ordenar,
+.ordernar:hover{
+    color: #212529!important;
+    text-decoration: none!important;
+    background-color: transparent;
 }
 
-.menu{
-   text-align: left!important;
-}
-.menu a{
+/** Paginação */
+.pagination-initial {
     width: 100%;
-    text-align: left;
+    padding-top: 5px;
+    border-top: 0.5px solid #dee2e6;
+}
+
+.label-pagination{
+    padding: 14px;
+    color: #979595;
 }

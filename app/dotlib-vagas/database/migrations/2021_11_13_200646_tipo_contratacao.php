@@ -16,12 +16,7 @@ class TipoContratacao extends Migration
         Schema::create('tipo_contratacao', function (Blueprint $table) {
             $table->id();
             $table->string('descricao');
-            $table->decimal('salario',10,2)->nullable();
-            $table->string('alocacao')->nullable();
-            $table->unsignedBigInteger('tipo_contratacao_id');
             $table->timestamps();
-
-            $table->foreign('tipo_contratacao_id')->references('id')->on('tipo_contratacao');
         });
     }
 

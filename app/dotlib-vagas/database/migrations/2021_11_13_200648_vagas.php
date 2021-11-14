@@ -15,10 +15,13 @@ class Vagas extends Migration
     {
         Schema::create('vagas', function (Blueprint $table) {
             $table->id();
+            $table->string('titulo');
             $table->string('descricao');
-            $table->string('requisito_obrigatorio')->nullable();
-            $table->string('requisito_diferencial')->nullable();
-            $table->string('beneficios')->nullable();
+            $table->text('requisito_obrigatorio')->nullable();
+            $table->text('requisito_diferencial')->nullable();
+            $table->text('beneficios')->nullable();
+            $table->decimal('salario',10,2)->nullable();
+            $table->string('alocacao')->nullable();
             $table->boolean("pausada")->default(0);
             $table->unsignedBigInteger('tipo_contratacao_id');
             $table->timestamps();

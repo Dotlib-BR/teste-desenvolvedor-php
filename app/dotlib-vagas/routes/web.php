@@ -14,3 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\HomeController@index');
+
+
+/** Vagas */
+Route::resource('/vagas', 'App\Http\Controllers\VagasController');
+Route::post('/pesquisar', 'App\Http\Controllers\VagasController@pesquisar');
+Route::get('/pesquisar/{order?}', 'App\Http\Controllers\VagasController@index');
