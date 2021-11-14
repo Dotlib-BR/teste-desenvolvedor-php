@@ -1,0 +1,28 @@
+version: "3.6"
+services:
+  db_mysql:
+    image: mysql:5.7
+    container_name: db_mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=teste123456
+      - MYSQL_DATABASE=dot_vagas
+      - MYSQL_USER=dot
+      - MYSQL_PASSWORD=teste123456
+
+  web_app:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: web_app
+    working_dir: /var/www/html
+    restart: always
+    ports:
+      - 8000:80
+    volumes:
+      - ./php/sites-available/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./app/dotlib-vagas:/var/www/html
+    links:
+      - "db_mysql"
