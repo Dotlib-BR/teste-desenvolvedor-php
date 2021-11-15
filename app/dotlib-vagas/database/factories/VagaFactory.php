@@ -14,6 +14,8 @@ class VagaFactory extends Factory
      */
     public function definition()
     {
+        $tipoAlocacao = ['Home office','Híbrido','Presencial'];
+
         return
         [
             'titulo'=> 'Desenvolvedor PHP Pleno '.rand(1,100),
@@ -22,7 +24,7 @@ class VagaFactory extends Factory
             'requisito_diferencial'=> $this->faker->paragraph(),
             'beneficios'=> $this->faker->paragraph(),
             'salario'=> rand(4000,6000),
-            'alocacao'=>'100% Remoto',
+            'alocacao'=> $tipoAlocacao[rand(0,2)],
             'tipo_contratacao_id'=> rand(1,3)
         ];
     }

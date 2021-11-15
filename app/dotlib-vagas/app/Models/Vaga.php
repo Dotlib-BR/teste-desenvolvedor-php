@@ -25,10 +25,6 @@ class Vaga extends Model
         'pausada'
     ];
 
-    public function tipoContratacao()
-    {
-        return $this->belongsTo(TipoContratacao::class);
-    }
 
     public function getSalario() {
         return number_format($this->salario,2,",",".");

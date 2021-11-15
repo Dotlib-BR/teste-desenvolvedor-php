@@ -47,15 +47,6 @@ class VagasRepository
         }
     }
 
-    public function getListaVagas(){
-        try{
-            return $this->model::all();
-        }catch (\Exception $e){
-            \Log::info($e);
-            return false;
-        }
-    }
-
     public function getVagas($orderColuna, $paginacao = false){
         try{
 
