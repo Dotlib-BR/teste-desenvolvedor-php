@@ -92,7 +92,7 @@ class VagasRepository
         try{
             unset($data['id']);
 
-            $data['salario'] = AppUtil::limpaValor($data['salario']);
+            $data['salario'] = $data['salario'] ? AppUtil::limpaValor($data['salario']) : 0.0;
 
             $obj =  $this->model::find($id);
 

@@ -5,8 +5,8 @@
         <h4 class="ml-4 pt-3">Candidatos</h4>
         <div class="row div-botoes">
             <div class="col-md-2 ">
-                <a href="{{ url('users/create') }}" class="btn btn-success mb-2">
-                    Nova Vaga
+                <a href="{{ url('users/create') }}" class="btn btn-success col-md-12 mb-2">
+                    Novo Candidato
                 </a>
             </div>
             <div class="col-md-10">

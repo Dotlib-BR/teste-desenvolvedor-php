@@ -13,18 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\HomeController@index');
+/** Auth */
+Route::get('/', 'App\Http\Controllers\AuthController@index')->name('login');
+Route::post('/auth/login', 'App\Http\Controllers\AuthController@login');
+Route::post('/auth/store', 'App\Http\Controllers\AuthController@store');
+Route::get('/auth/logout', 'App\Http\Controllers\AuthController@logout');
+Route::get('/auth/register', 'App\Http\Controllers\AuthController@register');
 
+Route::middleware(['auth:web'])->group(function(){
+    /** Vagas */
+    Route::resource('/vagas', 'App\Http\Controllers\VagasController');
+    Route::get('/vagas/pausar/{id}', 'App\Http\Controllers\VagasController@pausarVaga');
+    Route::post('/vagas/pesquisar', 'App\Http\Controllers\VagasController@pesquisar');
+    Route::get('/vagas/pesquisar/{order?}', 'App\Http\Controllers\VagasController@index');
 
-/** Vagas */
-Route::resource('/vagas', 'App\Http\Controllers\VagasController');
-Route::get('/vagas/pausar/{id}', 'App\Http\Controllers\VagasController@pausarVaga');
-Route::post('/vagas/pesquisar', 'App\Http\Controllers\VagasController@pesquisar');
-Route::get('/vagas/pesquisar/{order?}', 'App\Http\Controllers\VagasController@index');
+    /** Users */
+    Route::resource('/users', 'App\Http\Controllers\UsersController');
+    Route::post('/users/pesquisar', 'App\Http\Controllers\UsersController@pesquisar');
+    Route::get('/users/pesquisar/{order?}', 'App\Http\Controllers\UsersController@index');
+});
 
-
-
-/** Users */
-Route::resource('/users', 'App\Http\Controllers\UsersController');
-Route::post('/users/pesquisar', 'App\Http\Controllers\UsersController@pesquisar');
-Route::get('/users/pesquisar/{order?}', 'App\Http\Controllers\UsersController@index');

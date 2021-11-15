@@ -1,7 +1,7 @@
 @extends('template.template') @section('conteudo')
     <div class="container-md conteudo">
             <h3 class="modal-title pt-3">
-                @if(isset($vaga)) Editar @else Cadastrar @endif nova vaga
+                @if(isset($vaga)) Editar @else Cadastrar nova @endif vaga
             </h3>
             @if(Session::get('error'))
                 <div class="alert alert-danger" role="alert">
@@ -157,7 +157,7 @@
                         <select name="alocacao" id="alocacao" class="form-control" value="">
                             <option value="">Selecione</option>
                             <option value="Home office"
-                                @if(isset($vaga))
+                                @if(isset($vaga->alocacao))
                                     @if ($vaga->alocacao == 'Home office')
                                         selected="selected"
                                     @endif
@@ -166,7 +166,7 @@
                                     selected="selected"
                                 @endif>Home office</option>
                             <option value="Híbrido"
-                                @if(isset($vaga))
+                                @if(isset($vaga->alocacao))
                                     @if ($vaga->alocacao == 'Híbrido')
                                     selected="selected"
                                     @endif
@@ -176,7 +176,7 @@
                                 @endif
                             >Híbrido</option>
                             <option value="Presencial"
-                                @if(isset($vaga))
+                                @if(isset($vaga->alocacao))
                                     @if ($vaga->alocacao == 'Presencial')
                                     selected="selected"
                                     @endif
@@ -215,7 +215,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ url('vaga') }}" class="btn btn-danger ml-3 mb-3">
+            <a href="{{ url('vagas') }}" class="btn btn-danger ml-3 mb-3">
                 Cancelar
             </a>
             <button type="submit" class="btn btn-success mb-3">

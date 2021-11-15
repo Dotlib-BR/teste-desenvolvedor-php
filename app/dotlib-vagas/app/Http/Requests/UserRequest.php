@@ -14,12 +14,25 @@ class UserRequest extends Request
      */
     public function rules()
     {
-        return [
-            "name" => "required|string",
-            "last_name" => "required|string",
-            "email" => "required|string",
-            'password' => 'required|min:6|confirmed'
-        ];
+        switch($this->method()) {
+            case 'POST':
+                return [
+                    "name" => "required|string",
+                    "last_name" => "required|string",
+                    "email" => "required|string",
+                    'password' => 'required|min:6|confirmed'
+                ];
+                break;
+            case 'PUT':
+                return [
+                    "name" => "required|string",
+                    "last_name" => "required|string",
+                    "email" => "required|string",
+                    'password' => 'nullable|min:6|confirmed'
+                ];
+                break;
+        }
+
     }
 
     public function messages()

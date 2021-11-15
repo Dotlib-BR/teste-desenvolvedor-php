@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Models\User;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Hash;
 
 class UsersRepository
 {
@@ -66,6 +67,8 @@ class UsersRepository
 
     public function store($data){
         try{
+            $data['password'] = Hash::make($data['password']);
+
             $this->model::create($data);
             return true;
         }catch (\Exception $e){
@@ -76,12 +79,19 @@ class UsersRepository
 
     public function update($id,$data){
         try{
-            unset($data['id']);
 
             $obj =  $this->model::find($id);
 
             if(!$obj){
                 return false;
+            }
+
+            unset($data['id']);
+
+            if($data['password']){
+                $data['password'] = Hash::make($data['password']);
+            }else{
+                unset($data['password']);
             }
 
             $obj->fill($data);
@@ -107,6 +117,5 @@ class UsersRepository
             \Log::info($e);
             return false;
         }
-
     }
 }

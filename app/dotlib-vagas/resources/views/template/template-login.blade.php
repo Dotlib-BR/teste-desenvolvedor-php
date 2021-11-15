@@ -19,22 +19,15 @@
             <div class="collapse navbar-collapse" id="navbarToggler">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/vagas">Vagas</a>
+                        <a class="nav-link" href="/auth/register">Cadastre-se</a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/users">Candidatos</a>
-                    </li>
-                    <li class="nav-item text-right">
-                        <a class="nav-link" href="/users">Minhas Vagas</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Login</a>
                     </li>
                 </ul>
-                <div class="my-2 my-lg-0">
-                    <label class="user"> {{ Auth::user()->name }}</label>
-                    <a class="btn-logout" href="/auth/logout"><i class="fas fa-sign-out-alt"></i></a>
-                </div>
             </div>
         </nav>
-        <div class="container-fluid">
+        <div class="container-fluid container-login">
             @yield('conteudo')
         </div>
     </body>

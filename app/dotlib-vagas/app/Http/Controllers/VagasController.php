@@ -94,7 +94,6 @@ class VagasController extends Controller
         $status = $this->vagasRepository->update($id,$data);
 
         if(!$status){
-            \Log::info('error');
             $request->session()->flash('error',"Error ao atualizar o registro");
             $vaga = $data;
 

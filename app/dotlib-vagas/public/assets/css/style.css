@@ -9,6 +9,11 @@
     color: rgb(9 11 24 / 50%)!important;
 }
 
+.user {
+    padding: 5px;
+    color: #fff;
+}
+
 /** conteudo */
 .conteudo {
     min-height: 490px;
@@ -51,7 +56,11 @@
     margin: 1px;
 }
 
-/** order table */
+/** table */
+.table tr{
+    cursor: pointer!important;
+}
+
 .scroll-table {
     overflow-y: auto;
 }
@@ -91,4 +100,22 @@
 .label-pagination{
     padding: 14px;
     color: #979595;
+}
+
+/** Login */
+.container-login{
+    margin-top: 2em;
+}
+
+.btn-logout,
+.btn-logout:hover{
+    color: #f9f9f9!important;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+
+.container-login .card-header {
+    background: #86bc42;
+    color: #ffff;
 }

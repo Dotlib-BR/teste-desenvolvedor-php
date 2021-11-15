@@ -4,7 +4,7 @@
         <h4 class="ml-4 pt-3">Vagas</h4>
         <div class="row div-botoes">
             <div class="col-md-2 ">
-                <a href="{{ url('vagas/create') }}" class="btn btn-success mb-2">
+                <a href="{{ url('vagas/create') }}" class="btn btn-success col-md-12 mb-2">
                     Nova Vaga
                 </a>
             </div>
@@ -97,12 +97,12 @@
                         <tbody>
                             @foreach($vagas as $obj)
                                 <tr class="{{ $obj->pausada ? 'vaga-pausada' : '' }}">
-                                    <td class="col-md-1" scope="row">{{ $obj->id }}</td>
-                                    <td class="col-md-2" >{{ $obj->titulo }}</td>
-                                    <td class="col-md-3" >{{ $obj->descricao }}</td>
-                                    <td class="col-md-2" >{{ $obj->tipo_contratacao }}</td>
-                                    <td class="col-md-1" >{{ $obj->alocacao }}</td>
-                                    <td class="col-md-1" >{{ $obj->getSalario() }}</td>
+                                    <td onclick="detalheVaga({{$obj}})" class="col-md-1" scope="row">{{ $obj->id }}</td>
+                                    <td onclick="detalheVaga({{$obj}})" class="col-md-2" >{{ $obj->titulo }}</td>
+                                    <td onclick="detalheVaga({{$obj}})" class="col-md-3" >{{ $obj->descricao }}</td>
+                                    <td onclick="detalheVaga({{$obj}})" class="col-md-2" >{{ $obj->tipo_contratacao }}</td>
+                                    <td onclick="detalheVaga({{$obj}})" class="col-md-1" >{{ $obj->alocacao }}</td>
+                                    <td onclick="detalheVaga({{$obj}})" class="col-md-1" >{{ $obj->getSalario() }}</td>
                                     <td class="col-md-2 col-lg-2 text-center">
                                         @if(!$obj->pausada)
                                             <button type="button"  name="{{url("vagas/pausar/$obj->id")}}"
@@ -144,4 +144,6 @@
             </div>
         </div>
     </div>
+
+    @include('vagas.modal-detalhe')
 @endsection
