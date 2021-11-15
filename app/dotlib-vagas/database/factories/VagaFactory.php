@@ -19,7 +19,7 @@ class VagaFactory extends Factory
         return
         [
             'titulo'=> 'Desenvolvedor PHP Pleno '.rand(1,100),
-            'descricao'=> $this->faker->paragraph(),
+            'descricao'=> $this->faker->text($maxNbChars = 200),
             'requisito_obrigatorio'=> $this->faker->paragraph(),
             'requisito_diferencial'=> $this->faker->paragraph(),
             'beneficios'=> $this->faker->paragraph(),
