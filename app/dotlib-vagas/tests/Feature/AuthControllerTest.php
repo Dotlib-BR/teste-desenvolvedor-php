@@ -33,8 +33,7 @@ class AuthControllerTest extends TestCase
         $user = User::first();
         Auth::login($user);
 
-        $response = $this->get('/')
-            ->assertRedirect('/vagas');
+        $this->get('/')->assertRedirect('/vagas');
     }
 
     /**
@@ -56,7 +55,7 @@ class AuthControllerTest extends TestCase
         $userFactory = new UserFactory();
         $userFake = $userFactory->definition();
 
-        $response = $this->call('POST', '/auth/store',
+        $this->call('POST', '/auth/store',
             [
                 '_token' =>csrf_token(),
                 'name' => $userFake['name'],
@@ -65,8 +64,6 @@ class AuthControllerTest extends TestCase
                 'password_confirmation' => '123456',
             ]
         )->assertRedirect('/');
-
-        $response->assertStatus(302);
     }
 
     /**
