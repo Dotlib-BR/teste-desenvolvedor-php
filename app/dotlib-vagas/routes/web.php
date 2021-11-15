@@ -36,6 +36,5 @@ Route::middleware(['auth:web'])->group(function(){
     Route::post('/inscricoes/pesquisar', 'App\Http\Controllers\InscricoesController@pesquisar');
     Route::get('/inscricoes/pesquisar/{order?}', 'App\Http\Controllers\InscricoesController@index');
     Route::get('/inscricoes/{id}', 'App\Http\Controllers\InscricoesController@inscricaoUserVaga');
-
 });
 

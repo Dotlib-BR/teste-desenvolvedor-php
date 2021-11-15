@@ -64,14 +64,17 @@ class AuthController extends Controller
      */
     protected function login(LoginRequest $request)
     {
+        \Log::info($request->only('email','password'));
+
         if (Auth::attempt($request->only('email','password'))) {
             $request->session()->regenerate();
+            \Log::info('vaga');
 
-            return redirect()->intended('vagas');
+            return redirect('/vagas');
         }
 
         $request->session()->flash('error',"Error ao realizar o login, por favor verifique seus dados de acesso.");
-        return redirect()->intended('auth');
+        return redirect('/');
     }
 
     /**
