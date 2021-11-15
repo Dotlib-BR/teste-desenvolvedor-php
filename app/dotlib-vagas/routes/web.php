@@ -31,5 +31,11 @@ Route::middleware(['auth:web'])->group(function(){
     Route::resource('/users', 'App\Http\Controllers\UsersController');
     Route::post('/users/pesquisar', 'App\Http\Controllers\UsersController@pesquisar');
     Route::get('/users/pesquisar/{order?}', 'App\Http\Controllers\UsersController@index');
+
+    /** Inscricoes */
+    Route::post('/inscricoes/pesquisar', 'App\Http\Controllers\InscricoesController@pesquisar');
+    Route::get('/inscricoes/pesquisar/{order?}', 'App\Http\Controllers\InscricoesController@index');
+    Route::get('/inscricoes/{id}', 'App\Http\Controllers\InscricoesController@inscricaoUserVaga');
+
 });
 

@@ -25,7 +25,7 @@
                         <a class="nav-link" href="/users">Candidatos</a>
                     </li>
                     <li class="nav-item text-right">
-                        <a class="nav-link" href="/users">Minhas Vagas</a>
+                        <a class="nav-link" href="/inscricoes/pesquisar">Inscrições</a>
                     </li>
                 </ul>
                 <div class="my-2 my-lg-0">

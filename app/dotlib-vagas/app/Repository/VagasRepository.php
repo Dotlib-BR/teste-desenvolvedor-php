@@ -4,13 +4,14 @@
 namespace App\Repository;
 
 
+use App\Models\AuxVagasUsers;
 use App\Models\Vaga;
 use App\Util\AppUtil;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class VagasRepository
 {
-
     public function __construct(public Vaga $model){}
 
     public function pesquisar($data, $coluna = 'vagas.id', $order = 'desc'){
@@ -26,6 +27,7 @@ class VagasRepository
                     ->orwhere('vagas.descricao', 'like','%'.$termoBusca.'%')
                     ->orwhere('alocacao', 'like','%'.$termoBusca.'%')
                     ->orwhere('tc.descricao', 'like','%'.$termoBusca.'%')
+                    ->orwhere('salario', AppUtil::limpaValor($termoBusca))
                     ->orderBy($coluna, $order)
                     ->paginate(20);
 
@@ -112,14 +114,25 @@ class VagasRepository
 
     public function delete($id){
         try{
+            DB::beginTransaction();
             $obj = $this->model::find($id);
+
+            $inscricoes = AuxVagasUsers::where('vaga_id', $id)->get();
+
+            foreach($inscricoes as $item){
+                $item->delete();
+            };
+
             $obj->delete();
+            DB::commit();
 
             return true;
         }catch (QueryException $e){
+            DB::rollBack();
             \Log::info($e);
             return false;
         }catch (\Exception $e){
+            DB::rollBack();
             \Log::info($e);
             return false;
         }
@@ -140,6 +153,5 @@ class VagasRepository
             return false;
         }
     }
-
 
 }

@@ -35,7 +35,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success">Candidatar-se</button>
+                <button type="button" id="btn-inscricao-vaga"  onclick="setInscricaoUserVaga(this.name)" class="btn btn-success">Candidatar-se</button>
             </div>
         </div>
     </div>

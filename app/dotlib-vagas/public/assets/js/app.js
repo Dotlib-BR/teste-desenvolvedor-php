@@ -92,12 +92,13 @@ function alterarRegistro(url) {
     .catch(function (error) {
         console.log(error)
         swalWithBootstrapButtons.fire(
-            'Não foi possível alterar o registro',
+            'Não foi possível alterar o registro.',
             '',
             'error'
         )
     });
 }
+
 function detalheVaga(obj) {
     console.log(obj)
     $msg = 'Não informado';
@@ -119,10 +120,51 @@ function detalheVaga(obj) {
     $('#alocacao-vaga').text(obj['alocacao'] ? obj['alocacao']  : $msg);
     $('#salario-vaga').text((obj['salario'] && obj['salario'] !== "0.00") ? formatarMoeda(obj['salario'],2,true) : $msg );
 
+    $('#btn-inscricao-vaga').attr("name", `/inscricoes/${obj['id']}`)
+
     $('#detalheVagaModal').modal({backdrop: 'static', keyboard: false});
     $('#detalheVagaModal').modal('show');
 }
 
+function setInscricaoUserVaga(url) {
+
+    let token = document.getElementsByName("_token")[0].value;
+
+    axios({
+        method: 'get',
+        url: url,
+        headers: {'X-CSRF-TOKEN': token}
+    })
+    .then(function (response) {
+        swalWithBootstrapButtons.fire(
+            'Inscrição realizada!',
+            '',
+            'success'
+        ).then((result) => {
+            if (result.isConfirmed) {
+                location.reload();
+            }
+        })
+    })
+    .catch(function (error) {
+        if (error.response) {
+            console.log(error.response.status)
+            if(error.response.status === 409){
+                swalWithBootstrapButtons.fire(
+                    'Usuário já está inscrito na vaga.',
+                    '',
+                    'warning'
+                )
+                return
+            }
+        }
+        swalWithBootstrapButtons.fire(
+            'Não foi possível alterar o registro.',
+            '',
+            'error'
+        )
+    });
+}
 
 
 

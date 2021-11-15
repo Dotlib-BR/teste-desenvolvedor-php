@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class VagasController extends Controller
 {
-
     public function __construct(public VagasRepository $vagasRepository,
                                 public TipoContratacaoRepository $tipoContratacaoRepository){}
 
@@ -135,9 +134,6 @@ class VagasController extends Controller
         return view('vagas.index')->with(compact('vagas'));
     }
 
-    /**
-     * @param $id
-     */
     public function pausarVaga($id)
     {
         $status = $this->vagasRepository->pausarVaga($id);

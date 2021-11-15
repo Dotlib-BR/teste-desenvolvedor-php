@@ -4,8 +4,10 @@
 namespace App\Repository;
 
 
+use App\Models\AuxVagasUsers;
 use App\Models\User;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UsersRepository
@@ -106,14 +108,24 @@ class UsersRepository
 
     public function delete($id){
         try{
+            DB::beginTransaction();
+            $inscricoes = AuxVagasUsers::where('user_id', $id)->get();
+
+            foreach($inscricoes as $item){
+                $item->delete();
+            };
+
             $obj = $this->model::find($id);
             $obj->delete();
 
+            DB::commit();
             return true;
         }catch (QueryException $e){
+            DB::rollBack();
             \Log::info($e);
             return false;
         }catch (\Exception $e){
+            DB::rollBack();
             \Log::info($e);
             return false;
         }
