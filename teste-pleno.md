@@ -2,65 +2,81 @@
 
 # Teste para candidatos à vaga de Desenvolvedor PHP Pleno
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
+## Requesitos
+-   Docker version 20.10.9.
+-   Docker-compose version 1.29.2
 
-## Instruções
+**OBS: O procedimento a seguir foi executado em um sistema linux (Fedora 35)**
 
-O desafio consiste em implementar uma aplicação web utilizando o framework PHP Laravel, um banco de dados relacional (Mysql, Postgres ou SQLite), que terá como finalidade a inscrição de candidatos a uma oportunidade de emprego.
+## Ambiente
+- Realizar o clone do projeto e acessar a branch **jose-handerson-da-silva**
+- Na pasta raiz do projeto aonde se encontra o arquivo **docker-compose.yml**  execute o seguinte comando:
+```
+docker-compose up --build
+```
 
-Sua aplicação deve possuir:
+## Configurações do projeto
 
-- CRUD de vagas:
-  - Criar, editar, excluir e listar vagas.
-  - A vaga pode ser CLT, Pessoa Jurídica ou Freelancer.
-- CRUD de candidatos:
-  - Criar, editar, excluir e listar candidatos.
+- Gerando o arquivo de configuração
+```
+Raiz do projeto
+mv app/dotlib-vagas/.env.example app/dotlib-vagas/.env  
+```
+
+- Instalando as dependecias do projeto
+```
+docker exec -it web_app  composer install
+```
+ Caso esteja utilizando algum sistema linux execute na raiz do projeto:
+ ```
+ Raiz do projeto
+ sudo chmod -R 777 app
+```
+- Execuntando as migrations
+```
+docker exec -it web_app  php artisan migrate
+```
+
+- Execuntando as seeders
+```
+docker exec -it web_app  php artisan db:seed
+```
+
+- Execuntando os testes
+```
+docker exec -it web_app  vendor/bin/phpunit
+```
+
+Se tudo ocorreu bem o projeto estará acessivel em http://localhost:8000/.
+
+Para acessar o sistema é necessario realizar um cadastro básico e logar no sistema com o mesmo.
+
+
+
+## Tarefas realizadas
+- CRUD de vagas.
+- CRUD de candidatos.
 - Um cadidato pode se inscrever em uma ou mais vagas.
 - Deve ser ser possível "pausar" a vaga, evitando a inscrição de candidatos.
-- Cada CRUD:
-  - Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
-  - Deve possuir formulários para criação e atualização de seus itens.
-  - Deve permitir a deleção de qualquer item de sua lista.
-  - Implementar validações de campos obrigatórios e tipos de dados.
-- Testes unitários e de unidade.
+- Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
+- Deve possuir formulários para criação e atualização de seus itens.
+- Deve permitir a deleção de qualquer item de sua lista.
+- Implementar validações de campos obrigatórios e tipos de dados.
+- Testes unitários e de unidade (Unitários e Feature).
+- Implementar autenticação de usuário na aplicação.
 
-## Banco de dados
 
-- O banco de dados deve ser criado utilizando Migrations do framework Laravel, e também utilizar Seeds e Factorys para popular as informações no banco de dados.
-
-## Tecnologias a serem utilizadas
-
-Devem ser utilizadas as seguintes tecnologias:
-
-- HTML
-- CSS
-- Javascript
-- Framework Laravel (PHP)
-- Docker (construção do ambiente de desenvolvimento)
-- Mysql, Postgres ou SQLite
-
-## Entrega
-
-- Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
-- Crie uma branch com o seu nome completo;
-- Altere o arquivo teste-pleno.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
-- Depois de finalizado, envie-nos o pull request;
-- Preencha o formulário https://forms.gle/YKMoZVMe28qgX7qH8 e envie seu currículo.
-
-## Bônus
-
+## Tarefas não realizadas
 - API Rest JSON para todos os CRUDS listados acima.
 - Permitir deleção em massa de itens nos CRUDs.
 - Permitir que o usuário mude o número de itens por página.
-- Implementar autenticação de usuário na aplicação.
 
-## O que iremos analisar
 
-- Organização do código;
-- Aplicação de design patterns;
-- Aplicação de testes;
-- Separação de módulos e componentes;
-- Legibilidade;
-- Criação do ambiente com Docker.
+## Link de demostração
+O projeto proposto está acessivel no link http://vagas.mobsystem.com.br.
 
-### Boa sorte!
+
+
+
+
+
