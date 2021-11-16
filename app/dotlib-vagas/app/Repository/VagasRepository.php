@@ -73,6 +73,8 @@ class VagasRepository
 
     public function store($data){
         try{
+            $data['salario'] = $data['salario'] ? AppUtil::limpaValor($data['salario']) : 0.0;
+
             $this->model::create($data);
             return true;
         }catch (\Exception $e){
