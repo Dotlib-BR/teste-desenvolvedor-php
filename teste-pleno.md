@@ -56,6 +56,7 @@ Para acessar o sistema é necessario realizar um cadastro básico e logar no sis
 ## Tarefas realizadas
 - CRUD de vagas.
 - CRUD de candidatos.
+- Listagem e busca das inscrições.
 - Um cadidato pode se inscrever em uma ou mais vagas.
 - Deve ser ser possível "pausar" a vaga, evitando a inscrição de candidatos.
 - Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
