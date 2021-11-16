@@ -59,7 +59,7 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-12">
-                <label for="email">Email</label>
+                <label for="email">Email *</label>
                 <input
                     autofocus
                     type="email"
@@ -77,7 +77,7 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="password">Senha</label>
+                <label for="password">Senha </label>
                 <input
                     autofocus
                     type="password"

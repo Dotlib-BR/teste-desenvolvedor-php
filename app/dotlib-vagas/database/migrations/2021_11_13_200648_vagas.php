@@ -22,7 +22,7 @@ class Vagas extends Migration
             $table->text('beneficios')->nullable();
             $table->decimal('salario',10,2)->nullable();
             $table->string('alocacao')->nullable();
-            $table->boolean("pausada")->default(0);
+            $table->boolean("pausada")->nullable()->default(0);
             $table->unsignedBigInteger('tipo_contratacao_id');
             $table->timestamps();
 

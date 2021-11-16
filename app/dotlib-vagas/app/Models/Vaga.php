@@ -27,6 +27,6 @@ class Vaga extends Model
 
 
     public function getSalario() {
-        return number_format($this->salario,2,",",".");
+        return intval($this->salario) == 0 ? 'Não Informado' : number_format($this->salario,2,",",".");
     }
 }

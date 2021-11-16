@@ -190,19 +190,8 @@
                     <div class="form-group col-md-4">
                         <label for="nome">Pausada</label>
                         <select name="pausada" id="pausada" class="form-control" value="">
-                            <option value="">Selecione</option>
-                            <option value="1"
-                                    @if(isset($vaga))
-                                        @if ($vaga->pausada == '1')
-                                            selected="selected"
-                                        @endif
-                                    @endif
-                                    @if (old('pausada') == '1')
-                                        selected="selected"
-                                    @endif> Sim
-                            </option>
                             <option value="0"
-                                    @if(isset($vaga))
+                                    @if(isset($vaga->pausada))
                                         @if ($vaga->pausada == '0')
                                             selected="selected"
                                         @endif
@@ -210,6 +199,16 @@
                                     @if (old('pausada') == '0')
                                          selected="selected"
                                     @endif> Não
+                            </option>
+                            <option value="1"
+                                    @if(isset($vaga->pausada))
+                                    @if ($vaga->pausada == '1')
+                                    selected="selected"
+                                    @endif
+                                    @endif
+                                    @if (old('pausada') == '1')
+                                    selected="selected"
+                                @endif> Sim
                             </option>
                         </select>
                     </div>
