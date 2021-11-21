@@ -1,0 +1,2 @@
+##CRIAR SEEDER USUARIOS
+php artisan migrate:fresh --seed
