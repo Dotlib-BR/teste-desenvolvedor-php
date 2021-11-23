@@ -36,28 +36,37 @@
                     </div>
                     <li class="label">Menu</li>
                     <ul>
-                        <li title="Perfil" {{ request()->routeIs('usuario.isMe') ? 'class=active' : '' }}>
-                            <a href="{{ route('usuario.isMe', ['id' => auth()->user()->id]) }}">
+                        <li title="Perfil" {{ request()->routeIs('user.index') ? 'class=active' : '' }}>
+                            <a href="{{ route('user.index') }}">
                                 <i class="ti-user"></i>
                                 <span class="label">Perfil</span>
                             </a>
                         </li>
-                        <li title="Perfil" {{ request()->routeIs('anuncios.list') ? 'class=active' : '' }}>
-                            <a href="{{ route('anuncios.list') }}">
-                                <i class="ti-user"></i>
+                        <li title="Minhas Vagas" {{ request()->routeIs('announcement.my.*') ? 'class=active' : '' }}>
+                            <a href="{{ route('announcement.my.vacancies') }}">
+                                <i class="ti-clipboard"></i>
+                                <span class="label">Minhas Vagas</span>
+                            </a>
+                        </li>
+                        <li title="Vagas Disponíveis"
+                            {{ request()->routeIs('announcement.index') ? 'class=active' : '' }}>
+                            <a href="{{ route('announcement.index') }}">
+                                <i class="ti-harddrives"></i>
                                 <span class="label">Todas as Vagas</span>
                             </a>
                         </li>
                         @if (auth()->user()->admin)
-                            <li title="Anúncios" {{ request()->routeIs('anuncio.*') ? 'class=active' : '' }}>
-                                <a href="{{ route('anuncios') }}">
+                            <li title="Anúncios"
+                                {{ request()->routeIs('announcement.adm.index') ? 'class=active' : '' }}>
+                                <a href="{{ route('announcement.adm.index') }}">
                                     <i class="ti-bookmark"></i>
                                     <span class="label">Anúncios</span>
                                 </a>
                             </li>
-                            <li title="Usuário" {{ request()->routeIs('usuarios.*') ? 'class=active' : '' }}><a
-                                    href="{{ route('usuarios') }}"><i class="ti-user"></i><span
-                                        class="label">Usuários</span></a></li>
+                            <li title="Usuário" {{ request()->routeIs('user.adm.index') ? 'class=active' : '' }}>
+                                <a href="{{ route('user.adm.index') }}"><i class="ti-user"></i><span
+                                        class="label">Usuários</span></a>
+                            </li>
                         @endif
                     </ul>
                 </ul>
@@ -108,7 +117,31 @@
 
     <div class="content-wrap">
         <div class="main" style="height:93vh">
-            @yield('content')
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 p-r-0 title-margin-right">
+                        <div class="page-header">
+                            <div class="page-title">
+                                {{ $title }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 p-l-0 title-margin-left">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        {{ $description }}
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section id="main-content">
+                    @yield('content')
+                </section>
+            </div>
         </div>
     </div>
 
@@ -138,6 +171,9 @@
     <script src="{{ asset('js/dashboard/jquery.maskMoney.min.js') }}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <script>
+function myFunction() {
+    document.getElementById('msg').style.display='block'
+}
         $(document).ready(() => {
 
             $('#table_id').DataTable({
@@ -150,11 +186,50 @@
                 $("#msg").fadeOut().empty();
             }, 3000);
 
+            var checkTodos = $("#checkTodos");
+            checkTodos.click(function() {
+                if ($(this).is(':checked')) {
+                    $('input:checkbox').prop("checked", true);
+                } else {
+                    $('input:checkbox').prop("checked", false);
+                }
+            })
 
+            $('.delete_checkbox').click(function() {
+                if ($(this).is(':checked')) {
+                    $(this).closest('tr').addClass('removeRow');
+                } else {
+                    $(this).closest('tr').removeClass('removeRow');
+                }
+            });
+
+            $('#delete_all').click(function() {
+                var checkbox = $('.delete_checkbox:checked');
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                if (checkbox.length > 0) {
+                    var checkbox_value = [];
+                    $(checkbox).each(function() {
+                        checkbox_value.push($(this).val());
+                    });
+
+                    $.ajax({
+                        url: "{{route('announcement.adm.delete.all')}}",
+                        method: "POST",
+                        data: {
+                            _token:CSRF_TOKEN,
+                            _method:'DELETE',
+                            checkbox_value: checkbox_value
+                        },
+                        success: function() {
+
+                        },
+                    })
+                } else {
+                    alert('Selecione dados para serema apagados');
+                }
+            });
         });
-
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
     </script>
 </body>
 

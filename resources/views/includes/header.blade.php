@@ -9,7 +9,7 @@
       </button>
 
       <div class="collapse navbar-collapse text-center" id="navigation">
-        @component('components.nav')
+        @component('components.site_nav')
 
         @endcomponent
       </div>

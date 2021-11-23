@@ -12,28 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function rules()
-    {
-        return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$this->id,
-            'password' => 'required|min:3'
-        ];
-    }
-
-    public function feedback()
-    {
-        return [
-            'required' => 'O campo :attribute é obrigatório',
-            'email.unique' => 'E-mail já cadastrado',
-            'email.email' => 'E-mail informado não é válido'
-        ];
-    }
-
-
-    public function anuncio() {
-        return $this->belongsToMany("App\Models\Anuncio","vagas_vinculos", "anuncio_id");
-    }
     /**
      * The attributes that are mass assignable.
      *
@@ -43,8 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'user',
-        'admin'
+        'admin',
+        'user'
     ];
 
     /**

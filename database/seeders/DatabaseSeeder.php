@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(200)->create();
         $this->call([
-            EmpresaSeeder::class,
-            AnuncioSeeder::class,
+            CompaniesTableSeeder::class,
+            AnnouncementsTableSeeder::class,
         ]);
     }
 }

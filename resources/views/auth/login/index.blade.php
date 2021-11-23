@@ -8,7 +8,7 @@
                 <div class="login-content">
                     <div class="login-form">
                         <h4>Acessar o Sistema</h4>
-                        <form method="POST" action="{{ route('login_action') }}">
+                        <form method="POST" action="{{ route('login.action') }}">
                             @csrf
                             <div class="form-group @error('email') has-error @enderror">
                                 <label>Email :.</label>

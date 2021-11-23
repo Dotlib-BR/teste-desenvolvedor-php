@@ -24,7 +24,7 @@ function formatarStatusVaga($status){
     if ($status==1) {
         $msg='<span class="badge badge-success pull-right m-t-6">Ativo</span>';
     } else {
-        $msg='<span class="badge badge-danger pull-right m-t-6">Inativo</span>';
+        $msg='<span class="badge badge-danger pull-right m-t-6">Pausado(a)</span>';
     }
     echo $msg;
     return;

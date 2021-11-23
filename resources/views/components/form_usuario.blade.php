@@ -1,9 +1,10 @@
 @if (isset($usuario->id))
-    <form action="{{ route('usuario.update', $usuario->id) }}" method="POST">
+    <form action="{{ route('user.adm.update') }}" method="POST">
         @csrf
         @method('PUT')
+        <input type="hidden" name="id" value="{{ $usuario->id}}">
     @else
-        <form action="{{ route('usuario.store') }}" method="POST">
+        <form action="{{ route('user.adm.store') }}" method="POST">
             @csrf
 @endif
 

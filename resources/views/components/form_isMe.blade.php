@@ -1,6 +1,7 @@
-<form action="{{ route('usuario.updateIsMe', $usuario->id) }}" method="POST">
+<form action="{{ route('user.update') }}" method="POST">
         @csrf
         @method('PUT')
+        <input type="hidden" name="id" value="{{  $usuario->id }}">
 <div class="form-group @error('name') has-error @enderror">
     <label>Nome</label>
     <input type="text" class="form-control input-default" name="name"
