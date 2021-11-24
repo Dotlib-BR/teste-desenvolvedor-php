@@ -33,11 +33,12 @@ Route::middleware(['checked', 'active', 'admin'])->prefix('/system/adm')->group(
     Route::get('/announcement/{id}',[AdminAnnouncement::class, 'edit'])->name('announcement.adm.edit');
     Route::put('/announcement',[AdminAnnouncement::class, 'update'])->name('announcement.adm.update');
     Route::delete('/announcement/{id}',[AdminAnnouncement::class, 'destroy'])->name('announcement.adm.delete');
+    Route::delete('/destroyAnnouncementAll',[AdminAnnouncement::class, 'deleteForAll'])->name('announcement.adm.delete.all');
     Route::get('/userIndex',[AdminUser::class, 'index'])->name('user.adm.index');
     Route::get('/userCreate',[AdminUser::class, 'create'])->name('user.adm.create');
     Route::post('/userStore',[AdminUser::class, 'store'])->name('user.adm.store');
     Route::get('/userEdit/{id}',[AdminUser::class, 'edit'])->name('user.adm.edit');
     Route::put('/userUpdate',[AdminUser::class, 'update'])->name('user.adm.update');
     Route::delete('/destroy/{id}',[AdminUser::class, 'destroy'])->name('user.adm.delete');
-    Route::delete('/destroy',[AdminAnnouncement::class, 'deleteForAll'])->name('announcement.adm.delete.all');
+    Route::delete('/destroyUserAll',[AdminUser::class, 'deleteForAll'])->name('user.adm.delete.all');
 });

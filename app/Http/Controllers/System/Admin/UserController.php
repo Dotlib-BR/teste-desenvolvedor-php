@@ -222,15 +222,22 @@ class UserController extends Controller
         }
     }
 
-    protected function validation(array $data, array $rules, array $feedback)
-    {
-        return Validator::make($data, $rules, $feedback);
-    }
 
     public function destroy($id)
     {
         $delete = $this->user->find($id);
         $delete->delete();
         return redirect()->back()->with('user_delete', 'Usuario apagado com sucesso!');
+    }
+
+    public function deleteForAll(Request $request)
+    {
+        $this->user->whereIn('id', $request->checkbox_value)->delete();
+        return response()->json(['msg'=>'ok'], 200);
+    }
+
+    protected function validation(array $data, array $rules, array $feedback)
+    {
+        return Validator::make($data, $rules, $feedback);
     }
 }

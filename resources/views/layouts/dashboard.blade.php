@@ -175,7 +175,7 @@ function myFunction() {
     document.getElementById('msg').style.display='block'
 }
         $(document).ready(() => {
-
+            $("#apagando").hide();
             $('#table_id').DataTable({
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
@@ -186,7 +186,9 @@ function myFunction() {
                 $("#msg").fadeOut().empty();
             }, 3000);
 
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var checkTodos = $("#checkTodos");
+
             checkTodos.click(function() {
                 if ($(this).is(':checked')) {
                     $('input:checkbox').prop("checked", true);
@@ -195,17 +197,8 @@ function myFunction() {
                 }
             })
 
-            $('.delete_checkbox').click(function() {
-                if ($(this).is(':checked')) {
-                    $(this).closest('tr').addClass('removeRow');
-                } else {
-                    $(this).closest('tr').removeClass('removeRow');
-                }
-            });
-
-            $('#delete_all').click(function() {
-                var checkbox = $('.delete_checkbox:checked');
-                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $('#delete_all_announcement').click(function() {
+                var checkbox = $('.delete_checkbox_announcement:checked');
 
                 if (checkbox.length > 0) {
                     var checkbox_value = [];
@@ -222,7 +215,41 @@ function myFunction() {
                             checkbox_value: checkbox_value
                         },
                         success: function() {
+                            $('#table_id').fadeIn(3000);
+                            $("#apagando").show();
+                            $('#table_id').fadeOut(3000, function(){
+                                location.reload(true);
+                            });
+                        },
+                    })
+                } else {
+                    alert('Selecione dados para serema apagados');
+                }
+            });
 
+            $('#delete_all_user').click(function() {
+                var checkbox = $('.delete_checkbox_user:checked');
+
+                if (checkbox.length > 0) {
+                    var checkbox_value = [];
+                    $(checkbox).each(function() {
+                        checkbox_value.push($(this).val());
+                    });
+
+                    $.ajax({
+                        url: "{{route('user.adm.delete.all')}}",
+                        method: "POST",
+                        data: {
+                            _token:CSRF_TOKEN,
+                            _method:'DELETE',
+                            checkbox_value: checkbox_value
+                        },
+                        success: function() {
+                            $('#table_id').fadeIn(3000);
+                            $("#apagando").show();
+                            $('#table_id').fadeOut(3000, function(){
+                                location.reload(true);
+                            });
                         },
                     })
                 } else {

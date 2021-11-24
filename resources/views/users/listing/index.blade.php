@@ -21,10 +21,15 @@
                     </div>
                     <div class="bootstrap-data-table-panel">
                         <div class="table-responsive">
+                            <p id="apagando" style="display: none;">Apagando dados ...</p>
                             <table id="table_id" class="display">
                                 <thead>
-
                                     <tr>
+                                        <th>
+                                            <button type="button" name="delete_all_user" id="delete_all_user" class="btn btn-danger btn-sm">Delete</button>
+                                            <label><input type="checkbox" id="checkTodos" name="checkTodos"> Selecionar Todos</label>
+                                        </th>
+                                        <th>ID</th>
                                         <th>Nome</th>
                                         <th>Email</th>
                                         <th>Perfil</th>
@@ -35,6 +40,8 @@
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
+                                            <td><input type="checkbox" class="delete_checkbox_user" value="{{ $user->id }}"></td>
+                                            <td>{{ $user->id }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ formatarPerfil($user->admin, $user->user) }}</td>

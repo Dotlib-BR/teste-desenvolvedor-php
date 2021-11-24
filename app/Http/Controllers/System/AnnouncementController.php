@@ -28,16 +28,6 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,30 +60,6 @@ class AnnouncementController extends Controller
         $announcement = $this->announcement->find($id);
         return view('annuncement.compete.index',compact('title', 'announcement','description'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Announcement  $announcement
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Announcement $announcement)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Announcement  $announcement
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-
-    }
-
 
     /**
      * Remove the specified resource from storage.
@@ -157,11 +123,11 @@ class AnnouncementController extends Controller
                  FROM announcements AS a
                  LEFT JOIN vacancy_links AS vl ON a.id = vl.announcement_id
                  INNER JOIN companies AS c ON a.company_id=c.id";
-                 if ($flag) {
+                     $sql .= " WHERE a.id NOT IN ($arrayImplode)";
+                /* if ($flag) {
                      $sql .= " WHERE a.id IN ($arrayImplode)";
                  } else {
-                     $sql .= " WHERE a.id NOT IN ($arrayImplode)";
-                 }
+                 }*/
              }
 
              $adverts=\DB::select($sql);

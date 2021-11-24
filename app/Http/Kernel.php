@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'checked' => \App\Http\Middleware\CheckdAccess::class,
         'active' => \App\Http\Middleware\UserActive::class,
         'admin' => \App\Http\Middleware\AdminAccess::class,
+        'jwt.auth' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
     ];
 }

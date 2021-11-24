@@ -38,13 +38,16 @@
                 </div>
                 <div class="bootstrap-data-table-panel">
                     <div class="table-responsive">
+                        <p id="apagando" style="display: none;">Apagando dados ...</p>
                         <table id="table_id">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <button type="button" name="delete_all" id="delete_all" class="btn btn-danger btn-sm">Delete</button>
-                                        <label><input type="checkbox" id="checkTodos" name="checkTodos"> Selecionar Todos</label>
-                                    </th>
+                                    @if (Request::route()->getName()=='announcement.adm.index')
+                                        <th>
+                                            <button type="button" name="delete_all_announcement" id="delete_all_announcement" class="btn btn-danger btn-sm">Delete</button>
+                                            <label><input type="checkbox" id="checkTodos" name="checkTodos"> Selecionar Todos</label>
+                                        </th>
+                                    @endif
                                     <th>ID</th>
                                     <th>Empresa</th>
                                     <th>Título</th>
@@ -58,7 +61,9 @@
                             <tbody>
                                 @foreach ($announcements as $announcement)
                                     <tr>
-                                        <td>  <input type="checkbox" class="delete_checkbox" value="{{  $announcement->id }}"></td>
+                                        @if (Request::route()->getName()=='announcement.adm.index')
+                                            <td><input type="checkbox" class="delete_checkbox_announcement" value="{{  $announcement->id }}"></td>
+                                        @endif
                                         <td >{{ $announcement->id }}</td>
                                         <td>{{ $announcement->company->name ?? $announcement->company_name }}</td>
                                         <td>{{ $announcement->title }}</td>

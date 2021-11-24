@@ -1,17 +1,6 @@
-<header class="navigation fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <a class="navbar-brand font-tertiary h3" href="{{ url('/') }}">
-       Quem Procura Acha
-    </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
-        aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse text-center" id="navigation">
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal"><a class="p-2 text-dark" href="{{ url('/') }}">Vagas disponiveis</a></h5>
         @component('components.site_nav')
 
         @endcomponent
-      </div>
-    </nav>
-  </header>
+</div>
