@@ -10,7 +10,7 @@ class Candidato extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome', 'sobrenome', 'data_nascimento', 'genero', 'cpf', 'endereco', 'telefone', 'celular', 'email'
+        'user_id', 'nome', 'sobrenome', 'data_nascimento', 'genero', 'cpf', 'endereco', 'telefone', 'celular', 'email'
     ];
 
     protected $dates = [
