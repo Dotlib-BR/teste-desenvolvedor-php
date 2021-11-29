@@ -59,6 +59,18 @@
                                     <input type="text" class="form-control input-sm" id="search" name="search">
                                 </div>
                             </div>
+                            <div class="col-sm-3 col-md-3">
+                                <label class="col-md-6 col-form-label text-md-right" for="empresa">Pesquisar por empresa:</label>
+
+                                <div class="col-md-12">
+                                    <select id="empresa" class="form-control" name="empresa">
+                                        <option value="" selected></option>
+                                        @foreach ($empresas as $empresa)
+                                            <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group mt-3">
@@ -111,7 +123,7 @@
 
                             <ul class="list-inline my-0">
                                 @if(!$vaga->tags->isEmpty())
-                                @foreach($vaga->tags->random(4) as $tag)
+                                @foreach($vaga->tags as $tag)
                                     <li class="list-inline-item"> <span class="badge rounded-pill bg-primary ">{{$tag->nome}}</span></li>
                                 @endforeach
                                 @endif

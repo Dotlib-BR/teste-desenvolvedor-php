@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Exceptions\FileStorageException;
 use App\Http\Controllers\Controller;
+use App\Models\Empresa;
 use App\Models\User;
 use App\Models\Vaga;
 use Carbon\Carbon;
@@ -18,6 +19,9 @@ class SiteController extends Controller
 
     public function lista(Request $request)
     {
+
+        $empresas = Empresa::all();
+
         $vagas = Vaga::with('empresa', 'tags')
         ->when(!is_null($request->search), function($query) use($request) {
             $query->where('titulo', 'LIKE', '%' . $request->search . '%')
@@ -26,11 +30,14 @@ class SiteController extends Controller
             ->orWhere('categoria', 'LIKE', '%' . $request->search . '%')
             ->orWhere('regime', 'LIKE', '%' . $request->search . '%');
         })
+        ->when(!is_null($request->empresa), function($query) use ($request){
+            $query->where('empresa_id', '=', $request->empresa);
+        })
         ->when(!is_null($request->order) && !is_null($request->orderType), function($query) use($request) {
             $query->orderBy($request->order, $request->orderType);
         })->paginate(!is_null($request->perpage) ? $request->perpage : 20);
 
-        return view('home', compact('vagas'));
+        return view('home', compact('vagas', 'empresas'));
     }
 
     public function vaga($slug){
