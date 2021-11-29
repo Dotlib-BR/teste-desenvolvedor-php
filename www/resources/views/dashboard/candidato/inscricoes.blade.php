@@ -110,18 +110,17 @@
                         <div class="col-md-auto">
 
                             <ul class="list-inline my-0">
-                                @if(!$vaga->tags->isEmpty())
-                                @foreach($vaga->tags->random(4) as $tag)
+                                @foreach($vaga->tags as $tag)
                                     <li class="list-inline-item"> <span class="badge rounded-pill bg-primary ">{{$tag->nome}}</span></li>
                                 @endforeach
-                                @endif
                             </ul>
 
                         </div>
                     </div>
                     <div class="d-flex row mb-0">
                         <div class="col">
-                            <p class="text-muted"> {{ \Illuminate\Support\Str::limit($vaga->descricao, 100)}} </p>
+                            <p class="text-muted"> {!! \Illuminate\Support\Str::limit($vaga->descricao, 100) !!} </p>
+                            <p>Data Inscrição: {{ \Carbon\Carbon::parse($vaga->pivot->aplicado_em)->format('d-m-Y H:i:s')}}</p>
                         </div>
                     </div>
                 </div>
