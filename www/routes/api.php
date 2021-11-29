@@ -17,6 +17,7 @@ Route::prefix('v1')->group(function(){
 
         Route::prefix('empresa')->group(function(){
             Route::resource('vagas', App\Http\Controllers\Api\Empresa\VagasController::class);
+            Route::get('tags', [App\Http\Controllers\Api\Empresa\TagsController::class, 'index']);
             Route::patch('vagas/{id}/pause', [App\Http\Controllers\Api\Empresa\VagasController::class, 'pause']);
         });
 
