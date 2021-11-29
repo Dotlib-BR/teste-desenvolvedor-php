@@ -1,0 +1,503 @@
+{
+	"info": {
+		"_postman_id": "6771ad84-b895-43d8-8707-4d999bb29877",
+		"name": "DOTLIB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Vagas",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8100/api/v1/empresa/vagas?order=desc&paginate=15&salario=5000&regime=remoto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"empresa",
+								"vagas"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "desc"
+								},
+								{
+									"key": "paginate",
+									"value": "15"
+								},
+								{
+									"key": "salario",
+									"value": "5000"
+								},
+								{
+									"key": "regime",
+									"value": "remoto"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/empresa/vagas/127",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"empresa",
+								"vagas",
+								"127"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "titulo",
+									"value": "Enviando vaga pela API",
+									"type": "text"
+								},
+								{
+									"key": "descricao",
+									"value": "Caros amigos, o aumento do diálogo entre os diferentes setores produtivos possibilita uma melhor visão global dos métodos utilizados na avaliação de resultados. Todavia, a hegemonia do ambiente político aponta para a melhoria de todos os recursos funcionais envolvidos. Podemos já vislumbrar o modo pelo qual a estrutura atual da organização auxilia a preparação e a composição das condições financeiras e administrativas exigidas. Gostaria de enfatizar que o acompanhamento das preferências de consumo nos obriga à análise do remanejamento dos quadros funcionais. Pensando mais a longo prazo, a competitividade nas transações comerciais deve passar por modificações independentemente dos índices pretendidos.\n\n          Ainda assim, existem dúvidas a respeito de como o entendimento das metas propostas ainda não demonstrou convincentemente que vai participar na mudança das formas de ação. Desta maneira, a constante divulgação das informações oferece uma interessante oportunidade para verificação das diretrizes de desenvolvimento para o futuro. As experiências acumuladas demonstram que a complexidade dos estudos efetuados promove a alavancagem do levantamento das variáveis envolvidas.\n\n          Percebemos, cada vez mais, que a percepção das dificuldades maximiza as possibilidades por conta do investimento em reciclagem técnica. Não obstante, o julgamento imparcial das eventualidades talvez venha a ressaltar a relatividade das diversas correntes de pensamento. No entanto, não podemos esquecer que a revolução dos costumes garante a contribuição de um grupo importante na determinação do fluxo de informações.\n\n          A nível organizacional, o desenvolvimento contínuo de distintas formas de atuação agrega valor ao estabelecimento de alternativas às soluções ortodoxas. No mundo atual, o comprometimento entre as equipes facilita a criação do processo de comunicação como um todo. O empenho em analisar o surgimento do comércio virtual é uma das consequências dos níveis de motivação departamental. Evidentemente, a crescente influência da mídia estende o alcance e a importância das condições inegavelmente apropriadas.\n\n          Do mesmo modo, o fenômeno da Internet acarreta um processo de reformulação e modernização das direções preferenciais no sentido do progresso. O que temos que ter sempre em mente é que a contínua expansão de nossa atividade obstaculiza a apreciação da importância do impacto na agilidade decisória. Todas estas questões, devidamente ponderadas, levantam dúvidas sobre se o novo modelo estrutural aqui preconizado apresenta tendências no sentido de aprovar a manutenção dos modos de operação convencionais. Assim mesmo, o início da atividade geral de formação de atitudes estimula a padronização das posturas dos órgãos dirigentes com relação às suas atribuições.\n\n          Por conseguinte, a valorização de fatores subjetivos exige a precisão e a definição do orçamento setorial. A certificação de metodologias que nos auxiliam a lidar com a consolidação das estruturas desafia a capacidade de equalização do retorno esperado a longo prazo. Por outro lado, a consulta aos diversos militantes afeta positivamente a correta previsão dos relacionamentos verticais entre as hierarquias.\n\n          O cuidado em identificar pontos críticos na execução dos pontos do programa pode nos levar a considerar a reestruturação das novas proposições. Neste sentido, o consenso sobre a necessidade de qualificação assume importantes posições no estabelecimento da gestão inovadora da qual fazemos parte. É claro que a expansão dos mercados mundiais cumpre um papel essencial na formulação dos procedimentos normalmente adotados. ",
+									"type": "text"
+								},
+								{
+									"key": "nivel",
+									"value": "pleno",
+									"type": "text"
+								},
+								{
+									"key": "categoria",
+									"value": "CLT",
+									"type": "text"
+								},
+								{
+									"key": "regime",
+									"value": "remoto",
+									"type": "text"
+								},
+								{
+									"key": "salario",
+									"value": "5500.00",
+									"type": "text"
+								},
+								{
+									"key": "is_paused",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/empresa/vagas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"empresa",
+								"vagas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "titulo",
+									"value": "Atualizando vaga pela API",
+									"type": "text"
+								},
+								{
+									"key": "descricao",
+									"value": " Todavia, o desenvolvimento contínuo de distintas formas de atuação possibilita uma melhor visão global dos paradigmas corporativos. Pensando mais a longo prazo, a percepção das dificuldades aponta para a melhoria do fluxo de informações. É claro que a necessidade de renovação processual faz parte de um processo de gerenciamento das condições financeiras e administrativas exigidas. As experiências acumuladas demonstram que o acompanhamento das preferências de consumo deve passar por modificações independentemente do remanejamento dos quadros funcionais. A certificação de metodologias que nos auxiliam a lidar com a estrutura atual da organização prepara-nos para enfrentar situações atípicas decorrentes das condições inegavelmente apropriadas.\n\n          O que temos que ter sempre em mente é que a competitividade nas transações comerciais ainda não demonstrou convincentemente que vai participar na mudança das novas proposições. Desta maneira, a consulta aos diversos militantes oferece uma interessante oportunidade para verificação dos relacionamentos verticais entre as hierarquias. Podemos já vislumbrar o modo pelo qual o consenso sobre a necessidade de qualificação promove a alavancagem do orçamento setorial. Percebemos, cada vez mais, que o aumento do diálogo entre os diferentes setores produtivos maximiza as possibilidades por conta do investimento em reciclagem técnica.\n\n          Por conseguinte, o entendimento das metas propostas talvez venha a ressaltar a relatividade dos índices pretendidos. ",
+									"type": "text"
+								},
+								{
+									"key": "nivel",
+									"value": "junior",
+									"type": "text"
+								},
+								{
+									"key": "categoria",
+									"value": "CLT",
+									"type": "text"
+								},
+								{
+									"key": "regime",
+									"value": "remoto",
+									"type": "text"
+								},
+								{
+									"key": "salario",
+									"value": "4000.00",
+									"type": "text"
+								},
+								{
+									"key": "is_paused",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/empresa/vagas/127",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"empresa",
+								"vagas",
+								"127"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/empresa/vagas/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"empresa",
+								"vagas",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pausar",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/empresa/vagas/127/pause?pause=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"empresa",
+								"vagas",
+								"127",
+								"pause"
+							],
+							"query": [
+								{
+									"key": "pause",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Candidatos",
+			"item": [
+				{
+					"name": "Minhas Inscrições",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/candidato/minhas-inscricoes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"candidato",
+								"minhas-inscricoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Realizar Inscrição",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "curriculo",
+									"type": "file",
+									"src": "/C:/Users/danie/Desktop/how-to-build-your-own-tech/feynman.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/candidato/vaga/9/inscrever",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"candidato",
+								"vaga",
+								"9",
+								"inscrever"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"pm.environment.set('token', jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "schmidt.malvina@example.org",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/auth/logout",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refresh",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"pm.environment.set('token', jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/auth/refresh",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "me",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/auth/me",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By Token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/auth/user?token={{token}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"user"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

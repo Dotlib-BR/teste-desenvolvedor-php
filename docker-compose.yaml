@@ -1,0 +1,50 @@
+version: "3.7"
+
+networks:
+    app-network:
+        driver: bridge
+
+services:
+    app:
+        build: 
+            context: ./
+            dockerfile: Dockerfile
+        image: laravel8-php-fpm-80
+        container_name: app
+        restart: unless-stopped
+        tty: true
+        working_dir: /var/www
+        volumes: 
+            - ./www:/var/www
+        networks: 
+            - app-network
+    mysql:
+        image: mysql:5.7.33
+        container_name: mysql
+        restart: unless-stopped
+        tty: true
+        environment: 
+            MYSQL_DATABASE: prova
+            MYSQL_ROOT_PASSWORD: 123456
+            MYSQL_PASSWORD: 123456
+            MYSQL_USER: prova
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes: 
+            - ./mysql/data:/var/lib/mysql
+        networks:
+            - app-network
+        
+    nginx:
+        image: nginx:1.19.8-alpine
+        container_name: nginx
+        restart: unless-stopped
+        tty: true
+        ports: 
+            - 8100:80
+        volumes: 
+            - ./www:/var/www
+            - ./nginx/conf:/etc/nginx/conf.d
+        networks: 
+            - app-network
+

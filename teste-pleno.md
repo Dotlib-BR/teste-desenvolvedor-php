@@ -1,10 +1,57 @@
 [![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
 
+
 # Teste para candidatos à vaga de Desenvolvedor PHP Pleno
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
+## Configurando o projeto
 
-## Instruções
+Iniciar os containers
+
+```
+$ docker-compose up
+```
+
+Acessar a pasta `www` e executar o comando para instalar as dependências
+```
+$ docker-compose exec -T app composer install
+```
+Criar o arquivo .env e setar as configurações do banco de dados
+
+```
+$ docker-compose exec -T app cp .env.example .env
+```
+No arquivo .env na raiz do projeto, mude as configurações do banco de dados como está abaixo
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=prova
+DB_USERNAME=prova
+DB_PASSWORD=123456
+
+```
+Agora com o banco configurado, vamos executar as migrations juntamente com os seeders para popular a base com alguns dados
+
+```
+$ docker-compose exec -T app php artisan migrate --seed
+```
+
+O projeto pode ser acessado em http://localhost:8100
+
+
+Para rodar testes de caso
+
+```
+$ docker-compose exec -T app php artisan test
+```
+
+### Deixo no repositorio 2 arquivos exportados do postman, um contendo uma coleção com as requests prontas para os endpoints, e o outro é a configuração de ambiente utilizado por essas coleções, se servir de ajuda.
+
+
+------------------------------------------------
+
+## Descrição do teste/projeto
 
 O desafio consiste em implementar uma aplicação web utilizando o framework PHP Laravel, um banco de dados relacional (Mysql, Postgres ou SQLite), que terá como finalidade a inscrição de candidatos a uma oportunidade de emprego.
 
