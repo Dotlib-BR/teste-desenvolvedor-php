@@ -1,58 +1,113 @@
-[![](https://dotlib.com/theme/img/logos/logo.png)](http://www.dotlib.com)
+[![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
 
-# Nossa empresa
 
-A Dot.Lib distribui conteúdo online científico e acadêmico a centenas de instituições espalhadas pela América Latina. Temos como parceiras algumas das principais editoras científicas nacionais e internacionais. Além de prover conteúdo, criamos soluções que atendem às necessidades de nossos clientes e editoras.
+# Teste para candidatos à vaga de Desenvolvedor PHP Pleno
 
-## Conheça mais sobre a Dotlib
+## Configurando o projeto
 
-https://dotlib.com/
+Iniciar os containers
 
-https://www.linkedin.com/company/dotlib/
+```
+$ docker-compose up
+```
 
-# Descrição da vaga
+Acessar a pasta `www` e executar o comando para instalar as dependências
+```
+$ docker-compose exec -T app composer install
+```
+Criar o arquivo .env e setar as configurações do banco de dados
 
-Buscamos profissionais que sejam apaixonados por desenvolvimento, inovação e novas tecnologias, para integrar nosso time em projetos baseados em Node.JS, Laravel, React.JS e React Native.
+```
+$ docker-compose exec -T app cp .env.example .env
+```
+No arquivo .env na raiz do projeto, mude as configurações do banco de dados como está abaixo
 
-## Requisitos
+```env
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=prova
+DB_USERNAME=prova
+DB_PASSWORD=123456
 
-### **Obrigatórios:**
+```
+Agora com o banco configurado, vamos executar as migrations juntamente com os seeders para popular a base com alguns dados
 
-- Mínimo 1 ano de experiência em desenvolvimento de sites e sistemas em Laravel;
-- Desenvolvimento de APIs RESTful;
-- Conhecimentos em SQL e NoSQL;
-- Conhecimentos em Docker;
-- Controle de versões (GIT).
+```
+$ docker-compose exec -T app php artisan migrate --seed
+```
 
-### **Diferenciais:**
+O projeto pode ser acessado em http://localhost:8100
 
-- TDD;
-- Conhecimentos em Node.JS;
-- Conhecimentos em Elasticsearch;
-- Conhecimentos em serviços AWS;
-- Experiência em metodologias ágeis (Scrum/Kanban).
 
-## Benefícios
+Para rodar testes de caso
 
-- Salário compatível com o mercado;
-- Vale Refeição ou Vale Alimentação;
-- Plano de Saúde e Odontológico;
-- Equipe unida, divertida e apaixonada por hambúrgueres;
-- TECH DAY - Evento trimestral de palestras sobre tecnologia;
-- Friday's Talk - Bate papo descontraído sobre tecnologia, apresentação de POCs de estudos, etc;
-- Emendas em feriados nacionais.
+```
+$ docker-compose exec -T app php artisan test
+```
 
-## Contratação
+### Deixo no repositorio 2 arquivos exportados do postman, um contendo uma coleção com as requests prontas para os endpoints, e o outro é a configuração de ambiente utilizado por essas coleções, se servir de ajuda.
 
-Regime: CLT
 
-## Alocação
+------------------------------------------------
 
-100% Remoto
+## Descrição do teste/projeto
 
-## Como se candidatar
+O desafio consiste em implementar uma aplicação web utilizando o framework PHP Laravel, um banco de dados relacional (Mysql, Postgres ou SQLite), que terá como finalidade a inscrição de candidatos a uma oportunidade de emprego.
 
-Para se candidatar, basta acessar a url de acordo com o nível e realizar o teste para a vaga:
+Sua aplicação deve possuir:
 
-- [Desenvolvedor PHP Júnior](teste-junior.md)
-- [Desenvolvedor PHP Pleno](teste-pleno.md)
+- CRUD de vagas:
+  - Criar, editar, excluir e listar vagas.
+  - A vaga pode ser CLT, Pessoa Jurídica ou Freelancer.
+- CRUD de candidatos:
+  - Criar, editar, excluir e listar candidatos.
+- Um cadidato pode se inscrever em uma ou mais vagas.
+- Deve ser ser possível "pausar" a vaga, evitando a inscrição de candidatos.
+- Cada CRUD:
+  - Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
+  - Deve possuir formulários para criação e atualização de seus itens.
+  - Deve permitir a deleção de qualquer item de sua lista.
+  - Implementar validações de campos obrigatórios e tipos de dados.
+- Testes unitários e de unidade.
+
+## Banco de dados
+
+- O banco de dados deve ser criado utilizando Migrations do framework Laravel, e também utilizar Seeds e Factorys para popular as informações no banco de dados.
+
+## Tecnologias a serem utilizadas
+
+Devem ser utilizadas as seguintes tecnologias:
+
+- HTML
+- CSS
+- Javascript
+- Framework Laravel (PHP)
+- Docker (construção do ambiente de desenvolvimento)
+- Mysql, Postgres ou SQLite
+
+## Entrega
+
+- Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
+- Crie uma branch com o seu nome completo;
+- Altere o arquivo teste-pleno.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
+- Depois de finalizado, envie-nos o pull request;
+- Preencha o formulário https://forms.gle/YKMoZVMe28qgX7qH8 e envie seu currículo.
+
+## Bônus
+
+- API Rest JSON para todos os CRUDS listados acima.
+- Permitir deleção em massa de itens nos CRUDs.
+- Permitir que o usuário mude o número de itens por página.
+- Implementar autenticação de usuário na aplicação.
+
+## O que iremos analisar
+
+- Organização do código;
+- Aplicação de design patterns;
+- Aplicação de testes;
+- Separação de módulos e componentes;
+- Legibilidade;
+- Criação do ambiente com Docker.
+
+### Boa sorte!
