@@ -6,6 +6,7 @@ use App\Models\Tecnologia;
 use App\Models\TecnologiaVaga;
 use App\Models\Vaga;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TecnologiaVagaSeeder extends Seeder
 {
@@ -16,10 +17,13 @@ class TecnologiaVagaSeeder extends Seeder
      */
     public function run()
     {
-        $tecnologias = Tecnologia::inRandomOrder()->take(rand(3,5))->get();
+
         $vagas = Vaga::all();
 
         foreach($vagas as $vaga){
+
+            $tecnologias = Tecnologia::inRandomOrder()->take(4)->get();
+
             foreach($tecnologias as $tecnologia){
                 TecnologiaVaga::firstOrCreate([
                     'tecnologia_id' => $tecnologia->id,
