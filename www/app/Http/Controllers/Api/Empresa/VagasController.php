@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Empresa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Empresa;
+use App\Models\Tecnologia;
 use App\Models\Vaga;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -48,11 +49,16 @@ class VagasController extends Controller
     {
         try {
 
-            $dados = $request->all();
-            $dados['slug'] = Str::slug($dados['titulo']);
+            $dadosVaga = $request->all();
+            $dadosVaga['slug'] = Str::slug($dadosVaga['titulo']);
+            unset($dadosVaga['tecnologias']);
+
+            $dadosTecs = $request->tecnologias;
 
             $empresa = Empresa::findOrFail(auth('api')->user()->empresa->id);
-            $empresa->vagas()->create($dados);
+            $vaga = $empresa->vagas()->create($dadosVaga);
+
+            $vaga->tecnologias()->attach($dadosTecs);
 
             return response()->json(['message' => 'Uma nova vaga foi criada'], 200);
 

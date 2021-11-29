@@ -25,7 +25,8 @@ class AuthenticationTest extends TestCase
 
     public function testLoginSuccess()
     {
-        $loginData = ['email' => 'schmidt.malvina@example.org', 'password' => '123456'];
+        $user = User::first();
+        $loginData = ['email' => $user->email, 'password' => '123456'];
 
         $this->json('POST', 'api/v1/auth/login', $loginData, ['Accept' => 'application/json'])
         ->assertStatus(200)->assertJsonStructure(["token"]);
@@ -43,7 +44,9 @@ class AuthenticationTest extends TestCase
 
     public function testGetUserByToken(){
 
-        $loginData = ['email' => 'schmidt.malvina@example.org', 'password' => '123456'];
+        $user = User::first();
+
+        $loginData = ['email' => $user->email, 'password' => '123456'];
         $response = $this->json('POST', 'api/v1/auth/login', $loginData, ['Accept' => 'application/json']);
         $response->assertStatus(200)->assertJsonStructure(["token"]);
 
