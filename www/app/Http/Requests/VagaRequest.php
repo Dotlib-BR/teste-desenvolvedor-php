@@ -34,6 +34,8 @@ class VagaRequest extends FormRequest
                     'regime' => 'required|in:presencial,remoto',
                     'salario' => 'required|numeric',
                     'is_paused' => 'boolean',
+
+                    'tags' => 'required',
                 ];
             }
 
@@ -47,6 +49,8 @@ class VagaRequest extends FormRequest
                     'regime' => 'required|in:presencial,remoto',
                     'salario' => 'required|numeric',
                     'is_paused' => 'boolean',
+
+                    'tags' => 'required',
                 ];
             }
         }
@@ -64,6 +68,8 @@ class VagaRequest extends FormRequest
             'regime.required' => 'Regime da vaga é obrigatório',
             'regime.in' => 'Opção selecionada para o regime da vaga é inválida',
             'salario.required' => 'Salário da vaga é obrigatório',
+            'salario.numeric' => 'O campo salário deve ser númerico',
+            'tags.required' => 'É necessário selecionar ao menos 1 tag de tecnologia',
         ];
     }
 }

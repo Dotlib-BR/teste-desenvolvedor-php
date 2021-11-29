@@ -11,7 +11,7 @@ class CreateVagasTable extends Migration
         Schema::create('vagas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('empresa_id');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('titulo');
             $table->longText('descricao');
             $table->string('nivel');

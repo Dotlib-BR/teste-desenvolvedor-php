@@ -6,6 +6,8 @@ use App\Models\Tecnologia;
 use App\Models\User;
 use App\Models\Vaga;
 use Tests\TestCase;
+use Illuminate\Support\Str;
+use Faker\Factory as Faker;
 
 class VagaTest extends TestCase
 {
@@ -24,20 +26,23 @@ class VagaTest extends TestCase
 
         $token = $response->decodeResponseJson()['token'];
 
-        $tec = Tecnologia::inRandomOrder()->take(5)->get();
+        $tecnologias = "1, 3, 5, 15";
+
+        $faker = Faker::create();
+        $title = $faker->text(25);
 
         $vagaData = [
             'empresa_id' => $user->empresa->id,
-            'titulo' => 'Teste de caso',
-            'slug' => 'teste-de-caso',
-            'nivel' => 'pleno',
-            'categoria' => 'CLT',
-            'regime' => 'remoto',
-            'salario' => 4952.45,
-            'descricao' => 'Fazendo testes de caso',
-            'is_paused' => 0,
+            'titulo' => $title,
+            'slug' => Str::slug($title),
+            'nivel' => $faker->randomElement(['junior', 'pleno', 'senior']),
+            'categoria' => $faker->randomElement(['CLT', 'PJ', 'Freelancer']),
+            'regime' => $faker->randomElement(['remoto', 'presencial']),
+            'salario' => $faker->randomFloat(2, 2500, 10000),
+            'descricao' => '<p>'.$faker->text(1000).'</p>',
+            'is_paused' => $faker->numberBetween(0,1),
 
-            'tecnologias' => $tec->pluck('id'),
+            'tags' => $tecnologias,
         ];
 
         $this->json('POST', 'api/v1/empresa/vagas', $vagaData, ['Accept' => 'application/json', 'Authorization' => 'Bearer '.$token])

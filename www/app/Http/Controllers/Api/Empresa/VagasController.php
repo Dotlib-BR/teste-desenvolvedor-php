@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Empresa;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VagaRequest;
 use App\Models\Empresa;
 use App\Models\Tecnologia;
 use App\Models\Vaga;
@@ -45,22 +46,29 @@ class VagasController extends Controller
         return response()->json($vagas, 200);
     }
 
-    public function store(Request $request)
+    public function store(VagaRequest $request)
     {
+
+        $empresa_id = auth('api')->user()->empresa->id;
         try {
 
-            $dadosVaga = $request->all();
-            $dadosVaga['slug'] = Str::slug($dadosVaga['titulo']);
-            unset($dadosVaga['tecnologias']);
+            $vaga = Vaga::create([
+                'empresa_id' => $empresa_id,
+                'titulo' => $request->titulo,
+                'slug' => Str::slug($request->titulo),
+                'descricao' => $request->descricao,
+                'nivel' => $request->nivel,
+                'categoria' => $request->categoria,
+                'regime' => $request->regime,
+                'salario' => $request->salario,
+                'is_paused' => $request->is_paused ? 1 : 0,
+            ]);
 
-            $dadosTecs = $request->tecnologias;
+            $tecnologias = explode(",", $request->tags);
 
-            $empresa = Empresa::findOrFail(auth('api')->user()->empresa->id);
-            $vaga = $empresa->vagas()->create($dadosVaga);
+            $vaga->tecnologias()->attach($tecnologias);
 
-            $vaga->tecnologias()->attach($dadosTecs);
-
-            return response()->json(['message' => 'Uma nova vaga foi criada'], 200);
+            return response()->json(['message' => 'A vaga foi criada'], 200);
 
         } catch (\Exception $e) {
             return response()->json(['message' => 'Erro ao criar a nova vaga', 'erroMessage' => $e->getMessage(), 'errorTrace' => $e->getTraceAsString(), 'errorLine' => $e->getLine(), 'errorFile' => $e->getFile()], 400);

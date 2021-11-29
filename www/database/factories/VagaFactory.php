@@ -23,7 +23,7 @@ class VagaFactory extends Factory
         return [
             'slug' => Str::slug($title),
             'titulo' => $title,
-            'descricao' => $this->faker->text(500),
+            'descricao' => '<p>'.$this->faker->text(1000).'</p>',
             'nivel' => $this->faker->randomElement(['junior', 'pleno', 'senior']),
             'categoria' => $this->faker->randomElement(['CLT', 'PJ', 'Freelancer']),
             'regime' => $this->faker->randomElement(['remoto', 'presencial']),
