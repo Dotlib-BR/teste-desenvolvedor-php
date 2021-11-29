@@ -120,11 +120,9 @@
                         <div class="col-md-auto">
 
                             <ul class="list-inline my-0">
-                                @if(!$vaga->tags->isEmpty())
-                                @foreach($vaga->tags->random(4) as $tag)
+                                @foreach($vaga->tags as $tag)
                                     <li class="list-inline-item"> <span class="badge rounded-pill bg-primary ">{{$tag->nome}}</span></li>
                                 @endforeach
-                                @endif
                             </ul>
 
                         </div>

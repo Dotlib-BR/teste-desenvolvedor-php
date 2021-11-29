@@ -37,7 +37,7 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-inline my-0">
-                        @foreach($vaga->tags->random(4) as $tag)
+                        @foreach($vaga->tags as $tag)
                             <li class="list-inline-item"> <span class="badge rounded-pill bg-primary ">{{$tag->nome}}</span></li>
                         @endforeach
                     </ul>
