@@ -48,7 +48,7 @@
                                         <label for="cpf" class="col-md-4 col-form-label text-md-right">CPF</label>
 
                                         <div class="col-md-12">
-                                            <input id="cpf" type="text" class="form-control @error('candidato.cpf') is-invalid @enderror" name="candidato[cpf]" value="{{ old('candidato.cpf') }}" required autocomplete="cpf" autofocus>
+                                            <input id="cpf" type="text" class="form-control @error('candidato.cpf') is-invalid @enderror" name="candidato[cpf]" value="{{ old('candidato.cpf') }}" required autocomplete="cpf" maxlength="14" autofocus>
 
                                             @error('candidato.cpf')
                                                 <span class="invalid-feedback" role="alert">
@@ -202,7 +202,7 @@
                                         <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirmar a senha</label>
 
                                         <div class="col-md-12">
-                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                            <input id="password-confirm" type="password" class="form-control" name="usuario[password_confirmation]" required autocomplete="new-password">
                                         </div>
                                     </div>
                                 </div>

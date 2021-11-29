@@ -21,7 +21,7 @@ class CadastroEmpresaRequest extends FormRequest
             case 'POST': {
                 return [
                     'empresa.nome' => 'required',
-                    'empresa.cnpj' => 'required|unique:empresas,cnpj',
+                    'empresa.cnpj' => 'required|unique:empresas,cnpj|max:20',
                     'empresa.endereco' => 'required',
                     'empresa.telefone' => 'required',
                     'empresa.celular' => 'nullable',
@@ -60,6 +60,7 @@ class CadastroEmpresaRequest extends FormRequest
             'empresa.nome.required' => 'Nome da empresa é obrigatório',
             'empresa.cnpj.required' => 'CNPJ da empresa é obrigatório',
             'empresa.cnpj.unique' => 'CNPJ já foi cadastrado',
+            'empresa.cnpj.max' => 'O cnpj não deve ultrapassar 20 caracteres',
             'empresa.endereco.required' => 'Endereço da empresa é obrigatório',
             'empresa.telefone.required' => 'Telefone da empresa é obrigatório',
             'empresa.email.email' => 'Formato de email da empresa é inválido',

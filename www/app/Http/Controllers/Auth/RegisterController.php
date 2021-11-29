@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CadastroCandidatoRequest;
 use App\Http\Requests\CadastroEmpresaRequest;
+use App\Models\Candidato;
 use App\Models\Empresa;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -29,7 +31,26 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo;
+
+    public function redirectTo()
+    {
+        switch (Auth::user()->perfil) {
+
+            case 'candidato':
+                $this->redirectTo = route('dashboard.candidato.home');
+                return $this->redirectTo;
+                break;
+            case 'empresa':
+                $this->redirectTo = route('dashboard.empresa.home');
+                return $this->redirectTo;
+                break;
+            default:
+                return redirect()->route('auth.login');
+                break;
+        }
+
+    }
 
     public function __construct()
     {
@@ -57,13 +78,13 @@ class RegisterController extends Controller
             $user = User::create($usuario);
 
             if($user){
-                $empresa['user_id'] = $user->id;
-
-                Empresa::create($empresa);
+                $user->empresa()->create($empresa);
 
                 DB::commit();
 
-                return redirect()->route('dashboard.empresa.home')->with(['message' => 'Bem vindo... seu usário foi cadastrado!!']);
+                $this->guard()->login($user);
+
+                return redirect()->route('dashboard.empresa.home')->with(['message' => 'Bem vindo!! Cadastrado criado e usuário autenticado']);
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -84,13 +105,13 @@ class RegisterController extends Controller
             $user = User::create($usuario);
 
             if($user){
-                $candidato['user_id'] = $user->id;
-
-                Empresa::create($candidato);
+                $user->candidato()->create($candidato);
 
                 DB::commit();
 
-                return redirect()->route('dashboard.candidato.home')->with(['message' => 'Bem vindo... seu usário foi cadastrado!!']);
+                $this->guard()->login($user);
+
+                return redirect()->route('dashboard.candidato.home')->with(['message' => 'Bem vindo!! Cadastrado criado e usuário autenticado']);
             }
         } catch (\Exception $e) {
             DB::rollBack();

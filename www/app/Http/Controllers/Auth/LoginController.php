@@ -25,25 +25,6 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    // public function redirectTo()
-    // {
-    //     switch (Auth::user()->perfil) {
-
-    //         case 'candidato':
-    //             $this->redirectTo = route('dashboard.candidato.home');
-    //             return $this->redirectTo;
-    //             break;
-    //         case 'empresa':
-    //             $this->redirectTo = route('dashboard.empresa.home');
-    //             return $this->redirectTo;
-    //             break;
-    //         default:
-    //             return redirect()->route('auth.login');
-    //             break;
-    //     }
-
-    // }
-
     public function logout()
     {
         Auth::guard('web')->logout();

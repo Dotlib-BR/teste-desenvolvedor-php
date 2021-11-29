@@ -35,7 +35,7 @@
                                         <label for="cnpj" class="col-md-4 col-form-label text-md-right">CNPJ</label>
 
                                         <div class="col-md-12">
-                                            <input id="cnpj" type="text" class="form-control @error('empresa.cnpj') is-invalid @enderror" name="empresa[cnpj]" value="{{ old('empresa.cnpj') }}" required autocomplete="cnpj">
+                                            <input id="cnpj" type="text" class="form-control @error('empresa.cnpj') is-invalid @enderror" name="empresa[cnpj]" value="{{ old('empresa.cnpj') }}" required autocomplete="cnpj" maxlength="20">
 
                                             @error('empresa.cnpj')
                                                 <span class="invalid-feedback" role="alert">
