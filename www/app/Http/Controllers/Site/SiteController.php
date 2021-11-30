@@ -128,7 +128,6 @@ class SiteController extends Controller
             return redirect()->back()->with($notification);
 
         } catch (\Exception $e) {
-
             $notification = array(
                 'message' => 'Erro no Servidor',
                 'alert-type' => 'error'
@@ -144,7 +143,7 @@ class SiteController extends Controller
 
         if($request->hasFile('curriculo')){
             if(!Storage::disk('curriculo')->exists(auth()->user()->candidato->nome)){
-                Storage::disk('curriculo')->makeDirectory(auth()->user()->candidato->nome);
+                Storage::disk('curriculo')->makeDirectory(auth()->user()->candidato->nome, '0777');
             }
 
             $file = $request->file('curriculo');
