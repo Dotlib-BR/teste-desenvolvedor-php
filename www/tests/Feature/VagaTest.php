@@ -8,9 +8,11 @@ use App\Models\Vaga;
 use Tests\TestCase;
 use Illuminate\Support\Str;
 use Faker\Factory as Faker;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class VagaTest extends TestCase
 {
+    use DatabaseTransactions;
 
     protected $token;
 

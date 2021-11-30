@@ -4,14 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use App\Models\Vaga;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
-use Illuminate\Support\Str;
 
 class CandidatoTest extends TestCase
 {
+    use DatabaseTransactions;
 
     public function testAplicarParaVaga(){
 
