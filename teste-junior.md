@@ -1,71 +1,36 @@
-[![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
+Teste Junior:
 
-# Teste para candidatos à vaga de Desenvolvedor PHP Júnior
+Preparo do docker:
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
+docker run -d -p 3306:3306 --name desafio-teste -e "MYSQL_DATABASE=desafio" -e "MYSQL_ROOT_PASSWORD=password" -e MYSQL_ROOT_HOST='%' -d mysql:5.7
 
-## Instruções
+Comandos para criar o usuario do mysql:
 
-O desafio consiste em implementar uma aplicação Web utilizando o framework PHP Laravel, e um banco de dados relacional SQLite, MySQL ou Postgres, a partir de uma modelagem de dados inicial desnormalizada, que deve ser normalizada para a implementação da solução.
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
 
-Você vai criar uma aplicação de cadastro de pedidos de compra, a partir de uma modelagem inicial, com as seguintes funcionalidades:
+GRANT ALL PRIVILEGES ON _._ TO 'username'@'localhost' WITH GRANT OPTION;
 
-- CRUD de clientes.
-- CRUD de produtos.
-- CRUD de pedidos de compra, com status (Em Aberto, Pago ou Cancelado).
-- Cada CRUD:
-  - deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
-  - deve possuir formulários para criação e atualização de seus itens.
-  - deve permitir a deleção de qualquer item de sua lista.
-- Barra de navegação entre os CRUDs.
-- Links para os outros CRUDs nas listagens (Ex: link para o detalhe do cliente da compra na lista de pedidos de compra)
+CREATE USER 'username'@'%' IDENTIFIED BY 'password';
 
-## Modelo de dados
+GRANT ALL PRIVILEGES ON _._ TO 'username'@'%' WITH GRANT OPTION;
 
-A modelagem inicial para a implementação solução é a seguinte:
+FLUSH PRIVILEGES;
 
-[![](/images/modelo.png)](http://www.dotlib.com)
+Comandos para instalar as dependencias do laravel no projeto:
 
-Você deve alterar esta modelagem para que a mesma cumpra com as três primeiras formas normais.
+composer install && composer dump-autoload
 
-Além disso, a implementação deste modelo em um banco de dados relacional deve ser realizada levando em consideração os seguintes requisitos:
+Renomeie o arquivo .env.example para .env e configure a conexão com o banco de dados MySQL.
 
-- O banco de dados deve ser criado utilizando Migrations do framework Laravel, e também utilizar Seeds e Factorys para popular as informações no banco de dados.
-- Implementação das validações necessárias na camada que julgar melhor.
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=desafio_dotlib
+DB_USERNAME=username
+DB_PASSWORD=password
 
-## Tecnologias a serem utilizadas
+Por fim, execute o comando php artisan migrate:fresh --seed para popular o banco de dados.
 
-Devem ser utilizadas as seguintes tecnologias:
+Documentação da API
 
-- HTML
-- CSS
-- Javascript
-- Framework Laravel (PHP)
-- Docker (construção do ambiente de desenvolvimento)
-
-## Entrega
-
-- Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
-- Crie uma branch com o seu nome completo;
-- Altere o arquivo teste-junior.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
-- Depois de finalizado, envie-nos o pull request;
-- Preencha o formulário https://forms.gle/YKMoZVMe28qgX7qH8 e envie seu currículo.
-
-## Bônus
-
-- Implementar autenticação de usuário na aplicação.
-- Permitir que o usuário mude o número de itens por página.
-- Permitir deleção em massa de itens nos CRUDs.
-- Implementar aplicação de desconto em alguns pedidos de compra.
-- Implementar a camada de Front-End utilizando a biblioteca javascript Bootstrap e ser responsiva.
-- API Rest JSON para todos os CRUDS listados acima.
-
-## O que iremos analisar
-
-- Organização do código;
-- Aplicação de design patterns;
-- Separação de módulos e componentes;
-- Legibilidade;
-- Criação do ambiente com Docker.
-
-### Boa sorte!
+https://documenter.getpostman.com/view/7035979/UVeNo48Q#200aa48a-709a-410c-a9f6-a5b44a33c734
