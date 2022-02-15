@@ -1,0 +1,65 @@
+@extends('layouts.app')
+@section('content')
+    <h3 class="page-title">Clientes</h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('client.get.list') }}">Clientes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gerenciar Clientes</li>
+        </ol>
+    </nav>
+
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Clientes Cadastrados</h4>
+            <p class="card-description"> Lista os clientes cadastrados</code>
+            </p>
+            <table id="clients" class="table table-bordered" style="width:100%">
+              <thead class="p5 mt5">
+                <tr>
+                  <th> # </th>
+                  <th> Nome </th>
+                  <th> CPF </th>
+                  <th> E-mail </th>
+                  <th> Compra </th>
+                  <th> Valor Total </th>
+                  <th> X </th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($clients as $client)
+                    
+                <tr>
+                  <td> {{ $client->id }} </td>
+                  <td> {{ $client->name }} </td>
+                  <td> {{ $client->cpf }} </td>
+                  <td> {{ $client->email }} </td>
+                  <td>
+                    <div class="progress">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </td>
+                  <td> 0 </td>
+                  <td>
+                  </td>
+                </tr>
+
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    
+@endsection
+
+@section('js')
+<script>
+$(document).ready( function () {
+    $('#clients').DataTable({
+        "scrollX": true
+    });
+} );
+</script>
+@endsection
