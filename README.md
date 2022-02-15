@@ -9,7 +9,7 @@ Olá caro recrutador, nesse teste utilizei meu conhecimento para tentar entregar
 ## Instruções
 
 ``` git
-  git clone xxxxxx
+  git clone https://github.com/ricardocoimbra/teste-desenvolvedor-php.git
 ```
 Crie o arquivo do banco de dados na pasta 'database'
 
@@ -60,6 +60,12 @@ ou assim para popular as tabelas de clientes e produtos
 ```laravel
   php artisan migrate --seed
 ```
+
+Usuário
+admin@pedidos.test
+
+Senha
+123admin
 
 
 ### Obrigado!

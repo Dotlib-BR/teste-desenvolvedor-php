@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Order;
 use App\Product;
+use App\Status;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -73,9 +74,9 @@ class OrdersController extends Controller
     {
         $customers = Customer::all();
         $products = Product::all();
-        //$statuses = Status::all();
+        $statuses = Status::all();
 
-        return view('orders.edit', compact('customers', 'products'));
+        return view('orders.edit', compact('order','customers', 'products', 'statuses'));
     }
 
     /**
@@ -83,21 +84,25 @@ class OrdersController extends Controller
      *
      * @param Request $request
      * @param  Order $order
-     * @return Response
+     * @return Application|RedirectResponse|Response|Redirector
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->fill($request->all());
+        $order->save();
+
+        return redirect('orders');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  Order $order
-     * @return Response
+     * @return Application|RedirectResponse|Response|Redirector
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect('orders');
     }
 }

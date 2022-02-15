@@ -21,6 +21,7 @@
                             <th>Nome Produto</th>
                             <th>Valor Unitário</th>
                             <th>Quantidade</th>
+                            <th>Status</th>
                             <th>Ações</th>
                         </tr>
                         </thead>
@@ -36,6 +37,7 @@
                                 <td>{{ $order->product->name }}</td>
                                 <td>{{ number_format($order->product->price, 2, ',', '.') }}</td>
                                 <td>{{ $order->quantity }}</td>
+                                <td>{{ $order->status->name }}</td>
                                 <td class="d-flex justify-content-around">
                                     <a class="btn btn-outline-info" href="{{ route('orders.edit', $order) }}"><i class="fas fa-edit"></i></a>
                                     <form id="delete-order-{{$order->id}}" method="POST" action="{{ route('orders.destroy', $order) }}">
