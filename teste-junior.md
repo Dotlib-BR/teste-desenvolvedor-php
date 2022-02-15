@@ -1,10 +1,19 @@
-[![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
-
 # Teste para candidatos à vaga de Desenvolvedor PHP Júnior
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
+Loja em Laravel
 
 ## Instruções
+
+### Instalação
+
+`
+$cd loja_teste
+`
+
+`
+$composer install
+`
+
 
 O desafio consiste em implementar uma aplicação Web utilizando o framework PHP Laravel, e um banco de dados relacional SQLite, MySQL ou Postgres, a partir de uma modelagem de dados inicial desnormalizada, que deve ser normalizada para a implementação da solução.
 
