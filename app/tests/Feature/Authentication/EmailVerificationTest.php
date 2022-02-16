@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Authentication;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Laravel\Fortify\Features;
 use Tests\TestCase;
+use function now;
 
 class EmailVerificationTest extends TestCase
 {
