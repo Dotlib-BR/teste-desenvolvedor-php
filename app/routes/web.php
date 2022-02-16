@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CostumerController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,6 +27,13 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    Route::resource('costumers', CostumerController::class);
+    Route::resource('orders', OrderController::class);
+    Route::resource('products', ProductController::class);
+});
+
