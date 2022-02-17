@@ -2,6 +2,13 @@
 
 @section('content')
 
+<h3 class="page-title">Clientes</h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('client.get.list') }}">Clientes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gerenciar Clientes</li>
+        </ol>
+    </nav>
 
     <div class="card">
         <div class="card-body">
@@ -42,6 +49,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-gradient-primary me-2">Atualizar</button>
+                <a href="{{ route('client.get.list') }}" class="btn btn-gradient-secondary">Voltar</button>
             </form>
         </div>
     </div>

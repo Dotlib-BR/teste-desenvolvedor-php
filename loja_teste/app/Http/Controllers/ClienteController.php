@@ -12,6 +12,18 @@ class ClienteController extends Controller
         $clients = Client::where('active', 1)->get();
         return view("backend.client.list", ['clients' => $clients]);
     }
+
+    public function getClientDetail($id)
+    {
+        $client = Client::findOrFail($id);
+        if($client)
+            if($client->active)
+                return view("backend.client.detail", ['client' => $client]);
+            else
+                abort(403);
+        else
+            abort(404);
+    }
     
     public function getClientCreate()
     {
@@ -25,14 +37,15 @@ class ClienteController extends Controller
         if($client)
             return view("backend.client.edit", ['client' => $client]);
         else
-            Abort(404);
+            abort(404);
     }
 
     public function postClientCreate(Request $request)
     {
+        
         $validated = $request->validate([
-            'name' => 'required|max:255|min:3',
-            'cpf' => 'required|unique:clients|max:14|min:14',
+            'name' => 'required|max:100|min:3',
+            'cpf' => 'required|unique:clients|max:11|min:11',
             'email' => 'nullable|email|unique:clients',
         ]);
 
@@ -67,6 +80,20 @@ class ClienteController extends Controller
             return redirect('/client');
         }
         else
-            Abort(404);
+            abort(404);
+    }
+
+    public function putClientDeactive($id)
+    {
+        $client = Client::findOrFail($id);
+        if($client)
+        {
+            $client->active = 0;
+            $client->save();
+
+            return redirect('/client');
+        }
+        else
+            abort(404);
     }
 }

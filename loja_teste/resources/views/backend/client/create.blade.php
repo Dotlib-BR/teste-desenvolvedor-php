@@ -2,6 +2,14 @@
 
 @section('content')
 
+<h3 class="page-title">Clientes</h3>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('client.get.list') }}">Clientes</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Cadastrar    </li>
+    </ol>
+</nav>
+
 
     <div class="card">
         <div class="card-body">
@@ -30,8 +38,8 @@
                 <div class="form-group row">
                     <label for="exampleInputCPF" class="col-sm-3 col-form-label">CPF</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="exampleInputCPF" name="cpf" placeholder="CPF Ex: 123.123.123-01"
-                            required minlength="14" maxlength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                        <input type="text" class="cpf-mask form-control" id="exampleInputCPF" name="cpf" placeholder="CPF Ex: 123.123.123-01"
+                            required minlength="11" maxlength="11" pattern="\d{11}">
                     </div>
                 </div>
                 <div class="form-group row">

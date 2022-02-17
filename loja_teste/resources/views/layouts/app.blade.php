@@ -63,6 +63,13 @@
     <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>>
     <script src="{{ asset('assets/js/misc.js') }}"></script>
     <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
+    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+
+    <script>
+        $('.phone-mask').mask('(00) 0 0000-0000');
+        $('.amount-mask').mask('#.##0,00', {reverse: true});
+        $('.cpf-mask').mask('00000000000');
+    </script>
     
     @yield('js')
     <!-- endinject -->

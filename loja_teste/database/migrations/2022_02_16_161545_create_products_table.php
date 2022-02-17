@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('cpf')->unique();
-            $table->string('email')->nullable()->unique(); //conferir
+            $table->string('name')->nullable(); //conferir
+            $table->unsignedDecimal('amount', 8, 2);
+            $table->string('barcode', 20);
             $table->tinyInteger('active');
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('products');
     }
 };
