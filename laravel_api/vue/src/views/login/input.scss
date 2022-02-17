@@ -1,0 +1,39 @@
+@import '../../assets/scss/main';
+        
+.login {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: $gray;
+    
+
+    .content-login {
+        width: 400px;
+        height: 450px;
+        background-color: $main-color;
+        border-radius: 7px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+    
+            h1 {
+                color: $text-color;
+                font-size: 28px;
+            }
+        }
+
+        .form {
+            width: 70%;
+            margin-top: 40px;
+        }
+    }
+
+
+}

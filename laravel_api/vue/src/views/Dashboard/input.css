@@ -1,0 +1,44 @@
+/* ==== Colors ==== */
+/* ==== Transition ==== */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  font-family: 'Roboto', 'sans-serif';
+  background-color: #e1ddf4;
+}
+
+.content-pages {
+  padding: 15px;
+  min-height: 100vh;
+  background-color: #e1ddf4;
+}
+
+.main {
+  width: 100%;
+  height: 100vh;
+  text-decoration: none;
+  /* .sidebar {
+        
+    } */
+}
+
+.main .content-right {
+  width: calc(100% - 300px);
+  height: 100vh;
+}
+
+.main .content-right .navbar {
+  /* width: 100%;
+            height: 80px;
+            background-color: $purple-dark; */
+  /* padding: 10px 15px; */
+}
+
+.main .content-right .pages {
+  width: 100%;
+  height: auto;
+}
+/*# sourceMappingURL=input.css.map */

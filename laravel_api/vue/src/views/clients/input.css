@@ -1,0 +1,22 @@
+/* ==== Colors ==== */
+/* ==== Transition ==== */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  font-family: 'Roboto', 'sans-serif';
+  background-color: #e1ddf4;
+}
+
+.content-pages {
+  padding: 15px;
+  min-height: 100vh;
+  background-color: #e1ddf4;
+}
+
+.card {
+  min-height: 100%;
+}
+/*# sourceMappingURL=input.css.map */

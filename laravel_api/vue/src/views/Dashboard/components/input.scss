@@ -1,0 +1,411 @@
+@import '../../../assets/scss/main';
+
+/* Import Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ==== Resuable CSS ==== */
+.sidebar-nav {
+
+    .text{
+        font-size: 16px;
+        font-weight: 500;
+        color: $text-color;
+    }
+    
+    .image {
+        min-width: 60px;
+    }
+}
+
+/* ==== Close ==== */
+
+
+
+/* ==== Sidebar-nav ==== */
+
+/* Normal THEME */
+.main {
+    .sidebar-nav {
+        padding: 14px 14px;
+        width: 300px;
+        height: 100vh;
+        /* box-shadow: 20px 0px 10px gray; */
+        background-color: $sidebar-color;
+
+        .image-text {
+            img {
+                width: 40px;
+                border-radius: 6px;
+            }
+        }
+
+        header {
+            position: relative;
+
+            .image-text {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .header-text {
+                    display: flex;
+                    flex-direction: column;
+
+                    .name {
+                        font-weight: 600;
+                    }
+
+                    .profession {
+                        margin-top: -2px;
+                    }
+                }
+            }
+
+            .toggle {
+                position: absolute;
+                top: 50%;
+                right: -25px;
+                transform: translateY(-50%);
+                height: 30px;
+                width: 30px;
+                background: $primary-color-side;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                padding: 8px;
+                color: $sidebar-color;
+                cursor: pointer;
+            }
+        }
+
+        li {
+            height: 50px;
+            margin: 10px 0px 0px 0px;
+            padding: 0px;
+            list-style: none;
+            display: flex;
+            align-items: center;
+
+            .icon{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 60px;
+                font-size: 20px;
+            }
+
+            .text, .icon {
+                color: $text-color;
+            }
+
+            .router-link {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                border-radius: 6px;
+                transition: $tran-04;
+                
+            }
+            
+            .router-link:hover {
+                color: $sidebar-color;
+                background: $primary-color-side;
+                
+                .icon, .text {
+                    color: $sidebar-color;
+                    transition: $tran-02;
+                }
+            }
+        }
+
+        .search-box {
+            background: $primary-color-light-side;
+            border-radius: 8px;
+            
+            input::placeholder{
+                color: $text-color;
+            }
+            input {
+                height: 100%;
+                width: 100%;
+                padding: 0px 20px;
+                outline: none;
+                border: none;
+                background: $primary-color-light-side;
+                color: $text-color;
+            }
+        }
+
+        .menu-bar {
+            height: calc(100% - 50px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-top: 80px;
+
+            .mode {
+                background: $primary-color-light-side;
+                border-radius: 8px;
+
+                .moon-sun {
+                    height: 50px;
+                    width: 60px;
+                    display: flex;
+                    align-items: center;
+                    
+                    i {
+                        position: absolute;
+                        transition: $tran-03;
+                    }
+    
+                    .moon {
+                        opacity: 1;
+                    }
+    
+                    .sun {
+                        opacity: 0;
+                    }
+                }
+
+
+                .toggle-switch {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
+                    min-width: 60px;
+                    cursor: pointer;
+                    
+
+                    .switch {
+                        position: relative;
+                        height: 22px;
+                        width: 44px;
+                        border-radius: 25px;
+                        background: $toggle-color;
+                    }
+                    
+                    .switch::before {
+                        content: '';
+                        position: absolute;
+                        height: 15px;
+                        width: 15px;
+                        border-radius: 50%;
+                        top: 50%;
+                        left: 5px;
+                        transform: translateY(-50%);
+                        background: $sidebar-color;
+                        transition: $tran-03;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+/* Dark THEME */
+.dark {
+    $body-color: #18191A;
+    $sidebar-color: #242526;
+    $primary-color-side: #3A3B3C;
+    $primary-color-light-side: #3A3B3C;
+    $toggle-color: #DDD;
+    $text-color: #CCC;
+    transition: $tran-04;
+
+    .sidebar-nav {
+        padding: 14px 14px;
+        width: 300px;
+        height: 100vh;
+        /* box-shadow: 20px 0px 10px gray; */
+        background-color: $sidebar-color;
+    
+        .image-text {
+            img {
+                width: 40px;
+                border-radius: 6px;
+            }
+        }
+    
+        header {
+            position: relative;
+    
+            .image-text {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+    
+                .header-text {
+                    display: flex;
+                    flex-direction: column;
+    
+                    .name {
+                        font-weight: 600;
+                    }
+    
+                    .profession {
+                        margin-top: -2px;
+                    }
+                }
+            }
+    
+            .toggle {
+                position: absolute;
+                top: 50%;
+                right: -25px;
+                transform: translateY(-50%);
+                height: 30px;
+                width: 30px;
+                background: $text-color;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                padding: 8px;
+                color: $sidebar-color;
+                cursor: pointer;
+            }
+        }
+    
+        li {
+            height: 50px;
+            margin: 10px 0px 0px 0px;
+            padding: 0px;
+            list-style: none;
+            display: flex;
+            align-items: center;
+    
+            .icon{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 60px;
+                font-size: 20px;
+            }
+    
+            .text, .icon {
+                color: $text-color;
+            }
+    
+            .router-link {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                border-radius: 6px;
+                transition: $tran-04;
+                
+            }
+            
+            .router-link:hover {
+                color: $sidebar-color;
+                background: $primary-color-side;
+                
+                .icon, .text {
+                    color: $text-color;
+                    transition: $tran-02;
+                }
+            }
+        }
+    
+        .search-box {
+            background: $primary-color-light-side;
+            border-radius: 8px;
+            
+            input::placeholder{
+                color: $text-color;
+            }
+            input {
+                height: 100%;
+                width: 100%;
+                padding: 0px 20px;
+                outline: none;
+                border: none;
+                background: $primary-color-light-side;
+                color: $text-color;
+            }
+        }
+    
+        .menu-bar {
+            height: calc(100% - 50px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-top: 80px;
+    
+            .mode {
+                background: $primary-color-light-side;
+                border-radius: 8px;
+    
+                .moon-sun {
+                    height: 50px;
+                    width: 60px;
+                    display: flex;
+                    align-items: center;
+
+                    i {
+                        position: absolute;
+                    }
+                    
+                    .moon {
+                        opacity: 0;
+                    }
+    
+                    .sun {
+                        opacity: 1;
+                    }
+        
+                }
+    
+                .toggle-switch {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
+                    min-width: 60px;
+                    cursor: pointer;
+                    
+    
+                    .switch {
+                        position: relative;
+                        height: 22px;
+                        width: 44px;
+                        border-radius: 25px;
+                        background: $toggle-color;
+                    }
+                    
+                    .switch::before {
+                        content: '';
+                        position: absolute;
+                        height: 15px;
+                        width: 15px;
+                        border-radius: 50%;
+                        top: 50%;
+                        left: 5px;
+                        transform: translateY(-50%);
+                        background: $sidebar-color;
+                        transition: $tran-03;
+                    }
+
+                    .switch::before {
+                        left: 24px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+

@@ -1,0 +1,15 @@
+@import './colors';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
+
+.main {
+    display: flex;
+    height: 100vh;
+    font-family: 'Roboto', 'sans-serif';
+    background-color: $body-color;
+}
+
+.content-pages {
+    padding: 15px;
+    min-height: 100vh;
+    background-color: $body-color;
+}

@@ -1,0 +1,72 @@
+/* ==== Colors ==== */
+/* ==== Transition ==== */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  font-family: 'Roboto', 'sans-serif';
+  background-color: #e1ddf4;
+}
+
+.content-pages {
+  padding: 15px;
+  min-height: 100vh;
+  background-color: #e1ddf4;
+}
+
+.login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #EBEBEB;
+}
+
+.login .content-login {
+  width: 400px;
+  height: 450px;
+  background-color: #6f00ff;
+  border-radius: 7px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login .content-login header {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.login .content-login header h1 {
+  color: #fff;
+  font-size: 28px;
+}
+
+.login .content-login .form {
+  width: 70%;
+  margin-top: 40px;
+}
+/*# sourceMappingURL=input.css.map */
