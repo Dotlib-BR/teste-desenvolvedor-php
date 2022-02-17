@@ -13,6 +13,17 @@ class ClienteController extends Controller
         return view("backend.client.list", ['clients' => $clients]);
     }
 
+    public function getClientByCPF(Request $request)
+    {
+        $client = Client::where('cpf', $request->cpf)->first();
+        if($client)
+            if($client->active)
+                return $client;
+            else 
+                return "Cliente inativo";
+        return "Cliente não existe";
+    }
+
     public function getClientDetail($id)
     {
         $client = Client::findOrFail($id);
@@ -54,17 +65,16 @@ class ClienteController extends Controller
         $client->cpf = $request->cpf;
         $client->email = $request->email;
         $client->active = 1;
-
         $client->save();
 
-        return redirect('/client');
+        return redirect('/client/list');
     }
 
     public function putClientEdit(Request $request, $id)
     {
         $validated = $request->validate([
             'name' => 'required|max:255|min:3',
-            'cpf' => 'required|max:14|min:14|unique:clients,cpf,'. $id,
+            'cpf' => 'required|max:11|min:11|unique:clients,cpf,'. $id,
             'email' => 'nullable|email|unique:clients,email,'.$id,
         ]);
 
@@ -77,7 +87,7 @@ class ClienteController extends Controller
             $client->email = $request->email;
             $client->save();
 
-            return redirect('/client');
+            return redirect('/client/list');
         }
         else
             abort(404);
@@ -91,7 +101,7 @@ class ClienteController extends Controller
             $client->active = 0;
             $client->save();
 
-            return redirect('/client');
+            return redirect('/client/list');
         }
         else
             abort(404);

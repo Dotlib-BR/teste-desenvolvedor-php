@@ -46,15 +46,15 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'max:100|nullable',
             'barcode' => 'required|unique:products|max:20|min:20',
-            'amount' => 'required',
+            'price' => 'required',
         ]);
 
-        $amount_replace= str_replace(['.', ','], ['', '.'], $request->amount);
+        $price_replace= str_replace(['.', ','], ['', '.'], $request->price);
 
         $product = new Product();
         $product->name = $request->name;
         $product->barcode = $request->barcode;
-        $product->amount = (double) $amount_replace;
+        $product->price = (double) $price_replace;
         $product->active = 1;
 
         $product->save();
@@ -67,18 +67,18 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'max:100|nullable',
             'barcode' => 'required|max:20|min:20|unique:products,barcode,'. $id,
-            'amount' => 'required'
+            'price' => 'required'
         ]);
 
         $product = Product::findOrFail($id);
 
         if($product)
         {
-            $amount_replace= str_replace(['.', ','], ['', '.'], $request->amount);
+            $price_replace= str_replace(['.', ','], ['', '.'], $request->price);
 
             $product->name = $request->name;
             $product->barcode = $request->barcode;
-            $product->amount = (double) $amount_replace;
+            $product->price = (double) $price_replace;
             $product->save();
 
             return redirect('/product/list');

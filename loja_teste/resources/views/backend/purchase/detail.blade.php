@@ -29,7 +29,7 @@
                     <p class="font-weight-bold">Nome</p>
                     <p class="mb-5">{{ $product->name }}</p>
                     <p class="font-weight-bold">Valor Unitário</p>
-                    <p class="mb-5">{{ $product->price }}</p>
+                    <p class="mb-5">{{ $product->amount }}</p>
                     <p class="font-weight-bold">Código de Barras</p>
                     <p class="mb-5">{{ $product->barcode }}</p>
                 </div>

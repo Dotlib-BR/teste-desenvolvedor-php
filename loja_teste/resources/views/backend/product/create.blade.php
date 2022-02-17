@@ -36,9 +36,9 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="productInputAmount" class="col-sm-3 col-form-label">Valor Unitário</label>
+                    <label for="productInputprice" class="col-sm-3 col-form-label">Valor Unitário</label>
                     <div class="col-sm-9">
-                        <input type="text" class="amount-mask form-control" id="productInputAmount" name="amount" placeholder="Valor em reais do produto. Ex: 111,11"
+                        <input type="text" class="amount-mask form-control" id="productInputprice" name="price" placeholder="Valor Unitário em reais do produto. Ex: 111,11"
                             required>
                     </div>
                 </div>

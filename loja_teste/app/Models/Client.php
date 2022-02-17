@@ -19,4 +19,9 @@ class Client extends Model
         'email',
         'cpf',
     ];
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class, 'client_id');
+    }
 }

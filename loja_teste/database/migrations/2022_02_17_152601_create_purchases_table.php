@@ -13,16 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(); //conferir
-            $table->unsignedDecimal('price', 8, 2);
-            $table->string('barcode', 20);
+            $table->unsignedBigInteger('client_id');
+            $table->dateTime('date');
+            $table->double('amount');
             $table->tinyInteger('active');
             $table->timestamps();
         });
-    }
 
+        Schema::table('purchases', function (Blueprint $table) {
+            $table->foreign('client_id')->references('id')->on('clients');
+        });
+    }
     /**
      * Reverse the migrations.
      *
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('purchases');
     }
 };

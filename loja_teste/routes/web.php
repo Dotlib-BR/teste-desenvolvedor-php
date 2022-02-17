@@ -20,6 +20,7 @@ Route::get('/', function () {
 // Clientes
 Route::get('/client/list', [\App\Http\Controllers\ClienteController::class, 'getClient'])->name("client.get.list");
 Route::get('/client/detail/{id}', [\App\Http\Controllers\ClienteController::class, 'getClientDetail'])->name("client.get.detail");
+Route::get('/client/bycpf', [\App\Http\Controllers\ClienteController::class, 'getClientByCPF'])->name("client.get.bycpf");
 
 Route::get('/client/create', [\App\Http\Controllers\ClienteController::class, 'getClientCreate'])->name("client.get.create");
 Route::post('/client/create', [\App\Http\Controllers\ClienteController::class, 'postClientCreate'])->name("client.post.create");
@@ -40,3 +41,15 @@ Route::get('/product/edit/{id}', [\App\Http\Controllers\ProductController::class
 Route::put('/product/edit/{id}', [\App\Http\Controllers\ProductController::class, 'putProductEdit'])->name("product.put.edit");
 
 Route::put('/product/delete/{id}', [\App\Http\Controllers\ProductController::class, 'putProductDeactive'])->name("product.put.deactive")->withTrashed();
+
+// Compras
+Route::get('/purchase/list', [\App\Http\Controllers\PurchaseController::class, 'getPurchase'])->name("purchase.get.list");
+Route::get('/purchase/detail/{id}', [\App\Http\Controllers\PurchaseController::class, 'getPurchaseDetail'])->name("purchase.get.detail");
+
+Route::get('/purchase/create', [\App\Http\Controllers\PurchaseController::class, 'getPurchaseCreate'])->name("purchase.get.create");
+Route::post('/purchase/create', [\App\Http\Controllers\PurchaseController::class, 'postPurchasetCreate'])->name("purchase.post.create");
+
+Route::get('/purchase/edit/{id}', [\App\Http\Controllers\PurchaseController::class, 'getPurchaseEdit'])->name("purchase.get.edit");
+Route::put('/purchase/edit/{id}', [\App\Http\Controllers\PurchaseController::class, 'putPurchaseEdit'])->name("purchase.put.edit");
+
+Route::put('/purchase/delete/{id}', [\App\Http\Controllers\PurchaseController::class, 'putPurchaseDeactive'])->name("purchase.put.deactive")->withTrashed();

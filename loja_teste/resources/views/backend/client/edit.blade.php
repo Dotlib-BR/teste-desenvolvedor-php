@@ -39,7 +39,7 @@
                     <label for="exampleInputCPF" class="col-sm-3 col-form-label">CPF</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="exampleInputCPF" name="cpf" placeholder="CPF Ex: 123.123.123-01"
-                            required minlength="14" maxlength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" value="{{ $client->cpf }}">
+                            required minlength="14" maxlength="14" pattern="\d{11}" value="{{ $client->cpf }}">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-gradient-primary me-2">Atualizar</button>
-                <a href="{{ route('client.get.list') }}" class="btn btn-gradient-secondary">Voltar</button>
+                <a href="{{ route('client.get.list') }}" class="btn btn-gradient-secondary">Voltar</a>
             </form>
         </div>
     </div>
