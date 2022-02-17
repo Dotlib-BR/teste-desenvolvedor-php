@@ -1,18 +1,21 @@
 [![](https://dotlib.com/theme/img/logos/logo.png)](http://www.dotlib.com)
 
 
-#Comandos necessários de serem rodados para iniciar o projeto
+# Comandos necessários de serem rodados para iniciar o projeto
 php composer i
 \
 php artisan migrate --seed
 
-###Dados do banco
-    database: teste_desenvolvedor
-    username: root
-    password:
+### Dados do banco
 
-####URI e JSON Body de cada rota
-##Cliente
+```
+database: teste_desenvolvedor
+username: root
+password:
+```
+
+#### URI e JSON Body de cada rota
+## Cliente
 * GET - *api.show.one.cliente*
     * URI - /api/cliente/listar/{id}
     * *Não possui JSON.*
@@ -58,7 +61,7 @@ php artisan migrate --seed
     * URI - /api/cliente/deletar/{id}
     * *Não possui JSON.*
 
-##Produto
+## Produto
 * GET - *api.show.one.produto*
     * URI - /api/produto/listar/{id}
     * *Não possui JSON.*
@@ -105,7 +108,7 @@ php artisan migrate --seed
     * *Não possui JSON.*
 
 
-##Pedido
+## Pedido
 * GET - *api.show.one.pedido*
     * URI - /api/pedido/listar/{id}
     * *Não possui JSON.*
