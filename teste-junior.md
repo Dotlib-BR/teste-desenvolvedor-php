@@ -148,7 +148,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>GET</td>
-<td>/client</td>
+<td>/api/client</td>
 <td>Retorna todos os registros de clientes do banco de dados.</td>
   
 </tr>
@@ -156,7 +156,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>GET</td>
-<td>/client/{client}</td>
+<td>/api/client/{client}</td>
 <td>Retorna as informações de um único cliente através id.</td>
   
 </tr>
@@ -164,7 +164,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>POST</td>
-<td>/client</td>
+<td>/api/client</td>
 <td>Insere um cliente no banco de dados.</td>
   
 </tr>
@@ -172,7 +172,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>PUT</td>
-<td>/client/{client}</td>
+<td>/api/client/{client}</td>
 <td>Atualiza as informações de um usuário através do id.</td>
   
 </tr>
@@ -180,7 +180,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>DELETE</td>
-<td>/client/{client}</td>
+<td>/api/client/{client}</td>
 <td>Deleta um usuário através do id no banco de dados.</td>
   
 </tr>
@@ -203,7 +203,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>GET</td>
-<td>/product</td>
+<td>/api/product</td>
 <td>Retorna todos os registros de produtos do banco de dados.</td>
   
 </tr>
@@ -211,7 +211,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>GET</td>
-<td>/product/{product}</td>
+<td>/api/product/{product}</td>
 <td>Retorna as informações de um único produto através id.</td>
   
 </tr>
@@ -219,7 +219,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>POST</td>
-<td>/product</td>
+<td>/api/product</td>
 <td>Insere um produto no banco de dados.</td>
   
 </tr>
@@ -227,7 +227,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>PUT</td>
-<td>/product/{product}</td>
+<td>/api/product/{product}</td>
 <td>Atualiza as informações de um produto através do id.</td>
   
 </tr>
@@ -235,7 +235,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
   
 <td>DELETE</td>
-<td>/product/{product}</td>
+<td>/api/product/{product}</td>
 <td>Deleta um produto através do id no banco de dados.</td>
   
 </tr>
@@ -265,7 +265,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>GET</td>
-<td>/order</td>
+<td>/api/api/order</td>
 <td>Retorna todos os registros de pedidos do banco de dados.</td>
   
 </tr>
@@ -273,7 +273,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>GET</td>
-<td>/order/{order}</td>
+<td>/api/order/{order}</td>
 <td>Retorna as informações de um único pedido através id.</td>
   
 </tr>
@@ -281,7 +281,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>POST</td>
-<td>/order</td>
+<td>/api/order</td>
 <td>Insere um pedido no banco de dados.</td>
   
 </tr>
@@ -289,7 +289,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
 
 <td>PUT</td>
-<td>/order/{order}</td>
+<td>/api/order/{order}</td>
 <td>Atualiza as informações de um pedido através do id.</td>
   
 </tr>
@@ -297,7 +297,7 @@ no endereço http://127.0.0.1:8000 .
 <tr>
   
 <td>>DELETE</td>
-<td>/order/{order}</td>
+<td>/api/order/{order}</td>
 <td>Deleta um pedido através do id no banco de dados.</td>
   
 </tr>
