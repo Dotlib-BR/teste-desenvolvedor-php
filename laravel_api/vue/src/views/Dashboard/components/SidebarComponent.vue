@@ -25,33 +25,27 @@
                 </li>
                 <ul class="menus-links">
                     <li class="nav-link">
-                        <router-link class="router-link" :to="{name: 'Homea'}">
+                        <router-link class="router-link" :to="{name: 'Home'}">
                             <i class="fa fa-home icon"></i>
-                            <span class="text nav-text">Início</span>
+                            <span class="text nav-text">Dashboard</span>
                         </router-link>
                     </li>
                     <li class="nav-link">
                         <router-link class="router-link" :to="{name: 'Clients'}">
-                            <i class="fa fa-box icon"></i>
+                            <i class="fas fa-user-friends icon"></i>
                             <span class="text nav-text">Clientes</span>
                         </router-link>
                     </li>
                     <li class="nav-link">
-                        <router-link class="router-link" :to="{name: 'List'}">
-                            <i class="fa fa-store icon"></i>
-                            <span class="text nav-text">Lista</span>
+                        <router-link class="router-link" :to="{name: 'Products'}">
+                            <i class="fas fa-toolbox icon"></i>
+                            <span class="text nav-text">Produtos</span>
                         </router-link>
                     </li>
                     <li class="nav-link">
-                        <router-link class="router-link" :to="{name: 'Homea'}">
-                            <i class="fa fa-chart-bar icon"></i>
-                            <span class="text nav-text">Vendas</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-link">
-                        <router-link class="router-link" :to="{name: 'Homea'}">
-                            <i class="fa fa-home icon"></i>
-                            <span class="text nav-text">Relatórios</span>
+                        <router-link class="router-link" :to="{name: 'Pedidos'}">
+                            <i class="fa fa-box icon"></i>
+                            <span class="text nav-text">Pedidos</span>
                         </router-link>
                     </li>
                 </ul>

@@ -9,11 +9,7 @@
 </template>
 <script>
 export default {
-  created(){
-    this.$http.get('/ping').then((response) =>{
-      console.log(response)
-    })
-  }
+
 }
 </script>
 <style>

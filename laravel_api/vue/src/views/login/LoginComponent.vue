@@ -15,7 +15,7 @@
             >
               <b-form-input
                 id="input-1"
-                v-model="form.email"
+                v-model="email"
                 type="email"
                 placeholder="Insira seu email..."
                 required
@@ -30,7 +30,7 @@
             >
               <b-form-input
                 id="input-2"
-                v-model="form.name"
+                v-model="password"
                 type="password"
                 placeholder="Insira sua senha..."
                 required
@@ -38,7 +38,7 @@
             </b-form-group>
 
             <div class="text-end">
-                <b-button @click.prevent="login" type="submit" variant="primary" class="mt-3 px-4 fs-5">Entrar</b-button>
+                <b-button type="submit" variant="primary" class="mt-3 px-4 fs-5">Entrar</b-button>
             </div>
           </b-form>
         </div>
@@ -53,21 +53,24 @@ export default {
 
     data() {
         return {
-            form: {
-                email: "",
-                name: "",
-            },
+            email: "",
+            password: "",
             show: true,
         };
     },
     methods: {
         onSubmit(event) {
-            event.preventDefault();
-            alert(JSON.stringify(this.form));
+          const payload = {
+            email: this.email,
+            password: this.password,
+          }
+          this.$http.post('login', payload).then((response) => {
+            console.log(response);
+           
+          }).catch((err) => {
+            console.log(err);
+          });
         },
-        login() {
-            this.$router.push({name: 'Homea'})
-        }
     },
 };
 </script>

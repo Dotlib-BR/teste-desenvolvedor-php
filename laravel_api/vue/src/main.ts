@@ -7,7 +7,9 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import './plugins/axios'
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all.js';
+import VueMask from 'v-mask';
 
+Vue.use(VueMask);
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'

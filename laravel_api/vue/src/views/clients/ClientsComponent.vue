@@ -1,7 +1,7 @@
 <template>
     <DashboardComponent>
         <div slot="slot-pages" class="content-pages">
-            <b-card class="card p-3">
+            <b-card class="card p-3 shadow">
                 <b-card-title>Clientes Cadastrados <span class="badge bg-info">{{items.length}}</span></b-card-title>
                 <b-row class="m-0 p-0">
                     <b-col cols="11" class=" m-0 my-auto">
@@ -22,49 +22,29 @@
                         </div>
                     </b-col>
                 </b-row>
-                <div class="table">
-                    <!-- <table class="table table-striped myTable">
+                <div class="table table-responsive">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>{{columnsName[0]}}</th>
-                                <th>{{columnsName[1]}}</th>
-                                <th>{{columnsName[2]}}</th>
-                                <th>{{columnsName[3]}}</th>
-                                <th>{{columnsName[4]}}</th>
+                                <th scope="col">{{columnsName[0]}}</th>
+                                <th scope="col">{{columnsName[1]}}</th>
+                                <th scope="col">{{columnsName[2]}}</th>
+                                <th scope="col">{{columnsName[3]}}</th>
+                                <th scope="col">{{columnsName[4]}}</th>
+                                <th scope="col">{{columnsName[5]}}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="client in clients" :key="client.id">
+                            <tr v-for="client in items" :key="client.id">
                                 <th scope="row">{{client.id}}</th>
-                                <td>{{client.name}}</td>
+                                <td><router-link :to="{name:'ClientsShow', params:{client:client.id}}" class="text-decoration-none text-black">
+                                    <i class="fas fa-exclamation-circle text-secondary"></i> {{client.name}}
+                                </router-link></td>
                                 <td>{{client.cpf}}</td>
                                 <td>{{client.email}}</td>
+                                <td v-if="client.stats == 1"><span class="badge rounded-pill bg-info">Sim</span></td>
+                                <td v-else><span class="badge rounded-pill bg-secondary">Não</span></td>
                                 <td>
-                                    <router-link :to="{name:'ClientsEdit', params:{client:client.id}}">
-                                        <b-button class="me-2" variant="outline-primary"><i class="fa fa-edit"></i></b-button>
-                                    </router-link>
-                                    <b-button variant="outline-danger"><i class="fa fa-trash-alt"></i></b-button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table> -->
-                    <b-table-simple striped>
-                        <b-thead>
-                            <b-tr>
-                                <b-th>{{columnsName[0]}}</b-th>
-                                <b-th>{{columnsName[1]}}</b-th>
-                                <b-th>{{columnsName[2]}}</b-th>
-                                <b-th>{{columnsName[3]}}</b-th>
-                                <b-th>{{columnsName[4]}}</b-th>
-                            </b-tr>
-                        </b-thead>
-                        <b-tbody>
-                            <b-tr v-for="client in items" :key="client.id">
-                                <b-td>{{client.id}}</b-td>
-                                <b-td>{{client.name}}</b-td>
-                                <b-td>{{client.cpf}}</b-td>
-                                <b-td>{{client.email}}</b-td>
-                                <b-td>
                                     <router-link :to="{name:'ClientsEdit', params:{client:client.id}}">
                                         <b-button pill class="me-2" variant="outline-primary"><i class="fa fa-edit"></i></b-button>
                                     </router-link>
@@ -75,17 +55,17 @@
                                         </template>
                                         <div class="d-block text-center">
                                             <p class="fs-4 m-0 p-0">Excluir o cliente <b>{{client.name}}</b>?</p>
+                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> Todos os pedidos relacionados a este cliente será excluído!</span>
                                         </div>
                                         <template #modal-footer="{ close }">
                                             <b-button pill class="px-3 my-0" @click="close()" variant="danger"><i class="fa fa-times fa-1x"></i></b-button>
                                             <b-button pill class="px-3 my-0" @click="del(client.id)" variant="success"><i class="fa fa-check fa-1x"></i></b-button>
                                         </template>
                                     </b-modal>
-                                </b-td>
-                            </b-tr>
-                        </b-tbody>
-                    </b-table-simple>
-                    <!-- <b-table striped hover :items="items"></b-table> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </b-card>
         </div>
@@ -97,16 +77,16 @@
     import DashboardComponent from '../Dashboard/DashboardComponent.vue';
 
     export default {
-        name: 'HomeComponent',
+        name: 'ClientsComponent',
 
         data() {
             return {
                 perPage: 10,
                 currentPage: 1,
                 items: [],
-                columnsName: ['#', 'Nome', 'CPF', 'Email', 'Ações'],
+                columnsName: ['#', 'Nome', 'CPF', 'Email', 'Status', 'Ações'],
                 /* Alert */
-                dismissSecs: 5,
+                dismissSecs: 3,
                 dismissCountDown: 0,
             }
         },
@@ -121,7 +101,7 @@
         methods: {
             async getData() {
                 try {
-                    this.$http.get('/clients/list').then((response) =>{
+                    this.$http.get('/clients').then((response) =>{
                         this.items = response.data;
                     });
                 } catch (error) {

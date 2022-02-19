@@ -6,7 +6,7 @@
         </div>
         <div class="footer d-flex justify-content-between">
             <i :class="['fa-2x m-0', icon]"></i>
-            <p class="qtd m-0 fs-4">{{qtd}}</p>
+            <p class="qtd m-0 fs-4">Mensal</p>
         </div>
     </div>
 </template>
@@ -27,7 +27,7 @@
 <style scoped>
     .my_cards {
         width: 100%;
-        background-color: #8D86F4;
+        background-color: #6f00ff;
         padding: 15px;
         border-radius: 7px;
     }

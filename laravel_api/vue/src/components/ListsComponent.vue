@@ -1,30 +1,28 @@
 <template>
   <div class="lists">
     <div class="top">
-      <p class="text-start"><strong>{{description}}</strong> <span class="badge bg-info">{{data.length}}</span></p>
+      <p class="text-center"><strong>Últimos 5 {{description}}</strong> <span class="badge bg-info"></span></p>
       
     </div>
 
     <div class="content">
-      <table class="table table-striped my_table">
-        <thead>
-          <tr>
-            <th scope="col">{{columns[0]}}</th>
-            <th scope="col">{{columns[1]}}</th>
-            <th scope="col">{{columns[2]}}</th>
-            <th scope="col">{{columns[3]}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in data" :key="item.id">
-            <th scope="row">{{item.id}}</th>
-            <td>{{item.name}}</td>
-            <td>{{(description == 'Clientes') ? item.email : item.valor}}</td>
-            <td>{{item.phone}}</td>
-            
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-striped my_table">
+          <thead>
+            <tr>
+              <th scope="col">{{columns[0]}}</th>
+              <th scope="col">{{columns[1]}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in data" :key="item.id">
+              <th scope="row">{{item.id}}</th>
+              <td v-if="description == 'Pedidos'">R$ {{item.value_total}}</td>
+              <td v-else>{{item.name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
