@@ -16,8 +16,8 @@ class ClientesFactory extends Factory
         return [
             'nome' => $this->faker->name(),
             'email' => $this->faker->freeEmail(),
-            'cpf' => $this->faker->numerify('###########'),
-            'celular' => $this->faker->tollFreePhoneNumber(),
+            'cpf' => $this->faker->cpf(false),
+            'celular' => $this->faker->phoneNumberCleared(),
             'data_nascimento' => $this->faker->date(),
             'status' => $this->faker->numberBetween(0, 1)
         ];

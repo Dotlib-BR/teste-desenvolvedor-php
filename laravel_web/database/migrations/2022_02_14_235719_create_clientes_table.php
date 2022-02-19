@@ -18,7 +18,7 @@ class CreateClientesTable extends Migration
             $table->string('nome', 45);
             $table->string('email', 45)->unique();
             $table->string('cpf', 14)->unique();
-            $table->string('celular', 14)->nullable();
+            $table->string('celular', 15)->nullable();
             $table->date('data_nascimento');
             $table->integer('status');
             $table->timestamps();
