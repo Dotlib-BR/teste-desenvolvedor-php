@@ -60,16 +60,7 @@ export default {
     },
     methods: {
         onSubmit(event) {
-          const payload = {
-            email: this.email,
-            password: this.password,
-          }
-          this.$http.post('login', payload).then((response) => {
-            console.log(response);
-           
-          }).catch((err) => {
-            console.log(err);
-          });
+          this.$router.push('/');
         },
     },
 };

@@ -65,7 +65,8 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Você realmente deseja excluir <b>{{$cliente->nome}}</b>?
+                                            <p class="m-0 p-0">Você realmente deseja excluir <b>{{$cliente->nome}}</b>?</p>
+                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> Todos os pedidos relacionados a este cliente será excluído!</span>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>

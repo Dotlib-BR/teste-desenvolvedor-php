@@ -7,8 +7,8 @@
                 </span>
 
                 <div class="text header-text">
-                    <span class="name">CodingLab</span>
-                    <span class="profession">Web Developer</span>
+                    <span class="name">Dot.Lib</span>
+                    <span class="profession">Danilo Lourenço</span>
                 </div>
             </div>
             
@@ -17,12 +17,6 @@
 
         <div class="menu-bar">
             <div class="menu">
-                <li class="search-box">
-                    <a class="router-link" >
-                        <i class="fa fa-search icon"></i>
-                        <input type="serch" placeholder="Search...">
-                    </a>
-                </li>
                 <ul class="menus-links">
                     <li class="nav-link">
                         <router-link class="router-link" :to="{name: 'Home'}">
