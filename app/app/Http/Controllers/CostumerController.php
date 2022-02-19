@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Costumer;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Request as RequestFacade;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -16,42 +20,42 @@ class CostumerController extends Controller
 {
 
     /**
-     * Create the controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // Define this resource controller uses the CostumerPolicy class binding.
-
-        $this->authorizeResource(Costumer::class, 'costumer');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Inertia\Response
      */
     public function index()
     {
-        return Inertia::render("Costumers/Index");
+        return Inertia::render("Costumers", [
+            "pagination" => Costumer::query()
+                ->when(RequestFacade::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('email', 'like', '%' . $search . '%')
+                        ->orWhere('cpf', 'like', '%' . $search . '%');
+                })
+                ->paginate(20, ['name', 'email', 'cpf', 'id'])
+                ->appends(RequestFacade::except('page')),
+            "filters" => RequestFacade::query()
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Inertia\Response
      */
     public function create()
     {
-        //
+        return $this->index()->with([
+            "modal" => ["active" => true]
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return \Inertia\Response
      * @throws ValidationException
      */
     public function store(Request $request)
@@ -62,11 +66,7 @@ class CostumerController extends Controller
             "cpf" => ["required", "string", "max:14"],
         ]);
 
-        $validated["user_id"] = Auth::user()->id;
-
-        Costumer::create($validated);
-
-        return Redirect::to("/costumers");
+        return $this->index();
     }
 
     /**
@@ -83,12 +83,17 @@ class CostumerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param Costumer $costumer
+     * @return \Inertia\Response
      */
-    public function edit($id)
+    public function edit(Costumer $costumer)
     {
-        //
+        return $this->index()->with([
+            "modal" => [
+                "active" => true,
+                "costumer" => $costumer->only(["id", "name", "email", "cpf"])
+            ]
+        ]);
     }
 
     /**
@@ -96,11 +101,12 @@ class CostumerController extends Controller
      *
      * @param Request $request
      * @param Costumer $costumer
-     * @return RedirectResponse
+     * @return \Inertia\Response
      */
     public function update(Request $request, Costumer $costumer)
     {
         $validated = $request->validate([
+            "id" => ["required", "integer"],
             "name" => ["required", "string", "max:255"],
             "email" => ["required", "string", "email", "max:255"],
             "cpf" => ["required", "string", "max:14"],
@@ -108,19 +114,19 @@ class CostumerController extends Controller
 
         $costumer->update($validated);
 
-        return Redirect::to("/costumers");
+        return $this->index();
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param Costumer $costumer
-     * @return RedirectResponse
+     * @return \Inertia\Response
      */
     public function destroy(Costumer $costumer)
     {
         $costumer->delete();
 
-        return Redirect::to("/costumers");
+        return $this->index();
     }
 }

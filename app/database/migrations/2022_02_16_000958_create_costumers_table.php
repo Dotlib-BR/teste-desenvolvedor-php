@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('email');
             $table->string('cpf');
             $table->timestamps();
-            $table->foreignIdFor(\App\Models\User::class)->constrained();
         });
     }
 

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order_product', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\Order::class)->constrained();
+            $table->foreignIdFor(\App\Models\Order::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(\App\Models\Product::class)->constrained();
             $table->unsignedInteger('quantity');
             $table->timestamps();

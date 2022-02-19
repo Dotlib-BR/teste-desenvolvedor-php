@@ -14,7 +14,7 @@ class OrdersManagementTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_an_user_can_create_a_new_order_belonging_to_own_costumer()
+    public function test_a_user_can_create_a_new_order_belonging_to_a_costumer()
     {
         $costumer = Costumer::factory()->create();
 
@@ -33,20 +33,7 @@ class OrdersManagementTest extends TestCase
         ]);
     }
 
-    public function test_an_user_cannot_manage_an_order_belonging_to_another_user()
-    {
-        $order = Order::factory()->create();
-
-        $user2 = User::factory()->create();
-
-        $this->actingAs($user2)
-            ->patch("/orders/{$order->id}", [
-                'bought_at' => now()->toDateString(),
-            ])
-            ->assertStatus(403);
-    }
-
-    public function test_an_user_can_manage_own_orders()
+    public function test_a_user_can_manage_orders()
     {
         $order = Order::factory()->create();
 

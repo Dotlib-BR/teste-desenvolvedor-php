@@ -1,64 +1,74 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+#Teste entrevista dev. PHP Jr.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Esta aplicação foi desenvolvida para a entrevista de dev. PHP Jr. da dotlib.com.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![Screenshot da página de pedidos](img/screens.png)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Requerimentos
 
-## Learning Laravel
+- Docker em um ambiente de desenvolvimento com macOS ou Linux, ou configuração manual no Windows.
+- Composer.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Instalação e execução com Docker (Linux/MacOS) 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Crie um arquivo `.env` a partir do arquivo `.env.example`. Mude as portas da aplicação para livres em sua máquina.
 
-## Laravel Sponsors
+A partir da raiz do projeto, execute os comandos:
+```bash
+composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+./vendor/bin/sail up -d
+./vendor/bin/sail artisan key:generate
+./vendor/bin/sail artisan migrate --seed
+./vendor/bin/sail yarn run prod
+```
 
-### Premium Partners
+A aplicação tem o **usuário** e **senha** padrão:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+usuario@exemplo.com
+| 12345678
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Referência e requerimentos: [README.md](../README.md)
 
-## Code of Conduct
+Esquema do banco de dados normalizado:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+![Banco de dados](img/schema.png)
 
-## Security Vulnerabilities
+## Descrição da aplicação
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+O projeto usa a seguinte stack:
+- [Laravel Jetstream](https://jetstream.laravel.com/): Laravel Sanctum + Inertia.js + Vue.js
+- [Laravel Sail](https://laravel.com/docs/9.x/sail): Ambiente docker padrão
 
-## License
+As views são controladas pelo Inertia.js no backend e renderizadas pelo Vue.js no frontend.
+A existência de um protótipo de frontend em Vue facilitará a conversão futura da aplicação em uma SPA.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Os testes de unidade estão passando mesmo após as refatorações. Os de integração não estão passando.
+
+## Descrição de requisitos da aplicação
+
+- [x] Um usuário pode cadastrar um cliente
+- [x] Um usuário pode editar todos os campos de um cliente
+- [x] Um usuário pode excluir um cliente
+- [x] Um usuário pode listar todos os clientes
+- [x] Um usuário pode procurar clientes por nome, email ou cpf
+
+
+- [x] Um usuário pode cadastrar um produto
+- [x] Um usuário pode editar todos os campos de um produto
+- [x] Um usuário pode excluir um produto
+- [x] Um usuário pode listar todos os produtos
+- [x] Um usuário pode procurar produtos por nome ou código de barras
+
+
+- [x] Um usuário pode cadastrar uma venda escolhendo um cliente em uma lista de clientes, uma data e um status de uma lista de possíveis status
+- [x] Um usuário pode adicionar produtos em uma venda, escolhendo a partir de uma lista de produtos
+- [x] Um usuário pode listar todas as vendas de um cliente
+- [x] Um usuário pode apagar uma venda
+- [ ] Um usuário pode remover um produto de uma venda (existe rota)
+- [ ] Um usuário pode editar quantidade de um produto de uma venda

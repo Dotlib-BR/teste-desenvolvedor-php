@@ -12,21 +12,24 @@
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('orders.index')">
                                     <jet-application-mark class="block h-9 w-auto" />
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </jet-nav-link>
-
-                                <jet-nav-link :href="route('costumers')" :active="route().current('costumers')">
+                                <jet-nav-link :href="route('costumers.index')" :active="route().current('costumers.index')">
                                     Clientes
                                 </jet-nav-link>
 
+                                <jet-nav-link :href="route('products.index')" :active="route().current('products.index')">
+                                    Produtos
+                                </jet-nav-link>
+
+                                <jet-nav-link :href="route('orders.index')" :active="route().current('orders.index')">
+                                    Pedidos
+                                </jet-nav-link>
                             </div>
                         </div>
 
@@ -147,8 +150,16 @@
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                        <jet-responsive-nav-link :href="route('costumers.index')" :active="route().current('costumers.index')">
+                            Clientes
+                        </jet-responsive-nav-link>
+
+                        <jet-responsive-nav-link :href="route('products.index')" :active="route().current('products.index')">
+                            Produtos
+                        </jet-responsive-nav-link>
+
+                        <jet-responsive-nav-link :href="route('orders.index')" :active="route().current('orders.index')">
+                            Pedidos
                         </jet-responsive-nav-link>
                     </div>
 

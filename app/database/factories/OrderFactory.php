@@ -20,6 +20,7 @@ class OrderFactory extends Factory
         return [
             'bought_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'costumer_id' => Costumer::factory(),
+            'status' => random_int(0, 2)
         ];
     }
 }

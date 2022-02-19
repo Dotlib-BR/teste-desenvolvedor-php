@@ -3,46 +3,56 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+
+use Illuminate\Support\Facades\Request as RequestFacade;
+
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
-    /**
-     * Create the controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->authorizeResource(Product::class, 'product');
-    }
-
+    use SoftDeletes;
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index()
     {
-        //
+        return Inertia::render("Products", [
+            "pagination" => Product::query()
+                ->when(RequestFacade::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('barcode', 'like', '%' . $search . '%');
+                })
+                ->paginate(20, ["name", "barcode", "price", "id"])
+                ->appends(RequestFacade::except('page')),
+            "filters" => RequestFacade::query()
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
-        //
+        return $this->index()->with([
+            "modal" => [
+                "active" => true,
+            ]
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function store(Request $request)
     {
@@ -52,11 +62,9 @@ class ProductController extends Controller
             "barcode" => "string|max:255"
         ]);
 
-        $validated["user_id"] = auth()->user()->id;
-
         Product::create($validated);
 
-        return Redirect::route("products.index");
+        return $this->index();
     }
 
     /**
@@ -74,11 +82,16 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return $this->index()->with([
+            "modal" => [
+                "active" => true,
+                "product" => $product->only(["id", "name", "barcode", "price"])
+            ]
+        ]);
     }
 
     /**
@@ -98,19 +111,19 @@ class ProductController extends Controller
 
         $product->update($validated);
 
-        return Redirect::route("products.index");
+        return $this->index();
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function destroy(Product $product)
     {
         $product->delete();
 
-        return Redirect::route("products.index");
+        return $this->index();
     }
 }

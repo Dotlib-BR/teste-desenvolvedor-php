@@ -19,9 +19,8 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'price' => random_int(100, 100000)/(100),
+            'price' => $this->faker->randomFloat(2, 1, 9999),
             'barcode' => $this->faker->ean13(),
-            'user_id'=> User::factory()
         ];
     }
 }

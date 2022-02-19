@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->timestamp("bought_at");
             $table->foreignIdFor(\App\Models\Costumer::class)->constrained();
+            $table->integer("status")->nullable();
         });
     }
 
