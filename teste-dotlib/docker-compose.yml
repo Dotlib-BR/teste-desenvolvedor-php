@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+    dotlib-laravel:
+        build: ./
+        ports:
+            -   8000:80
+        volumes:
+            -   ./:/usr/share/nginx/html
+        restart: always
+        networks:
+            - dotlib-net
+
+
+    dotlib-db:
+        image: mysql
+        restart: always
+        ports:
+            - 3308:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: docker
+            MYSQL_DATABASE: docker
+            MYSQL_USER: docker
+            MYSQL_PASSWORD: docker
+        networks:
+            - dotlib-net
+
+
+networks:
+    dotlib-net:
+        driver: bridge
