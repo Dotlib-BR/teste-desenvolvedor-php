@@ -45,7 +45,6 @@ Devem ser utilizadas as seguintes tecnologias:
 - Crie uma branch com o seu nome completo;
 - Altere o arquivo teste-pleno.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
 - Depois de finalizado, envie-nos o pull request;
-- Preencha o formulário https://forms.gle/YKMoZVMe28qgX7qH8 e envie seu currículo.
 
 ## Bônus
 
