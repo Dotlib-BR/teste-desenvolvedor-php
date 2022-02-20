@@ -6,7 +6,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('purchase.get.list') }}">Pedidos</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Editar</li>
+            <li class="breadcrumb-item active" aria-current="page">Cadastrar</li>
         </ol>
     </nav>
 

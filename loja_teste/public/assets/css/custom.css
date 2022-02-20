@@ -1,3 +1,4 @@
+/* Tabela responsiva */
 table {
     border: 1px solid #ccc;
     border-collapse: collapse;
@@ -77,4 +78,27 @@ table {
 
 body {
     line-height: 1.25;
+  }
+
+  /* Tamanho responsivo das fontes geral */
+  html {
+    font-size: 1rem;
+  }
+  
+  @include media-breakpoint-up(sm) {
+    html {
+      font-size: 1.2rem;
+    }
+  }
+  
+  @include media-breakpoint-up(md) {
+    html {
+      font-size: 1.4rem;
+    }
+  }
+  
+  @include media-breakpoint-up(lg) {
+    html {
+      font-size: 1.6rem;
+    }
   }

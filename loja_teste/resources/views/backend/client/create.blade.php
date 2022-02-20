@@ -6,7 +6,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('client.get.list') }}">Clientes</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Cadastrar    </li>
+        <li class="breadcrumb-item active" aria-current="page">Cadastrar</li>
     </ol>
 </nav>
 

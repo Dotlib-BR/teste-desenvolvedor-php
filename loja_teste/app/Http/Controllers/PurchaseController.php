@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Purchase;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class PurchaseController extends Controller
 {
@@ -21,20 +23,21 @@ class PurchaseController extends Controller
 
     public function getPurchaseDetail($id)
     {
-        $purchase = Purchase::findOrFail($id);
+        $purchase = Purchase::where('active', 1)
+            ->where('id', $id)
+            ->with('products')
+            ->with('client')
+            ->first();
+
         if ($purchase)
-            if ($purchase->active)
-                return view("backend.purchase.detail", ['purchase' => $purchase]);
-            else
-                abort(403);
+            return view("backend.purchase.detail", ['purchase' => $purchase]);
         else
             abort(404);
     }
 
     public function getPurchaseCreate()
     {
-        $products = Product::where('active', 1)->get();
-        return view("backend.purchase.create", ['products' => $products]);
+        return view("backend.purchase.create");
     }
 
     public function getPurchaseEdit($id)
@@ -42,7 +45,10 @@ class PurchaseController extends Controller
         $purchase = Purchase::findOrFail($id);
 
         if ($purchase)
-            return view("backend.purchase.edit", ['purchase' => $purchase]);
+            if ($purchase->active)
+                return view("backend.purchase.edit", ['purchase' => $purchase]);
+            else
+                abort(403);
         else
             abort(404);
     }
@@ -83,22 +89,39 @@ class PurchaseController extends Controller
     public function putPurchaseEdit(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'max:100|nullable',
-            'barcode' => 'required|max:20|min:20|unique:Purchases,barcode,' . $id,
-            'amount' => 'required'
+            'clientId' => 'required',
+            'productsId' => 'required',
+            'productsQuantity' => 'required',
+            'productsAmount' => 'required',
+            'purchaseAmount' => 'required'
         ]);
 
         $purchase = Purchase::findOrFail($id);
 
         if ($purchase) {
-            $amount_replace = str_replace(['.', ','], ['', '.'], $request->amount);
+            // $amount_replace = str_replace(['.', ','], ['', '.'], $request->amount);
 
-            $purchase->name = $request->name;
-            $purchase->barcode = $request->barcode;
-            $purchase->amount = (float) $amount_replace;
+            $products_id = $request->productsId;
+            $products_qtd = $request->productsQuantity;
+            $products_amount = $request->productsAmount;
+
+            $purchase->client_id = $request->clientId;
+            $purchase->amount = (float) $request->purchaseAmount;
+            $purchase->active = 1;
             $purchase->save();
 
-            return redirect('/purchases/list');
+            // dd((float) $request->purchaseAmount);
+
+            DB::table('purchases_products')->where('purchase_id', '=', $purchase->id)->delete();
+            
+            for ($i = 0; $i < sizeof($products_id); $i++) {
+                DB::insert(
+                    'insert into purchases_products (purchase_id, product_id, quantity, product_price) values (?, ?, ?, ?)',
+                    [$purchase->id, (int) $products_id[$i], (float) $products_qtd[$i], (float) $products_amount[$i]]
+                );
+            }
+
+            return redirect('/purchase/list');
         } else
             abort(404);
     }
@@ -110,7 +133,9 @@ class PurchaseController extends Controller
             $purchase->active = 0;
             $purchase->save();
 
-            return redirect('/purchases/list');
+            DB::table('purchases_products')->where('purchase_id', '=', $purchase->id)->delete();
+
+            return redirect('/purchase/list');
         } else
             abort(404);
     }

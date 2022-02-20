@@ -12,8 +12,7 @@ class Purchase extends Model
     protected $fillable = [
         'client_id',
         'date',
-        'quantity',
-        'amount'
+        'amount',
     ];
 
     public function client(){
@@ -22,7 +21,8 @@ class Purchase extends Model
 
     public function products()
     {
-        return $this->belongsTo(Product::class,'purchases_products', 'product_id', 'purache_id');
+        return $this->belongsToMany(Product::class,'purchases_products', 
+        'purchase_id', 'product_id')->withPivot('quantity', 'product_price');;
     }
 
 }
