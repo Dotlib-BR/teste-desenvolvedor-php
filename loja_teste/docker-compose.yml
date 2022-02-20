@@ -1,0 +1,29 @@
+version: '3.5'
+services:
+  db:
+    image: mysql:latest
+    #restart: always
+    environment:
+      MYSQL_DATABASE: 'loja'
+      MYSQL_USER: 'laravel'
+      MYSQL_PASSWORD: '123'
+      MYSQL_ROOT_PASSWORD: '123'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./loja-db:/var/lib/mysql
+  app:
+    image: phpmyadmin/phpmyadmin:latest
+    build: .
+    links:
+      - db
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    volumes:
+      - ./php-make/upload.ini:/usr/local/etc/php/php.ini
+volumes:
+  loja-db:
