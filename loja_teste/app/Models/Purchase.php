@@ -16,6 +16,10 @@ class Purchase extends Model
         'amount'
     ];
 
+    public function client(){
+        return $this->belongsTo(Client::class);
+    }
+
     public function products()
     {
         return $this->belongsTo(Product::class,'purchases_products', 'product_id', 'purache_id');

@@ -14,45 +14,43 @@
                 <h4 class="card-title">Pedidos Cadastrados</h4>
                 <p class="card-description"> Lista os Pedidos cadastrados</code>
                 </p>
-                <table id="purchases" class="table table-bordered" style="width:100%">
-                    <thead class="p5 mt5">
+                <table id="purchases">
+                    <thead>
                         <tr>
-                            <th> # </th>
-                            <th> Nome </th>
-                            <th> Cliente </th>
-                            <th> Data </th>
-                            <th> Valor Total </th>
-                            <th> Detalhes </th>
-                            <th> Editar </th>
-                            <th> Deletar </th>
+                            <th scope="col"> # </th>
+                            <th scope="col"> Nome do Cliente </th>
+                            <th scope="col"> Data </th>
+                            <th scope="col"> Valor Total </th>
+                            <th scope="col"> Detalhes </th>
+                            <th scope="col"> Editar </th>
+                            <th scope="col"> Deletar </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($purchases as $purchase)
                             <tr>
-                                <td> {{ $purchase->id }} </td>
-                                <td> {{ $purchase->client_id }} </td>
-                                <td> {{ $purchase->date }} </td>
-                                <td> {{ number_format($purchase->amount, 2, ',','.') }} </td>
-                                <td class="text-center">
+                                <td scope="row" data-label="#"> {{ $purchase->id }} </td>
+                                <td data-label="Nome do Cliente"> {{ $purchase->client->name }} </td>
+                                <td data-label="Data"> {{ date('d/m/Y H:m', strtotime($purchase->date)) }} </td>
+                                <td data-label="Valor Total"> {{ number_format($purchase->amount, 2, ',', '.') }} </td>
+                                <td data-label="Detalhes">
 
                                     <a href="{{ route('purchase.get.detail', $purchase->id) }}">
                                         <button class="btn btn-outline-primary btn-rounded btn-icon">
-                                        <i class="mdi mdi-account-search-outline"></i>
+                                            <i class="mdi mdi-account-search-outline"></i>
                                         </button>
                                     </a>
                                 </td>
-                                <td class="text-center">
+                                <td data-label="Editar">
 
                                     <a href="{{ route('purchase.get.edit', $purchase->id) }}">
                                         <button class="btn btn-outline-warning btn-rounded btn-icon">
-                                        <i class="mdi mdi-grease-pencil"></i>
+                                            <i class="mdi mdi-grease-pencil"></i>
                                         </button>
                                     </a>
                                 </td>
-                                <td class="text-center">
-                                    <form action="{{ route('purchase.put.deactive', $purchase->id) }}"
-                                        method="POST">
+                                <td data-label="Deletar">
+                                    <form action="{{ route('purchase.put.deactive', $purchase->id) }}" method="POST">
                                         <button class="btn btn-outline-danger btn-rounded btn-icon">
                                             <i class="mdi mdi-delete"></i>
                                         </button>
@@ -60,7 +58,6 @@
                                         @csrf
                                     </form>
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>
@@ -79,11 +76,10 @@
     <script>
         $(document).ready(function() {
             $('#purchases').DataTable({
-                "scrollX": true,
                 language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.11.4/i18n/pt_br.json'
                 },
-                "lengthMenu": [ 20, 40, 60, 80, 100 ]
+                "lengthMenu": [20, 40, 60, 80, 100]
             });
         });
     </script>

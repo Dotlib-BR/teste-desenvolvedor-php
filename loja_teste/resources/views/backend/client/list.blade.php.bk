@@ -14,7 +14,7 @@
             <h4 class="card-title">Clientes Cadastrados</h4>
             <p class="card-description"> Lista os clientes cadastrados</code>
             </p>
-            <table id="clients" class="table table-bordered" style="width:100%">
+            <table id="clients" class="table table-bordered">
               <thead class="p5 mt5">
                 <tr>
                   <th> # </th>

@@ -33,6 +33,7 @@ Route::put('/client/delete/{id}', [\App\Http\Controllers\ClienteController::clas
 //Produtos
 Route::get('/product/list', [\App\Http\Controllers\ProductController::class, 'getProduct'])->name("product.get.list");
 Route::get('/product/detail/{id}', [\App\Http\Controllers\ProductController::class, 'getProductDetail'])->name("product.get.detail");
+Route::get('/product/barcode', [\App\Http\Controllers\ProductController::class, 'getProductByBarcode'])->name("product.get.byqrcode");
 
 Route::get('/product/create', [\App\Http\Controllers\ProductController::class, 'getProductCreate'])->name("product.get.create");
 Route::post('/product/create', [\App\Http\Controllers\ProductController::class, 'postProductCreate'])->name("product.post.create");
@@ -47,7 +48,7 @@ Route::get('/purchase/list', [\App\Http\Controllers\PurchaseController::class, '
 Route::get('/purchase/detail/{id}', [\App\Http\Controllers\PurchaseController::class, 'getPurchaseDetail'])->name("purchase.get.detail");
 
 Route::get('/purchase/create', [\App\Http\Controllers\PurchaseController::class, 'getPurchaseCreate'])->name("purchase.get.create");
-Route::post('/purchase/create', [\App\Http\Controllers\PurchaseController::class, 'postPurchasetCreate'])->name("purchase.post.create");
+Route::post('/purchase/create', [\App\Http\Controllers\PurchaseController::class, 'postPurchaseCreate'])->name("purchase.post.create");
 
 Route::get('/purchase/edit/{id}', [\App\Http\Controllers\PurchaseController::class, 'getPurchaseEdit'])->name("purchase.get.edit");
 Route::put('/purchase/edit/{id}', [\App\Http\Controllers\PurchaseController::class, 'putPurchaseEdit'])->name("purchase.put.edit");

@@ -14,26 +14,26 @@
                 <h4 class="card-title">Produtos Cadastrados</h4>
                 <p class="card-description"> Lista os Produtos cadastrados</code>
                 </p>
-                <table id="products" class="table table-bordered" style="width:100%">
-                    <thead class="p5 mt5">
+                <table id="products">
+                    <thead>
                         <tr>
-                            <th> # </th>
-                            <th> Nome </th>
-                            <th> Valor Unitário </th>
-                            <th> Código de Barras </th>
-                            <th> Detalhes </th>
-                            <th> Editar </th>
-                            <th> Deletar </th>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Valor Unitário</th>
+                            <th scope="col">Código de Barras</th>
+                            <th scope="col">Detalhes</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Deletar</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($products as $product)
                             <tr>
-                                <td> {{ $product->id }} </td>
-                                <td> {{ $product->name }} </td>
-                                <td> {{ number_format($product->price, 2, ',','.') }} </td>
-                                <td> {{ $product->barcode }} </td>
-                                <td class="text-center">
+                                <td scope="row" data-label="#"> {{ $product->id }} </td>
+                                <td data-label="Nome"> {{ $product->name }} </td>
+                                <td data-label="Valor Unitário"> {{ number_format($product->price, 2, ',','.') }} </td>
+                                <td data-label="Código de Barras"> {{ $product->barcode }} </td>
+                                <td data-label="Detalhes">
 
                                     <a href="{{ route('product.get.detail', $product->id) }}">
                                         <button class="btn btn-outline-primary btn-rounded btn-icon">
@@ -41,7 +41,7 @@
                                         </button>
                                     </a>
                                 </td>
-                                <td class="text-center">
+                                <td data-label="Editar">
 
                                     <a href="{{ route('product.get.edit', $product->id) }}">
                                         <button class="btn btn-outline-warning btn-rounded btn-icon">
@@ -49,7 +49,7 @@
                                         </button>
                                     </a>
                                 </td>
-                                <td class="text-center">
+                                <td data-label="Deletar">
                                     <form action="{{ route('product.put.deactive', $product->id) }}"
                                         method="POST">
                                         <button class="btn btn-outline-danger btn-rounded btn-icon">
@@ -78,7 +78,6 @@
     <script>
         $(document).ready(function() {
             $('#products').DataTable({
-                "scrollX": true,
                 language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.11.4/i18n/pt_br.json'
                 },

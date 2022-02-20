@@ -25,6 +25,19 @@ class ProductController extends Controller
         else
             abort(404);
     }
+
+    public function getProductByBarcode(Request $request)
+    {
+        $barcode = $request->barcode;
+        $product =  Product::where('barcode', $barcode)->where('active', 1)->first();
+        if($product)
+            if($product->active)
+                return $product;
+            else
+                return abort(403, "Produto desativado");
+        else
+            return abort(404, "Nenhum produto cadastrado com este código de barras");
+    }
     
     public function getProductCreate()
     {

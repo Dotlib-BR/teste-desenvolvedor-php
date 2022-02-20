@@ -10917,7 +10917,8 @@ body {
 .form-control,
 .form-control:focus {
   -webkit-box-shadow: none;
-  -moz-box-shadow: none; }
+  -moz-box-shadow: none; 
+  box-shadow: none;}
 
 .form-control {
   -webkit-box-shadow: none;
@@ -14399,7 +14400,9 @@ dl {
   .rtl .sidebar-fixed .nav::-webkit-scrollbar-track,
   .rtl .table-responsive::-webkit-scrollbar-track,
   .rtl ul.chats::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+   }
   .rtl .product-chart-wrapper::-webkit-scrollbar-thumb,
   .rtl .sidebar-fixed .nav::-webkit-scrollbar-thumb,
   .rtl .table-responsive::-webkit-scrollbar-thumb,

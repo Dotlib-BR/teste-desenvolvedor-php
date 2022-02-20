@@ -55,7 +55,7 @@
                         <a class="nav-link" href="{{ route('purchase.get.list') }}">Listar Pedidos</a>
                     </li>
                     <li class="nav-item" id="create-purchase-nav">
-                        <a class="nav-link" href="{{ route('purchase.get.create') }}">Cadastrar Pedidos</a>
+                        <a class="nav-link" href="{{ route('purchase.get.create') }}">Cadastrar Pedido</a>
                     </li>
                 </ul>
             </div>
