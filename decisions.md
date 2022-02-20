@@ -13,4 +13,4 @@ não permitiria a criação de uma ordem de compra contendo mais de um produto, 
 ### **Solução**
 Optei pela criação de uma tabela OrderProducts responsável pela relação entre essas duas tabelas. Com isso, será possível a criação de um item para cada produto de cada ordem de compra:
 
-![](https://github.com/henri1i/teste-desenvolvedor-php/blob/henri-borges/images/decisions/orders-ordersproducts-products.png?raw=true)
+![](https://github.com/henri1i/teste-desenvolvedor-php/blob/henri-borges/images/decisions/orders-oderproducts-products.png?raw=true)
