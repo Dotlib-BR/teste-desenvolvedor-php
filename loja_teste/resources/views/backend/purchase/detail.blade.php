@@ -40,6 +40,10 @@
                             <p class="font-weight-bold">Valor Total</p>
                             <p>{{ $purchase->amount }}</p>
                         </div>
+                        <div class="border border-light px-2 bd-highlight flex-fill rounded mx-1">
+                            <p class="font-weight-bold">Status</p>
+                            <p>{{ $purchase->status }}</p>
+                        </div>
                     </div>
                 </div>
             </div>

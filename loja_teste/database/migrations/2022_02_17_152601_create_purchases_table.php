@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id');
             $table->dateTime('date');
             $table->double('amount');
+            $table->enum('status', ['Em aberto', 'Pago', 'Cancelado']);
             $table->tinyInteger('active');
             $table->timestamps();
         });

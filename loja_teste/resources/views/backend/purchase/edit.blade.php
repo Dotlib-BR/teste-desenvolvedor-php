@@ -54,6 +54,16 @@
                                     value="{{ $purchase->client->name }}" disabled>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="purchaseInputStatus" class="col-sm-3 col-form-label">Status do Pedido</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="status">
+                                    <option value="Em aberto">Em aberto</option>
+                                    <option value="Pago">Pago</option>
+                                    <option value="Cancelado">Cancelado</option>
+                                  </select>
+                            </div>
+                        </div>
                         <hr>
                         <h5 class="text-center">Adicionar Produtos</h5>
                         <hr>
@@ -130,7 +140,7 @@
                         </div>
 
                         <button type="submit" id="createPurchaseSubmit"
-                            class="btn btn-gradient-primary me-2">Cadastrar</button>
+                            class="btn btn-gradient-primary me-2">Atualizar</button>
                     </form>
                 </div>
             </div>

@@ -21,6 +21,7 @@
                             <th scope="col"> Nome do Cliente </th>
                             <th scope="col"> Data </th>
                             <th scope="col"> Valor Total </th>
+                            <th scope="col"> Status </th>
                             <th scope="col"> Detalhes </th>
                             <th scope="col"> Editar </th>
                             <th scope="col"> Deletar </th>
@@ -33,6 +34,15 @@
                                 <td data-label="Nome do Cliente"> {{ $purchase->client->name }} </td>
                                 <td data-label="Data"> {{ date('d/m/Y H:m', strtotime($purchase->date)) }} </td>
                                 <td data-label="Valor Total"> {{ number_format($purchase->amount, 2, ',', '.') }} </td>
+                                <td>
+                                @if ($purchase->status === 'Em aberto')
+                                <label class="badge badge-info">Em aberto</label>
+                                @elseif ($purchase->status === 'Pago')
+                                <label class="badge badge-success">Pago</label>
+                                @else
+                                <label class="badge badge-danger">Cancelado</label>
+                                @endif
+                            </td>   
                                 <td data-label="Detalhes">
 
                                     <a href="{{ route('purchase.get.detail', $purchase->id) }}">

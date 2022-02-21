@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Purchase;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\Cast\Object_;
+
 
 class PurchaseController extends Controller
 {
@@ -61,13 +59,15 @@ class PurchaseController extends Controller
             'productsId' => 'required',
             'productsQuantity' => 'required',
             'productsAmount' => 'required',
-            'purchaseAmount' => 'required'
+            'purchaseAmount' => 'required',
+            'status' => 'require'
         ]);
 
         $purchase = new Purchase();
         $purchase->client_id = $request->clientId;
         $purchase->date = now();
         $purchase->amount = $request->purchaseAmount;
+        $purchase->status = 'Em aberto';
         $purchase->active = 1;
         $purchase->save();
 
@@ -93,7 +93,8 @@ class PurchaseController extends Controller
             'productsId' => 'required',
             'productsQuantity' => 'required',
             'productsAmount' => 'required',
-            'purchaseAmount' => 'required'
+            'purchaseAmount' => 'required',
+            'status' => 'required'
         ]);
 
         $purchase = Purchase::findOrFail($id);
@@ -107,6 +108,7 @@ class PurchaseController extends Controller
 
             $purchase->client_id = $request->clientId;
             $purchase->amount = (float) $request->purchaseAmount;
+            $purchase->status = $request->status;
             $purchase->active = 1;
             $purchase->save();
 

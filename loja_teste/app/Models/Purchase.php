@@ -13,6 +13,7 @@ class Purchase extends Model
         'client_id',
         'date',
         'amount',
+        'status'
     ];
 
     public function client(){

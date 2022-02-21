@@ -14,8 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
-})->name('home');
+    return view('welcome');
+});
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
+
+Route::group(['middleware' => ['auth']], function(){
+
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
+    
 
 // Clientes
 Route::get('/client/list', [\App\Http\Controllers\ClienteController::class, 'getClient'])->name("client.get.list");
@@ -54,3 +65,6 @@ Route::get('/purchase/edit/{id}', [\App\Http\Controllers\PurchaseController::cla
 Route::put('/purchase/edit/{id}', [\App\Http\Controllers\PurchaseController::class, 'putPurchaseEdit'])->name("purchase.put.edit");
 
 Route::put('/purchase/delete/{id}', [\App\Http\Controllers\PurchaseController::class, 'putPurchaseDeactive'])->name("purchase.put.deactive")->withTrashed();
+});
+
+require __DIR__.'/auth.php';

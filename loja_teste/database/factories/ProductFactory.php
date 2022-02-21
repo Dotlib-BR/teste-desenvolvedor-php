@@ -27,7 +27,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->words(2, true),
-            'price' => $this->faker->randomFloat(2, 0.01, 999999.99),
+            'price' => $this->faker->randomFloat(2, 0.01, 99999.99),
             'barcode' => $this->faker->regexify('[1-9]{5}[A-Z]{5}[0-9]{10}'),
             'active' => $this->faker->boolean()
         ];

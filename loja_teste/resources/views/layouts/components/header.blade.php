@@ -1,4 +1,4 @@
-<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         <a class="navbar-brand brand-logo" href="{{ route('home') }}"><img src="{{ asset('assets/images/logo.png') }}"
                 alt="logo" /></a>
@@ -19,9 +19,13 @@
             
             
             <li class="nav-item nav-logout d-none d-lg-block">
-                <a class="nav-link" href="#">
-                    <i class="mdi mdi-power"></i>
-                </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-link nav-link">
+                        <i class="mdi mdi-power"></i>
+                    </button>
+                </form>
+                
             </li>
             <li class="nav-item nav-settings d-none d-lg-block">
                 <a class="nav-link" href="#">
