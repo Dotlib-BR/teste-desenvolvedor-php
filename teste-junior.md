@@ -6,54 +6,65 @@ Loja em Laravel
 
 ### Docker
 
-Inicialize o ambiente de desenvolvimento
-`
-$docker up
-`
-
-### Instalação
-
 Entre na pasta loja_teste
 `
 $cd loja_teste
 `
 
-Instale os pacotes através do composer
-`
-$composer install
-`
-
-Copie o .env.exemplo para o .env (já está com a configuração do docker)
+Copie o .env.exemplo para o .env 
 `
 $cp .env.example .env
 `
 
+Edite o arquivo docker-composer.yml com o nome do usuário local
+
+docker.composer.yml
+`
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: sammy  #mesmo usuário proprietário na pasta local
+        uid: 1000
+      context: ./
+`
+
+Construa a imagem do app
+`
+$docker-compose build app
+`
+
+Inicialize o ambiente de desenvolvimento em segundo plano
+`
+$docker-compose up -d
+`
+
+### Instalação
+
+Instale os pacotes através do composer
+`
+$docker-compose exec app composer install
+`
+
 Gere a key do laravel
 `
-$php artisan key:generate
+$docker-compose exec app php artisan key:generate
 `
 
 #### Bando de Dados
 
 Crie as tabelas do Banco de Dados
 `
-$php artisan migrate
+$docker-compose exec app php artisan migrate
 `
 
 Popule o Banco de Dados
 `
-$php artisan seed
+$docker-compose exec app php artisan seed
 `
 
 ### Execução
 
-Execute o servidor
-`
-$php artisan serve
-`
-
 No navegador entre no localhost
 http://localhost:8000
-
-Caso queira entrar no phpmyadmin
-http://localhost:8080
