@@ -4,7 +4,7 @@ services:
     build:
       args:
         user: dockremap  
-        uid: 100
+        uid: 1000
       context: ./
       dockerfile: Dockerfile
     image: lojateste
