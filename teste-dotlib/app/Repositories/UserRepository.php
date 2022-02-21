@@ -33,6 +33,23 @@ class UserRepository
         return $result;
     }
 
+    public function getClients() {
+        $clients = User::where('admin', 0)->get();
+        return $clients;
+    }
+
+    public function getUserByIdAjax($id) {
+        $client = User::find($id);
+        return $client;
+    }
+
+    public function destroyUserByIdAjax($id) {
+        $client = User::find($id);
+        $client->delete();
+        return $client;
+    }
+
+
     public function formatCpf($cpf) {
         return str_replace('-', '', str_replace('.', '', $cpf));
     }

@@ -30,7 +30,7 @@ class LoginController extends Controller
 
         if (Auth::attempt(['cpf' => $cpf, 'password' => $request->password])) {
             $user = $this->userRepository->getUserByCpf($cpf);
-            Session::put('user', ['admin' => $user->admin, 'name' => $user->name, 'cpf' => $user->cpf, 'email' => $user->email, 'created_at' => $user->created_at]);
+            Session::put('user', ['id' => $user->id, 'admin' => $user->admin, 'name' => $user->name, 'cpf' => $user->cpf, 'email' => $user->email, 'created_at' => $user->created_at]);
             return redirect()->route('home');
         }
         return redirect()->back()->with('danger', 'Email ou senha inválidos');
@@ -61,7 +61,7 @@ class LoginController extends Controller
 
         $cpf = $this->userRepository->formatCpf($request->get('cpf'));
         $user = $this->userRepository->getUserByCpf($cpf);
-        Session::put('user', ['admin' => $user->admin, 'name' => $user->name, 'cpf' => $user->cpf, 'email' => $user->email, 'created_at' => $user->created_at]);
+        Session::put('user', ['id' => $user->id, 'admin' => $user->admin, 'name' => $user->name, 'cpf' => $user->cpf, 'email' => $user->email, 'created_at' => $user->created_at]);
         return redirect()->route('home');
     }
 

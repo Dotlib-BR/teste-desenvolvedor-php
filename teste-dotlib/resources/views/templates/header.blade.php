@@ -8,10 +8,10 @@
             @if(session('user'))
                 <li><a href="/" class="nav-link px-2 link-dark">Home</a></li>
                 @if(session('user.admin'))
-                    <li><a href="#" class="nav-link px-2 link-dark">Clientes</a></li>
+                    <li><a href="/clients/id" class="nav-link px-2 link-dark">Clientes</a></li>
                 @endif
-                <li><a href="#" class="nav-link px-2 link-dark">Produtos</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Pedidos</a></li>
+                <li><a href="/products/id" class="nav-link px-2 link-dark">Produtos</a></li>
+                <li><a href="/requests/date" class="nav-link px-2 link-dark">Pedidos</a></li>
             @endif
 
 

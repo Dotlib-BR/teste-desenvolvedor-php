@@ -17,6 +17,9 @@ use App\Http\Controllers\LoginController;
 
 
 
+Route::get('/', function () {
+    return view('home');
+})->name('home');
 
 Route::get('/login', function () {
     return view('login');
@@ -31,11 +34,30 @@ Route::get('/about', function () {
 })->name('about');
 
 
-Route::group(['middleware' => 'authentic'], function () {
-    Route::get('/', function () {
-        return view('home');
-    })->name('home');
 
+Route::group(['middleware' => 'authentic'], function () {
+    Route::get('/products/{filter}', [\App\Http\Controllers\ProductsController::class, 'index'])->name('products');
+
+    Route::get('/requests/{filter}', [\App\Http\Controllers\RequestsController::class, 'index'])->name('requests');
+    Route::post('/request', [\App\Http\Controllers\RequestsController::class, 'store'])->name('add.request');
+    Route::get('/ajax/request/get/{id}', [\App\Http\Controllers\RequestsController::class, 'showAjax'])->name('get.request.ajax');
+    Route::get('/ajax/request/delete/{id}', [\App\Http\Controllers\RequestsController::class, 'destroyAjax'])->name('delete.request.ajax');
+    Route::get('/ajax/product/get/{id}', [\App\Http\Controllers\ProductsController::class, 'showAjax']);
+    Route::get('/ajax/request/user/get/{id}', [\App\Http\Controllers\RequestsController::class, 'getRequestByUser']);
+
+    Route::get('/ajax/orders/get/{id}', [\App\Http\Controllers\RequestsController::class, 'listOrdersByRequestAjax']);
+    Route::get('/ajax/orders/post/', [\App\Http\Controllers\RequestsController::class, 'addOrderInRequestAjax']);
+});
+
+
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/clients/{filter}', [\App\Http\Controllers\ClientsController::class, 'index']);
+    Route::get('/ajax/clients/get/{id}', [\App\Http\Controllers\ClientsController::class, 'showAjax'])->name('get.client.ajax');
+    Route::get('/ajax/clients/delete/{id}', [\App\Http\Controllers\ClientsController::class, 'destroyAjax'])->name('delete.client.ajax');
+
+    Route::post('/product', [\App\Http\Controllers\ProductsController::class, 'store'])->name('add.product');
+    Route::get('ajax/product/update/{id}', [\App\Http\Controllers\ProductsController::class, 'updateAjax'])->name('update.product');
+    Route::get('/ajax/products/delete/{id}', [\App\Http\Controllers\ProductsController::class, 'destroyAjax']);
 });
 
 

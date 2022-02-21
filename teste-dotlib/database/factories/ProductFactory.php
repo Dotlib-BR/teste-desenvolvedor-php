@@ -4,9 +4,8 @@ namespace Database\Factories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class ProductFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,10 +15,9 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->safeEmail(),
-            'cpf' => $this->faker->numberBetween(11111111112, 99999999999),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'name' => $this->faker->colorName(),
+            'unit_value' => $this->faker->randomFloat(null, 1, 10),
+            'bar_code' => $this->faker->numberBetween(1000000000000000000, 99999999999999999999),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
