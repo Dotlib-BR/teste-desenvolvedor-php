@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('cpf')->unique();
-            $table->string('email')->nullable()->unique(); //conferir
+            $table->string('email')->nullable()->unique();
             $table->tinyInteger('active');
             $table->timestamps();
         });

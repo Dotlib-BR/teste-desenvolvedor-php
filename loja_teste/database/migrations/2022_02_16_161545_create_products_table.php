@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(); //conferir
+            $table->string('name');
             $table->unsignedDecimal('price', 8, 2);
             $table->string('barcode', 20);
             $table->tinyInteger('active');

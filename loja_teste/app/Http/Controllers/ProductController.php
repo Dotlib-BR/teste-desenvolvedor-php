@@ -57,7 +57,7 @@ class ProductController extends Controller
     public function postProductCreate(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'max:100|nullable',
+            'name' => 'required|max:100',
             'barcode' => 'required|unique:products|max:20|min:20',
             'price' => 'required',
         ]);
@@ -78,7 +78,7 @@ class ProductController extends Controller
     public function putProductEdit(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'max:100|nullable',
+            'name' => 'required|max:100',
             'barcode' => 'required|max:20|min:20|unique:products,barcode,'. $id,
             'price' => 'required'
         ]);
