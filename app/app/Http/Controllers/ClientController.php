@@ -31,13 +31,13 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => 'required',
             'cpf' => 'unique:App\Models\Client,cpf|required|string|min:11|max:11',
             'email' => 'unique:App\Models\Client,email|required|email',
         ]);
 
-        return Client::create($request->all());
+        return Client::create($data);
     }
 
     /**
