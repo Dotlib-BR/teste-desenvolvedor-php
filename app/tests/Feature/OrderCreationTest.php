@@ -44,7 +44,7 @@ class OrderCreationTest extends TestCase
         OrderService::create($this->client->id, $this->products);
 
         $this->assertCount(1, Order::all());
-        $this->assertEquals($this->client->id, Order::first()->id);
+        $this->assertEquals($this->client->id, Order::first()->client_id);
 
         $this->assertCount(2, OrderProduct::all());
         $this->assertEquals(2, OrderProduct::first()->quantity);
