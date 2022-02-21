@@ -14,3 +14,8 @@ não permitiria a criação de uma ordem de compra contendo mais de um produto, 
 Optei pela criação de uma tabela OrderProducts responsável pela relação entre essas duas tabelas. Com isso, será possível a criação de um item para cada produto de cada ordem de compra:
 
 ![](https://github.com/henri1i/teste-desenvolvedor-php/blob/henri-borges/images/decisions/orders-oderproducts-products.png?raw=true)
+
+### **Bootstrap ou Tailwind?**
+No início do projeto achei que seria tranquilo o uso do bootstrap, mas agora que tentei utiliza-lo, percebi que ele iria acabar me atrapalhando na velocidade do desenvolvimento do front. Acabei gastando praticamente 3 dias inteiros polindo o back-end, o que acabou me deixando sem tempo.
+
+Por isso, optei pelo uso do tailwind, que estou mais familiarizado e sei que com ele, vou acabar economizando muito tempo. 
