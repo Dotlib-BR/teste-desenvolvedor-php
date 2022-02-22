@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('app');
+    return redirect()->route('clients');
 });
+
+Route::get('/clients', function() {
+    return view('clients');
+})->name('clients');
