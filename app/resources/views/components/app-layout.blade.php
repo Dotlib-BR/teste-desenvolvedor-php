@@ -2,12 +2,14 @@
     'pageName',
 ])
 
-@extends('layouts.main')
+<div>
+    @extends('layouts.main')
 
-@section('header')
-    {{ $header ?? '' }}
-@endsection
+    @section('header')
+        {{ $header ?? '' }}
+    @endsection
 
-@section('content')
-    {{ $slot }}
-@endsection
+    @section('content')
+        {{ $slot }}
+    @endsection
+</div>
