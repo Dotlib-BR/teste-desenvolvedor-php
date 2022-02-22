@@ -20,8 +20,15 @@ class ClientController extends Controller
             'per_page' => 'integer'
         ]);
 
-        $clients = Client::paginate($request->input('per_page'));
-        return view('clients', ['clients' => $clients]);
+        $per_page = $request->input('per_page') ?: 10;
+
+        $clients = Client::paginate($per_page);
+
+        return view('clients', [
+            'clients' => $clients,
+            'per_page' => $per_page,
+
+        ]);
     }
 
     /**
