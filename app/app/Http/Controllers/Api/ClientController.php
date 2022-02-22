@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Client;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ClientController extends Controller
 {
