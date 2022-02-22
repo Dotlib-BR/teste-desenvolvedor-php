@@ -1,5 +1,7 @@
 <x-app-layout pageName="Clientes">
-    <x-table.table searchable='true' :pagination="$clients->links()">
+    <x-table.table searchable='true'
+        :pagination="$clients->links('pagination::tailwind')"
+        :per-page="$per_page">
         <x-slot name="header">
             <tr>
                 <x-table.head-row>Nome</x-table.head-row>

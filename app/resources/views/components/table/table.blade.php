@@ -1,6 +1,7 @@
 @props([
     'searchable' => false,
-    'pagination'
+    'pagination',
+    'perPage',
 ])
 
 <div class="border border-gray-200 rounded-lg">
@@ -33,11 +34,24 @@
                 </tbody>
         </table>
     </div>
-    <div class="bg-white w-full p-2 rounded-b-lg flex justify-end border-t border-gray-200">
-        <div class="flex justify-between">
+    <div class="relative bg-white w-full rounded-b-lg border-gray-200">
+        <div class="absolute w-full h-full flex justify-center items-center gap-2">
+            <select id="per_page" name="per_page" 
+                class="bg-white border border-gray-300 p-2 rounded-lg shadow-sm" 
+                onchange="changePerPage(this)">
+
+                
+                <option value="5" {{ $perPage == 5 ? "selected" : "" }}>5</option>
+                <option value="10" {{ $perPage == 10 ? "selected" : "" }}>10</option>
+                <option value="25" {{ $perPage == 25 ? "selected" : "" }}>25</option>
+                <option value="50" {{ $perPage == 50 ? "selected" : "" }}>50</option>
+            </select>
+            <label for="per_page" class="text-sm font-extralight">por página</label>
+        </div>
+        <div class="w-full px-4 py-2">
+            {!! $pagination !!}
         </div>
     </div>
-
     <style>
         thead > tr {
             background-color: #F9FAFB;
@@ -50,4 +64,36 @@
             text-align: start;
         }
     </style>
+
+    <script>
+        function changePerPage(selectObject) {
+            currentPerPage = {{ $perPage }}
+            selected = selectObject.value
+            if (selected == currentPerPage) {
+                return
+            }
+            var newURL = updateURLParameter(window.location.href, 'per_page', selected);
+            window.location.replace(newURL)
+        }
+
+        function updateURLParameter(url, param, paramVal){
+            var newAdditionalURL = "";
+            var tempArray = url.split("?");
+            var baseURL = tempArray[0];
+            var additionalURL = tempArray[1];
+            var temp = "";
+            if (additionalURL) {
+                tempArray = additionalURL.split("&");
+                for (var i=0; i<tempArray.length; i++){
+                    if(tempArray[i].split('=')[0] != param){
+                        newAdditionalURL += temp + tempArray[i];
+                        temp = "&";
+                    }
+                }
+            }
+
+            var rows_txt = temp + "" + param + "=" + paramVal;
+            return baseURL + "?" + newAdditionalURL + rows_txt;
+        }
+    </script>
 </div>
