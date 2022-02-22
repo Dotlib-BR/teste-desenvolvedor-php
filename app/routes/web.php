@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\ClientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,4 @@ Route::get('/', function () {
     return redirect()->route('clients');
 });
 
-Route::get('/clients', function() {
-    return view('clients');
-})->name('clients');
+Route::resource('/clients', ClientController::class)->name('index', 'clients');
