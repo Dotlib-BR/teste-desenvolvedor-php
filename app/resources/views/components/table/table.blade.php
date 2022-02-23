@@ -2,6 +2,7 @@
     'searchable' => false,
     'pagination',
     'perPage',
+    'searchParams' => null
 ])
 
 <div class="border border-gray-200 rounded-lg" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;">
@@ -11,7 +12,8 @@
                 <div class="absolute flex justify-center items-center w-9 h-9 ">
                     <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
                 </div>
-                <input type="text" placeholder="Pesquisa"
+                <input type="text" placeholder="Pesquisa" id="table-search"
+                    value="{{ $searchParams }}  "
                     class="h-9 pl-9 border rounded-lg placeholder:text-slate-400 w-full
                     transition-all
                     focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500">
@@ -36,16 +38,16 @@
     </div>
     <div class="relative bg-white w-full rounded-b-lg border-gray-200">
         <div class="absolute w-full h-full flex justify-center items-center gap-2">
-            <select id="per_page" name="per_page" 
-                class="bg-white border border-gray-300 p-2 rounded-lg shadow-sm" 
-                onchange="changePerPage(this)">
+                <select id="per_page" name="per_page"
+                    class="bg-white border border-gray-300 p-2 rounded-lg shadow-sm" 
+                    onchange="changePerPage(this)">
 
-                
-                <option value="5" {{ $perPage == 5 ? "selected" : "" }}>5</option>
-                <option value="10" {{ $perPage == 10 ? "selected" : "" }}>10</option>
-                <option value="25" {{ $perPage == 25 ? "selected" : "" }}>25</option>
-                <option value="50" {{ $perPage == 50 ? "selected" : "" }}>50</option>
-            </select>
+                    
+                    <option value="5" {{ $perPage == 5 ? "selected" : "" }}>5</option>
+                    <option value="10" {{ $perPage == 10 ? "selected" : "" }}>10</option>
+                    <option value="25" {{ $perPage == 25 ? "selected" : "" }}>25</option>
+                    <option value="50" {{ $perPage == 50 ? "selected" : "" }}>50</option>
+                </select>
             <label for="per_page" class="text-sm font-extralight">por página</label>
         </div>
         <div class="w-full px-4 py-2">
@@ -66,6 +68,14 @@
     </style>
 
     <script>
+        const search = document.getElementById('table-search');
+        search.addEventListener('keyup', function(e){
+            var key = e.which || e.keyCode;
+            if (key == 13) {
+                performSearch(this.value);
+            }
+        });
+
         function changePerPage(selectObject) {
             currentPerPage = {{ $perPage }}
             selected = selectObject.value
@@ -73,6 +83,11 @@
                 return
             }
             var newURL = updateURLParameter(window.location.href, 'per_page', selected);
+            window.location.replace(newURL)
+        }
+
+        function performSearch(param) {
+            let newURL = updateURLParameter(window.location.href, 'search_params', param)
             window.location.replace(newURL)
         }
 

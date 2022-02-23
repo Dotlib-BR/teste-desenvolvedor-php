@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Contracts\AdvancedSearchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Product extends Model
+class Product extends Model implements AdvancedSearchable
 {
     use HasFactory;
 
@@ -15,5 +16,11 @@ class Product extends Model
     public function orderProduct(): BelongsToMany
     {
         return $this->belongsToMany(OrderProduct::class);
+    }
+
+    public static function scopeAdvancedSearch($query, $param)
+    {
+        return $query->where('name', 'like', "%$param%")
+            ->orWhere('barcode', 'like', "%$param%");
     }
 }
