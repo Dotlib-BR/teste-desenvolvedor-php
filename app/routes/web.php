@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Web\ClientController;
+use App\Http\Controllers\Web\OrderController;
 use App\Http\Controllers\Web\ProductController;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +29,4 @@ Route::get('/clients/create', [ClientController::class, 'createPage'])->name('cr
 
 
 Route::resource('/products', ProductController::class);
+Route::resource('/orders', OrderController::class);
