@@ -5,7 +5,7 @@
         </div>
         <div class="px-10 mt-4 flex flex-col">
             <span class="tracking-wide text-xs text-gray-600 font-bold mb-4">LOJA</span>
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-5">
                 <x-sidebar.item url="clients" icon="user-group">Clientes</x-sidebar.item>
                     
                 <x-sidebar.item url="products" icon="box">Produtos</x-sidebar>

@@ -9,6 +9,10 @@
         {{ $header ?? '' }}
     @endsection
 
+    @section('buttons')
+        {{ $buttons ?? '' }}
+    @endsection
+
     @section('content')
         {{ $slot }}
     @endsection
