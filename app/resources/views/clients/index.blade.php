@@ -1,7 +1,14 @@
 <x-app-layout pageName="Clientes">
-    <x-table.table searchable='true'
+    <x-slot name="buttons">
+        <x-link-button url="clients/create">Novo cliente</x-link-button>
+    </x-slot>
+
+    <x-table.table
         :pagination="$clients->links('pagination::tailwind')"
-        :per-page="$per_page">
+        :per-page="$per_page"
+        :search-params="$search_params"
+        :searchable="true"
+        >
         <x-slot name="header">
             <tr>
                 <x-table.head-row>Nome</x-table.head-row>
@@ -18,7 +25,7 @@
                     <x-table.body-row>{{ $client->cpf }}</x-table.body-row> 
                     <x-table.body-row>{{ $client->email }}</x-table.body-row>
                     <x-table.body-row>
-                        <a href="{{ url("/clients/$client->id") }}" class="text-green-600 font-medium hover:text-green-500 text-sm">Editar</a>
+                        <a href="{{ url("/clients/$client->id/edit") }}" class="text-green-600 font-medium hover:text-green-500 text-sm">Editar</a>
                     </x-table.body-row>
                 </tr>
             @endforeach
