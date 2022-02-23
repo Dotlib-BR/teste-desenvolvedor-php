@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\ClientController;
+use App\Http\Controllers\Web\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +19,11 @@ Route::get('/', function () {
     return redirect()->route('clients');
 });
 
-Route::resource('/clients', ClientController::class)->name('index', 'clients');
+
+Route::get('/clients/{id}/edit', [ClientController::class, 'updatePage'])->name('createPage', 'yoooo');
+Route::resource('/clients', ClientController::class)
+    ->name('index', 'clients');
+Route::get('/clients/create', [ClientController::class, 'createPage'])->name('createPage', 'yoooo');
+
+
+Route::resource('/products', ProductController::class);
