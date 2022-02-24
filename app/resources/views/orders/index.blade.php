@@ -28,7 +28,7 @@
                     <x-table.body-row>
                         <x-status :status="$order->status" />
                         </x-table.body-row> 
-                        <x-table.body-row>{{ App\Services\HelperService::numberToMoney($order->total_value) }}</x-table.body-row> 
+                        <x-table.body-row>{{ App\Services\HelperService::numberToMoney($order->total_discounted) }}</x-table.body-row> 
                     <x-table.body-row>{{ $order->created_at->toFormattedDateString() }}</x-table.body-row>
                     <x-table.body-row>
                         <a href="{{ url("/orders/$order->id/edit") }}" class="text-green-600 font-medium hover:text-green-500 text-sm">Editar</a>

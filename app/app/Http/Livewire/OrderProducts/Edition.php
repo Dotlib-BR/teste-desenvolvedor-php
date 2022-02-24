@@ -69,6 +69,7 @@ class Edition extends Component
     public function getOrderProducts()
     {
         $this->products = $this->order->orderProducts()->get();
+        $this->emitTo(Total::class, 'refresh');
     }
 
     public function render()

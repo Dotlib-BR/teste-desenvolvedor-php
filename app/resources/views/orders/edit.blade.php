@@ -88,6 +88,10 @@
                         <livewire:order-products.edition :order="$order" />
                 </x-card>
             </div>
+            
+            <div>
+                <livewire:order-products.total :order="$order" />
+            </div>
                 
             <div class="mt-6 flex flex-row gap-2 items-center justify-end md:justify-start col-start-1 col-span-3 md:col-span-3">
                 <button type="submit" form="orders-form"
