@@ -15,8 +15,6 @@
             </form>
         </x-slot>
 
-
-
         <div class="grid grid-cols-3 md:flex-row md:justify-between gap-6">
             <div class="w-full col-span-3 md:col-span-2">
                 <x-card>
@@ -26,11 +24,13 @@
     
                         <input type="hidden" id="">
 
-                        <div class="flex flex-col space-y-2">
+                        <div class="flex flex-col space-y-2 relative">
                             <label for="id" class="text-sm font-medium text-gray-700">Número</label>
                             <input type="text" name="id" value="{{ $order->id }}" disabled
                                 class="py-2 px-3 border rounded-lg text-slate-400 w-full">
-                            <x-error-message for="name" />
+                            <div class="absolute">
+                                <x-error-message for="name" />
+                            </div>
                         </div>
     
                         <div class="flex flex-col space-y-2">
@@ -39,7 +39,7 @@
                                 class="py-2 px-3 border rounded-lg text-slate-400 w-full">
                         </div>
 
-                        <div class="flex flex-col space-y-2">
+                        <div class="flex flex-col space-y-2 relative">
                             <label for="status" class="text-sm font-medium text-gray-700">Status</label>
                             <select name="status" id="status"
                                 class="py-2 px-3 border rounded-lg w-full bg-white
@@ -49,8 +49,21 @@
                                     <option value="{{ $status->value }}" {{ $status->value === $order->status->value ? "selected" : "" }}>{{ $status->description }}</option>
                                 @endforeach
                             </select>
+                            <div class="absolute">
+                                <x-error-message for="status" />
+                            </div>
                         </div>
-    
+
+                        <div class="flex flex-col space-y-2">
+                            <label for="discount_id" class="text-sm font-medium text-gray-700">Desconto</label>
+                            <select type="text" name="discount_id" value="{{ $order->discount_id }}"
+                                class="py-2 px-3 border rounded-lg text-gray-800 w-full bg-white">
+                                    <option value="">Nenhum</option>
+                                @foreach($discounts as $discount)
+                                    <option value="{{ $discount->id }}" {{ $order->discount_id === $discount->id ? 'selected' : '' }}>{{ $discount->code }}</option>
+                                @endforeach
+                            </select>
+                        </div>
     
                     </form>
                 </x-card>

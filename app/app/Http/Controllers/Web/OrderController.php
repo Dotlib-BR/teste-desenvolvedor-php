@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Discount;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -80,7 +81,8 @@ class OrderController extends Controller
     public function edit($id)
     {
         $order = Order::findOrFail($id);
-        return view('orders.edit', compact('order'));
+        $discounts = Discount::all();
+        return view('orders.edit', compact('order', 'discounts'));
     }
 
     /**
@@ -94,6 +96,7 @@ class OrderController extends Controller
     {
         $validatedData = $request->validate([
             'status' => 'numeric',
+            'discount_id' => 'numeric|nullable'
         ]);
 
         Order::findOrFail($id)->update($validatedData);
