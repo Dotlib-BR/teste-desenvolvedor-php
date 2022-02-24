@@ -37,22 +37,26 @@
         </table>
     </div>
     <div class="relative bg-white w-full rounded-b-lg border-gray-200">
-        <div class="absolute w-full h-full flex justify-center items-center gap-2">
-                <select id="per_page" name="per_page"
-                    class="bg-white border border-gray-300 p-2 rounded-lg shadow-sm" 
-                    onchange="changePerPage(this)">
+        @if($pagination)
+            <div class="absolute w-full h-full flex justify-center items-center gap-2">
+                    <select id="per_page" name="per_page"
+                        class="bg-white border border-gray-300 p-2 rounded-lg shadow-sm" 
+                        onchange="changePerPage(this)">
 
-                    
-                    <option value="5" {{ $perPage == 5 ? "selected" : "" }}>5</option>
-                    <option value="10" {{ $perPage == 10 ? "selected" : "" }}>10</option>
-                    <option value="25" {{ $perPage == 25 ? "selected" : "" }}>25</option>
-                    <option value="50" {{ $perPage == 50 ? "selected" : "" }}>50</option>
-                </select>
-            <label for="per_page" class="text-sm font-extralight">por página</label>
-        </div>
-        <div class="w-full px-4 py-2">
-            {!! $pagination !!}
-        </div>
+                        
+                        <option value="5" {{ $perPage == 5 ? "selected" : "" }}>5</option>
+                        <option value="10" {{ $perPage == 10 ? "selected" : "" }}>10</option>
+                        <option value="25" {{ $perPage == 25 ? "selected" : "" }}>25</option>
+                        <option value="50" {{ $perPage == 50 ? "selected" : "" }}>50</option>
+                    </select>
+                <label for="per_page" class="text-sm font-extralight">por página</label>
+            </div>
+            <div class="w-full px-4 py-2">
+                {!! $pagination !!}
+            </div>
+        @else
+            <div class="rounded-b-lg h-[54px]"></div>
+        @endif
     </div>
     <style>
         thead > tr {

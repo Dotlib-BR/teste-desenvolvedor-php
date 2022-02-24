@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\ClientController;
+use App\Http\Controllers\Web\DiscountController;
 use App\Http\Controllers\Web\OrderController;
 use App\Http\Controllers\Web\ProductController;
 use App\Models\Order;
@@ -30,3 +31,4 @@ Route::get('/clients/create', [ClientController::class, 'createPage'])->name('cr
 
 Route::resource('/products', ProductController::class);
 Route::resource('/orders', OrderController::class);
+Route::resource('/discounts', DiscountController::class);

@@ -13,6 +13,8 @@
                 <x-sidebar.item url="products" icon="box">Produtos</x-sidebar>
                     
                 <x-sidebar.item url="orders" icon="bag-shopping">Pedidos</x-sidebar>
+
+                <x-sidebar.item url="discounts" icon="percent">Descontos</x-sidebar>
             </div>
         </div>
     </div>
