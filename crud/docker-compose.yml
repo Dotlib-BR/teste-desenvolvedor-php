@@ -68,6 +68,15 @@ services:
         networks: 
             - laravel-9
 
+    # npm
+    # npm: 
+    #     image: node:13.7
+    #     container_name: npm_laravel
+    #     volumes: 
+    #         - ./:/var/www
+    #     working_dir: /var/www
+    #     entrypoint: ['npm']
+
 networks: 
     laravel-9:
         driver: bridge
