@@ -4,18 +4,18 @@ namespace App\Models;
 
 use App\Contracts\AdvancedSearchable;
 use App\Enums\OrderStatus;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Order extends Model implements AdvancedSearchable
 {
     use HasFactory;
 
     protected $guarded = ['id'];
+
     protected $casts = [
         'status' => OrderStatus::class,
     ];
@@ -23,6 +23,11 @@ class Order extends Model implements AdvancedSearchable
     public function orderProducts(): HasMany
     {
         return $this->hasMany(OrderProduct::class);
+    }
+
+    public function discount(): HasOne
+    {
+        return $this->hasOne(Discount::class);
     }
 
     public function client(): BelongsTo
