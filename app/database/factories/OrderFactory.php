@@ -20,7 +20,6 @@ class OrderFactory extends Factory
         return [
             'client_id' => $this->faker->numberBetween(1, $client_count),
             'status' => $this->faker->randomElement($status),
-            'ordered_at' => now(),
         ];
     }
 }
