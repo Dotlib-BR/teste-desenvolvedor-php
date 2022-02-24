@@ -114,5 +114,13 @@
             var rows_txt = temp + "" + param + "=" + paramVal;
             return baseURL + "?" + newAdditionalURL + rows_txt;
         }
+         
+        function yoo(param) {
+
+            url = new URL(window.location.href);
+
+            url.searchParams.set('order_by', param);
+            window.location.replace(url);
+        }
     </script>
 </div>

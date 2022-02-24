@@ -23,6 +23,7 @@ class ClientController extends Controller
         $request->validate([
             'per_page' => 'integer',
             'search_params',
+            'order_by',
         ]);
 
         if(session('success_message')) {
@@ -31,12 +32,18 @@ class ClientController extends Controller
 
         $per_page = $request->input('per_page') ?: 20;
         $search_params = $request->input('search_params');
+        $order_by = $request->input('order_by'); 
+
+
+        if ($order_by) {
+            $query = Client::orderBy($order_by);
+        }
 
         if ($search_params) {
-            $clients = Client::advancedSearch($search_params)->paginate($per_page);
-        } else {
-            $clients = Client::paginate($per_page);
+            $query = $query->advancedSearch($search_params);
         }
+
+        $clients = $query->paginate($per_page);
 
         return view('clients.index', [
             'clients' => $clients->appends(request()->input()),
