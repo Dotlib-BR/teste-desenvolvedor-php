@@ -7,27 +7,22 @@ use BenSampo\Enum\Enum;
 final class OrderStatus extends Enum
 {
     const Ordered = 0;
-    const Production = 1;
-    const Shipped = 2;
-    const Delivered = 3;
+    const Paid = 1;
+    const Cancelled = 2;
 
     public static function getDescription($value): string
     {
         switch($value) {
             case self::Ordered:
-                return "Pedido";
+                return "Em aberto";
                 break;
 
-            case self::Production:
-                return "Em produção";
+            case self::Paid:
+                return "Pago";
                 break;
 
-            case self::Shipped:
-                return "Enviado";
-                break;
-
-            case self::Delivered:
-                return "Entregue";
+            case self::Cancelled:
+                return "Cancelado";
                 break;
         }
         
