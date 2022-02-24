@@ -18,7 +18,6 @@ class OrderService
     {
         $order = Order::create([
             'client_id' => $client_id,
-            'ordered_at' => now(),
         ]);
 
         try {

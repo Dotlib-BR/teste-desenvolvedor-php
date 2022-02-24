@@ -16,7 +16,6 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id');
-            $table->date('ordered_at');
             $table->integer('status')->default(0);
             $table->timestamps();
         });
