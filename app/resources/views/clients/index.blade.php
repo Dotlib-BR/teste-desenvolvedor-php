@@ -11,9 +11,9 @@
         >
         <x-slot name="header">
             <tr>
-                <x-table.head-row>Nome</x-table.head-row>
-                <x-table.head-row>CPF</x-table.head-row>
-                <x-table.head-row>E-mail</x-table.head-row>
+                <x-table.head-row order-by="name">Nome</x-table.head-row>
+                <x-table.head-row order-by="cpf">CPF</x-table.head-row>
+                <x-table.head-row order-by="email">E-mail</x-table.head-row>
                 <x-table.head-row> </x-table.head-row>
             </tr>
         </x-slot>
@@ -21,7 +21,10 @@
         <x-slot name="body">
             @foreach ($clients as $client)
                 <tr>
-                    <x-table.body-row>{{ $client->name }}</x-table.body-row> 
+                    <x-table.body-row>
+                        <a href="{{ url(route("clients.edit", ['client' => $client])) }}">
+                            {{ $client->name }}</x-table.body-row> 
+                        </a>
                     <x-table.body-row>{{ $client->cpf }}</x-table.body-row> 
                     <x-table.body-row>{{ $client->email }}</x-table.body-row>
                     <x-table.body-row>

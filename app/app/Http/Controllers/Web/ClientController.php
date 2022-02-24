@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Symfony\Component\Console\Input\Input;
 
 class ClientController extends Controller
 {
@@ -28,7 +29,7 @@ class ClientController extends Controller
             Alert::success('Sucesso!', session('success_message'));
         }
 
-        $per_page = $request->input('per_page') ?: 10;
+        $per_page = $request->input('per_page') ?: 20;
         $search_params = $request->input('search_params');
 
         if ($search_params) {
@@ -38,7 +39,7 @@ class ClientController extends Controller
         }
 
         return view('clients.index', [
-            'clients' => $clients,
+            'clients' => $clients->appends(request()->input()),
             'per_page' => $per_page,
             'searchable' => true,
             'search_params' => $search_params

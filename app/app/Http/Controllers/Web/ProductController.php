@@ -28,7 +28,7 @@ class ProductController extends Controller
             Alert::success('Sucesso!', session('success_message'));
         }
 
-        $per_page = $request->input('per_page') ?: 10;
+        $per_page = $request->input('per_page') ?: 20;
         $search_params = $request->input('search_params');
 
         if ($search_params) {
@@ -38,7 +38,7 @@ class ProductController extends Controller
         }
 
         return view('products.index', [
-            'products' => $products,
+            'products' => $products->appends(request()->input()),
             'per_page' => $per_page,
             'searchable' => true,
             'search_params' => $search_params
