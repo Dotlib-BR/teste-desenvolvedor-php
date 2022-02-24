@@ -27,7 +27,7 @@ class Order extends Model implements AdvancedSearchable
 
     public function discount(): HasOne
     {
-        return $this->hasOne(Discount::class);
+        return $this->hasOne(Discount::class, 'id', 'discount_id');
     }
 
     public function client(): BelongsTo
@@ -45,6 +45,34 @@ class Order extends Model implements AdvancedSearchable
             $total = $product->unit_price * $product->quantity;
         }
         return $total;
+    }
+
+    public function getTotalDiscountedAttribute()
+    {
+        return $this->applyDiscount($this->getTotalValueAttribute());
+    }
+
+    private function applyDiscount($total)
+    {      
+        if (! $this->discount()->count())
+        {
+            return $total;
+        }
+
+        $discount = $this->discount()->first();
+        if ($discount->percent_off && ! $discount->value_off)
+        {
+            return $total - ($total * ($discount->percent_off/100));
+        }
+
+        if ($discount->value_off && ! $discount->percent_off) {
+            if ($total < $discount->value_off) {
+                return $total;
+            }
+            return $total - $discount->value_off;
+        }
+
+        return ($total - ($total * ($discount->percent_off/100))) - $discount->value_off;
     }
 
     public static function scopeAdvancedSearch($query, $param)
