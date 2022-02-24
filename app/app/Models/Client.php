@@ -26,4 +26,19 @@ class Client extends Model implements AdvancedSearchable
             ->orWhere('cpf', 'like', "%$param%")
             ->orWhere('email', 'like', "%$param%");
     }
+
+    public function listedFormat()
+    {
+        return $this->name;
+    }
+
+    public function displayResultFormat()
+    {
+        return $this->name;
+    }
+     
+    public function resultFormat()
+    {
+        return $this->id;
+    }
 }

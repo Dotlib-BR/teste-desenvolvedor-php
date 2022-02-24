@@ -23,4 +23,20 @@ class Product extends Model implements AdvancedSearchable
         return $query->where('name', 'like', "%$param%")
             ->orWhere('barcode', 'like', "%$param%");
     }
+
+    
+    public function listedFormat() 
+    {
+        return $this->name;
+    }
+
+    public function displayResultFormat() 
+    {
+        return $this->name;
+    }
+     
+    public function resultFormat()
+    {
+        return $this->id;
+    }
 }
