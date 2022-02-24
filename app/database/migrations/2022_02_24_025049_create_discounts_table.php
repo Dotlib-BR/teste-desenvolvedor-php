@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDiscountColumnToOrdersTable extends Migration
+class CreateDiscountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddDiscountColumnToOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->double('discount')->nullable();
+        Schema::create('discounts', function (Blueprint $table) {
+            $table->id();
+            $table->string('code')->unique();
+            $table->integer('percent_off')->nullable();
+            $table->integer('value_off')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddDiscountColumnToOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('discount');
-        });
+        Schema::dropIfExists('discounts');
     }
 }
