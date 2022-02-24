@@ -51,7 +51,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.create');
     }
 
     /**
@@ -62,18 +62,13 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validatedData = $request->validate([
+            'client_id' => 'required|integer',
+            'status' => 'required|integer',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $order = Order::create($validatedData);
+        return redirect(route('orders.edit', ['order' => $order]))->withSuccessMessage('Pedido criado com sucesso');
     }
 
     /**
@@ -84,7 +79,8 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = Order::findOrFail($id);
+        return view('orders.edit', compact('order'));
     }
 
     /**
@@ -96,7 +92,12 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'status' => 'numeric',
+        ]);
+
+        Order::findOrFail($id)->update($validatedData);
+        return redirect(route('orders.index'))->withSuccessMessage('Pedido editado com sucesso');
     }
 
     /**
@@ -107,6 +108,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Order::findOrFail($id)->delete();
+        return redirect(route('orders.index'))->withSuccessMessage('Pedido apagado com sucesso');
     }
 }
