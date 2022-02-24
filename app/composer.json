@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "livewire/livewire": "^2.10",
         "realrashid/sweet-alert": "^5.0"
     },
     "require-dev": {
