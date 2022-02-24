@@ -6,8 +6,6 @@
                 <x-card>
                     <form id="client-form" method="POST" action="{{ url("products") }}" class="grid grid-cols-2 gap-6">
                         @csrf
-    
-                        <input type="hidden" id="">
 
                         <div class="flex flex-col space-y-2">
                             <label for="name" class="text-sm font-medium text-gray-700">Nome</label>
