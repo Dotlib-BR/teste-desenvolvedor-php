@@ -18,7 +18,6 @@ class Order extends Model implements AdvancedSearchable
     protected $guarded = ['id'];
     protected $casts = [
         'status' => OrderStatus::class,
-        'ordered_at' => 'datetime'
     ];
 
     public function orderProducts(): HasMany
@@ -33,7 +32,14 @@ class Order extends Model implements AdvancedSearchable
 
     public function getTotalValueAttribute()
     {
-        return $this->orderProducts()->sum('unit_price');
+        $orderProducts = $this->orderProducts()->get(['quantity', 'unit_price']);
+        
+        $total = 0;
+        foreach($orderProducts as $product)
+        {
+            $total = $product->unit_price * $product->quantity;
+        }
+        return $total;
     }
 
     public static function scopeAdvancedSearch($query, $param)
@@ -41,5 +47,20 @@ class Order extends Model implements AdvancedSearchable
         $query->join('clients', 'clients.id', 'orders.client_id')
             ->select('clients.name', 'orders.*')
             ->where('clients.name', 'like', "%$param%");
+    }
+
+    public function listedFormat() 
+    {
+        return "$this->id - ".$this->client->name;
+    }
+
+    public function displayResultFormat()
+    {
+        return "$this->id - ".$this->client->name;
+    }
+     
+    public function resultFormat()
+    {
+        return $this->id;
     }
 }
