@@ -18,4 +18,7 @@ Optei pela criação de uma tabela OrderProducts responsável pela relação ent
 ### **Bootstrap ou Tailwind?**
 No início do projeto achei que seria tranquilo o uso do bootstrap, mas agora que tentei utiliza-lo, percebi que ele iria acabar me atrapalhando na velocidade do desenvolvimento do front. Acabei gastando praticamente 3 dias inteiros polindo o back-end, o que acabou me deixando sem tempo.
 
-Por isso, optei pelo uso do tailwind, que estou mais familiarizado e sei que com ele, vou acabar economizando muito tempo. 
+Por isso, optei pelo uso do tailwind, que estou mais familiarizado e sei que com ele, vou acabar economizando muito tempo.
+
+### **Separação dos Controllers API e Web**
+Inicialmente pensei em utilizar os endpoints da API na interface, mas ao perceber que precisaria adicionar novos métodos que estariam totalmente ligados apenas a interface do blade, preferi separa-los em casos de uso (separar o que muda por razões diferentes e em momentos diferentes :D).
