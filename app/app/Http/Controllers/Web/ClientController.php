@@ -34,11 +34,11 @@ class ClientController extends Controller
         $search_params = $request->input('search_params');
         $order_by = $request->input('order_by'); 
 
+        $query = Client::query();
 
         if ($order_by) {
-            $query = Client::orderBy($order_by);
+            $query = $query->orderBy($order_by);
         }
-
         if ($search_params) {
             $query = $query->advancedSearch($search_params);
         }
