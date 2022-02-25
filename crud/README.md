@@ -26,5 +26,10 @@ Instalar as dependências do projeto
 composer install
 ```
 
+Cria as tabelas do banco de dados através do migrate
+```sh
+php artisan migrate
+```
+
 Acesse o projeto
 [http://localhost:8989](http://localhost:8989)
