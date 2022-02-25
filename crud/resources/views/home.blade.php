@@ -20,17 +20,21 @@
 
     </head>
     <body class="">
-       
-        <nav>
-            <ul class="nav-bar">
-                <li> <a href="/">Início</a> </li>
-                <li> <a href="/customers">Clientes</a> </li>
-                <li> <a href="/products">Produtos</a> </li>
-                <li> <a href="/requests">Pedidos</a> </li>
-            </ul>
-        </nav>
+       <header>
+           <nav>
+               <ul class="nav-bar">
+                   <li> <a href="/">Início</a> </li>
+                   <li> <a href="/customers">Clientes</a> </li>
+                   <li> <a href="/products">Produtos</a> </li>
+                   <li> <a href="/requests">Pedidos</a> </li>
+               </ul>
+           </nav>
+       </header>
 
         <div class="container">
+            @if(session('msg'))
+                <p class="msg"> {{session('msg')}} </p>
+            @endif
             @yield('container')
         </div>
 

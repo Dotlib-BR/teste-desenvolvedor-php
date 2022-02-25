@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Requests extends Model
+class OperationType extends Model
 {
     protected $guarded = [];
 
-    protected $table  = 'requests';
-
+    protected $table  = 'operation_type';
+    
     use HasFactory;
 }

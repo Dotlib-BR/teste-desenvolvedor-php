@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('number_request')
                 ->autoIncrement();
             $table->date('dt_request');
-            $table->integer('id_customer')
+            $table->foreignId('id_customer')
                 ->references('id')
                 ->on('customers');
             $table->foreignId('id_state')

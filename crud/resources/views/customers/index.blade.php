@@ -6,7 +6,7 @@
   {{-- MENU --}}
 <div class="menu">
   <h3>CLIENTES:</h3>
-  <a href="/add" class="buttom-add">
+  <a href="/customers/add" class="buttom-add">
     Adicionar cliente +
   </a>
 </div>
@@ -26,8 +26,16 @@
       <tr> 
         <td> {{$customer->id}} </td>  
         <td> {{$customer->name}} </td>  
-        <td> <a href="/edit/{{$customer->id}}"> Editar </a></td>  
-        <td> <a href="/customers/{{$customer->id}}"> Deletar </a> </td>  
+        <td> <a href="/customers/edit/{{$customer->id}}"> Editar </a></td>  
+        <td>
+           <form action="/customers/delet/{{$customer->id}}" method="POST" class="form-delet"> 
+            @csrf 
+            @method('DELETE')
+            <button type="submit">
+              Deletar
+            </button>
+          </form> 
+        </td>  
       </tr>
       @endforeach
     </tbody>

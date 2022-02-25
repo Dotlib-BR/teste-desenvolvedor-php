@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customers extends Model
 {
+
+    protected $guarded = [];
+
     protected $table  = 'customers';
     // public $timestamps = false;
     use HasFactory;

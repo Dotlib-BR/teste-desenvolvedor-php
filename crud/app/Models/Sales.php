@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class sales extends Model
 {
+    protected $guarded = [];
+
+    protected $table  = 'sales';
+    
     use HasFactory;
 }
