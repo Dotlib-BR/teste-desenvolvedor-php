@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->int('id')
+        Schema::create('operation_type', function (Blueprint $table) {
+            $table->id('id')
                 ->autoIncrement();
-            $table->char('name', 100);
-            $table->char('email', 10)
-                ->nullable($value = true);
-            $table->int('cpf', 11);
+            $table->char('type', 20);
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('operation-type');
     }
 };
