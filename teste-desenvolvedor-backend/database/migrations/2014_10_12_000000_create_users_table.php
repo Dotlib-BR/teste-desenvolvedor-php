@@ -22,7 +22,7 @@ return new class extends Migration
             $table->rememberToken();
 
             // Foreign Key
-            $table->foreignId('client_id')->constrained();
+            $table->foreignId('client_id')->constrained('clients');
             $table->timestamps();
         });
     }

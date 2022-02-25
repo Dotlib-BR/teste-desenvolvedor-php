@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders_has_products', function (Blueprint $table) {
-            $table->foreignId('order_id')->constrained();
-            $table->foreignId('product_id')->constrained();
+            $table->foreignId('order_id')->constrained('orders');
+            $table->foreignId('product_id')->constrained('products');
             $table->integer('quantity');
             $table->decimal('price');
         });
