@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 class UserRepository implements UserRepositoryInterface
@@ -13,7 +12,7 @@ class UserRepository implements UserRepositoryInterface
     private User $user;
 
     /**
-     * AlineaRepository constructor.
+     * UserRepository constructor.
      *
      * @param User $user
      */

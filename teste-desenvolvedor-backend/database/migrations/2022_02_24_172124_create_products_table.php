@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('price');
-            $table->integer('bar_code');
+            $table->bigInteger('bar_code');
             $table->timestamps();
         });
     }

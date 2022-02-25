@@ -13,7 +13,7 @@ class ClientRepository implements ClientRepositoryInterface
     private Client $client;
 
     /**
-     * AlineaRepository constructor.
+     * ClientRepository constructor.
      *
      * @param Client $client
      */

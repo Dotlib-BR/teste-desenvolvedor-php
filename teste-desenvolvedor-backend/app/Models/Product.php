@@ -10,6 +10,12 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'price',
+        'bar_code',
+    ];
+
     public function orders(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'orders_has_products')->withPivot('quantity', 'price');

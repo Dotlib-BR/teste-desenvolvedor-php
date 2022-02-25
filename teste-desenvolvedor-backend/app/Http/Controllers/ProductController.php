@@ -4,83 +4,71 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Models\Product;
+use App\Repositories\Interfaces\ProductRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param ProductRepositoryInterface $productRepository
      */
-    public function index()
-    {
-        //
-    }
+    public function __construct(
+        private ProductRepositoryInterface $productRepository
+    )
+    {}
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function create()
+    public function index(): JsonResponse
     {
-        //
+        return response()->json($this->productRepository->all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreProductRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreProductRequest $request
+     * @return JsonResponse
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request): JsonResponse
     {
-        //
+        return response()->json($this->productRepository->create($request->validated()));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResponse
      */
-    public function show(Product $product)
+    public function show(int $id): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
+        return response()->json($this->productRepository->findOrFail($id));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateProductRequest  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param UpdateProductRequest $request
+     * @param int $id
+     * @return JsonResponse
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, int $id): JsonResponse
     {
-        //
+        return response()->json($this->productRepository->update($request->validated(), $id));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResponse
      */
-    public function destroy(Product $product)
+    public function destroy(int $id): JsonResponse
     {
-        //
+        return response()->json($this->productRepository->destroy($id));
     }
 }
