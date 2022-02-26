@@ -15,4 +15,4 @@ Utilizando CSS puro, fiz um layout simples, focando principalmente no backend, p
 ![Diagram-crud](https://user-images.githubusercontent.com/61431715/155819556-e88f85e3-1cf7-4a9f-9640-1bb8396949ce.png)
 
 ### *Video rápido mostrando o sistema e observações*
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://www.youtube.com/watch?v=II3568sxCzk&list=RDII3568sxCzk&start_radio=1)
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/fxxXXHyFqkE)
