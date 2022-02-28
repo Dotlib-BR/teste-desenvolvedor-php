@@ -11,9 +11,9 @@ class StoreOrderRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,12 @@ class StoreOrderRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'client_id' => 'required|integer',
+            'total_price' => 'required|string',
+            'product_id' => 'required|array',
         ];
     }
 }

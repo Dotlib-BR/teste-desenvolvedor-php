@@ -41,6 +41,12 @@ interface UserRepositoryInterface
     public function findOrFail(mixed $id, array $columns = ['*']): Model;
 
     /**
+     * @param string $email
+     * @return Model|null
+     */
+    public function findByEmail (string $email) : ?Model;
+
+    /**
      * @param array $attributes
      * @param mixed $id
      * @return bool

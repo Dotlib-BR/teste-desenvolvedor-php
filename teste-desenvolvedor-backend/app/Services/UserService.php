@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Repositories\Interfaces\ClientRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Throwable;
 
 class UserService
@@ -29,8 +30,9 @@ class UserService
      */
     public function create(array $attributes): User
     {
-        return DB::transaction(function () use ($attributes) {
+        $attributes['verification_token'] = hash('sha256', Str::random(60));
 
+        return DB::transaction(function () use ($attributes) {
             $client = $this->clientRepository->create([
                 'name' => $attributes['name'],
                 'cpf' => $attributes['cpf'],

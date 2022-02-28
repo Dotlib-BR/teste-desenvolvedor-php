@@ -5,7 +5,10 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -45,6 +48,7 @@ class UserRepository implements UserRepositoryInterface
      */
     public function create(array $attributes): User
     {
+        $attributes['password'] = Hash::make($attributes['password']);
         return $this->user->create($attributes);
     }
 
@@ -67,6 +71,17 @@ class UserRepository implements UserRepositoryInterface
     {
         $user = $this->user->newQuery()->findOrFail($id);
         return $user->delete();
+    }
+
+    /**
+     * @param string $email
+     * @return Model|null
+     */
+    public function findByEmail (string $email) : ?User
+    {
+        return $this->user->newQuery()
+            ->where('email', strtolower($email))
+            ->first();
     }
 
     public function find(mixed $id, array $columns = ['*']): ?User

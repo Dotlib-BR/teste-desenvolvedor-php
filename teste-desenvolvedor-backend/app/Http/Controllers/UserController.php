@@ -36,10 +36,11 @@ class UserController extends Controller
      *
      * @param StoreUserRequest $request
      * @return JsonResponse
+     * @throws Throwable
      */
     public function store(StoreUserRequest $request): JsonResponse
     {
-        return response()->json($this->userRepository->create($request->validated()));
+        return response()->json($this->userService->create($request->validated()));
     }
 
     /**
