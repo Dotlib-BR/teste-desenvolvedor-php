@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACI,AAAA,IAAI,CAAC;EACD,UAAU,EAAE,QAAQ;CACvB;;AAGD,AAAA,aAAa,CAAC;EACV,OAAO,EAAE,WAAW;EACpB,UAAU,EAAE,2CAA2C;EACvD,aAAa,EAAE,GAAG;CACrB;;AAGD,AAAA,MAAM,CAAC;EACH,YAAY,EAAE,MAAM,CAAA,UAAU;EAC9B,WAAW,EAAE,MAAM,CAAA,UAAU;CAChC",
+    "sources": [
+        "modelos_acessoPrivado_administradores.scss"
+    ],
+    "names": [],
+    "file": "modelos_acessoPrivado_administradores.css"
+}

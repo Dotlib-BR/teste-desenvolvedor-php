@@ -1,0 +1,16 @@
+body {
+  background: lavender;
+}
+
+#tabela-admin {
+  padding: 2em 0 3em 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(#d6d6ff), to(#d9d9fd59));
+  background: linear-gradient(180deg, #d6d6ff, #d9d9fd59);
+  border-radius: 2em;
+}
+
+#mx-05 {
+  margin-right: 0.05em !important;
+  margin-left: 0.05em !important;
+}
+/*# sourceMappingURL=modelos_acessoPrivado_administradores.css.map */

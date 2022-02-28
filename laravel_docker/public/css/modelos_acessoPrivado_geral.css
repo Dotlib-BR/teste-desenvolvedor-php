@@ -1,0 +1,6 @@
+@charset "UTF-8";
+#pointer-pagina-selecionada a :before {
+  content: "➤";
+  color: black;
+}
+/*# sourceMappingURL=modelos_acessoPrivado_geral.css.map */

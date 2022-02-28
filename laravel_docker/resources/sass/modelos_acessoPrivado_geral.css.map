@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": ";AAEQ,AAAA,iBAAiB,CAAC;EACd,WAAW,EAAE,iBAAiB;CACjC;;AAKD,AAEQ,2BAFmB,CACvB,CAAC,CACG,OAAO,CAAC;EACJ,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,KAAK;CACf",
+    "sources": [
+        "modelos_acessoPrivado_geral.scss"
+    ],
+    "names": [],
+    "file": "modelos_acessoPrivado_geral.css"
+}

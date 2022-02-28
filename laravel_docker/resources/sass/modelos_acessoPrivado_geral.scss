@@ -1,0 +1,18 @@
+// Carrinho
+    // Decorar página
+        #carrinho-divisor {
+            border-left: 1px solid #000000;
+        }
+
+
+// Navegação
+    // Indicação da página atual
+        #pointer-pagina-selecionada {
+            a {
+                :before {
+                    content: "➤";
+                    color: black;
+                }
+            }
+        }
+
