@@ -36,8 +36,7 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request): JsonResponse
     {
-        $user = auth()->user();
-        dd($user);
+        $user = $request->user();
         return response()->json($this->orderService->create($request->validated(), $user));
     }
 
@@ -48,17 +47,6 @@ class OrderController extends Controller
      * @return Response
      */
     public function show(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return Response
-     */
-    public function edit(Order $order)
     {
         //
     }

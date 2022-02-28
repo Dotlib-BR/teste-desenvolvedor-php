@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
+use App\Repositories\Interfaces\ProductRepositoryInterface;
 
 class OrderService
 {
@@ -15,6 +16,7 @@ class OrderService
      */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
+        private ProductRepositoryInterface $productRepository
     )
     {}
 
@@ -24,23 +26,49 @@ class OrderService
      * @return mixed
      */
     public function create(array $attributes, User $user): Order
-
     {
-        $quantity = $attributes['quantity'];
+        $clientId = $user->client()->first()->id;
 
-        $product = $this->orderRepository->findOrFail($attributes['product_id']);
+        //$product = $this->productRepository->findOrFail($attributes['product_id']);
 
-        $priceOfProduct = $product->price;
+        $totalPrice = 0;
+        foreach ($attributes['products'] as $products) {
 
-        $totalPrice = $priceOfProduct * $quantity;
+            $product = $this->productRepository->findOrFail($products['product_id']);
 
-        return $this->orderRepository->create([
-            'user_id' => $user->id,
-            'product_id' => $product->id,
-            'quantity' => $quantity,
-            'total_price' => $totalPrice,
+            $priceOfProduct = $product->price;
+
+            $quantity = $products['quantity'];
+            $totalPrice = $priceOfProduct * $quantity;
+
+            //array of products prices
+            $prices[] = $priceOfProduct;
+            $AllPrices[] = $totalPrice;
+        }
+
+        $sumAllPrices = array_sum($AllPrices);
+
+        $order = $this->orderRepository->create([
+            'client_id' => $clientId,
+            'total_price' => $sumAllPrices,
         ]);
 
+        $i = 0;
+        foreach ($attributes['products'] as $products) {
+
+            $product = $this->productRepository->findOrFail($products['product_id']);
+
+            $quantity = $products['quantity'];
+
+            $order->products()->attach($product->id, [
+                'quantity' => $quantity,
+                'price' => $prices[$i],
+            ]);
+
+            $i++;
+        }
+
+        return $order->load('products');
     }
 
 }

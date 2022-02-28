@@ -23,6 +23,19 @@
       <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/doctrine/event-manager" />
       <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/laravel/passport" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/symfony/psr-http-message-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/league/oauth2-server" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/league/event" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/lcobucci/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/php-http/message-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/paragonie/constant_time_encoding" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/phpseclib/phpseclib" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/nyholm/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/teste-desenvolvedor-backend/vendor/defuse/php-encryption" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

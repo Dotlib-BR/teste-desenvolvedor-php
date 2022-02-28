@@ -25,8 +25,10 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'client_id' => 'required|integer',
-            'total_price' => 'required|string',
-            'product_id' => 'required|array',
+            'products' => 'required|min:1',
+            'products.*' => 'required',
+            'products.*.product_id' => 'required|integer',
+            'products.*.quantity' => 'required|integer'
         ];
     }
 }
