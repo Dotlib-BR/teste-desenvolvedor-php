@@ -1,24 +1,17 @@
-[![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
+
 
 # Teste para candidatos à vaga de Desenvolvedor PHP Júnior
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
 
 ## Instruções
 
-O desafio consiste em implementar uma aplicação Web utilizando o framework PHP Laravel, e um banco de dados relacional SQLite, MySQL ou Postgres, a partir de uma modelagem de dados inicial desnormalizada, que deve ser normalizada para a implementação da solução.
-
-Você vai criar uma aplicação de cadastro de pedidos de compra, a partir de uma modelagem inicial, com as seguintes funcionalidades:
-
-- CRUD de clientes.
-- CRUD de produtos.
-- CRUD de pedidos de compra, com status (Em Aberto, Pago ou Cancelado).
-- Cada CRUD:
-  - deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
-  - deve possuir formulários para criação e atualização de seus itens.
-  - deve permitir a deleção de qualquer item de sua lista.
-- Barra de navegação entre os CRUDs.
-- Links para os outros CRUDs nas listagens (Ex: link para o detalhe do cliente da compra na lista de pedidos de compra)
+- clone o repositório
+- instale as dependências: composer install
+- execute os contêineres (foi utilizado o laradock para construção do ambiente): docker-compose up -d nginx mysql phpmyadmin
+- execute as migrations: php artisan migrate
+- execute os seeders um de cada vez: php artisan db:seed --class=ClientesTableSeeder (gera 30 clientes aleatórios)
+  php artisan db:seed --class=ProdutosTableSeeder (gera 30 produtos aleatórios)
+- Acesse o endereço http://localhost:80 e tenha acesso a aplicação
 
 ## Modelo de dados
 
