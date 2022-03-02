@@ -5,7 +5,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="/" class="nav-link active" aria-current="page">
+            <a href="{{ route('home') }}" class="nav-link active" aria-current="page">
                 <i class="bi bi-house-fill"></i>
                 Home
             </a>
@@ -26,7 +26,7 @@
         </li>
 
         <li>
-            <a href="/customers" class="nav-link text-white">
+            <a href="{{ route('customers') }}" class="nav-link text-white">
                 <i class="bi bi-person-fill"></i>
                 Clientes
             </a>

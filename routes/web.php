@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\CustomersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
+
+    Route::resource('/customers', CustomersController::class, [
+        'names' => [
+            'index' => 'customers',
+            'create' => 'createCustomer',
+            'store' => 'storeCustomer',
+            'edit' => 'editCustomer',
+            'update' => 'updateCustomer',
+            'destroy' => 'destroyCustomer',
+        ]
+    ])->except('show');
 });

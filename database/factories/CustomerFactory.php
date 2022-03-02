@@ -3,12 +3,11 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Customer>
  */
-class UserFactory extends Factory
+class CustomerFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +18,8 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'cpf' => $this->faker->numerify('###########'),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => Hash::make('password'),
         ];
     }
 }

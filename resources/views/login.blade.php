@@ -18,7 +18,7 @@
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <div class="input-group has-validation">
-                    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required />
+                    <input type="email" name="email" class="form-control" id="email" aria-describedby="Email to login" required />
                     <div class="invalid-feedback">
                     Selecione um email válido.
                     </div>
@@ -28,7 +28,7 @@
             <div class="mb-3">
                 <label for="password" class="form-label">Senha</label>
                 <div class="input-group has-validation">
-                    <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" required />
+                    <input type="password" name="password" class="form-control" id="password" aria-describedby="Password to login" required />
                     <div class="invalid-feedback">
                     Digite sua senha
                     </div>
