@@ -1,0 +1,22 @@
+:root {
+    --bs-font-sans-serif: 'Roboto', sans-serif;
+}
+
+body {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Slab', serif;
+}
+
+.login-content,
+.signup-content {
+    max-width: 448px;
+}
