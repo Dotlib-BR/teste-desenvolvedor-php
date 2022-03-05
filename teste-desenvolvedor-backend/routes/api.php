@@ -18,42 +18,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
 // Login & Signup
-Route::post('signup', [UserController::class, 'store']);
+Route::post('signup', [AuthController::class, 'signup']);
 Route::post('login', [AuthController::class, 'login']);
 
 // Required Auth
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    Route::group(['prefix' => 'users'], function () {
+    Route::group(['middleware' => ['auth_only:Administrador, Cliente']], function (){
+
         // Users
-        Route::get('index', [UserController::class, 'index']);
-        Route::post('store', [UserController::class, 'store']);
-        Route::put('update/{id}', [UserController::class, 'update']);
-        Route::get('show/{id}', [UserController::class, 'show']);
-        Route::delete('delete/{id}', [UserController::class, 'destroy']);
-    });
+        Route::put('user/update/{id}', [UserController::class, 'update']);
+        Route::get('user/show/{id}', [UserController::class, 'show']);
+        Route::delete('user/delete/{id}', [UserController::class, 'destroy']);
 
-    Route::group(['prefix' => 'products'], function () {
         // Products
-        Route::get('index', [ProductController::class, 'index']);
-        Route::post('store', [ProductController::class, 'store']);
-        Route::put('update/{id}', [ProductController::class, 'update']);
-        Route::get('show/{id}', [ProductController::class, 'show']);
-        Route::delete('delete/{id}', [ProductController::class, 'destroy']);
-    });
+        Route::get('products', [ProductController::class, 'index']);
+        Route::get('product/show/{id}', [ProductController::class, 'show']);
 
-    Route::group(['prefix' => 'orders'], function () {
         // Orders
-        Route::get('index', [OrderController::class, 'index']);
-        Route::post('store', [OrderController::class, 'store']);
-        Route::put('update/{id}', [OrderController::class, 'update']);
-        Route::get('show/{id}', [OrderController::class, 'show']);
-        Route::delete('delete/{id}', [OrderController::class, 'destroy']);
-    });
+        Route::get('orders', [OrderController::class, 'index']);
+        Route::post('order/store', [OrderController::class, 'store']);
+        Route::put('order/update/{id}', [OrderController::class, 'update']);
+        Route::get('order/show/{id}', [OrderController::class, 'show']);
+        Route::delete('order/delete/{id}', [OrderController::class, 'destroy']);
 
+        Route::group(['middleware' => ['auth_only:Administrador']], function (){
+
+            // Users
+            Route::get('users', [UserController::class, 'index']);
+            Route::post('user/store', [UserController::class, 'store']);
+
+            // Products
+            Route::post('product/store', [ProductController::class, 'store']);
+            Route::put('product/update/{id}', [ProductController::class, 'update']);
+            Route::delete('product/delete/{id}', [ProductController::class, 'destroy']);
+        });
+    });
 });

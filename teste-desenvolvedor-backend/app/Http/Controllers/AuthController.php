@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Services\UserService;
@@ -17,7 +18,8 @@ use Illuminate\Validation\UnauthorizedException;
 class AuthController extends Controller
 {
     public function __construct(
-        private UserRepositoryInterface $userRepository
+        private UserRepositoryInterface $userRepository,
+        private UserService $userService
     )
     {}
 
@@ -37,6 +39,22 @@ class AuthController extends Controller
         if (!$user || !Hash::check($request['password'], $user->password)) {
             throw new UnauthorizedException("Acesso não autorizado, e-mail ou senha incorretos");
         }
+
+        $token = $user->createToken('api-token-teste')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Signup - Cria um novo usuário.
+     */
+    public function signup(StoreUserRequest $request): JsonResponse
+    {
+        $user = $this->userService->create($request->validated());
 
         $token = $user->createToken('api-token-teste')->plainTextToken;
 

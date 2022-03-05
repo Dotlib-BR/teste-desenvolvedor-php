@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json($this->productRepository->all());
+        return response()->json($this->productRepository->paginate());
     }
 
     /**
