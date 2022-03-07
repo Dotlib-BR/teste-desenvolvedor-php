@@ -23,6 +23,7 @@ Para esse desafio técnico foi utilizado [Laravel](http://laravel.com), o melhor
   - FORWARD_DB_PORT=5433
 * Instalar dependências: composer install
 * Executar o Docker: sail up -d
+* Executar comando para as migrations e seeders: sail artisan migrate --seed
 
 ## Instruções
 
