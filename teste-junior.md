@@ -1,3 +1,49 @@
+# TESTE DESENVOLVEDOR PHP
+
+Este é um desafio técnico onde foi implementado em [Laravel 9](https://laravel.com/docs/9.x/releases) uma API para o gerênciamento de pedidos de produtos realizado por um usuário, baseado na tabela do [teste](https://github.com/dotlib/teste-desenvolvedor-php/blob/master/teste-junior.md).
+
+São utilizados também no projeto Repository Pattern e Service Pattern.
+
+## Requisitos
+
+* PHP 8.0 ou mais atual
+* Banco de Dados Postgres
+* Docker
+* Composer
+
+## Framework
+
+Para esse desafio técnico foi utilizado [Laravel](http://laravel.com), o melhor framework PHP existente.
+
+## Instalação
+
+* Clonar o repositório: git clone https://github.com/mauricioguim/teste-desenvolvedor-php.git
+* Criar um esquema de banco de dados Postgres
+* Criar arquivo .env e setar informaçôes necessárias para a conexão com o esquema de banco de dados
+  - FORWARD_DB_PORT=5433
+* Instalar dependências: composer install
+* Executar o Docker: sail up -d
+
+## Instruções
+
+* Utilizar [Laravel Sail](https://laravel.com/docs/9.x/sail) para os comandos Laravel.
+
+## Recomendações
+
+* Utilizar o [Postman](https://www.postman.com/) para testar os endpoints da API.
+* Utilizar o [Scribe](https://scribe.knuckles.wtf/laravel) para gerar a documentação e importar no Postman para testes dos endpoints.
+
+
+# O PROBLEMA
+
+## Modelagem normalizada
+
+![image](https://user-images.githubusercontent.com/12083988/157061734-bd8a73e6-d6d0-4f31-939f-1949e578f1f3.png)
+
+### Observação: Apesar da tabela estar em português, foi codificada em inglês (tradução direta).
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 [![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
 
 # Teste para candidatos à vaga de Desenvolvedor PHP Júnior
