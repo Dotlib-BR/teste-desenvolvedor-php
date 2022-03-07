@@ -1,6 +1,6 @@
 # TESTE DESENVOLVEDOR PHP
 
-﻿# Desafio Técnico PHP (Laravel)
+## Desafio Técnico PHP (Laravel)
 
 Este é um desafio técnico onde foi implementado em [Laravel 9](https://laravel.com/docs/9.x/releases) uma API para o gerênciamento de pedidos de produtos realizado por um usuário, baseado na tabela do [teste](https://github.com/dotlib/teste-desenvolvedor-php/blob/master/teste-junior.md).
 
@@ -8,7 +8,7 @@ Este é um desafio técnico onde foi implementado em [Laravel 9](https://laravel
 
 * PHP 8.0 ou mais atual
 * Banco de Dados Postgres
-* Docker instalado
+* Docker
 * Composer
 
 ## Framework
@@ -34,7 +34,7 @@ Para esse desafio técnico foi utilizado [Laravel](http://laravel.com), o melhor
 * Utilizar o [Scribe](https://scribe.knuckles.wtf/laravel) para gerar a documentação e importar no Postman para testes dos endpoints.
 
 
-## O PROBLEMA
+# O PROBLEMA
 
 ## Modelagem normalizada
 
