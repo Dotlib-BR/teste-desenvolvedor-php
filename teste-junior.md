@@ -2,6 +2,8 @@
 
 Este é um desafio técnico onde foi implementado em [Laravel 9](https://laravel.com/docs/9.x/releases) uma API para o gerênciamento de pedidos de produtos realizado por um usuário, baseado na tabela do [teste](https://github.com/dotlib/teste-desenvolvedor-php/blob/master/teste-junior.md).
 
+São utilizados também no projeto Repository Pattern e Service Pattern.
+
 ## Requisitos
 
 * PHP 8.0 ou mais atual
