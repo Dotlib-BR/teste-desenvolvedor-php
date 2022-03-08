@@ -30,4 +30,28 @@ class UpdateUserRequest extends FormRequest
             'cpf' => 'string|max:255',
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function bodyParameters(): array {
+        return [
+            'name' => [
+                'description' => 'Nome do usuário',
+                'example' => 'Jose Almeida'
+            ],
+            'email' => [
+                'description' => 'Email do usuário',
+                'example' => 'cliente@dotlib.com'
+            ],
+            'password' => [
+                'description' => 'Senha do usuário',
+                'example' => '12345678'
+            ],
+            'cpf' => [
+                'description' => 'CPF do usuário',
+                'example' => '12345678901'
+            ]
+        ];
+    }
 }

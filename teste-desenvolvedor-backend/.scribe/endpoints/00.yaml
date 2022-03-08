@@ -49,30 +49,30 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: 'Must not be greater than 255 characters.'
+        description: 'Nome do usuário. Must not be greater than 255 characters.'
         required: true
-        example: aaguiiaiqdwxavfjohttudbjyeyshrzzcqubz
+        example: 'Jose Almeida'
         type: string
         custom: []
       email:
         name: email
-        description: 'Must not be greater than 255 characters.'
+        description: 'Email do usuário. Must not be greater than 255 characters.'
         required: true
-        example: ''
+        example: cliente@dotlib.com
         type: string
         custom: []
       password:
         name: password
-        description: 'Must not be greater than 255 characters.'
+        description: 'Senha do usuário. Must not be greater than 255 characters.'
         required: true
-        example: fpfvipedvazezpvcopmkabkxzxiavvxdxddxzujqprjikdltixewouyvrfbwocnroleexbxlhdgpsmotmgmjbgdfwczbuwmvtqwfchtpeyrlrivdijipgidaagiqkmjapakbtxizodxcrvlxtotenqgxqvxewysrrjsngppeknmrwrdsimzxamrwxlhvtjpyeuokaahsmcerqvjbvnxnvspcqnyzmkfeuzlksufyolxvnsbpiqbmivba
+        example: '12345678'
         type: string
         custom: []
       cpf:
         name: cpf
-        description: 'Must not be greater than 255 characters.'
+        description: 'CPF do usuário. Must not be greater than 255 characters.'
         required: true
-        example: pwbgzeyueongryqvgcxouarypdxobgeomtamslgaznwxbvmcflghjtchmivbniwryszugurownflerlqsxdfybvnsxwatfkwbetclpfepshykuwelwhjsdnkkirebvnrpaqstnmexaqtachcnexoffgukwciycmiinbzhitvwvvqpakokphpzhrdmfnixnopgqiqrgirdyjumtemjezaabvlgwfenhfcdsbgjmg
+        example: '12345678901'
         type: string
         custom: []
     responses: []

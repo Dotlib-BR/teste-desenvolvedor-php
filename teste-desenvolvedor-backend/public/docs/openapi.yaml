@@ -79,20 +79,20 @@ paths:
               properties:
                 name:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: aaguiiaiqdwxavfjohttudbjyeyshrzzcqubz
+                  description: 'Nome do usuário. Must not be greater than 255 characters.'
+                  example: 'Jose Almeida'
                 email:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: ''
+                  description: 'Email do usuário. Must not be greater than 255 characters.'
+                  example: cliente@dotlib.com
                 password:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: fpfvipedvazezpvcopmkabkxzxiavvxdxddxzujqprjikdltixewouyvrfbwocnroleexbxlhdgpsmotmgmjbgdfwczbuwmvtqwfchtpeyrlrivdijipgidaagiqkmjapakbtxizodxcrvlxtotenqgxqvxewysrrjsngppeknmrwrdsimzxamrwxlhvtjpyeuokaahsmcerqvjbvnxnvspcqnyzmkfeuzlksufyolxvnsbpiqbmivba
+                  description: 'Senha do usuário. Must not be greater than 255 characters.'
+                  example: '12345678'
                 cpf:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: pwbgzeyueongryqvgcxouarypdxobgeomtamslgaznwxbvmcflghjtchmivbniwryszugurownflerlqsxdfybvnsxwatfkwbetclpfepshykuwelwhjsdnkkirebvnrpaqstnmexaqtachcnexoffgukwciycmiinbzhitvwvvqpakokphpzhrdmfnixnopgqiqrgirdyjumtemjezaabvlgwfenhfcdsbgjmg
+                  description: 'CPF do usuário. Must not be greater than 255 characters.'
+                  example: '12345678901'
               required:
                 - name
                 - email
@@ -235,20 +235,20 @@ paths:
               properties:
                 name:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: mmfwwrlfjveyemwgujkeloczrfillddrzmslacvzzccjvpzdoaqfxicyzyrtvhdcfloyymtjnojumkpjmyrvnhdlta
+                  description: 'Nome do usuário. Must not be greater than 255 characters.'
+                  example: 'Jose Almeida'
                 email:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: odjdvmsqjsdpnsmwqodrkndsbgjhlp
+                  description: 'Email do usuário. Must not be greater than 255 characters.'
+                  example: cliente@dotlib.com
                 password:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: cbcixyxohkrkthfudrxuptqgnkqpolwsynwkatvlihqyrrbojnuazlvpucidqxmxqgjvmezzcxapzittvcznhlwnoryktqvuucwiqvdnahpqalyldxpfldejdpqyqhbzwyyrzpfjbemnttlvevsuytbwklbhdtidcyfjdgkrtwomvzzmuubvqemdmalhknucpsvwfgejozyphcrvwyovf
+                  description: 'Senha do usuário. Must not be greater than 255 characters.'
+                  example: '12345678'
                 cpf:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: btytlqybnjyyissaenboryfqochvvahkpwepnswlgpfjfqawoyepsfzqtjlittekcvutrfpsvznsobnncnzuqtfqrhneihsmeoekzpoklaisxdqsswhirtymomomtyaclcyzbgldvudseymfvfdnxlidneaxifdyblryzauodjdjblhfpalwybhlutugtvybhxvurmkumesieivjcikgnkhgjcmlwuybcborzfctohkwjkvspidsqhif
+                  description: 'CPF do usuário. Must not be greater than 255 characters.'
+                  example: '12345678901'
       security: []
     get:
       summary: 'Display the specified resource.'
@@ -311,7 +311,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the user.'
-        example: 20
+        example: 7
         required: true
         schema:
           type: integer
@@ -380,16 +380,16 @@ paths:
               properties:
                 name:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: zsnggcerfcllfo
+                  description: 'Nome do produto. Must not be greater than 255 characters.'
+                  example: 'Livro de Laravel'
                 price:
                   type: string
-                  description: ''
-                  example: aliquid
+                  description: 'Preço do produto.'
+                  example: 'R$ 10,00'
                 bar_code:
                   type: integer
-                  description: ''
-                  example: 14
+                  description: 'Código de barras do produto.'
+                  example: 1234567890123
       security: []
     delete:
       summary: 'Remove the specified resource from storage.'
@@ -418,7 +418,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the product.'
-        example: 8
+        example: 20
         required: true
         schema:
           type: integer
@@ -453,8 +453,8 @@ paths:
               properties:
                 client_id:
                   type: integer
-                  description: ''
-                  example: 17
+                  description: 'ID do Cliente.'
+                  example: 1
                 products:
                   type: array
                   description: ''
@@ -466,11 +466,11 @@ paths:
                       product_id:
                         type: integer
                         description: ''
-                        example: 14
+                        example: 4
                       quantity:
                         type: integer
                         description: ''
-                        example: 19
+                        example: 11
                     required:
                       - product_id
                       - quantity
@@ -508,17 +508,17 @@ paths:
               properties:
                 client_id:
                   type: integer
-                  description: ''
-                  example: 5
+                  description: 'ID do Cliente.'
+                  example: 1
                 total_price:
                   type: string
                   description: ''
-                  example: facere
+                  example: voluptatum
                 product_id:
                   type: array
                   description: ''
                   example:
-                    - perferendis
+                    - similique
                   items:
                     type: string
       security: []
@@ -618,20 +618,20 @@ paths:
               properties:
                 name:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: owgigwomgbcinyhjndtqvvkyzxexblabzhcnabkwmqjnitxklpyigxbyqydnaukegejxfcrweklcimbzflkozarbqiyqgpvfgvvlggjznangurqmengnpzwnknziqvrripqohgldztlywyaukgtdskgxjtgwbnkuyoqvqfubiqzigtpfxejdjccwuciumyrfkuaguudpovqscjkeklktn
+                  description: 'Nome do usuário. Must not be greater than 255 characters.'
+                  example: 'Jose Almeida'
                 email:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: qsofhnlnyqywccixragegfvmokoioikihjwjtowdkhboxnbnkxbulcbsgjmkzqasgktydsheldoqfsqfkfpnmbsxajupaoowvrsxhqppewmkyhbwzjtbaxdwurqro
+                  description: 'Email do usuário. Must not be greater than 255 characters.'
+                  example: cliente@dotlib.com
                 password:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: zoxegyxjvhskcefajcelqfcpxmtwankztppeuwfyknsrgkwydazwcitdcluclkzbgbfojxgzzfhtrequpoxqjmnrwkxcrdilkrjevlcyzmosenzgpcnhblmwljwpgslpjgljmhuvhpzooprdsdppfvetc
+                  description: 'Senha do usuário. Must not be greater than 255 characters.'
+                  example: '12345678'
                 cpf:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: ymunearsmekadzqzrybwxlledxxbznfphxluzkyjvyhgdvoritrnkhrelxaoghyqlpmxsszbjxnqrsavjizdlazdwhhiwlzyzjbvldmkeckzufmdafcduicgujgclzinlseeqycogrkhfujhmrtzddgnxvdggrtnrlbiocnvhqdn
+                  description: 'CPF do usuário. Must not be greater than 255 characters.'
+                  example: '12345678901'
               required:
                 - name
                 - email
@@ -669,16 +669,16 @@ paths:
               properties:
                 name:
                   type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: dijwnjddyvkdoeaxqgzvxrzwmfbkeawskedyhjqcedpybxztbfusughyitefkxfefhttdndfryocygwqcwfuffnoxitdmxqyqlfdmeyzqrkwqjfezborfyzzojwtymvodplexykvqyarokblthlwlaymjgqhvcbdvsyoetllwhhmtvjphxngxmjrnhdlqlticqkcgfbxzchzafwopxtzskfvjd
+                  description: 'Nome do produto. Must not be greater than 255 characters.'
+                  example: 'Livro de Laravel'
                 price:
                   type: string
-                  description: ''
-                  example: occaecati
+                  description: 'Preço do produto.'
+                  example: 'R$ 10,00'
                 bar_code:
                   type: integer
-                  description: ''
-                  example: 6
+                  description: 'Código de barras do produto.'
+                  example: 1234567890123
               required:
                 - name
                 - price

@@ -29,4 +29,21 @@ class UpdateOrderRequest extends FormRequest
             'product_id' => 'array',
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function bodyParameters(): array
+    {
+        return [
+            'client_id' => [
+                'description' => 'ID do Cliente',
+                'example' => '1'
+            ],
+            'products' => [
+                'description' => 'Lista de produtos',
+                'example' => 'product_id: 1, quantity: 2'
+            ]
+        ];
+    }
 }

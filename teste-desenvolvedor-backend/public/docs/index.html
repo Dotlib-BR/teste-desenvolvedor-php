@@ -294,10 +294,10 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"aaguiiaiqdwxavfjohttudbjyeyshrzzcqubz\",
-    \"email\": \"\",
-    \"password\": \"fpfvipedvazezpvcopmkabkxzxiavvxdxddxzujqprjikdltixewouyvrfbwocnroleexbxlhdgpsmotmgmjbgdfwczbuwmvtqwfchtpeyrlrivdijipgidaagiqkmjapakbtxizodxcrvlxtotenqgxqvxewysrrjsngppeknmrwrdsimzxamrwxlhvtjpyeuokaahsmcerqvjbvnxnvspcqnyzmkfeuzlksufyolxvnsbpiqbmivba\",
-    \"cpf\": \"pwbgzeyueongryqvgcxouarypdxobgeomtamslgaznwxbvmcflghjtchmivbniwryszugurownflerlqsxdfybvnsxwatfkwbetclpfepshykuwelwhjsdnkkirebvnrpaqstnmexaqtachcnexoffgukwciycmiinbzhitvwvvqpakokphpzhrdmfnixnopgqiqrgirdyjumtemjezaabvlgwfenhfcdsbgjmg\"
+    \"name\": \"Jose Almeida\",
+    \"email\": \"cliente@dotlib.com\",
+    \"password\": \"12345678\",
+    \"cpf\": \"12345678901\"
 }"
 </code></pre></div>
 
@@ -313,10 +313,10 @@ const headers = {
 };
 
 let body = {
-    "name": "aaguiiaiqdwxavfjohttudbjyeyshrzzcqubz",
-    "email": "",
-    "password": "fpfvipedvazezpvcopmkabkxzxiavvxdxddxzujqprjikdltixewouyvrfbwocnroleexbxlhdgpsmotmgmjbgdfwczbuwmvtqwfchtpeyrlrivdijipgidaagiqkmjapakbtxizodxcrvlxtotenqgxqvxewysrrjsngppeknmrwrdsimzxamrwxlhvtjpyeuokaahsmcerqvjbvnxnvspcqnyzmkfeuzlksufyolxvnsbpiqbmivba",
-    "cpf": "pwbgzeyueongryqvgcxouarypdxobgeomtamslgaznwxbvmcflghjtchmivbniwryszugurownflerlqsxdfybvnsxwatfkwbetclpfepshykuwelwhjsdnkkirebvnrpaqstnmexaqtachcnexoffgukwciycmiinbzhitvwvvqpakokphpzhrdmfnixnopgqiqrgirdyjumtemjezaabvlgwfenhfcdsbgjmg"
+    "name": "Jose Almeida",
+    "email": "cliente@dotlib.com",
+    "password": "12345678",
+    "cpf": "12345678901"
 };
 
 fetch(url, {
@@ -374,40 +374,40 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-signup"
-               value="aaguiiaiqdwxavfjohttudbjyeyshrzzcqubz"
+               value="Jose Almeida"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>Nome do usuário. Must not be greater than 255 characters.</p>
         </p>
                 <p>
             <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-signup"
-               value=""
+               value="cliente@dotlib.com"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>Email do usuário. Must not be greater than 255 characters.</p>
         </p>
                 <p>
             <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
                name="password"
                data-endpoint="POSTapi-signup"
-               value="fpfvipedvazezpvcopmkabkxzxiavvxdxddxzujqprjikdltixewouyvrfbwocnroleexbxlhdgpsmotmgmjbgdfwczbuwmvtqwfchtpeyrlrivdijipgidaagiqkmjapakbtxizodxcrvlxtotenqgxqvxewysrrjsngppeknmrwrdsimzxamrwxlhvtjpyeuokaahsmcerqvjbvnxnvspcqnyzmkfeuzlksufyolxvnsbpiqbmivba"
+               value="12345678"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>Senha do usuário. Must not be greater than 255 characters.</p>
         </p>
                 <p>
             <b><code>cpf</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
                name="cpf"
                data-endpoint="POSTapi-signup"
-               value="pwbgzeyueongryqvgcxouarypdxobgeomtamslgaznwxbvmcflghjtchmivbniwryszugurownflerlqsxdfybvnsxwatfkwbetclpfepshykuwelwhjsdnkkirebvnrpaqstnmexaqtachcnexoffgukwciycmiinbzhitvwvvqpakokphpzhrdmfnixnopgqiqrgirdyjumtemjezaabvlgwfenhfcdsbgjmg"
+               value="12345678901"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>CPF do usuário. Must not be greater than 255 characters.</p>
         </p>
         </form>
 
@@ -713,21 +713,21 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/user/20" \
+    "http://localhost:8000/api/user/7" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"mmfwwrlfjveyemwgujkeloczrfillddrzmslacvzzccjvpzdoaqfxicyzyrtvhdcfloyymtjnojumkpjmyrvnhdlta\",
-    \"email\": \"odjdvmsqjsdpnsmwqodrkndsbgjhlp\",
-    \"password\": \"cbcixyxohkrkthfudrxuptqgnkqpolwsynwkatvlihqyrrbojnuazlvpucidqxmxqgjvmezzcxapzittvcznhlwnoryktqvuucwiqvdnahpqalyldxpfldejdpqyqhbzwyyrzpfjbemnttlvevsuytbwklbhdtidcyfjdgkrtwomvzzmuubvqemdmalhknucpsvwfgejozyphcrvwyovf\",
-    \"cpf\": \"btytlqybnjyyissaenboryfqochvvahkpwepnswlgpfjfqawoyepsfzqtjlittekcvutrfpsvznsobnncnzuqtfqrhneihsmeoekzpoklaisxdqsswhirtymomomtyaclcyzbgldvudseymfvfdnxlidneaxifdyblryzauodjdjblhfpalwybhlutugtvybhxvurmkumesieivjcikgnkhgjcmlwuybcborzfctohkwjkvspidsqhif\"
+    \"name\": \"Jose Almeida\",
+    \"email\": \"cliente@dotlib.com\",
+    \"password\": \"12345678\",
+    \"cpf\": \"12345678901\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/user/20"
+    "http://localhost:8000/api/user/7"
 );
 
 const headers = {
@@ -736,10 +736,10 @@ const headers = {
 };
 
 let body = {
-    "name": "mmfwwrlfjveyemwgujkeloczrfillddrzmslacvzzccjvpzdoaqfxicyzyrtvhdcfloyymtjnojumkpjmyrvnhdlta",
-    "email": "odjdvmsqjsdpnsmwqodrkndsbgjhlp",
-    "password": "cbcixyxohkrkthfudrxuptqgnkqpolwsynwkatvlihqyrrbojnuazlvpucidqxmxqgjvmezzcxapzittvcznhlwnoryktqvuucwiqvdnahpqalyldxpfldejdpqyqhbzwyyrzpfjbemnttlvevsuytbwklbhdtidcyfjdgkrtwomvzzmuubvqemdmalhknucpsvwfgejozyphcrvwyovf",
-    "cpf": "btytlqybnjyyissaenboryfqochvvahkpwepnswlgpfjfqawoyepsfzqtjlittekcvutrfpsvznsobnncnzuqtfqrhneihsmeoekzpoklaisxdqsswhirtymomomtyaclcyzbgldvudseymfvfdnxlidneaxifdyblryzauodjdjblhfpalwybhlutugtvybhxvurmkumesieivjcikgnkhgjcmlwuybcborzfctohkwjkvspidsqhif"
+    "name": "Jose Almeida",
+    "email": "cliente@dotlib.com",
+    "password": "12345678",
+    "cpf": "12345678901"
 };
 
 fetch(url, {
@@ -797,7 +797,7 @@ fetch(url, {
                 <input type="number"
                name="id"
                data-endpoint="PUTapi-user--id-"
-               value="20"
+               value="7"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
@@ -808,40 +808,40 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="PUTapi-user--id-"
-               value="mmfwwrlfjveyemwgujkeloczrfillddrzmslacvzzccjvpzdoaqfxicyzyrtvhdcfloyymtjnojumkpjmyrvnhdlta"
+               value="Jose Almeida"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>Nome do usuário. Must not be greater than 255 characters.</p>
         </p>
                 <p>
             <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="email"
                data-endpoint="PUTapi-user--id-"
-               value="odjdvmsqjsdpnsmwqodrkndsbgjhlp"
+               value="cliente@dotlib.com"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>Email do usuário. Must not be greater than 255 characters.</p>
         </p>
                 <p>
             <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="password"
                data-endpoint="PUTapi-user--id-"
-               value="cbcixyxohkrkthfudrxuptqgnkqpolwsynwkatvlihqyrrbojnuazlvpucidqxmxqgjvmezzcxapzittvcznhlwnoryktqvuucwiqvdnahpqalyldxpfldejdpqyqhbzwyyrzpfjbemnttlvevsuytbwklbhdtidcyfjdgkrtwomvzzmuubvqemdmalhknucpsvwfgejozyphcrvwyovf"
+               value="12345678"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>Senha do usuário. Must not be greater than 255 characters.</p>
         </p>
                 <p>
             <b><code>cpf</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="cpf"
                data-endpoint="PUTapi-user--id-"
-               value="btytlqybnjyyissaenboryfqochvvahkpwepnswlgpfjfqawoyepsfzqtjlittekcvutrfpsvznsobnncnzuqtfqrhneihsmeoekzpoklaisxdqsswhirtymomomtyaclcyzbgldvudseymfvfdnxlidneaxifdyblryzauodjdjblhfpalwybhlutugtvybhxvurmkumesieivjcikgnkhgjcmlwuybcborzfctohkwjkvspidsqhif"
+               value="12345678901"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>CPF do usuário. Must not be greater than 255 characters.</p>
         </p>
         </form>
 
@@ -858,14 +858,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/user/6" \
+    --get "http://localhost:8000/api/user/11" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/user/6"
+    "http://localhost:8000/api/user/11"
 );
 
 const headers = {
@@ -944,7 +944,7 @@ access-control-allow-origin: *
                 <input type="number"
                name="id"
                data-endpoint="GETapi-user--id-"
-               value="6"
+               value="11"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
@@ -964,14 +964,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/user/17" \
+    "http://localhost:8000/api/user/9" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/user/17"
+    "http://localhost:8000/api/user/9"
 );
 
 const headers = {
@@ -1033,7 +1033,7 @@ fetch(url, {
                 <input type="number"
                name="id"
                data-endpoint="DELETEapi-user--id-"
-               value="17"
+               value="9"
                data-component="url" hidden>
     <br>
 <p>The ID of the user.</p>
@@ -1053,14 +1053,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/product/8" \
+    --get "http://localhost:8000/api/product/20" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/product/8"
+    "http://localhost:8000/api/product/20"
 );
 
 const headers = {
@@ -1139,7 +1139,7 @@ access-control-allow-origin: *
                 <input type="number"
                name="id"
                data-endpoint="GETapi-product--id-"
-               value="8"
+               value="20"
                data-component="url" hidden>
     <br>
 <p>The ID of the product.</p>
@@ -1163,11 +1163,11 @@ access-control-allow-origin: *
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"client_id\": 17,
+    \"client_id\": 1,
     \"products\": [
         {
-            \"product_id\": 14,
-            \"quantity\": 19
+            \"product_id\": 4,
+            \"quantity\": 11
         }
     ]
 }"
@@ -1185,11 +1185,11 @@ const headers = {
 };
 
 let body = {
-    "client_id": 17,
+    "client_id": 1,
     "products": [
         {
-            "product_id": 14,
-            "quantity": 19
+            "product_id": 4,
+            "quantity": 11
         }
     ]
 };
@@ -1249,10 +1249,10 @@ fetch(url, {
                 <input type="number"
                name="client_id"
                data-endpoint="POSTapi-order"
-               value="17"
+               value="1"
                data-component="body" hidden>
     <br>
-
+<p>ID do Cliente.</p>
         </p>
                 <p>
         <details>
@@ -1266,7 +1266,7 @@ fetch(url, {
                 <input type="number"
                name="products.0.product_id"
                data-endpoint="POSTapi-order"
-               value="14"
+               value="4"
                data-component="body" hidden>
     <br>
 
@@ -1276,7 +1276,7 @@ fetch(url, {
                 <input type="number"
                name="products.0.quantity"
                data-endpoint="POSTapi-order"
-               value="19"
+               value="11"
                data-component="body" hidden>
     <br>
 
@@ -1302,10 +1302,10 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"client_id\": 5,
-    \"total_price\": \"facere\",
+    \"client_id\": 1,
+    \"total_price\": \"voluptatum\",
     \"product_id\": [
-        \"perferendis\"
+        \"similique\"
     ]
 }"
 </code></pre></div>
@@ -1322,10 +1322,10 @@ const headers = {
 };
 
 let body = {
-    "client_id": 5,
-    "total_price": "facere",
+    "client_id": 1,
+    "total_price": "voluptatum",
     "product_id": [
-        "perferendis"
+        "similique"
     ]
 };
 
@@ -1395,17 +1395,17 @@ fetch(url, {
                 <input type="number"
                name="client_id"
                data-endpoint="PUTapi-order--id-"
-               value="5"
+               value="1"
                data-component="body" hidden>
     <br>
-
+<p>ID do Cliente.</p>
         </p>
                 <p>
             <b><code>total_price</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="total_price"
                data-endpoint="PUTapi-order--id-"
-               value="facere"
+               value="voluptatum"
                data-component="body" hidden>
     <br>
 
@@ -1544,14 +1544,14 @@ access-control-allow-origin: *
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/order/19" \
+    "http://localhost:8000/api/order/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/order/19"
+    "http://localhost:8000/api/order/1"
 );
 
 const headers = {
@@ -1613,7 +1613,7 @@ fetch(url, {
                 <input type="number"
                name="id"
                data-endpoint="DELETEapi-order--id-"
-               value="19"
+               value="1"
                data-component="url" hidden>
     <br>
 <p>The ID of the order.</p>
@@ -1637,10 +1637,10 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"owgigwomgbcinyhjndtqvvkyzxexblabzhcnabkwmqjnitxklpyigxbyqydnaukegejxfcrweklcimbzflkozarbqiyqgpvfgvvlggjznangurqmengnpzwnknziqvrripqohgldztlywyaukgtdskgxjtgwbnkuyoqvqfubiqzigtpfxejdjccwuciumyrfkuaguudpovqscjkeklktn\",
-    \"email\": \"qsofhnlnyqywccixragegfvmokoioikihjwjtowdkhboxnbnkxbulcbsgjmkzqasgktydsheldoqfsqfkfpnmbsxajupaoowvrsxhqppewmkyhbwzjtbaxdwurqro\",
-    \"password\": \"zoxegyxjvhskcefajcelqfcpxmtwankztppeuwfyknsrgkwydazwcitdcluclkzbgbfojxgzzfhtrequpoxqjmnrwkxcrdilkrjevlcyzmosenzgpcnhblmwljwpgslpjgljmhuvhpzooprdsdppfvetc\",
-    \"cpf\": \"ymunearsmekadzqzrybwxlledxxbznfphxluzkyjvyhgdvoritrnkhrelxaoghyqlpmxsszbjxnqrsavjizdlazdwhhiwlzyzjbvldmkeckzufmdafcduicgujgclzinlseeqycogrkhfujhmrtzddgnxvdggrtnrlbiocnvhqdn\"
+    \"name\": \"Jose Almeida\",
+    \"email\": \"cliente@dotlib.com\",
+    \"password\": \"12345678\",
+    \"cpf\": \"12345678901\"
 }"
 </code></pre></div>
 
@@ -1656,10 +1656,10 @@ const headers = {
 };
 
 let body = {
-    "name": "owgigwomgbcinyhjndtqvvkyzxexblabzhcnabkwmqjnitxklpyigxbyqydnaukegejxfcrweklcimbzflkozarbqiyqgpvfgvvlggjznangurqmengnpzwnknziqvrripqohgldztlywyaukgtdskgxjtgwbnkuyoqvqfubiqzigtpfxejdjccwuciumyrfkuaguudpovqscjkeklktn",
-    "email": "qsofhnlnyqywccixragegfvmokoioikihjwjtowdkhboxnbnkxbulcbsgjmkzqasgktydsheldoqfsqfkfpnmbsxajupaoowvrsxhqppewmkyhbwzjtbaxdwurqro",
-    "password": "zoxegyxjvhskcefajcelqfcpxmtwankztppeuwfyknsrgkwydazwcitdcluclkzbgbfojxgzzfhtrequpoxqjmnrwkxcrdilkrjevlcyzmosenzgpcnhblmwljwpgslpjgljmhuvhpzooprdsdppfvetc",
-    "cpf": "ymunearsmekadzqzrybwxlledxxbznfphxluzkyjvyhgdvoritrnkhrelxaoghyqlpmxsszbjxnqrsavjizdlazdwhhiwlzyzjbvldmkeckzufmdafcduicgujgclzinlseeqycogrkhfujhmrtzddgnxvdggrtnrlbiocnvhqdn"
+    "name": "Jose Almeida",
+    "email": "cliente@dotlib.com",
+    "password": "12345678",
+    "cpf": "12345678901"
 };
 
 fetch(url, {
@@ -1717,40 +1717,40 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-user"
-               value="owgigwomgbcinyhjndtqvvkyzxexblabzhcnabkwmqjnitxklpyigxbyqydnaukegejxfcrweklcimbzflkozarbqiyqgpvfgvvlggjznangurqmengnpzwnknziqvrripqohgldztlywyaukgtdskgxjtgwbnkuyoqvqfubiqzigtpfxejdjccwuciumyrfkuaguudpovqscjkeklktn"
+               value="Jose Almeida"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>Nome do usuário. Must not be greater than 255 characters.</p>
         </p>
                 <p>
             <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-user"
-               value="qsofhnlnyqywccixragegfvmokoioikihjwjtowdkhboxnbnkxbulcbsgjmkzqasgktydsheldoqfsqfkfpnmbsxajupaoowvrsxhqppewmkyhbwzjtbaxdwurqro"
+               value="cliente@dotlib.com"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>Email do usuário. Must not be greater than 255 characters.</p>
         </p>
                 <p>
             <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
                name="password"
                data-endpoint="POSTapi-user"
-               value="zoxegyxjvhskcefajcelqfcpxmtwankztppeuwfyknsrgkwydazwcitdcluclkzbgbfojxgzzfhtrequpoxqjmnrwkxcrdilkrjevlcyzmosenzgpcnhblmwljwpgslpjgljmhuvhpzooprdsdppfvetc"
+               value="12345678"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>Senha do usuário. Must not be greater than 255 characters.</p>
         </p>
                 <p>
             <b><code>cpf</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
                name="cpf"
                data-endpoint="POSTapi-user"
-               value="ymunearsmekadzqzrybwxlledxxbznfphxluzkyjvyhgdvoritrnkhrelxaoghyqlpmxsszbjxnqrsavjizdlazdwhhiwlzyzjbvldmkeckzufmdafcduicgujgclzinlseeqycogrkhfujhmrtzddgnxvdggrtnrlbiocnvhqdn"
+               value="12345678901"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>CPF do usuário. Must not be greater than 255 characters.</p>
         </p>
         </form>
 
@@ -1771,9 +1771,9 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"dijwnjddyvkdoeaxqgzvxrzwmfbkeawskedyhjqcedpybxztbfusughyitefkxfefhttdndfryocygwqcwfuffnoxitdmxqyqlfdmeyzqrkwqjfezborfyzzojwtymvodplexykvqyarokblthlwlaymjgqhvcbdvsyoetllwhhmtvjphxngxmjrnhdlqlticqkcgfbxzchzafwopxtzskfvjd\",
-    \"price\": \"occaecati\",
-    \"bar_code\": 6
+    \"name\": \"Livro de Laravel\",
+    \"price\": \"R$ 10,00\",
+    \"bar_code\": 1234567890123
 }"
 </code></pre></div>
 
@@ -1789,9 +1789,9 @@ const headers = {
 };
 
 let body = {
-    "name": "dijwnjddyvkdoeaxqgzvxrzwmfbkeawskedyhjqcedpybxztbfusughyitefkxfefhttdndfryocygwqcwfuffnoxitdmxqyqlfdmeyzqrkwqjfezborfyzzojwtymvodplexykvqyarokblthlwlaymjgqhvcbdvsyoetllwhhmtvjphxngxmjrnhdlqlticqkcgfbxzchzafwopxtzskfvjd",
-    "price": "occaecati",
-    "bar_code": 6
+    "name": "Livro de Laravel",
+    "price": "R$ 10,00",
+    "bar_code": 1234567890123
 };
 
 fetch(url, {
@@ -1849,30 +1849,30 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-product"
-               value="dijwnjddyvkdoeaxqgzvxrzwmfbkeawskedyhjqcedpybxztbfusughyitefkxfefhttdndfryocygwqcwfuffnoxitdmxqyqlfdmeyzqrkwqjfezborfyzzojwtymvodplexykvqyarokblthlwlaymjgqhvcbdvsyoetllwhhmtvjphxngxmjrnhdlqlticqkcgfbxzchzafwopxtzskfvjd"
+               value="Livro de Laravel"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>Nome do produto. Must not be greater than 255 characters.</p>
         </p>
                 <p>
             <b><code>price</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
                name="price"
                data-endpoint="POSTapi-product"
-               value="occaecati"
+               value="R$ 10,00"
                data-component="body" hidden>
     <br>
-
+<p>Preço do produto.</p>
         </p>
                 <p>
             <b><code>bar_code</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="bar_code"
                data-endpoint="POSTapi-product"
-               value="6"
+               value="1234567890123"
                data-component="body" hidden>
     <br>
-
+<p>Código de barras do produto.</p>
         </p>
         </form>
 
@@ -1889,20 +1889,20 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/product/2" \
+    "http://localhost:8000/api/product/8" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"zsnggcerfcllfo\",
-    \"price\": \"aliquid\",
-    \"bar_code\": 14
+    \"name\": \"Livro de Laravel\",
+    \"price\": \"R$ 10,00\",
+    \"bar_code\": 1234567890123
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/product/2"
+    "http://localhost:8000/api/product/8"
 );
 
 const headers = {
@@ -1911,9 +1911,9 @@ const headers = {
 };
 
 let body = {
-    "name": "zsnggcerfcllfo",
-    "price": "aliquid",
-    "bar_code": 14
+    "name": "Livro de Laravel",
+    "price": "R$ 10,00",
+    "bar_code": 1234567890123
 };
 
 fetch(url, {
@@ -1971,7 +1971,7 @@ fetch(url, {
                 <input type="number"
                name="id"
                data-endpoint="PUTapi-product--id-"
-               value="2"
+               value="8"
                data-component="url" hidden>
     <br>
 <p>The ID of the product.</p>
@@ -1982,30 +1982,30 @@ fetch(url, {
                 <input type="text"
                name="name"
                data-endpoint="PUTapi-product--id-"
-               value="zsnggcerfcllfo"
+               value="Livro de Laravel"
                data-component="body" hidden>
     <br>
-<p>Must not be greater than 255 characters.</p>
+<p>Nome do produto. Must not be greater than 255 characters.</p>
         </p>
                 <p>
             <b><code>price</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="price"
                data-endpoint="PUTapi-product--id-"
-               value="aliquid"
+               value="R$ 10,00"
                data-component="body" hidden>
     <br>
-
+<p>Preço do produto.</p>
         </p>
                 <p>
             <b><code>bar_code</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="bar_code"
                data-endpoint="PUTapi-product--id-"
-               value="14"
+               value="1234567890123"
                data-component="body" hidden>
     <br>
-
+<p>Código de barras do produto.</p>
         </p>
         </form>
 
@@ -2022,14 +2022,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/product/19" \
+    "http://localhost:8000/api/product/9" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/product/19"
+    "http://localhost:8000/api/product/9"
 );
 
 const headers = {
@@ -2091,7 +2091,7 @@ fetch(url, {
                 <input type="number"
                name="id"
                data-endpoint="DELETEapi-product--id-"
-               value="19"
+               value="9"
                data-component="url" hidden>
     <br>
 <p>The ID of the product.</p>

@@ -29,4 +29,25 @@ class UpdateProductRequest extends FormRequest
             'bar_code' => 'integer',
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function bodyParameters(): array
+    {
+        return [
+            'name' => [
+                'description' => 'Nome do produto',
+                'example' => 'Livro de Laravel'
+            ],
+            'price' => [
+                'description' => 'Preço do produto',
+                'example' => 'R$ 10,00'
+            ],
+            'bar_code' => [
+                'description' => 'Código de barras do produto',
+                'example' => '1234567890123'
+            ]
+        ];
+    }
 }

@@ -93,37 +93,37 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 20
+        example: 7
         type: integer
         custom: []
     queryParameters: []
     bodyParameters:
       name:
         name: name
-        description: 'Must not be greater than 255 characters.'
+        description: 'Nome do usuário. Must not be greater than 255 characters.'
         required: false
-        example: mmfwwrlfjveyemwgujkeloczrfillddrzmslacvzzccjvpzdoaqfxicyzyrtvhdcfloyymtjnojumkpjmyrvnhdlta
+        example: 'Jose Almeida'
         type: string
         custom: []
       email:
         name: email
-        description: 'Must not be greater than 255 characters.'
+        description: 'Email do usuário. Must not be greater than 255 characters.'
         required: false
-        example: odjdvmsqjsdpnsmwqodrkndsbgjhlp
+        example: cliente@dotlib.com
         type: string
         custom: []
       password:
         name: password
-        description: 'Must not be greater than 255 characters.'
+        description: 'Senha do usuário. Must not be greater than 255 characters.'
         required: false
-        example: cbcixyxohkrkthfudrxuptqgnkqpolwsynwkatvlihqyrrbojnuazlvpucidqxmxqgjvmezzcxapzittvcznhlwnoryktqvuucwiqvdnahpqalyldxpfldejdpqyqhbzwyyrzpfjbemnttlvevsuytbwklbhdtidcyfjdgkrtwomvzzmuubvqemdmalhknucpsvwfgejozyphcrvwyovf
+        example: '12345678'
         type: string
         custom: []
       cpf:
         name: cpf
-        description: 'Must not be greater than 255 characters.'
+        description: 'CPF do usuário. Must not be greater than 255 characters.'
         required: false
-        example: btytlqybnjyyissaenboryfqochvvahkpwepnswlgpfjfqawoyepsfzqtjlittekcvutrfpsvznsobnncnzuqtfqrhneihsmeoekzpoklaisxdqsswhirtymomomtyaclcyzbgldvudseymfvfdnxlidneaxifdyblryzauodjdjblhfpalwybhlutugtvybhxvurmkumesieivjcikgnkhgjcmlwuybcborzfctohkwjkvspidsqhif
+        example: '12345678901'
         type: string
         custom: []
     responses: []
@@ -145,7 +145,7 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 6
+        example: 11
         type: integer
         custom: []
     queryParameters: []
@@ -177,7 +177,7 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 17
+        example: 9
         type: integer
         custom: []
     queryParameters: []
@@ -201,7 +201,7 @@ endpoints:
         name: id
         description: 'The ID of the product.'
         required: true
-        example: 8
+        example: 20
         type: integer
         custom: []
     queryParameters: []
@@ -233,9 +233,9 @@ endpoints:
     bodyParameters:
       client_id:
         name: client_id
-        description: ''
+        description: 'ID do Cliente.'
         required: true
-        example: 17
+        example: 1
         type: integer
         custom: []
       products:
@@ -250,14 +250,14 @@ endpoints:
         name: 'products[].product_id'
         description: ''
         required: true
-        example: 14
+        example: 4
         type: integer
         custom: []
       'products[].quantity':
         name: 'products[].quantity'
         description: ''
         required: true
-        example: 19
+        example: 11
         type: integer
         custom: []
     responses: []
@@ -286,16 +286,16 @@ endpoints:
     bodyParameters:
       client_id:
         name: client_id
-        description: ''
+        description: 'ID do Cliente.'
         required: false
-        example: 5
+        example: 1
         type: integer
         custom: []
       total_price:
         name: total_price
         description: ''
         required: false
-        example: facere
+        example: voluptatum
         type: string
         custom: []
       product_id:
@@ -303,7 +303,7 @@ endpoints:
         description: ''
         required: false
         example:
-          - perferendis
+          - similique
         type: 'string[]'
         custom: []
     responses: []
@@ -357,7 +357,7 @@ endpoints:
         name: id
         description: 'The ID of the order.'
         required: true
-        example: 19
+        example: 1
         type: integer
         custom: []
     queryParameters: []
@@ -381,30 +381,30 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: 'Must not be greater than 255 characters.'
+        description: 'Nome do usuário. Must not be greater than 255 characters.'
         required: true
-        example: owgigwomgbcinyhjndtqvvkyzxexblabzhcnabkwmqjnitxklpyigxbyqydnaukegejxfcrweklcimbzflkozarbqiyqgpvfgvvlggjznangurqmengnpzwnknziqvrripqohgldztlywyaukgtdskgxjtgwbnkuyoqvqfubiqzigtpfxejdjccwuciumyrfkuaguudpovqscjkeklktn
+        example: 'Jose Almeida'
         type: string
         custom: []
       email:
         name: email
-        description: 'Must not be greater than 255 characters.'
+        description: 'Email do usuário. Must not be greater than 255 characters.'
         required: true
-        example: qsofhnlnyqywccixragegfvmokoioikihjwjtowdkhboxnbnkxbulcbsgjmkzqasgktydsheldoqfsqfkfpnmbsxajupaoowvrsxhqppewmkyhbwzjtbaxdwurqro
+        example: cliente@dotlib.com
         type: string
         custom: []
       password:
         name: password
-        description: 'Must not be greater than 255 characters.'
+        description: 'Senha do usuário. Must not be greater than 255 characters.'
         required: true
-        example: zoxegyxjvhskcefajcelqfcpxmtwankztppeuwfyknsrgkwydazwcitdcluclkzbgbfojxgzzfhtrequpoxqjmnrwkxcrdilkrjevlcyzmosenzgpcnhblmwljwpgslpjgljmhuvhpzooprdsdppfvetc
+        example: '12345678'
         type: string
         custom: []
       cpf:
         name: cpf
-        description: 'Must not be greater than 255 characters.'
+        description: 'CPF do usuário. Must not be greater than 255 characters.'
         required: true
-        example: ymunearsmekadzqzrybwxlledxxbznfphxluzkyjvyhgdvoritrnkhrelxaoghyqlpmxsszbjxnqrsavjizdlazdwhhiwlzyzjbvldmkeckzufmdafcduicgujgclzinlseeqycogrkhfujhmrtzddgnxvdggrtnrlbiocnvhqdn
+        example: '12345678901'
         type: string
         custom: []
     responses: []
@@ -426,23 +426,23 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: 'Must not be greater than 255 characters.'
+        description: 'Nome do produto. Must not be greater than 255 characters.'
         required: true
-        example: dijwnjddyvkdoeaxqgzvxrzwmfbkeawskedyhjqcedpybxztbfusughyitefkxfefhttdndfryocygwqcwfuffnoxitdmxqyqlfdmeyzqrkwqjfezborfyzzojwtymvodplexykvqyarokblthlwlaymjgqhvcbdvsyoetllwhhmtvjphxngxmjrnhdlqlticqkcgfbxzchzafwopxtzskfvjd
+        example: 'Livro de Laravel'
         type: string
         custom: []
       price:
         name: price
-        description: ''
+        description: 'Preço do produto.'
         required: true
-        example: occaecati
+        example: 'R$ 10,00'
         type: string
         custom: []
       bar_code:
         name: bar_code
-        description: ''
+        description: 'Código de barras do produto.'
         required: false
-        example: 6
+        example: 1234567890123
         type: integer
         custom: []
     responses: []
@@ -464,30 +464,30 @@ endpoints:
         name: id
         description: 'The ID of the product.'
         required: true
-        example: 2
+        example: 8
         type: integer
         custom: []
     queryParameters: []
     bodyParameters:
       name:
         name: name
-        description: 'Must not be greater than 255 characters.'
+        description: 'Nome do produto. Must not be greater than 255 characters.'
         required: false
-        example: zsnggcerfcllfo
+        example: 'Livro de Laravel'
         type: string
         custom: []
       price:
         name: price
-        description: ''
+        description: 'Preço do produto.'
         required: false
-        example: aliquid
+        example: 'R$ 10,00'
         type: string
         custom: []
       bar_code:
         name: bar_code
-        description: ''
+        description: 'Código de barras do produto.'
         required: false
-        example: 14
+        example: 1234567890123
         type: integer
         custom: []
     responses: []
@@ -509,7 +509,7 @@ endpoints:
         name: id
         description: 'The ID of the product.'
         required: true
-        example: 19
+        example: 9
         type: integer
         custom: []
     queryParameters: []

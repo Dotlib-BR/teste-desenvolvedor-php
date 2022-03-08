@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\UnauthorizedException;
+use Throwable;
 
 /**
  * @group Auth
@@ -51,6 +52,7 @@ class AuthController extends Controller
 
     /**
      * Signup - Cria um novo usuário.
+     * @throws Throwable
      */
     public function signup(StoreUserRequest $request): JsonResponse
     {

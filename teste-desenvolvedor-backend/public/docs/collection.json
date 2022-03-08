@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Teste-Desenvolvedor-PHP",
-        "_postman_id": "97d7ca82-06f1-414b-aa5d-1343411c494c",
+        "_postman_id": "15803c72-8caf-4a2c-ae32-a4f7e90b6360",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -72,7 +72,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"aaguiiaiqdwxavfjohttudbjyeyshrzzcqubz\",\"email\":\"\",\"password\":\"fpfvipedvazezpvcopmkabkxzxiavvxdxddxzujqprjikdltixewouyvrfbwocnroleexbxlhdgpsmotmgmjbgdfwczbuwmvtqwfchtpeyrlrivdijipgidaagiqkmjapakbtxizodxcrvlxtotenqgxqvxewysrrjsngppeknmrwrdsimzxamrwxlhvtjpyeuokaahsmcerqvjbvnxnvspcqnyzmkfeuzlksufyolxvnsbpiqbmivba\",\"cpf\":\"pwbgzeyueongryqvgcxouarypdxobgeomtamslgaznwxbvmcflghjtchmivbniwryszugurownflerlqsxdfybvnsxwatfkwbetclpfepshykuwelwhjsdnkkirebvnrpaqstnmexaqtachcnexoffgukwciycmiinbzhitvwvvqpakokphpzhrdmfnixnopgqiqrgirdyjumtemjezaabvlgwfenhfcdsbgjmg\"}"
+                            "raw": "{\"name\":\"Jose Almeida\",\"email\":\"cliente@dotlib.com\",\"password\":\"12345678\",\"cpf\":\"12345678901\"}"
                         },
                         "description": "",
                         "auth": {
@@ -243,7 +243,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "20",
+                                    "value": "7",
                                     "description": "The ID of the user."
                                 }
                             ]
@@ -261,7 +261,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"mmfwwrlfjveyemwgujkeloczrfillddrzmslacvzzccjvpzdoaqfxicyzyrtvhdcfloyymtjnojumkpjmyrvnhdlta\",\"email\":\"odjdvmsqjsdpnsmwqodrkndsbgjhlp\",\"password\":\"cbcixyxohkrkthfudrxuptqgnkqpolwsynwkatvlihqyrrbojnuazlvpucidqxmxqgjvmezzcxapzittvcznhlwnoryktqvuucwiqvdnahpqalyldxpfldejdpqyqhbzwyyrzpfjbemnttlvevsuytbwklbhdtidcyfjdgkrtwomvzzmuubvqemdmalhknucpsvwfgejozyphcrvwyovf\",\"cpf\":\"btytlqybnjyyissaenboryfqochvvahkpwepnswlgpfjfqawoyepsfzqtjlittekcvutrfpsvznsobnncnzuqtfqrhneihsmeoekzpoklaisxdqsswhirtymomomtyaclcyzbgldvudseymfvfdnxlidneaxifdyblryzauodjdjblhfpalwybhlutugtvybhxvurmkumesieivjcikgnkhgjcmlwuybcborzfctohkwjkvspidsqhif\"}"
+                            "raw": "{\"name\":\"Jose Almeida\",\"email\":\"cliente@dotlib.com\",\"password\":\"12345678\",\"cpf\":\"12345678901\"}"
                         },
                         "description": "",
                         "auth": {
@@ -282,7 +282,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "6",
+                                    "value": "11",
                                     "description": "The ID of the user."
                                 }
                             ]
@@ -338,7 +338,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "17",
+                                    "value": "9",
                                     "description": "The ID of the user."
                                 }
                             ]
@@ -374,7 +374,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "8",
+                                    "value": "20",
                                     "description": "The ID of the product."
                                 }
                             ]
@@ -440,7 +440,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"client_id\":17,\"products\":[{\"product_id\":14,\"quantity\":19}]}"
+                            "raw": "{\"client_id\":1,\"products\":[{\"product_id\":4,\"quantity\":11}]}"
                         },
                         "description": "",
                         "auth": {
@@ -479,7 +479,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"client_id\":5,\"total_price\":\"facere\",\"product_id\":[\"perferendis\"]}"
+                            "raw": "{\"client_id\":1,\"total_price\":\"voluptatum\",\"product_id\":[\"similique\"]}"
                         },
                         "description": "",
                         "auth": {
@@ -556,7 +556,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "19",
+                                    "value": "1",
                                     "description": "The ID of the order."
                                 }
                             ]
@@ -602,7 +602,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"owgigwomgbcinyhjndtqvvkyzxexblabzhcnabkwmqjnitxklpyigxbyqydnaukegejxfcrweklcimbzflkozarbqiyqgpvfgvvlggjznangurqmengnpzwnknziqvrripqohgldztlywyaukgtdskgxjtgwbnkuyoqvqfubiqzigtpfxejdjccwuciumyrfkuaguudpovqscjkeklktn\",\"email\":\"qsofhnlnyqywccixragegfvmokoioikihjwjtowdkhboxnbnkxbulcbsgjmkzqasgktydsheldoqfsqfkfpnmbsxajupaoowvrsxhqppewmkyhbwzjtbaxdwurqro\",\"password\":\"zoxegyxjvhskcefajcelqfcpxmtwankztppeuwfyknsrgkwydazwcitdcluclkzbgbfojxgzzfhtrequpoxqjmnrwkxcrdilkrjevlcyzmosenzgpcnhblmwljwpgslpjgljmhuvhpzooprdsdppfvetc\",\"cpf\":\"ymunearsmekadzqzrybwxlledxxbznfphxluzkyjvyhgdvoritrnkhrelxaoghyqlpmxsszbjxnqrsavjizdlazdwhhiwlzyzjbvldmkeckzufmdafcduicgujgclzinlseeqycogrkhfujhmrtzddgnxvdggrtnrlbiocnvhqdn\"}"
+                            "raw": "{\"name\":\"Jose Almeida\",\"email\":\"cliente@dotlib.com\",\"password\":\"12345678\",\"cpf\":\"12345678901\"}"
                         },
                         "description": "",
                         "auth": {
@@ -633,7 +633,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"dijwnjddyvkdoeaxqgzvxrzwmfbkeawskedyhjqcedpybxztbfusughyitefkxfefhttdndfryocygwqcwfuffnoxitdmxqyqlfdmeyzqrkwqjfezborfyzzojwtymvodplexykvqyarokblthlwlaymjgqhvcbdvsyoetllwhhmtvjphxngxmjrnhdlqlticqkcgfbxzchzafwopxtzskfvjd\",\"price\":\"occaecati\",\"bar_code\":6}"
+                            "raw": "{\"name\":\"Livro de Laravel\",\"price\":\"R$ 10,00\",\"bar_code\":1234567890123}"
                         },
                         "description": "",
                         "auth": {
@@ -654,7 +654,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "2",
+                                    "value": "8",
                                     "description": "The ID of the product."
                                 }
                             ]
@@ -672,7 +672,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"zsnggcerfcllfo\",\"price\":\"aliquid\",\"bar_code\":14}"
+                            "raw": "{\"name\":\"Livro de Laravel\",\"price\":\"R$ 10,00\",\"bar_code\":1234567890123}"
                         },
                         "description": "",
                         "auth": {
@@ -693,7 +693,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "19",
+                                    "value": "9",
                                     "description": "The ID of the product."
                                 }
                             ]
