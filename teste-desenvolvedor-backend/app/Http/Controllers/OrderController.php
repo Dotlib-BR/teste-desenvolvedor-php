@@ -43,34 +43,34 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Order  $order
-     * @return Response
+     * @param int $id
+     * @return JsonResponse
      */
-    public function show(Order $order)
+    public function show(int $id): JsonResponse
     {
-        //
+        return response()->json($this->orderRepository->findOrFail($id)->load('products'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateOrderRequest  $request
-     * @param  \App\Models\Order  $order
-     * @return Response
+     * @param UpdateOrderRequest $request
+     * @param int $id
+     * @return JsonResponse
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(UpdateOrderRequest $request, int $id): JsonResponse
     {
-        //
+        return response()->json($this->orderRepository->update($request->validated(), $id));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Order  $order
-     * @return Response
+     * @param Order $order
+     * @return JsonResponse
      */
-    public function destroy(Order $order)
+    public function destroy(Order $order): JsonResponse
     {
-        //
+        return response()->json($this->orderRepository->destroy($order));
     }
 }

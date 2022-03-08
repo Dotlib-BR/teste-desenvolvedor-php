@@ -27,7 +27,9 @@ class OrderRepository implements OrderRepositoryInterface
      */
     public function all(array $params = []): Collection
     {
-        return $this->order->newQuery()->get();
+        return $this->order->newQuery()
+            ->get()
+            ->load('products');
     }
 
     /**
