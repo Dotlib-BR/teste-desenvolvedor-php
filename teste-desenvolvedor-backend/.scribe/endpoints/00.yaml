@@ -32,3 +32,48 @@ endpoints:
         custom: []
     responses: []
     responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/signup
+    metadata:
+      title: 'Signup - Cria um novo usuário.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: aaguiiaiqdwxavfjohttudbjyeyshrzzcqubz
+        type: string
+        custom: []
+      email:
+        name: email
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: ''
+        type: string
+        custom: []
+      password:
+        name: password
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: fpfvipedvazezpvcopmkabkxzxiavvxdxddxzujqprjikdltixewouyvrfbwocnroleexbxlhdgpsmotmgmjbgdfwczbuwmvtqwfchtpeyrlrivdijipgidaagiqkmjapakbtxizodxcrvlxtotenqgxqvxewysrrjsngppeknmrwrdsimzxamrwxlhvtjpyeuokaahsmcerqvjbvnxnvspcqnyzmkfeuzlksufyolxvnsbpiqbmivba
+        type: string
+        custom: []
+      cpf:
+        name: cpf
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: pwbgzeyueongryqvgcxouarypdxobgeomtamslgaznwxbvmcflghjtchmivbniwryszugurownflerlqsxdfybvnsxwatfkwbetclpfepshykuwelwhjsdnkkirebvnrpaqstnmexaqtachcnexoffgukwciycmiinbzhitvwvvqpakokphpzhrdmfnixnopgqiqrgirdyjumtemjezaabvlgwfenhfcdsbgjmg
+        type: string
+        custom: []
+    responses: []
+    responseFields: []

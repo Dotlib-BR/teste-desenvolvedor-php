@@ -19,7 +19,7 @@ class AuthOnly
      * @param mixed ...$args
      * @return Response|RedirectResponse
      */
-    public function handle(Request $request, Closure $next, ...$args): Response|RedirectResponse
+    public function handle(Request $request, Closure $next, ...$args)
     {
         /** @var User $user */
         $user = $request->user();
