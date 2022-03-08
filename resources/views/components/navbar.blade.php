@@ -5,7 +5,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="{{ route('home') }}" class="nav-link active" aria-current="page">
+            <a href="{{ route('home') }}" class="nav-link text-white {{ str_contains(strtolower(Request::route()->getName()), 'home') ? 'active' : ''}}">
                 <i class="bi bi-house-fill"></i>
                 Home
             </a>
@@ -19,14 +19,14 @@
         </li>
 
         <li>
-            <a href="/products" class="nav-link text-white">
+            <a href="{{ route('products') }}" class="nav-link text-white {{ str_contains(strtolower(Request::route()->getName()), 'products') ? 'active' : ''}}">
                 <i class="bi bi-box2-fill"></i>
                 Produtos
             </a>
         </li>
 
         <li>
-            <a href="{{ route('customers') }}" class="nav-link text-white">
+            <a href="{{ route('customers') }}" class="nav-link text-white {{ str_contains(strtolower(Request::route()->getName()), 'customer') ? 'active' : ''}}">
                 <i class="bi bi-person-fill"></i>
                 Clientes
             </a>

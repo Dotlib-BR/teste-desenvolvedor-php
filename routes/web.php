@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\CustomersController;
+use App\Http\Controllers\Web\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,17 @@ Route::middleware(['auth'])->group(function () {
             'edit' => 'editCustomer',
             'update' => 'updateCustomer',
             'destroy' => 'destroyCustomer',
+        ]
+    ])->except('show');
+
+    Route::resource('/products', ProductsController::class, [
+        'names' => [
+            'index' => 'products',
+            'create' => 'createProduct',
+            'store' => 'storeProduct',
+            'edit' => 'editProduct',
+            'update' => 'updateProduct',
+            'destroy' => 'destroyProduct',
         ]
     ])->except('show');
 });

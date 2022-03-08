@@ -1,9 +1,10 @@
 @props([
-    'route_name' => 'createCustomer',
+    'route_name' => 'storeCustomer',
     'route_params' => [],
     'name' => '',
     'cpf' => '',
-    'email' => ''
+    'email' => '',
+    'submit_button_text' => 'Adicionar Cliente'
 ])
 
 <form class="needs-validation" novalidate action="{{ route($route_name, $route_params) }}" method="POST">
@@ -33,7 +34,7 @@
             <small>(somente números)</small>
         </label>
         <div class="input-group has-validation">
-            <input type="cpf" name="cpf" class="form-control" value="{{ $cpf }}" id="cpf" aria-describedby="cpf to costumer" required max="11" min="11" pattern="[0-9]{11}" />
+            <input type="text" name="cpf" class="form-control" value="{{ $cpf }}" id="cpf" aria-describedby="cpf to costumer" required max="11" min="11" pattern="[0-9]{11}" />
             <div class="invalid-feedback">
             CPF Invalido
             </div>
@@ -50,5 +51,5 @@
         </div>
     </div>
 
-    <button type="submit" class="btn w-100 btn-primary">Adicionar Cliente</button>
+    <button type="submit" class="btn w-100 btn-primary">{{ $submit_button_text }}</button>
 </form>

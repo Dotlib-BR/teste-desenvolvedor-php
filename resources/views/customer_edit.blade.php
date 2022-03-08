@@ -14,6 +14,7 @@
             :name="$name"
             :email="$email"
             :cpf="$cpf"
+            submit_button_text="Editar Cliente"
         >
         @method("PUT")
         </x-customer-form>

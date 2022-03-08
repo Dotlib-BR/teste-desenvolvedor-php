@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section ('content')
-<form action="{{ route('customers') }}" method="GET" class="filters mt-5 row">
+<form action="{{ route('products') }}" method="GET" class="filters mt-5 row">
     <header class="mb-3 d-flex justify-content-between align-items-center">
-        <h2>Clientes</h2>
+        <h2>Produtos</h2>
 
         <button class="btn btn-secondary">
-            <a href="{{ route('createCustomer') }}" class="link-light" style="text-decoration: none">Adicionar</a>
+            <a href="{{ route('createProduct') }}" class="link-light" style="text-decoration: none">Adicionar</a>
         </button>
     </header>
 
@@ -32,14 +32,17 @@
             <option value="id|asc"{{ $order_by === 'id|asc' ? ' selected' : null }}>Id | Crescente</option>
             <option value="id|desc"{{ $order_by === 'id|desc' ? ' selected' : null }}>Id | Decrescente</option>
 
-            <option value="cpf|asc"{{ $order_by === 'cpf|asc' ? ' selected' : null }}>CPF | Crescente</option>
-            <option value="cpf|desc"{{ $order_by === 'cpf|desc' ? ' selected' : null }}>CPF | Decrescente</option>
+            <option value="code|asc"{{ $order_by === 'code|asc' ? ' selected' : null }}>Código | Crescente</option>
+            <option value="code|desc"{{ $order_by === 'code|desc' ? ' selected' : null }}>Código | Decrescente</option>
 
             <option value="name|asc"{{ $order_by === 'name|asc' ? ' selected' : null }}>Nome | Crescente</option>
             <option value="name|desc"{{ $order_by === 'name|desc' ? ' selected' : null }}>Nome | Decrescente</option>
 
-            <option value="email|asc"{{ $order_by === 'email|asc' ? ' selected' : null }}>Email | Crescente</option>
-            <option value="email|desc"{{ $order_by === 'email|desc' ? ' selected' : null }}>Email | Decrescente</option>
+            <option value="warehouse_quantity|asc"{{ $order_by === 'warehouse_quantity|asc' ? ' selected' : null }}>Quantidade | Crescente</option>
+            <option value="warehouse_quantity|desc"{{ $order_by === 'warehouse_quantity|desc' ? ' selected' : null }}>Quantidade | Decrescente</option>
+
+            <option value="value|asc"{{ $order_by === 'value|asc' ? ' selected' : null }}>Preço | Crescente</option>
+            <option value="value|desc"{{ $order_by === 'value|desc' ? ' selected' : null }}>Preço | Decrescente</option>
         </select>
     </div>
 
@@ -51,24 +54,26 @@
     <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Código</th>
             <th scope="col">Nome</th>
-            <th scope="col">CPF</th>
-            <th scope="col">Email</th>
-            <th scope="col">Editar</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Ações</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($customers as $customer)
+        @foreach ($products as $product)
             <tr>
-                <th scope="row">{{ $customer->id }}</th>
-                <td>{{ $customer->name }}</td>
-                <td>{{ $customer->cpf }}</td>
-                <td>{{ $customer->email }}</td>
+                <th scope="row">{{ $product->id }}</th>
+                <td>{{ $product->code }}</td>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->warehouse_quantity }}</td>
+                <td>{{ $product->value }}</td>
                 <td>
 
-                    <form action="{{ route('destroyCustomer', ['customer' => $customer->id]) }}" method="POST">
+                    <form action="{{ route('destroyProduct', ['product' => $product->id]) }}" method="POST">
                         <button class="btn btn-info" type="button">
-                            <a class="link-light" href="{{ route('editCustomer', ['customer' => $customer->id]) }}" style="text-decoration: none">
+                            <a class="link-light" href="{{ route('editProduct', ['product' => $product->id]) }}" style="text-decoration: none">
                                 Editar
                             </a>
                         </button>
@@ -84,3 +89,4 @@
     </tbody>
 </table>
 @endsection
+

@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Customer;
-use Illuminate\Support\Facades\Hash;
 
 class CustomerService {
     /**
@@ -26,7 +25,7 @@ class CustomerService {
     }
 
     /**
-     * Get customer from database from id
+     * Get customer from database by id
      *
      * @param int $id
      * @return Customer|null
@@ -39,10 +38,14 @@ class CustomerService {
     }
 
     /**
-     * Get cusomers from database, filters as params
+     * Get customers from database, filters as params
      *
      * @param int $per_page
-     * @return User|null
+     * @param int $page
+     * @param string $searchTerm
+     * @param string $orderBy
+     * @param string $orderDirection
+     * @return Customer[]|null
      */
     public function getCustomers(int $per_page = 20, int $page = 0, string $searchTerm = '', string $orderBy = 'id', string $orderDirection = 'ASC'): array {
         $customers = Customer::
@@ -58,7 +61,7 @@ class CustomerService {
     }
 
     /**
-     * Create user in Database
+     * Update customer in Database
      *
      * @param Customer $customer
      * @param string $name
@@ -77,11 +80,9 @@ class CustomerService {
     }
 
     /**
-     * Create customer in Database
+     * Delete customer in Database
      *
-     * @param string $name
-     * @param string $cpf
-     * @param string $email
+     * @param int $id
      * @return Customer
      */
     public function deleteCustomerById(int $id)

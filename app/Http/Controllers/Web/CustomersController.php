@@ -67,7 +67,7 @@ class CustomersController extends Controller
         $customer = $customerService->getCustomerById((int) $id);
 
         if (!$customer) {
-            return redirect('customers');
+            return redirect()->route('costumers');
         }
 
         return view('customer_edit', [
@@ -92,12 +92,12 @@ class CustomersController extends Controller
         $customer = $customerService->getCustomerById((int) $id);
 
         if (!$customer) {
-            return redirect('customers');
+            return redirect()->route('costumers');
         }
 
         $customerService->updateCustomer($customer, $request->name, $request->cpf, $request->email);
 
-        return redirect('customers');
+        return redirect()->route('costumers');
     }
 
     /**
@@ -110,6 +110,6 @@ class CustomersController extends Controller
     {
         $customerService->deleteCustomerById((int) $id);
 
-        return redirect('customers');
+        return redirect()->route('costumers');
     }
 }
