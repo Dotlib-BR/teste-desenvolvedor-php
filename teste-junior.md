@@ -2,69 +2,87 @@
 
 # Teste para candidatos à vaga de Desenvolvedor PHP Júnior
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
+Olá, me chamo Luan Matheus Silva Farias, sou desenvolvedor fullstack com as linguagens PHP e Javascript. Além disso sou estudante do curso de ciência da computação e trago aqui o desafio concluído.
 
-## Instruções
+## ⚙ Instalação
 
-O desafio consiste em implementar uma aplicação Web utilizando o framework PHP Laravel, e um banco de dados relacional SQLite, MySQL ou Postgres, a partir de uma modelagem de dados inicial desnormalizada, que deve ser normalizada para a implementação da solução.
+Se você deseja instalar o projeto localmente, siga os seguintes passos.
 
-Você vai criar uma aplicação de cadastro de pedidos de compra, a partir de uma modelagem inicial, com as seguintes funcionalidades:
+### Requisitos
 
-- CRUD de clientes.
-- CRUD de produtos.
-- CRUD de pedidos de compra, com status (Em Aberto, Pago ou Cancelado).
-- Cada CRUD:
-  - deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
-  - deve possuir formulários para criação e atualização de seus itens.
-  - deve permitir a deleção de qualquer item de sua lista.
-- Barra de navegação entre os CRUDs.
-- Links para os outros CRUDs nas listagens (Ex: link para o detalhe do cliente da compra na lista de pedidos de compra)
+Os requisitos para rodar esse aplicativo são.
 
-## Modelo de dados
+- <img src=".github/technologies/git.svg" alt="Git" height="18" /> &nbsp; [Git](https://git-scm.com)
+- <img src=".github/technologies/docker.svg" alt="Docker" height="18" /> &nbsp; [Docker](https://docker.com)
+- <img src=".github/technologies/php.svg" alt="PHP" height="18" /> &nbsp; [PHP](https://php.net)
+- <img src=".github/technologies/composer.svg" alt="Composer" height="18" /> &nbsp; [Composer](https://getcomposer.org/)
+- <img src=".github/technologies/insomnia.svg" alt="Insomnia" height="18" /> &nbsp; [Insomnia](https://insomnia.rest) (Caso queira testar a api)
+- <img src=".github/technologies/vscode.svg" alt="ESLint" height="18" /> &nbsp; [Visual Studio Code](https://code.visualstudio.com) (Opcional, editor de códigos que utilizei para desenvolver e caso queira ver o código)
 
-A modelagem inicial para a implementação solução é a seguinte:
+Embora o projeto utilize o docker, ele utiliza a depedência sail do composer que facilita para criar o container com o docker utilizando o laravel e o php.
 
-[![](/images/modelo.png)](http://www.dotlib.com)
+### Como instalar e rodar o projeto
 
-Você deve alterar esta modelagem para que a mesma cumpra com as três primeiras formas normais.
+Para instalar você deve serguir os seguintes passos:
 
-Além disso, a implementação deste modelo em um banco de dados relacional deve ser realizada levando em consideração os seguintes requisitos:
+```bash
+# Clonar repositório
+$ git clone git@github.com:lunsmat/teste-desenvolvedor-php.git
 
-- O banco de dados deve ser criado utilizando Migrations do framework Laravel, e também utilizar Seeds e Factorys para popular as informações no banco de dados.
-- Implementação das validações necessárias na camada que julgar melhor.
+# Entre na pasta do projeto
+$ cd teste-desenvolvedor-php
 
-## Tecnologias a serem utilizadas
+# Mude para a branch do desafio
+$ git checkout luan_matheus_silva_farias
 
-Devem ser utilizadas as seguintes tecnologias:
+# Instalar depedências
+$ composer install
+# Caso dê erro no composer install tente desta maneira
+$ composer install --ignore-platform-reqs
+# Isso não afetará o funcionamento do projeto, afinal instalamos depedências pois por meio delas usaremos o docker
 
-- HTML
-- CSS
-- Javascript
-- Framework Laravel (PHP)
-- Docker (construção do ambiente de desenvolvimento)
+# Copie e cole o arquivo .env.example para o .env
+# Após isso, rode o seguinte comando
+$ php artisan key:generate
 
-## Entrega
+# Tenha certeza que o docker está ativo antes dos próximos passos
 
-- Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
-- Crie uma branch com o seu nome completo;
-- Altere o arquivo teste-junior.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
-- Depois de finalizado, envie-nos o pull request;
+# Faça o alias para o sail (ele irá utilizar o docker)
+$ alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+# Obs: O projeto irá rodar na porta 80, tenha certeza de que ela está livre
 
-## Bônus
+# Rode os seguintes comandos para iniciar o projeto no docker
+$ sail up -d
+$ sail yarn # Instalará as depedências para buildar o javascript do frontend
+$ sail yarn dev # Buildará o javascript para o frontend
 
-- Implementar autenticação de usuário na aplicação.
-- Permitir que o usuário mude o número de itens por página.
-- Permitir deleção em massa de itens nos CRUDs.
-- Implementar aplicação de desconto em alguns pedidos de compra.
-- Implementar a camada de Front-End utilizando a biblioteca javascript Bootstrap e ser responsiva.
-- API Rest JSON para todos os CRUDS listados acima.
+# Agora vamos rodar as migrations e rodar as seeds
+$ sail artisan migrate
+$ sail artisan db:seed
 
-## O que iremos analisar
+# Acesse o projeto no seu localhost na porta 80
+# http://localhost
+# Logue com o email: `user@default.com` e senha: `password`
+# Pode testar a vontade
+```
 
-- Organização do código;
-- Aplicação de design patterns;
-- Separação de módulos e componentes;
-- Legibilidade;
-- Criação do ambiente com Docker.
+Além das telas do projeto, ele também inclui uma api.
 
-### Boa sorte!
+Para testar a API você tem que:
+
+- Abrir o aplicativo do Insomnia (preferencialmente)
+- Vá para `Application > Preferences > Data > Import Data > From File > Select the Insomnia File`.
+- Importe o arquivo `insomnia_design_document.json` que está na raíz do projeto.
+- Mude para o ambiente de desenvolvimento, e na aba de design você poderá ir testando. 
+    - Ao fazer o login, prefira optar por mudar a variavel de ambiente `access_token` para o seu token de api, assim as rotas privadas funcionaram ao invés de mudar todas manualmente.
+
+## 🔮 Author
+
+<img src="https://github.com/lunsmat.png" alt="Luan Farias" width="200" />
+
+[Luan Farias](https://github.com/lunsmat)
+
+Made with 💜 by Luan Farias. Contact-me:
+
+- 📩 [Email: luan.farias_bvs@outlook.com](mailto:luan.farias_bvs@outlook.com)
+- 💼 [LinkedIn: Luan Farias](https://www.linkedin.com/in/luan-farias-08572219b/)
