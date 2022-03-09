@@ -73,7 +73,7 @@
                 <td>{{ $product->code }}</td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->warehouse_quantity }}</td>
-                <td>{{ $product->value }}</td>
+                <td>R$ {{ $product->value }}</td>
                 <td>
 
                     <form action="{{ route('destroyProduct', ['product' => $product->id]) }}" method="POST">

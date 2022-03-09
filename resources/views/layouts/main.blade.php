@@ -27,7 +27,7 @@
             <x-header />
         @endif
 
-        <main class="container-xxl w-100 h-100 p-0">
+        <main class="container-fluid p-5 w-100 h-100 p-0" style="overflow-y: scroll; padding-top: 0 !important">
             @yield('content')
         </main>
     </section>

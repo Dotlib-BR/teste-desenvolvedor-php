@@ -18,7 +18,7 @@ class CustomerFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'cpf' => $this->faker->numerify('###########'),
+            'cpf' => $this->faker->unique()->numerify('###########'),
             'email' => $this->faker->unique()->safeEmail(),
         ];
     }
