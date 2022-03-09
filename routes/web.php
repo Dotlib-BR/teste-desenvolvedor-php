@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\CustomersController;
+use App\Http\Controllers\Web\OrdersController;
 use App\Http\Controllers\Web\ProductsController;
 
 /*
@@ -46,6 +47,17 @@ Route::middleware(['auth'])->group(function () {
             'edit' => 'editProduct',
             'update' => 'updateProduct',
             'destroy' => 'destroyProduct',
+        ]
+    ])->except('show');
+
+    Route::resource('/orders', OrdersController::class, [
+        'names' => [
+            'index' => 'orders',
+            'create' => 'createOrder',
+            'store' => 'storeOrder',
+            'edit' => 'editOrder',
+            'update' => 'updateOrder',
+            'destroy' => 'destroyOrder',
         ]
     ])->except('show');
 });

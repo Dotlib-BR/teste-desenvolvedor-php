@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Customer;
 use App\Models\Product;
 
 class ProductService {
@@ -48,7 +47,7 @@ class ProductService {
      * @param string $searchTerm
      * @param string $orderBy
      * @param string $orderDirection
-     * @return Product[]|null
+     * @return Product[]
      */
     public function getProducts(int $per_page = 20, int $page = 0, string $searchTerm = '', string $orderBy = 'id', string $orderDirection = 'ASC'): array {
         $products = Product::
@@ -70,9 +69,9 @@ class ProductService {
      * @param string $name
      * @param int $warehouse_quantity
      * @param float $value
-     * @return Customer
+     * @return Product
      */
-    public function updateProduct(Product $product, string $code, string $name, int $warehouse_quantity, float $value)
+    public function updateProduct(Product $product, string $code, string $name, int $warehouse_quantity, float $value): Product
     {
         $product->code = $code;
         $product->name = $name;
@@ -84,13 +83,26 @@ class ProductService {
     }
 
     /**
-     * Delete customer in Database
+     * Delete product in Database
      *
      * @param int $id
-     * @return Customer
+     * @return void
      */
-    public function deleteProductById(int $id)
+    public function deleteProductById(int $id): void
     {
         Product::where('id', $id)->delete();
+    }
+
+    /**
+     * Get products count from database, params to filter
+     *
+     * @param string $searchTerm
+     * @return int
+     */
+    public function getProductsCount(string $searchTerm = ''): int
+    {
+        return Product::where('name', 'ILIKE', '%' . $searchTerm . '%')
+            ->orWhere('code', 'ILIKE', '%' . $searchTerm . '%')
+            ->count();
     }
 }

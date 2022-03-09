@@ -53,7 +53,7 @@ class CustomersController extends Controller
 
         $customerService->createCustomer($request->name, $request->cpf, $request->email);
 
-        return redirect('customers');
+        return redirect()->route('costumers');
     }
 
     /**

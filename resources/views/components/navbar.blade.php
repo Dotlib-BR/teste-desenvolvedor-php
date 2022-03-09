@@ -12,7 +12,7 @@
         </li>
 
         <li>
-            <a href="/orders" class="nav-link text-white">
+            <a href="{{ route('orders') }}" class="nav-link text-white {{ str_contains(strtolower(Request::route()->getName()), 'order') ? 'active' : ''}}">
                 <i class="bi bi-cart-check-fill"></i>
                 Pedidos
             </a>
