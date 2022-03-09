@@ -47,4 +47,19 @@ class UserService {
     public function checkUserPassword(User $user, string $password): bool {
         return Hash::check($password, $user->password);
     }
+
+    /**
+     * Create token api to user
+     *
+     * @param User $user
+     * @return string
+     */
+    public function createTokenApiToUser(User $user)
+    {
+        $token = $user->createToken('token_api')->plainTextToken;
+        $user->api_token = $token;
+        $user->save();
+
+        return $token;
+    }
 }
