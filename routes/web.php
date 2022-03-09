@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\CustomersController;
+use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\OrdersController;
 use App\Http\Controllers\Web\ProductsController;
 
@@ -24,9 +25,7 @@ Route::post('/signup', [AuthController::class, 'signupAction'])->name('signupAct
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('home');
+    Route::get('/', HomeController::class)->name('home');
 
     Route::resource('/customers', CustomersController::class, [
         'names' => [
