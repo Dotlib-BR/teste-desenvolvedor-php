@@ -22,10 +22,13 @@ class CustomersController extends Controller
         list($order_by, $order_direction) = explode('|', (string) $request->get('order_by', 'id|asc'));
 
         $customers = $customerService->getCustomers($per_page, $page, $search_term, $order_by, $order_direction);
+        $customersCount = $customerService->getCustomersCount($search_term);
 
         return view('customers', [
             'customers' => $customers,
             'per_page' => $per_page,
+            'page' => $page,
+            'last_page' => ceil($customersCount / $per_page),
             'search_term' => $search_term,
             'order_by' => join('|', [$order_by, $order_direction]),
         ]);
@@ -53,7 +56,7 @@ class CustomersController extends Controller
 
         $customerService->createCustomer($request->name, $request->cpf, $request->email);
 
-        return redirect()->route('costumers');
+        return redirect()->route('customers');
     }
 
     /**
@@ -67,7 +70,7 @@ class CustomersController extends Controller
         $customer = $customerService->getCustomerById((int) $id);
 
         if (!$customer) {
-            return redirect()->route('costumers');
+            return redirect()->route('customers');
         }
 
         return view('customer_edit', [
@@ -92,12 +95,12 @@ class CustomersController extends Controller
         $customer = $customerService->getCustomerById((int) $id);
 
         if (!$customer) {
-            return redirect()->route('costumers');
+            return redirect()->route('customers');
         }
 
         $customerService->updateCustomer($customer, $request->name, $request->cpf, $request->email);
 
-        return redirect()->route('costumers');
+        return redirect()->route('customers');
     }
 
     /**
@@ -110,6 +113,6 @@ class CustomersController extends Controller
     {
         $customerService->deleteCustomerById((int) $id);
 
-        return redirect()->route('costumers');
+        return redirect()->route('customers');
     }
 }

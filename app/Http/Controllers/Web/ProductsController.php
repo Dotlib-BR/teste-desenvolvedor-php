@@ -22,10 +22,13 @@ class ProductsController extends Controller
         list($order_by, $order_direction) = explode('|', (string) $request->get('order_by', 'id|asc'));
 
         $products = $productService->getProducts($per_page, $page, $search_term, $order_by, $order_direction);
+        $productsCount = $productService->getProductsCount($search_term);
 
         return view('products', [
             'products' => $products,
             'per_page' => $per_page,
+            'page' => $page,
+            'last_page' => ceil($productsCount / $per_page),
             'search_term' => $search_term,
             'order_by' => join('|', [$order_by, $order_direction]),
         ]);

@@ -23,10 +23,13 @@ class OrdersController extends Controller
         list($order_by, $order_direction) = explode('|', (string) $request->get('order_by', 'id|asc'));
 
         $orders = $orderService->getOrders($per_page, $page, $search_term, $order_by, $order_direction);
+        $ordersCount = $orderService->getOrdersCount($search_term);
 
         return view('orders', [
             'orders' => $orders,
             'per_page' => $per_page,
+            'page' => $page,
+            'last_page' => ceil($ordersCount / $per_page),
             'search_term' => $search_term,
             'order_by' => join('|', [$order_by, $order_direction]),
         ]);

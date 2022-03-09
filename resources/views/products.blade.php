@@ -2,6 +2,8 @@
 
 @section ('content')
 <form action="{{ route('products') }}" method="GET" class="filters mt-5 row">
+    <input type="hidden" name="page" value="{{ $page }}" />
+
     <header class="mb-3 d-flex justify-content-between align-items-center">
         <h2>Produtos</h2>
 
@@ -50,6 +52,9 @@
         <button type="submit" class="btn w-100 btn-primary">Filtrar</button>
     </div>
 </form>
+
+<x-pagination :page="$page" :last_page="$last_page" />
+
 <table class="table mt-5">
     <thead>
         <tr>
