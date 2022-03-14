@@ -42,7 +42,7 @@
 
                         <div class="d-flex justify-content-end mt-3">
                             <button type="submit" form="form-client" class="btn btn-success mr-2">Salvar</button>
-                            <a href=" {{ route('clientes.index') }}" class="btn btn-secondary">Voltar</a>
+                            <a href=" {{ route('clientes.index') }}" class="btn btn-outline-success">Voltar</a>
                         </div>
                     </div>
                 </div>

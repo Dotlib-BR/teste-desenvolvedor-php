@@ -12,7 +12,7 @@
     @foreach($products as $indiceProduct => $product)
         <tr id="{{"id" . $product->id }}">
             <td>
-                <label><input type="checkbox" name="checkbox[]" value="0"></label>
+                <label><input type="checkbox" name="checkbox[]" value="{{ $product->id }}"></label>
             </td>
             <td>{{ $product->name }}</td>
             <td id="price">{{ $product->price }}</td>

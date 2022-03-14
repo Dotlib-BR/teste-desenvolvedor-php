@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\User;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
+use function GuzzleHttp\Promise\all;
 
 class OrderService
 {
@@ -31,39 +32,47 @@ class OrderService
 
         //$product = $this->productRepository->findOrFail($attributes['product_id']);
 
+        $quantity = [];
+        foreach ($attributes['quantity'] as $key => $value){
+            if ($value > 0){
+                $quantity[] = $value;
+            }
+        }
+
+        $subtotal = 0;
         $totalPrice = 0;
-        dd($attributes);
+        $i=0;
         foreach ($attributes['checkbox'] as $products) {
 
             $product = $this->productRepository->findOrFail($products+1);
 
             $priceOfProduct = $product->price;
 
-            $quantity = $products['quantity'];
-            $totalPrice = $priceOfProduct * $quantity;
+            $subtotal = $priceOfProduct * $quantity[$i];
 
             //array of products prices
             $prices[] = $priceOfProduct;
-            $AllPrices[] = $totalPrice;
+            $totalPrice = $subtotal + $totalPrice;
+            $i++;
         }
-
-        $sumAllPrices = array_sum($AllPrices);
 
         $order = $this->orderRepository->create([
             'client_id' => $clientId,
-            'total_price' => $sumAllPrices,
+            'total_price' => $totalPrice,
         ]);
 
         $i = 0;
-        foreach ($attributes['products'] as $products) {
+        foreach ($attributes['checkbox'] as $products) {
 
-            $product = $this->productRepository->findOrFail($products['product_id']);
+            $product = $this->productRepository->findOrFail($products+1);
 
-            $quantity = $products['quantity'];
+            $priceOfProduct = $product->price;
+
+            $totalPrice = $priceOfProduct * (int)$quantity;
 
             $order->products()->attach($product->id, [
-                'quantity' => $quantity,
-                'price' => $prices[$i],
+                'quantity' => $quantity[$i],
+                'price' => $totalPrice,
             ]);
 
             $i++;

@@ -10,6 +10,7 @@ use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Services\OrderService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
@@ -50,14 +51,14 @@ class OrderController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return View
+     * @return RedirectResponse
      */
-    public function store(Request $request): View
+    public function store(Request $request): RedirectResponse
     {
         $user = $request->user();
         $this->orderService->create($request->toArray(), $user);
 
-        return view('orders.index');
+        return redirect()->route('pedidos.index');
     }
 
 //    /**

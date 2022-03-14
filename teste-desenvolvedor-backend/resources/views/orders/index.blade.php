@@ -23,7 +23,6 @@
             </div>
             <a href="{{ route('pedidos.create') }}" class="btn btn-success my-2" style="margin-bottom: 1.5rem!important;">Novo Pedido</a>
         </div>
-        <!--- Tabela com hover e zebrada--->
         <table class="table table-hover table-striped">
             <thead>
             <tr>
