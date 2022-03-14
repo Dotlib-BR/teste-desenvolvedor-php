@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
 use Throwable;
 
 class UserController extends Controller
@@ -21,14 +22,26 @@ class UserController extends Controller
         private UserService $userService
     )
     {}
+
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
+     * @return View
      */
-    public function index(): JsonResponse
+    public function index(): View
     {
-        return response()->json($this->userRepository->all());
+        $users = $this->userRepository->all();
+        return view('users.index', compact('users'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return View
+     */
+    public function create(): View
+    {
+        return view('users.crud');
     }
 
     /**
@@ -52,6 +65,18 @@ class UserController extends Controller
     public function show(int $int): JsonResponse
     {
         return response()->json($this->userRepository->findOrFail($int));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $int
+     * @return View
+     */
+    public function edit(int $int): View
+    {
+        $user = $this->userRepository->findOrFail($int);
+        return view('users.crud', compact('user'));
     }
 
     /**

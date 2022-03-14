@@ -22,7 +22,6 @@ class UserSeeder extends Seeder
         if (app()->environment('local')){
             $adminUsers = [
                 [
-                    'name' => 'Admin',
                     'type' => User::TYPE_ADMINISTRADOR,
                     'email' => 'admin@email.com',
                     'password' => Hash::make('12345678'),
@@ -31,7 +30,6 @@ class UserSeeder extends Seeder
 
             $clientUsers = [
                 [
-                    'name' => 'Cliente',
                     'type' => User::TYPE_CLIENT,
                     'email' => 'cliente@email.com',
                     'password' => Hash::make('12345678'),

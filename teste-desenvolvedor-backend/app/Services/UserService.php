@@ -2,9 +2,13 @@
 
 namespace App\Services;
 
+use App\Models\Client;
+use App\Models\Order;
 use App\Models\User;
 use App\Repositories\Interfaces\ClientRepositoryInterface;
+use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Throwable;
@@ -18,7 +22,9 @@ class UserService
      */
     public function __construct(
         private UserRepositoryInterface $userRepository,
-        private ClientRepositoryInterface $clientRepository
+        private ClientRepositoryInterface $clientRepository,
+        private OrderService $orderService,
+        private OrderRepositoryInterface $orderRepository
     ) {
 
     }
@@ -65,5 +71,20 @@ class UserService
         });
     }
 
+    /**
+     * @param int $id
+     * @return bool
+     * @throws Throwable
+     */
+    public function destroy(int $id): bool
+    {
+        return DB::transaction(function () use ($id) {
 
+            /** @var Client $client */
+            $user = $this->userRepository->findOrFail($id);
+            $client = $this->clientRepository->findOrFail($user->client_id);
+            $this->orderRepository->destroyByClient($client->id);
+            return $this->clientRepository->destroy($client->id);
+        });
+    }
 }

@@ -32,9 +32,10 @@ class OrderService
         //$product = $this->productRepository->findOrFail($attributes['product_id']);
 
         $totalPrice = 0;
-        foreach ($attributes['products'] as $products) {
+        dd($attributes);
+        foreach ($attributes['checkbox'] as $products) {
 
-            $product = $this->productRepository->findOrFail($products['product_id']);
+            $product = $this->productRepository->findOrFail($products+1);
 
             $priceOfProduct = $product->price;
 

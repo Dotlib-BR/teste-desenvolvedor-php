@@ -11,6 +11,16 @@ class Order extends Model
 {
     use HasFactory;
 
+    const STATUS_OPEN = 'Aberto';
+    const STATUS_CANCELLED = 'Cancelado';
+    const STATUS_PAID = 'Pago';
+
+    const STATUS = [
+        self::STATUS_OPEN,
+        self::STATUS_CANCELLED,
+        self::STATUS_PAID
+    ];
+
     protected $fillable = [
         'client_id',
         'product_id',

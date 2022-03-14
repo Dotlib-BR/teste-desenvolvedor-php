@@ -19,6 +19,8 @@ return new class extends Migration
             $table->decimal('price');
             $table->bigInteger('bar_code')->unique();
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

@@ -2,8 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Models\Client;
 use App\Models\Order;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
+use App\Repositories\Interfaces\UserRepositoryInterface;
+use Couchbase\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
@@ -16,7 +19,7 @@ class OrderRepository implements OrderRepositoryInterface
      *
      * @param Order $order
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, private UserRepositoryInterface $userRepository)
     {
         $this->order = $order;
     }
@@ -38,7 +41,7 @@ class OrderRepository implements OrderRepositoryInterface
      */
     public function paginate(array $params = []): LengthAwarePaginator
     {
-        return $this->order->newQuery()->paginate(10);
+        return $this->order->newQuery()->paginate(20);
     }
 
     /**
@@ -72,6 +75,22 @@ class OrderRepository implements OrderRepositoryInterface
     }
 
     /**
+     * @param mixed $clientId
+     * @return Collection
+     */
+    public function destroyByClient(mixed $clientId): Collection
+    {
+        /** @var Order $order */
+        $orders = $this->order->newQuery()->where('client_id', $clientId)->get();
+        $orders->each(function (Order $order) {
+            $order->products()->detach();
+            $order->delete();
+        });
+
+        return $orders;
+    }
+
+    /**
      * @param mixed $id
      * @param array $columns
      * @return Order|null
@@ -89,5 +108,20 @@ class OrderRepository implements OrderRepositoryInterface
     public function findOrFail(mixed $id, array $columns = ['*']): Order
     {
         return $this->order->newQuery()->findOrFail($id, $columns);
+    }
+
+    /**
+     * @param string $search
+     * @return Collection
+     */
+    public function search(string $search): Collection
+    {
+        return Client::query()->join('orders', 'orders.client_id', '=', 'clients.id')
+            ->where('total_price', 'iLIKE', "%{$search}%")
+            ->orWhere('cpf', 'iLIKE', "%{$search}%")
+            ->orWhere('status', 'iLIKE', "%{$search}%")
+            ->orWhere('name', 'iLIKE', "%{$search}%")
+            ->orWhere('orders.id', 'iLIKE', "%{$search}%")
+            ->get();
     }
 }

@@ -5,15 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
+use App\Models\User;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
+use App\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Services\OrderService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\View\View;
+use Redirect;
 
 class OrderController extends Controller
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
+        private ProductRepositoryInterface $productRepository,
         private OrderService $orderService
     )
     {}
@@ -21,34 +27,58 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
+     * @return View
      */
-    public function index(): JsonResponse
+    public function index(): View
     {
-        return response()->json($this->orderRepository->all());
+        $orders = $this->orderRepository->paginate();
+        return view('orders.index', compact('orders'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreOrderRequest $request
-     * @return JsonResponse
+     * @return View
      */
-    public function store(StoreOrderRequest $request): JsonResponse
+    public function create(): view
     {
-        $user = $request->user();
-        return response()->json($this->orderService->create($request->validated(), $user));
+        $products = $this->productRepository->all();
+        return view('orders.crud', compact('products'));
     }
 
     /**
-     * Display the specified resource.
+     * Store a newly created resource in storage.
      *
-     * @param int $id
-     * @return JsonResponse
+     * @param Request $request
+     * @return View
      */
-    public function show(int $id): JsonResponse
+    public function store(Request $request): View
     {
-        return response()->json($this->orderRepository->findOrFail($id)->load('products'));
+        $user = $request->user();
+        $this->orderService->create($request->toArray(), $user);
+
+        return view('orders.index');
+    }
+
+//    /**
+//     * Display the specified resource.
+//     *
+//     */
+//    public function show(int $id)
+//    {
+//        $order = $this->orderRepository->findOrFail($id);
+//        return json_encode([$order]);
+//    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Order $order
+     * @return View
+     */
+    public function edit(Order $order): view
+    {
+        return view('orders.crud', compact('order'));
     }
 
     /**
@@ -56,11 +86,13 @@ class OrderController extends Controller
      *
      * @param UpdateOrderRequest $request
      * @param int $id
-     * @return JsonResponse
+     * @return View
      */
-    public function update(UpdateOrderRequest $request, int $id): JsonResponse
+    public function update(UpdateOrderRequest $request, int $id): view
     {
-        return response()->json($this->orderRepository->update($request->validated(), $id));
+        $this->orderRepository->update($request->validated(), $id);
+
+        return view('orders.index')->with('success', 'Pedido atualizado com sucesso!');
     }
 
     /**
@@ -72,5 +104,16 @@ class OrderController extends Controller
     public function destroy(Order $order): JsonResponse
     {
         return response()->json($this->orderRepository->destroy($order));
+    }
+
+    /**
+     * @param Request $request
+     * @return View
+     */
+    public function search(Request $request): View
+    {
+        $orders = $this->orderRepository->search($request->input('search'));
+
+        return view('orders.index', compact('orders'));
     }
 }

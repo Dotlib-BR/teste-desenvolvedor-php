@@ -52,4 +52,10 @@ interface ProductRepositoryInterface
      * @return bool|null
      */
     public function destroy(mixed $id): ?bool;
+
+    /**
+     * @param string $search
+     * @return Collection
+     */
+    public function search(string $search): Collection;
 }

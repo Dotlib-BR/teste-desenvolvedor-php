@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
+use App\Models\Order;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -52,4 +53,16 @@ interface OrderRepositoryInterface
      * @return bool|null
      */
     public function destroy(mixed $id): ?bool;
+
+    /**
+     * @param mixed $clientId
+     * @return Collection
+     */
+    public function destroyByClient(mixed $clientId): Collection;
+
+    /**
+     * @param string $search
+     * @return Collection
+     */
+    public function search(string $search): Collection;
 }

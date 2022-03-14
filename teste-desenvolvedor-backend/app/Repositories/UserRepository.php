@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Client;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -93,4 +94,20 @@ class UserRepository implements UserRepositoryInterface
     {
         return $this->user->newQuery()->findOrFail($id, $columns);
     }
+
+    /**
+     * @param string $search
+     * @return Collection
+     */
+    public function search(string $search): Collection
+    {
+        return Client::query()->join('users', 'users.client_id', '=', 'clients.id')
+            ->where('email', 'iLIKE', "%{$search}%")
+            ->orWhere('cpf', 'iLIKE', "%{$search}%")
+            ->orWhere('type', 'iLIKE', "%{$search}%")
+            ->orWhere('name', 'iLIKE', "%{$search}%")
+            ->orWhere('users.id', 'iLIKE', "%{$search}%")
+            ->get();
+    }
+
 }

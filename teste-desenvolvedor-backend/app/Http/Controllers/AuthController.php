@@ -8,16 +8,23 @@ use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\UnauthorizedException;
+use Illuminate\View\View;
 use Throwable;
 
-/**
- * @group Auth
- */
+
 class AuthController extends Controller
 {
+    /**
+     *
+     * @param UserRepositoryInterface $userRepository
+     * @param UserService $userService
+     */
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private UserService $userService
@@ -25,54 +32,64 @@ class AuthController extends Controller
     {}
 
     /**
+     * @return View
+     */
+    public function index(): View
+    {
+        return view('auth.login');
+    }
+
+    /**
      * LOGIN - Faz o login no sistema.
      * @unauthenticated
      *
      * @param LoginRequest $request
-     * @return JsonResponse
+     * @return RedirectResponse
      * @throws UnauthorizedException
      */
-    public function login(LoginRequest $request): JsonResponse
+    public function login(Request $request): RedirectResponse
     {
-        /** @var User $user */
-        $user = $this->userRepository->findByEmail($request->email);
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        if (!$user || !Hash::check($request['password'], $user->password)) {
-            throw new UnauthorizedException("Acesso não autorizado, e-mail ou senha incorretos");
+            return redirect()->intended('pedidos');
         }
 
-        $token = $user->createToken('api-token-teste')->plainTextToken;
-
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'user' => $user
+        return back()->withErrors([
+            'email' => 'Login ou senha invalido!',
         ]);
     }
 
     /**
-     * Signup - Cria um novo usuário.
+     * LOGOUT - Faz o logout do sistema.
+     * @authenticated
+     *
+     * @return RedirectResponse
+     */
+    public function logout(): RedirectResponse
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
+
+    /**
+     * @return View
+     */
+    public function signup(): View
+    {
+        return view('auth.signup');
+    }
+
+    /**
+     * @param StoreUserRequest $request
+     * @return RedirectResponse
      * @throws Throwable
      */
-    public function signup(StoreUserRequest $request): JsonResponse
+    public function register(StoreUserRequest $request): RedirectResponse
     {
-        $user = $this->userService->create($request->validated());
+        $this->userService->create($request->validated());
 
-        $token = $user->createToken('api-token-teste')->plainTextToken;
-
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'user' => $user
-        ]);
-    }
-
-    /**
-     * LOGOUT - Desloga o Usuário (Revoga o token logado)
-     */
-    public function logout(): Response
-    {
-        User::logout();
-        return response()->noContent();
+        return redirect()->intended('login');
     }
 }

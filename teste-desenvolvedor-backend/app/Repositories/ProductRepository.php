@@ -78,4 +78,17 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return $this->product->newQuery()->findOrFail($id, $columns);
     }
+
+    /**
+     * @param string $search
+     * @return Collection
+     */
+    public function search(string $search): Collection
+    {
+        return $this->product->newQuery()->where('price', 'iLIKE', "%{$search}%")
+            ->orWhere('bar_code', 'iLIKE', "%{$search}%")
+            ->orWhere('name', 'iLIKE', "%{$search}%")
+            ->orWhere('id', 'iLIKE', "%{$search}%")
+            ->get();
+    }
 }
