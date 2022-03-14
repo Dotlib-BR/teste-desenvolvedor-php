@@ -30,7 +30,7 @@ class ProductController extends Controller
      */
     public function index(): View
     {
-        $products = $this->productRepository->all();
+        $products = $this->productRepository->paginate();
         return view('products.index', compact('products'));
     }
 

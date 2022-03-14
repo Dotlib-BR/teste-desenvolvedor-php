@@ -26,9 +26,6 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <a class="navbar-brand" href="#">DotOrders</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{route('welcome')}}">Home</a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('pedidos.index') }}">Pedidos</a>
             </li>
@@ -39,10 +36,6 @@
                 <a class="nav-link " href="{{ route('clientes.index') }}">Clientes</a>
             </li>
         </ul>
-        <form class="">
-            <input class="" type="search" placeholder="Pesquisar" aria-label="Search" style="border-radius: 3px">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Pesquisar</button>
-        </form>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
                 <a class="nav-link" href="#">Sair</a>

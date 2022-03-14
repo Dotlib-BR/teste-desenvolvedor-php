@@ -15,10 +15,10 @@
         <div style="display: flex;justify-content: space-between" class="card-header py-2 mb-3">
             <h1 class="mt-3">Pedidos</h1>
             <div class="search-box mt-3">
-                <div class="title-search-blog">Pesquisar</div>
                 <form action="{{ route('orders.search') }}" method="POST">
                     @csrf
                     <input class="search-field" id="search" type="text" name="search" placeholder="Faça sua busca">
+                    <button class="btn btn-success my-2 my-sm-0" type="submit">Pesquisar</button>
                 </form>
             </div>
             <a href="{{ route('pedidos.create') }}" class="btn btn-success my-2" style="margin-bottom: 1.5rem!important;">Novo Pedido</a>
@@ -47,16 +47,41 @@
             @endforeach
             </tbody>
         </table>
-        <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a class="active" href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">&raquo;</a>
+
+        <div>
+            <nav class="d-flex justify-items-center justify-content-between">
+                <div class="d-flex justify-content-between flex-fill d-sm-none">
+                    <ul class="pagination">
+
+                        <li class="page-item disabled" aria-disabled="true">
+                            <span class="page-link">&laquo; Previous</span>
+                        </li>
+
+                        <li class="page-item">
+                            <a class="page-link" href="http://localhost:8000/clientes?page=2" rel="next">Next &raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
+                    <div>
+                        <ul class="pagination" style="display: inline-flex!important;">
+
+                            <li class="page-item"><a class="page-link" href="http://localhost:8000/pedidos">1</a></li>
+                            <li class="page-item"><a class="page-link" href="http://localhost:8000/pedidos?page=2">2</a></li>
+                            <li class="page-item"><a class="page-link" href="http://localhost:8000/pedidos?page=3">3</a></li>
+                            <li class="page-item"><a class="page-link" href="http://localhost:8000/pedidos?page=4">4</a></li>
+                            <li class="page-item"><a class="page-link" href="http://localhost:8000/pedidos?page=5">5</a></li>
+                            <li class="page-item"><a class="page-link" href="http://localhost:8000/pedidos?page=6">6</a></li>
+                            <li class="page-item"><a class="page-link" href="http://localhost:8000/pedidos?page=7">7</a></li>
+                            <li class="page-item"><a class="page-link" href="http://localhost:8000/pedidos?page=8">8</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
+
     </div>
 
     <!-- Modal de Detalhes -->
