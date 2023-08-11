@@ -40,7 +40,7 @@ docker-compose exec app php artisan key:generate
 
 9. Caso a bootstrap-ui e registration não seja acionadas sozinhos, execute:
 
-npn install && npm run dev
+npm install && npm run dev
 
 9. Execute as migrações do banco de dados:
 
@@ -50,6 +50,20 @@ docker-compose exec app php artisan migrate
 10. Acesse o aplicativo em seu navegador:
 
 [http://localhost:8000](http://localhost:8000)
+
+OBS: É possível testar também apenas clonando o repositório, acessando a pasta:
+
+cd teste-pleno-php
+
+E rodando os comandos de instalação:
+
+composer install 
+php artisan key:generate
+php artisan migrate
+npm install && npm run dev
+php artisan serve
+
+
 
 ## Como Parar e Remover o Contêiner
 
