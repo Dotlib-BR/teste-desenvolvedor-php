@@ -1,58 +1,74 @@
-[![](https://dotlib.com/theme/img/logos/logo.png)](http://www.dotlib.com)
+# Aplicativo de Vagas e Candidatos
 
-# Nossa empresa
+Olá caro desenvolvedor ou tester!
 
-A Dot.Lib distribui conteúdo online científico e acadêmico a centenas de instituições espalhadas pela América Latina. Temos como parceiras algumas das principais editoras científicas nacionais e internacionais. Além de prover conteúdo, criamos soluções que atendem às necessidades de nossos clientes e editoras.
+Este é um aplicativo de exemplo desenvolvido em Laravel que gerencia vagas e candidatos.
 
-## Conheça mais sobre a Dotlib
+## Pré-requisitos
 
-https://dotlib.com/
+Certifique-se de ter o Docker instalado em sua máquina.
 
-https://www.linkedin.com/company/dotlib/
+- Docker: [https://www.docker.com/get-started](https://www.docker.com/get-started)
 
-# Descrição da vaga
+## Como Executar
 
-Buscamos profissionais que sejam apaixonados por desenvolvimento, inovação e novas tecnologias, para integrar nosso time em projetos baseados em Node.JS, Laravel, React.JS e React Native.
+1. Clone este repositório para sua máquina:
 
-## Requisitos
+git clone https://github.com/seu-usuario/seu-projeto.git
 
-### **Obrigatórios:**
+2. Navegue até o diretório do projeto:
 
-- Mínimo 1 ano de experiência em desenvolvimento de sites e sistemas em Laravel;
-- Desenvolvimento de APIs RESTful;
-- Conhecimentos em SQL e NoSQL;
-- Conhecimentos em Docker;
-- Controle de versões (GIT).
+cd teste-pleno-php
 
-### **Diferenciais:**
+3. Crie uma cópia do arquivo `.env.example` e renomeie para `.env`:
 
-- TDD;
-- Conhecimentos em Node.JS;
-- Conhecimentos em Elasticsearch;
-- Conhecimentos em serviços AWS;
-- Experiência em metodologias ágeis (Scrum/Kanban).
+cp .env.example .env
 
-## Benefícios
+4. Edite o arquivo `.env` e configure as variáveis de ambiente, incluindo as configurações do banco de dados.
 
-- Salário compatível com o mercado;
-- Vale Refeição ou Vale Alimentação;
-- Plano de Saúde e Odontológico;
-- Equipe unida, divertida e apaixonada por hambúrgueres;
-- TECH DAY - Evento trimestral de palestras sobre tecnologia;
-- Friday's Talk - Bate papo descontraído sobre tecnologia, apresentação de POCs de estudos, etc;
-- Emendas em feriados nacionais.
+5. Execute o seguinte comando para construir a imagem Docker e iniciar o contêiner:
 
-## Contratação
+docker-compose up -d
 
-Regime: CLT
+6. Instale as dependências do Composer:
 
-## Alocação
+docker-compose exec app composer install 
 
-100% Remoto
+7. Gere a chave do aplicativo Laravel:
 
-## Como se candidatar
+docker-compose exec app php artisan key:generate
 
-Para se candidatar, basta acessar a url de acordo com o nível e realizar o teste para a vaga:
+9. Caso a bootstrap-ui e registration não seja acionadas sozinhos, execute:
 
-- [Desenvolvedor PHP Júnior](teste-junior.md)
-- [Desenvolvedor PHP Pleno](teste-pleno.md)
+npm install && npm run dev
+
+9. Execute as migrações do banco de dados:
+
+docker-compose exec app php artisan migrate
+
+
+10. Acesse o aplicativo em seu navegador:
+
+[http://localhost:8000](http://localhost:8000)
+
+OBS: É possível testar também apenas clonando o repositório, acessando a pasta:
+
+cd teste-pleno-php
+
+E rodando os comandos de instalação:
+
+composer install 
+php artisan key:generate
+php artisan migrate
+npm install && npm run dev
+php artisan serve
+
+
+
+## Como Parar e Remover o Contêiner
+
+Para parar o contêiner e remover o ambiente Docker, execute o seguinte comando:
+
+docker-compose down
+
+Isso encerrará o contêiner e removerá todos os recursos relacionados ao ambiente Docker.
