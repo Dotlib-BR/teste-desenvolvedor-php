@@ -1,65 +1,55 @@
-[![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
+# Aplicativo de Vagas e Candidatos
 
-# Teste para candidatos à vaga de Desenvolvedor PHP Pleno
+Olá caro desenvolvedor ou tester!
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
+Este é um aplicativo de exemplo desenvolvido em Laravel que gerencia vagas e candidatos.
 
-## Instruções
+## Pré-requisitos
 
-O desafio consiste em implementar uma aplicação web utilizando o framework PHP Laravel, um banco de dados relacional (Mysql, Postgres ou SQLite), que terá como finalidade a inscrição de candidatos a uma oportunidade de emprego.
+Certifique-se de ter o Docker instalado em sua máquina.
 
-Sua aplicação deve possuir:
+- Docker: [https://www.docker.com/get-started](https://www.docker.com/get-started)
 
-- CRUD de vagas:
-  - Criar, editar, excluir e listar vagas.
-  - A vaga pode ser CLT, Pessoa Jurídica ou Freelancer.
-- CRUD de candidatos:
-  - Criar, editar, excluir e listar candidatos.
-- Um cadidato pode se inscrever em uma ou mais vagas.
-- Deve ser ser possível "pausar" a vaga, evitando a inscrição de candidatos.
-- Cada CRUD:
-  - Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
-  - Deve possuir formulários para criação e atualização de seus itens.
-  - Deve permitir a deleção de qualquer item de sua lista.
-  - Implementar validações de campos obrigatórios e tipos de dados.
-- Testes unitários e de unidade.
+## Como Executar
 
-## Banco de dados
+1. Clone este repositório para sua máquina:
 
-- O banco de dados deve ser criado utilizando Migrations do framework Laravel, e também utilizar Seeds e Factorys para popular as informações no banco de dados.
+git clone https://github.com/seu-usuario/seu-projeto.git
 
-## Tecnologias a serem utilizadas
+2. Navegue até o diretório do projeto:
 
-Devem ser utilizadas as seguintes tecnologias:
+cd teste-pleno-php
 
-- HTML
-- CSS
-- Javascript
-- Framework Laravel (PHP)
-- Docker (construção do ambiente de desenvolvimento)
-- Mysql, Postgres ou SQLite
+3. Crie uma cópia do arquivo `.env.example` e renomeie para `.env`:
 
-## Entrega
+cp .env.example .env
 
-- Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
-- Crie uma branch com o seu nome completo;
-- Altere o arquivo teste-pleno.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
-- Depois de finalizado, envie-nos o pull request;
+4. Edite o arquivo `.env` e configure as variáveis de ambiente, incluindo as configurações do banco de dados.
 
-## Bônus
+5. Execute o seguinte comando para construir a imagem Docker e iniciar o contêiner:
 
-- API Rest JSON para todos os CRUDS listados acima.
-- Permitir deleção em massa de itens nos CRUDs.
-- Permitir que o usuário mude o número de itens por página.
-- Implementar autenticação de usuário na aplicação.
+docker-compose up -d
 
-## O que iremos analisar
+6. Instale as dependências do Composer:
 
-- Organização do código;
-- Aplicação de design patterns;
-- Aplicação de testes;
-- Separação de módulos e componentes;
-- Legibilidade;
-- Criação do ambiente com Docker.
+docker-compose exec app composer install
 
-### Boa sorte!
+7. Gere a chave do aplicativo Laravel:
+
+docker-compose exec app php artisan key:generate
+
+8. Execute as migrações do banco de dados:
+
+docker-compose exec app php artisan migrate
+
+9. Acesse o aplicativo em seu navegador:
+
+[http://localhost:8000](http://localhost:8000)
+
+## Como Parar e Remover o Contêiner
+
+Para parar o contêiner e remover o ambiente Docker, execute o seguinte comando:
+
+docker-compose down
+
+Isso encerrará o contêiner e removerá todos os recursos relacionados ao ambiente Docker.
