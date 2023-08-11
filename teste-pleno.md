@@ -32,17 +32,22 @@ docker-compose up -d
 
 6. Instale as dependências do Composer:
 
-docker-compose exec app composer install
+docker-compose exec app composer install 
 
 7. Gere a chave do aplicativo Laravel:
 
 docker-compose exec app php artisan key:generate
 
-8. Execute as migrações do banco de dados:
+9. Caso a bootstrap-ui e registration não seja acionadas sozinhos, execute:
+
+npn install && npm run dev
+
+9. Execute as migrações do banco de dados:
 
 docker-compose exec app php artisan migrate
 
-9. Acesse o aplicativo em seu navegador:
+
+10. Acesse o aplicativo em seu navegador:
 
 [http://localhost:8000](http://localhost:8000)
 
