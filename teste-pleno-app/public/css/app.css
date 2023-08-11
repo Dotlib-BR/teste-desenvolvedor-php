@@ -1,0 +1,55 @@
+body {
+  background-color: #F1F0E8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  margin: 0;
+}
+
+table {
+    margin: 2em 0;
+    background-color: #FFF3DA
+}
+
+.cotainer {
+    width: fit-content;
+}
+
+.navbar {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #96B6C5;
+    font-size: larger;
+}
+
+.option {
+    margin-top: 5em;
+}
+
+.btn-vaga-criar {
+    margin-top: 1em;
+}
+
+.btn-candidato-action {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.filter-candidatos {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.btn-remove-candidatos {
+  margin-left: 1em;
+}
+
+
+
+
+
