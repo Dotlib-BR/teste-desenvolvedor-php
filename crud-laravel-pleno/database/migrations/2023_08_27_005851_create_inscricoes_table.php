@@ -7,18 +7,23 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Rodar as migrations.
      */
     public function up(): void
     {
         Schema::create('inscricoes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Chave Primaria
+            $table->unsignedBigInteger('vaga_id'); //cahave estrangeira ref. vagas
+            $table->unsignedBigInteger('candidato_id'); //chave estrangeira ref. candidatos
+            $table->timestamp('data_inscricao')->default(now()); // Data inscrição momento atual
+
+            $table->foreign('vaga_id')->references('id')->on('vagas'); // Chave estrangeira tb vagas
+            $table->foreign('candidato_ida')->references(id)->on('candidatos'); // Chave estr. tb candidatos
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverter the migrations.
      */
     public function down(): void
     {
