@@ -7,18 +7,22 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Rodar as migrations
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('vagas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Chave primária
+            $table->string('titulo'); // Campo de texto
+            $table->text('descricao');  // Campo de texto mais logno
+            $table->enum('tipo', ['CLT', 'Pessoa Jurídica', 'Freelancer']);  // Enumeração
+            $table->enum('status', ['Ativa', 'Pausada', 'Encerrada']);  // Enumeração
+            $table->timestamps();  // Campos de dta de criação e modificação
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverter as migrations.
      */
     public function down(): void
     {
