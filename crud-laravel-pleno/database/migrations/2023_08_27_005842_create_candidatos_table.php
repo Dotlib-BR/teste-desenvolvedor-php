@@ -7,8 +7,22 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Rodar as migrations.
      */
+    public function up(): void
+    {
+        Schema::create('candidatos', function (Blueprint $table) {
+            $table->id(''); //Primária
+            $table->string('nome');
+            $table->string('emaul');
+            $table->text('experiencia_profissional')->nullable();
+            $table->text('habilidades')->nullable();
+            $table->string('disponibilidade')->nullable();
+            $table->timestamp(); //data de criação e modificação
+        });
+    }
+
+
     public function up(): void
     {
         Schema::create('candidatos', function (Blueprint $table) {
@@ -18,7 +32,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Reverter as migrations.
      */
     public function down(): void
     {

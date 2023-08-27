@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('vagas', function (Blueprint $table) {
             $table->id(); // Chave primária
-            $table->string('titulo'); // Campo de texto
-            $table->text('descricao');  // Campo de texto mais logno
+            $table->string('titulo');
+            $table->text('descricao');
             $table->enum('tipo', ['CLT', 'Pessoa Jurídica', 'Freelancer']);  // Enumeração
             $table->enum('status', ['Ativa', 'Pausada', 'Encerrada']);  // Enumeração
-            $table->timestamps();  // Campos de dta de criação e modificação
+            $table->timestamp();  // Campos de dta de criação e modificação
         });
     }
 
