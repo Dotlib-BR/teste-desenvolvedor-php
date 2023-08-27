@@ -14,20 +14,11 @@ return new class extends Migration
         Schema::create('candidatos', function (Blueprint $table) {
             $table->id(''); //Primária
             $table->string('nome');
-            $table->string('emaul');
+            $table->string('email');
             $table->text('experiencia_profissional')->nullable();
             $table->text('habilidades')->nullable();
             $table->string('disponibilidade')->nullable();
-            $table->timestamp(); //data de criação e modificação
-        });
-    }
-
-
-    public function up(): void
-    {
-        Schema::create('candidatos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->timestamps(); //data de criação e modificação
         });
     }
 

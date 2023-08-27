@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('descricao');
             $table->enum('tipo', ['CLT', 'Pessoa Jurídica', 'Freelancer']);  // Enumeração
             $table->enum('status', ['Ativa', 'Pausada', 'Encerrada']);  // Enumeração
-            $table->timestamp();  // Campos de dta de criação e modificação
+            $table->timestamps();  // Campos de dta de criação e modificação
         });
     }
 
