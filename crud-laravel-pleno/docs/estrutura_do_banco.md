@@ -31,10 +31,9 @@
 ## Tabela: Usuários
 
 - **ID:** (chave primária)
-- **Nome de Usuário**
+- **Name**
 - **E-mail do Usuário**
 - **Senha Criptografada**
-- **Nível de Acesso:** (Admin, Usuário Regular)
-- **Data de Criação**
-- **Data de Modificação**
+- **Nível de Acesso:** (Admin, Usuário)
+- **Data de Criação e Modificação**
 

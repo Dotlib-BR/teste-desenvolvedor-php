@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('data_inscricao')->default(now()); // Data inscrição momento atual
 
             $table->foreign('vaga_id')->references('id')->on('vagas'); // Chave estrangeira tb vagas
-            $table->foreign('candidato_ida')->references(id)->on('candidatos'); // Chave estr. tb candidatos
+            $table->foreign('candidato_id')->references('id')->on('candidatos'); // Chave estr. tb candidatos
         });
     }
 

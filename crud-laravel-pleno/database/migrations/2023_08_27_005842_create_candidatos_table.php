@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('candidatos', function (Blueprint $table) {
-            $table->id(''); //Primária
-            $table->string('nome');
+            $table->id(); //Primária
+            $table->string('name');
             $table->string('email');
             $table->text('experiencia_profissional')->nullable();
             $table->text('habilidades')->nullable();
