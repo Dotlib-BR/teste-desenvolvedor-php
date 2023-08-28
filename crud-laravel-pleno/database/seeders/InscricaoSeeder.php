@@ -12,6 +12,6 @@ class InscricaoSeeder extends Seeder
      */
     public function run(): void
     {
-        factory(Inscricao::class, 50)->create();
+        Factory::create(Inscricao::class, 50);
     }
 }

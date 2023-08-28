@@ -2,28 +2,34 @@
 
 namespace Database\Factories;
 
+use App\Models\Candidato;
+use App\Models\Inscricao;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
 class CandidatoFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Candidato::class;
+
     public function definition(): array
     {
         return [
-            'name' => fake()->name,
-            'email' => fake()->unique()->safeEmail, // Email do Candidato
-            'experiencia_profissional' => fake()->paragraph, // Experiência Profissional
-            'habilidades' => fake()->sentence, // Habilidades
-            'disponibilidade' => fake()->randomElement(['Integral', 'Meio Período']), // Disponibilidade
-            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
-            'updated_at' => now(), // Data de Modificacão
+            'name' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            'experiencia_profissional' => $this->faker->paragraph,
+            'habilidades' => $this->faker->sentence,
+            'disponibilidade' => $this->faker->randomElement(['Integral', 'Meio Período']),
+            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => now(),
         ];
+    }
+
+    // Definindo relacionamento com inscrições
+    public function configure()
+    {
+        return $this->afterCreating(function (Candidato $candidato) {
+            $candidato->inscricoes()->createMany(
+                Inscricao::factory()->count(3)->raw()
+            );
+        });
     }
 }

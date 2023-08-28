@@ -18,13 +18,13 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => bycrypt('password'),
-            #'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // Testar modelo criado se falhar
+            'password' => bcrypt('password'), // Usando bcrypt para criptografar a senha
+            //'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // Testar modelo criado se falhar
             'remember_token' => Str::random(10),
-            'nivel_acesso' => fake()->randomElement([Admin, Usuario]),
+            'nivel_acesso' => $this->faker->randomElement(['Admin', 'Usuario']), // As strings devem estar entre aspas
             'created_at' => now(),
             'updated_at' => now(),
         ];

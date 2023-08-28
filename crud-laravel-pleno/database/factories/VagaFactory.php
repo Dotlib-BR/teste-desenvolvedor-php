@@ -2,27 +2,26 @@
 
 namespace Database\Factories;
 
+use App\Models\Vaga;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Vaga>
  */
+
 class VagaFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Vaga::class;
+
     public function definition(): array
     {
         return [
-            'titulo' => fake()->sentence, // Uma descrição curta para o titulo
-            'descricao' => fake()->paragraph, // Paragrafo
-            'tipo' => fake()->randomElement(['CLT', 'Pessoa Jurídica', 'Freelancer']), // Tipo de vaga
-            'status' => fake()->randomElement(['Ativa', 'Pausada', 'Encerrada']), // Status da vaga
-            'created_at' => fake()->dateTimeBetween('-1 year', 'now'), // Data, sendo criada 12 meses atrás a partir da hora de criação
-            'updated_at' => now(), // Data modificação da vaga           
+            'titulo' => $this->faker->sentence,
+            'descricao' => $this->faker->paragraph,
+            'tipo' => $this->faker->randomElement(['CLT', 'Pessoa Jurídica', 'Freelancer']),
+            'status' => $this->faker->randomElement(['Ativa', 'Pausada', 'Encerrada']),
+            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => now(),
         ];
     }
 }
