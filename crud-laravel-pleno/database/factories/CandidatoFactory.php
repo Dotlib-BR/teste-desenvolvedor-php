@@ -17,7 +17,13 @@ class CandidatoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name,
+            'email' => fake()->unique()->safeEmail, // Email do Candidato
+            'experiencia_profissional' => fake()->paragraph, // Experiência Profissional
+            'habilidades' => fake()->sentence, // Habilidades
+            'disponibilidade' => fake()->randomElement(['Integral', 'Meio Período']), // Disponibilidade
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => now(), // Data de Modificacão
         ];
     }
 }
