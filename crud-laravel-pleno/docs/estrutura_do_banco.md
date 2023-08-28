@@ -13,13 +13,12 @@
 ## Tabela: Candidatos
 
 - **ID:** (chave primária)
-- **Nome do Candidato**
-- **E-mail do Candidato**
+- **Name** (Nome do Candidato)
+- **Email do Candidato**
 - **Experiência Profissional**
 - **Habilidades**
 - **Disponibilidade**
-- **Data de Criação**
-- **Data de Modificação**
+- **Data de Criação e Modificação**
 
 ## Tabela: Inscrições
 
@@ -32,7 +31,7 @@
 
 - **ID:** (chave primária)
 - **Name**
-- **E-mail do Usuário**
+- **Email do Usuário**
 - **Senha Criptografada**
 - **Nível de Acesso:** (Admin, Usuário)
 - **Data de Criação e Modificação**
