@@ -7,18 +7,22 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Roda as migrations.
      */
     public function up(): void
     {
         Schema::create('usuarios', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Cjave Primária
+            $table->string('nome');
+            $table->string('email')->unique(); //Email do usuário
+            $table->string('senha');
+            $table->enum('nivel_acesso', ['Administrador', 'Usuario']);
+            $table->timestamps(); // Data de criação e modificações
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverte as migrations.
      */
     public function down(): void
     {
