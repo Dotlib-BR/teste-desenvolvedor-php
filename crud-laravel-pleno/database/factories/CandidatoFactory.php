@@ -22,14 +22,4 @@ class CandidatoFactory extends Factory
             'updated_at' => now(),
         ];
     }
-
-    // Definindo relacionamento com inscrições
-    public function configure()
-    {
-        return $this->afterCreating(function (Candidato $candidato) {
-            $candidato->inscricoes()->createMany(
-                Inscricao::factory()->count(3)->raw()
-            );
-        });
-    }
 }
