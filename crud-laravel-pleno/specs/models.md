@@ -25,3 +25,5 @@
 
 **LEGENDA:**
 `HasFactory`, `HasApiTokens`, `HasFactory` e `Notifiable` são mixins, comportamentos ou módulos. Que ajudam na composição, reutilização de código, conflitos de métodos.
+`Model` as models são representações da estrutura de dados do app, integrando com o banco de dados e permitindo operações como leitura, gravação, update e delete.
+Das responsabilidades dasModels; __Relacionamentos, Validar dados, Migrações, Segurança, Orgfaniação e intermediação entre o banco de dados e a aplicação(mediar a interação com as regras de negócios e coordenação das ações de lógica).__

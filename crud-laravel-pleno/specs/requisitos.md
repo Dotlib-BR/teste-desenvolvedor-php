@@ -29,3 +29,6 @@ Testes unitários para garantir o funcionamento correto das funcionalidades.
 
 - Pasta DOCS com documentos do projeto.
 - Pasta Specs especificações e requerimentos.
+
+**LEGENDA**
+`Requisitos(requirements)` são uma descrição detalhada das funcionalidades, características e objetivos que um projeto deve alcançar. Dentre estas diretrizes e especificações para orientação no desenvolvimento estão; __Objetivos, base para testes, avaliação de desempenho, documentação, escopo do projeto(pode estar incluso) e em geral servem tambpém para comunicar as necessidades e expectativas no projeto.__
