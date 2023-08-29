@@ -2,16 +2,18 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Candidato;
+use App\Models\Inscricao;
 
 class CandidatoSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        Factory::create(Candidato::class, 20);
+        Candidato::factory()->count(20)->create()->each(function ($candidato) {
+            $candidato->inscricoes()->createMany(
+                Inscricao::factory()->count(3)->raw()
+            );
+        });
     }
 }

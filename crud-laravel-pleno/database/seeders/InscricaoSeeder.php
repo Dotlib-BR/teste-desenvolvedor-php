@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Inscricao;
 
 class InscricaoSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class InscricaoSeeder extends Seeder
      */
     public function run(): void
     {
-        Factory::create(Inscricao::class, 50);
+        Inscricao::factory()->count(20)->create();
     }
 }
