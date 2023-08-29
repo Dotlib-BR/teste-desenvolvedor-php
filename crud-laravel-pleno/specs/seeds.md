@@ -19,4 +19,4 @@
 - Cada vaga terá um título, descrição, tipo (CLT, Pessoa Jurídica ou Freelancer), status (Ativa, Pausada ou Encerrada) e datas de criação e atualização fictícias.
 
 **LEGENDA** 
-`Seeder` as seeds são scripts para preencher dados no banco de dados de aplicaç~eos web. Dentre as funcionalidades estão: testes, dados de exemplo, demonstrações, população inicial de dados no BD.
+`Seeder` as seeds são scripts para preencher dados no banco de dados de aplicaç~eos web. Dentre as funcionalidades estão: __testes, dados de exemplo, demonstrações, população inicial de dados no BD.__
