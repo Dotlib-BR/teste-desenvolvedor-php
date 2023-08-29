@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('nivel_acesso');
             $table->timestamps();
         });
 
@@ -40,7 +41,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('inscricoes', function (Blueprint $table) {
+        Schema::create('inscricaos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vaga_id');
             $table->unsignedBigInteger('candidato_id');
@@ -57,7 +58,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inscricoes');
+        Schema::dropIfExists('inscricaos');
         Schema::dropIfExists('candidatos');
         Schema::dropIfExists('vagas');
         Schema::dropIfExists('users');
