@@ -16,13 +16,14 @@ class Inscricao extends Model
         'data_inscricao',
     ];
 
-    public function vaga()
-    {
-        return $this->belongsTo(Vaga::class, 'vaga_id');
-    }
-
     public function candidato()
     {
-        return $this->belongsTo(Candidato::class, 'candidato_id');
+        return $this->belongsTo(Candidato::class);
     }
+    
+    public function vaga()
+    {
+        return $this->belongsTo(Vaga::class);
+    }
+    
 }

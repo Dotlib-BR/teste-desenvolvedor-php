@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Candidato;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +20,6 @@ class Candidato extends Model
 
     public function inscricoes()
     {
-        return $this->hasMany(Inscricao::class, 'candidato_id');
+        return $this->hasMany(Inscricao::class);
     }
 }

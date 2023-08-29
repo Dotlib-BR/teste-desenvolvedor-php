@@ -18,6 +18,6 @@ class Vaga extends Model
 
     public function inscricoes()
     {
-        return $this->hasMany(Inscricao::class, 'vaga_id');
+        return $this->hasMany(Inscricao::class);
     }
 }
