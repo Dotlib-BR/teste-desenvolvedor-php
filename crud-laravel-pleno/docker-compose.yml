@@ -5,6 +5,7 @@ services:
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
+                command: /bin/sh -c "apt-get update && apt-get install -y curl && php-fpm"
         image: sail-8.2/app
         extra_hosts:
             - 'host.docker.internal:host-gateway'
