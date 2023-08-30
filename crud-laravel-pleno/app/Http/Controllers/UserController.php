@@ -7,48 +7,45 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    /**
-     * Mostra uma lista de usuários.
-     */
     public function index()
     {
         $users = User::all();
         return response()->json($users);
     }
 
-    /**
-     * Armazena um novo usuário.
-     */
     public function store(Request $request)
     {
-        $userData = $request->all();
-        $user = User::create($userData);
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8',
+            'nivel_acesso' => 'required|in:Usuario,Admin',
+        ]);
+    
+        $user = User::create($validatedData);
         return response()->json($user, 201);
     }
 
-    /**
-     * Mostra os detalhes de um usuário específico.
-     */
     public function show(string $id)
     {
         $user = User::findOrFail($id);
         return response()->json($user);
     }
 
-    /**
-     * Atualiza os detalhes de um usuário existente.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'password' => 'nullable|string|min:8',
+            'nivel_acesso' => 'required|in:Usuario,Admin',
+        ]);
+    
         $user = User::findOrFail($id);
-        $userData = $request->all();
-        $user->update($userData);
+        $user->update($validatedData);
         return response()->json($user);
     }
 
-    /**
-     * Remove um usuário do sistema.
-     */
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);

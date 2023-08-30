@@ -7,48 +7,43 @@ use App\Models\Inscricao;
 
 class InscricaoController extends Controller
 {
-    /**
-     * Mostra uma lista de inscrições.
-     */
     public function index()
     {
-        $inscricoes = Inscricao::all();
+        $inscricoes = Inscricao::paginate(20);
         return response()->json($inscricoes);
     }
 
-    /**
-     * Armazena uma nova inscrição.
-     */
     public function store(Request $request)
     {
-        $dadosInscricao = $request->all();
-        $inscricao = Inscricao::create($dadosInscricao);
+        $validatedData = $request->validate([
+            'vaga_id' => 'required|exists:vagas,id',
+            'candidato_id' => 'required|exists:candidatos,id',
+            'data_inscricao' => 'required|date',
+        ]);
+
+        $inscricao = Inscricao::create($validatedData);
         return response()->json($inscricao, 201);
     }
 
-    /**
-     * Mostra os detalhes de uma inscrição específica.
-     */
     public function show(string $id)
     {
         $inscricao = Inscricao::findOrFail($id);
         return response()->json($inscricao);
     }
 
-    /**
-     * Atualiza os detalhes de uma inscrição existente.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'vaga_id' => 'required|exists:vagas,id',
+            'candidato_id' => 'required|exists:candidatos,id',
+            'data_inscricao' => 'required|date',
+        ]);
+
         $inscricao = Inscricao::findOrFail($id);
-        $dadosInscricao = $request->all();
-        $inscricao->update($dadosInscricao);
+        $inscricao->update($validatedData);
         return response()->json($inscricao);
     }
 
-    /**
-     * Remove uma inscrição do sistema.
-     */
     public function destroy(string $id)
     {
         $inscricao = Inscricao::findOrFail($id);

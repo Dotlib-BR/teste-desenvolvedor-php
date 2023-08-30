@@ -21,8 +21,15 @@ class CandidatoController extends Controller
      */
     public function store(Request $request)
     {
-        $dadosCandidato = $request->all();
-        $candidato = Candidato::create($dadosCandidato);
+        $validatedData = $request->validate([
+            'nome' => 'required|string|max:255',
+            'email' => 'required|email|unique:candidatos',
+            'experiencia_profissional' => 'nullable|string',
+            'habilidades' => 'nullable|string',
+            'disponibilidade' => 'nullable|string',
+        ]);
+    
+        $candidato = Candidato::create($validatedData);
         return response()->json($candidato, 201);
     }
 
@@ -38,11 +45,18 @@ class CandidatoController extends Controller
     /**
      * Atualiza os detalhes de um candidato existente.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'nome' => 'required|string|max:255',
+            'email' => 'required|email|unique:candidatos,email,'.$id,
+            'experiencia_profissional' => 'nullable|string',
+            'habilidades' => 'nullable|string',
+            'disponibilidade' => 'nullable|string',
+        ]);
+
         $candidato = Candidato::findOrFail($id);
-        $dadosCandidato = $request->all();
-        $candidato->update($dadosCandidato);
+        $candidato->update($validatedData);
         return response()->json($candidato);
     }
 
