@@ -4,9 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Inscricao>
- */
 class InscricaoFactory extends Factory
 {
     /**
@@ -21,6 +18,5 @@ class InscricaoFactory extends Factory
             'candidato_id' => $this->faker->randomElement([1, 2, 3]),
             'data_inscricao' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
-        
     }
 }

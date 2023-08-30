@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Candidato;
-use App\Models\Inscricao;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CandidatoFactory extends Factory
@@ -17,7 +16,7 @@ class CandidatoFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'experiencia_profissional' => $this->faker->paragraph,
             'habilidades' => $this->faker->sentence,
-            'disponibilidade' => $this->faker->randomElement(['Integral', 'Meio Período']),
+            'disponibilidade' => $this->faker->randomElement(['Integral', 'Meio Periodo']),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => now(),
         ];
