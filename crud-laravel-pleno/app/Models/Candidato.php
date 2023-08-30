@@ -10,7 +10,7 @@ class Candidato extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome',
+        'name',
         'email',
     ];
 
