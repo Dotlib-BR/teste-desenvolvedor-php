@@ -17,15 +17,16 @@ class VagaController extends Controller
 
     public function store(Request $request)
     {
-        $validateData = $request->validate([
+        $validatedData = $request->validate([
             'titulo' => 'required|string|max:255',
             'descricao' => 'required|string',
-            'tipo' => 'required|in:CLT,Pessoa Jurídica,Freelancer',
-            'status' => 'required|in:Ativa,Pausada,Encerrada',
+            'tipo' => 'required|string',
+            'status' => 'required|string',
         ]);
-
-        $vaga = Vaga::create($validateData);
-        return response()->json($vaga, 201);
+    
+        $vaga = Vaga::create($validatedData);
+    
+        return redirect('/');
     }
     
     public function show(string $id)

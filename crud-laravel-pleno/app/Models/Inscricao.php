@@ -24,5 +24,4 @@ class Inscricao extends Model
     {
         return $this->belongsTo(Vaga::class);
     }
-    
 }
