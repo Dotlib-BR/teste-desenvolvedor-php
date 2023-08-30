@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VagaController;
+use App\Http\Controllers\InscricaoController;
+use App\Http\Controllers\CandidatoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,22 @@ Route::prefix('users')->group(function () {
     Route::get('/{user}', [UserController::class, 'show']);
     Route::put('/{user}', [UserController::class, 'update']);
     Route::delete('/{user}', [UserController::class, 'destroy']);
+});
+
+Route::prefix('inscricoes')->group(function () {
+    Route::get('/', [InscricaoController::class, 'index']);
+    Route::post('/', [InscricaoController::class, 'store']);
+    Route::get('/{inscricao}', [InscricaoController::class, 'show']);
+    Route::put('/{inscricao}', [InscricaoController::class, 'update']);
+    Route::delete('/{inscricao}', [InscricaoController::class, 'destroy']);
+});
+
+Route::prefix('candidatos')->group(function () {
+    Route::get('/', [CandidatoController::class, 'index']);
+    Route::post('/', [CandidatoController::class, 'store']);
+    Route::get('/{candidato}', [CandidatoController::class, 'show']);
+    Route::put('/{candidato}', [CandidatoController::class, 'update']);
+    Route::delete('/{candidato}', [CandidatoController::class, 'destroy']);
 });
 
 Route::get('/', function () {
