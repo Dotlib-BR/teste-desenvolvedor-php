@@ -1,11 +1,10 @@
-<?php 
+<?php
 
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-
 
 class CriarVagaFeatureTest extends TestCase
 {
@@ -24,7 +23,8 @@ class CriarVagaFeatureTest extends TestCase
 
         $response = $this->post('/vagas', $dadosVaga);
 
-        $response->assertStatus(201); // Verificando se deu certinho
-        $response->assertJson(['titulo' => $dadosVaga['titulo']]); // Verificando se o JSON de resposta contém o título da vaga
+        $response->assertStatus(201);
+        $response->assertJson(['titulo' => $dadosVaga['titulo']]); // Verificando se na resposta retorna o título da vaga
     }
+
 }
