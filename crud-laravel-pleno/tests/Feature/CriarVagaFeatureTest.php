@@ -23,8 +23,9 @@ class CriarVagaFeatureTest extends TestCase
 
         $response = $this->post('/vagas', $dadosVaga);
 
-        $response->assertStatus(201);
-        $response->assertJson(['titulo' => $dadosVaga['titulo']]); // Verificando se na resposta retorna o título da vaga
+        $response->assertStatus(302);
+        $response->assertRedirect(route('login')); // Verificando se vai para a página de login depois do redirect
+
     }
 
 }

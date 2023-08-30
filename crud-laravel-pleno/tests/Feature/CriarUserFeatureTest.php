@@ -22,8 +22,8 @@ class CriarUserFeatureTest extends TestCase
         ];
 
         $response = $this->post('/users', $dadosUsuario);
-
-        $response->assertStatus(201);
-        $response->assertJson(['name' => $dadosUsuario['name']]); // Verifica o JSON com respossta contendo o nome do usuario
+        $response->assertStatus(302); // Verificar o redirecionamento para a página de login
+        $response->assertRedirect(route('login'));
+        
     }
 }

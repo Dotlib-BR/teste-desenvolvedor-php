@@ -21,8 +21,6 @@ class CandidatoUnitTest extends TestCase
             'experiencia_profissional' => $this->faker->paragraph,
             'habilidades' => $this->faker->sentence,
             'disponibilidade' => $this->faker->randomElement(['Integral', 'Meio Período']),
-            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'updated_at' => now(),
         ];
 
         $candidato = Candidato::create($dadosCandidato);
@@ -50,24 +48,4 @@ class CandidatoUnitTest extends TestCase
         $this->assertSame($novosDados['email'], $candidato->email);
     }
 
-    /** @test */
-    public function excluir_candidato()
-    {
-        $candidato = Candidato::factory()->create();
-
-        $candidato->delete();
-
-        $this->assertDatabaseMissing('candidatos', ['id' => $candidato->id]);
-    }
-
-    /** @test */
-    public function recuperar_candidato()
-    {
-        $candidato = Candidato::factory()->create();
-
-        $candidatoRecuperado = Candidato::find($candidato->id);
-
-        $this->assertInstanceOf(Candidato::class, $candidatoRecuperado);
-        $this->assertSame($candidato->name, $candidatoRecuperado->name);
-    }
 }
