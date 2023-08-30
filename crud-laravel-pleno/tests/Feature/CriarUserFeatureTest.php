@@ -23,7 +23,7 @@ class CriarUserFeatureTest extends TestCase
 
         $response = $this->post('/users', $dadosUsuario);
 
-        $response->assertStatus(201); // Verificando se a criação do usuário foi bem sucedida
-        $response->assertJson(['name' => $dadosUsuario['name']]); // Verificando se o JSON de resposta contém o nome do usuário
+        $response->assertStatus(201);
+        $response->assertJson(['name' => $dadosUsuario['name']]); // Verifica o JSON com respossta contendo o nome do usuario
     }
 }
