@@ -16,7 +16,7 @@ class CandidatoFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'experiencia_profissional' => $this->faker->paragraph,
             'habilidades' => $this->faker->sentence,
-            'disponibilidade' => $this->faker->randomElement(['Integral', 'Meio Periodo']),
+            'disponibilidade' => $this->faker->randomElement(['Integral', 'Meio Período']),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => now(),
         ];

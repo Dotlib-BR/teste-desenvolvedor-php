@@ -18,7 +18,7 @@ class CandidatoUnitTest extends TestCase
         $dadosCandidato = [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'experiencia_profissional' => $this->faker->paragraph,
+            'experiencia_profissional' => 'Teste de experiencia profissional para teste unitário',
             'habilidades' => $this->faker->sentence,
             'disponibilidade' => $this->faker->randomElement(['Integral', 'Meio Período']),
         ];
@@ -27,6 +27,7 @@ class CandidatoUnitTest extends TestCase
 
         $this->assertInstanceOf(Candidato::class, $candidato);
         $this->assertSame($dadosCandidato['name'], $candidato->name);
+        $this->assertSame($dadosCandidato['experiencia_profissional'], $candidato->experiencia_profissional); // Verifica a experiência profissional
     }
 
     /** @test */

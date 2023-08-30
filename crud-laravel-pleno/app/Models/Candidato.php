@@ -12,6 +12,9 @@ class Candidato extends Model
     protected $fillable = [
         'name',
         'email',
+        'experiencia_profissional',
+        'habilidades',
+        'disponibilidade'
     ];
 
     public function inscricoes() // Corrigir para 'inscricoes' porque a pluralização do laravel criou a tabela inscricao como inscricaos e não inscricoes
