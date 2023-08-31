@@ -10,7 +10,7 @@ class InscricaoAdminController extends Controller
 {
     public function index()
     {
-        $inscricoes = Inscricao::paginate(20); // Paginação de 20 itens por página
+        $inscricoes = Inscricao::paginate(20);
         return view('admin.inscricoes.index', compact('inscricoes'));
     }
 
@@ -21,7 +21,15 @@ class InscricaoAdminController extends Controller
 
     public function store(Request $request)
     {
-        // Lógica para criar uma nova inscrição
+        $validatedData = $request->validate([
+            'vaga_id' => 'required|exists:vagas,id',
+            'candidato_id' => 'required|exists:candidatos,id',
+            'data_inscricao' => 'required|date',
+        ]);
+
+        Inscricao::create($validatedData);
+
+        return redirect()->route('admin.inscricoes.index')->with('success', 'Inscrição criada com sucesso.');
     }
 
     public function show(Inscricao $inscricao)
@@ -36,11 +44,20 @@ class InscricaoAdminController extends Controller
 
     public function update(Request $request, Inscricao $inscricao)
     {
-        // Lógica para atualizar os dados da inscrição
+        $validatedData = $request->validate([
+            'vaga_id' => 'required|exists:vagas,id',
+            'candidato_id' => 'required|exists:candidatos,id',
+            'data_inscricao' => 'required|date',
+        ]);
+
+        $inscricao->update($validatedData);
+
+        return redirect()->route('admin.inscricoes.index')->with('success', 'Inscrição atualizada com sucesso.');
     }
 
     public function destroy(Inscricao $inscricao)
     {
-        // Lógica para excluir a inscrição
+        $inscricao->delete();
+        return redirect()->route('admin.inscricoes.index')->with('success', 'Inscrição excluída com sucesso.');
     }
 }

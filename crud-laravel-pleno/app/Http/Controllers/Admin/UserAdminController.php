@@ -10,7 +10,7 @@ class UserAdminController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(20); // Paginação de 20 itens por página
+        $users = User::paginate(20);
         return view('admin.users.index', compact('users'));
     }
 
@@ -21,7 +21,16 @@ class UserAdminController extends Controller
 
     public function store(Request $request)
     {
-        // Lógica para criar um novo usuário
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8',
+            'nivel_acesso' => 'required|in:Usuario,Admin',
+        ]);
+
+        User::create($validatedData);
+
+        return redirect()->route('admin.users.index')->with('success', 'Usuário criado com sucesso.');
     }
 
     public function show(User $user)
@@ -36,11 +45,27 @@ class UserAdminController extends Controller
 
     public function update(Request $request, User $user)
     {
-        // Lógica para atualizar os dados do usuário
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'password' => 'nullable|string|min:8',
+            'nivel_acesso' => 'required|in:Usuario,Admin',
+        ]);
+
+        if (!empty($validatedData['password'])) {
+            $validatedData['password'] = bcrypt($validatedData['password']);
+        } else {
+            unset($validatedData['password']);
+        }
+
+        $user->update($validatedData);
+
+        return redirect()->route('admin.users.index')->with('success', 'Dados do usuário atualizados com sucesso.');
     }
 
     public function destroy(User $user)
     {
-        // Lógica para excluir o usuário
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('success', 'Usuário excluído com sucesso.');
     }
 }
