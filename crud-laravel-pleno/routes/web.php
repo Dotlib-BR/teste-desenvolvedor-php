@@ -1,15 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\VagaController;
-use App\Http\Controllers\InscricaoController;
 use App\Http\Controllers\CandidatoController;
+use App\Http\Controllers\InscricaoController;
 use App\Http\Controllers\AuthController;
+
+// Rotas públicas
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 
 // Rotas protegidas por autenticação
 Route::middleware(['auth'])->group(function () {
-
     // Rotas de vagas
     Route::prefix('vagas')->group(function () {
         Route::get('/', [VagaController::class, 'index']);
@@ -36,12 +40,14 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/{inscricao}', [InscricaoController::class, 'update']);
         Route::delete('/{inscricao}', [InscricaoController::class, 'destroy']);
     });
+
+    // Restante das rotas protegidas
 });
 
 // Rotas API
-Route::prefix('api')->group(function () {
-    Route::apiResource('vagas', VagaController::class);
-    Route::apiResource('candidatos', CandidatoController::class);
-    Route::apiResource('inscricoes', InscricaoController::class);
-    Route::apiResource('users', UserController::class);
-});
+    Route::prefix('api')->group(function () {
+        Route::apiResource('vagas', VagaController::class);
+        Route::apiResource('candidatos', CandidatoController::class);
+        Route::apiResource('inscricoes', InscricaoController::class);
+        Route::post('login', [AuthController::class, 'login']); // Rota de login para a API
+    });

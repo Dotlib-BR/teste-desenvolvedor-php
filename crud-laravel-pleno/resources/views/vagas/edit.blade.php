@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Editar Vaga</h2>
+<div class="container bg-dark text-light p-4">
+    <h2 class="mb-4">Editar Vaga</h2>
     <form action="{{ route('vagas.update', $vaga->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
             <label for="descricao">Descrição:</label>
-            <textarea name="descricao" class="form-control" rows="3">{{ $vaga->descricao }}</textarea>
+            <textarea name="descricao" class="form-control" rows="4">{{ $vaga->descricao }}</textarea>
         </div>
         <div class="form-group">
             <label for="tipo">Tipo:</label>

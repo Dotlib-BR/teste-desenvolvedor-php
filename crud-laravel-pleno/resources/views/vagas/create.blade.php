@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Criar Vaga</h2>
+<div class="container bg-dark text-light p-4">
+    <h2 class="mb-4">Criar Vaga</h2>
     <form action="{{ route('vagas.store') }}" method="POST">
         @csrf
         <div class="form-group">
@@ -11,7 +11,7 @@
         </div>
         <div class="form-group">
             <label for="descricao">Descrição:</label>
-            <textarea name="descricao" class="form-control" rows="3"></textarea>
+            <textarea name="descricao" class="form-control" rows="4"></textarea>
         </div>
         <div class="form-group">
             <label for="tipo">Tipo:</label>

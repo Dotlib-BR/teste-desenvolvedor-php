@@ -3,16 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seu Título Aqui</title>
-    
-    <!-- Inclua os arquivos CSS do Bootstrap -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <title>Minha Aplicação</title>
+    <!-- Inclua links para folhas de estilo CSS -->
 </head>
 <body>
-    <!-- Conteúdo da página -->
-    @yield('content')
-
-    <!-- Inclua os scripts do Bootstrap e outros scripts necessários -->
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <header>
+        <!-- Cabeçalho -->
+    </header>
+    
+    <nav>
+        <!-- Navegação -->
+    </nav>
+    
+    <main>
+        <!-- Conteúdo dinâmico -->
+        @yield('content')
+    </main>
+    
+    <footer>
+        <!-- Rodapé -->
+    </footer>
 </body>
 </html>

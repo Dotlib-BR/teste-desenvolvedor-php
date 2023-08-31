@@ -10,6 +10,7 @@ class AuthController extends Controller
     // Mostrar o formulário de login
     public function showLoginForm()
     {
+        // Não é necessário verificar autenticação para a página de login
         return view('auth.login');
     }
 
@@ -24,7 +25,7 @@ class AuthController extends Controller
         }
 
         // Autenticação falhou, redirecionar de volta ao formulário de login com mensagem de erro
-        return redirect()->route('login')->with('error', 'Credenciais inválidas');
+        return redirect()->back()->withInput()->withErrors(['email' => 'Credenciais inválidas']);
     }
 
     // Fazer logout

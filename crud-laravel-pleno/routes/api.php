@@ -1,10 +1,12 @@
-<?php
+<?php 
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VagaController;
 use App\Http\Controllers\CandidatoController;
 use App\Http\Controllers\InscricaoController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 // Rotas de vagas (CRUD)
 Route::apiResource('vagas', VagaController::class);
