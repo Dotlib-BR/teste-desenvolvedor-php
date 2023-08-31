@@ -56,4 +56,3 @@ class VagaController extends Controller
         return response()->json(null, 204);
     }
 }
-
