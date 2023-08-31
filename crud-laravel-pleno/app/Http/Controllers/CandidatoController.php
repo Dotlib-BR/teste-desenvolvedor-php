@@ -7,7 +7,6 @@ use App\Models\Candidato;
 
 class CandidatoController extends Controller
 {
-
     public function index()
     {
         $candidatos = Candidato::paginate(20);
@@ -17,7 +16,7 @@ class CandidatoController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nome' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:candidatos',
         ]);
     
@@ -26,7 +25,7 @@ class CandidatoController extends Controller
         return redirect(route('home'));
     }
 
-    public function show(string $id)
+    public function show($id)
     {
         $candidato = Candidato::findOrFail($id);
         return response()->json($candidato);
@@ -35,7 +34,7 @@ class CandidatoController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'nome' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:candidatos,email,'.$id,
             'experiencia_profissional' => 'nullable|string',
             'habilidades' => 'nullable|string',
@@ -44,16 +43,15 @@ class CandidatoController extends Controller
 
         $candidato = Candidato::findOrFail($id);
         $candidato->update($validatedData);
+
         return response()->json($candidato);
     }
 
-    /**
-     * Remove um candidato do sistema.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $candidato = Candidato::findOrFail($id);
         $candidato->delete();
+
         return response()->json(null, 204);
     }
 }
