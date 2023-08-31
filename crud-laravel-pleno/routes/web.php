@@ -1,53 +1,45 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VagaController;
-use App\Http\Controllers\CandidatoController;
-use App\Http\Controllers\InscricaoController;
-use App\Http\Controllers\AuthController;
 
-// Rotas públicas
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return redirect()->route('vagas.index'); // Redirect to 'vagas.index' route
+})->name('home');
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+// Rotas para CRUD de Vagas
+Route::resource('vagas', VagaController::class);
 
-// Rotas protegidas por autenticação
-Route::middleware(['auth'])->group(function () {
-    // Rotas de vagas
-    Route::prefix('vagas')->group(function () {
-        Route::get('/', [VagaController::class, 'index']);
-        Route::post('/', [VagaController::class, 'store']);
-        Route::get('/{vaga}', [VagaController::class, 'show']);
-        Route::put('/{vaga}', [VagaController::class, 'update']);
-        Route::delete('/{vaga}', [VagaController::class, 'destroy']);
-    });
+// Rotas para CRUD de Candidatos
+Route::resource('candidatos', CandidatoController::class);
 
-    // Rotas de candidatos
-    Route::prefix('candidatos')->group(function () {
-        Route::get('/', [CandidatoController::class, 'index']);
-        Route::post('/', [CandidatoController::class, 'store']);
-        Route::get('/{candidato}', [CandidatoController::class, 'show']);
-        Route::put('/{candidato}', [CandidatoController::class, 'update']);
-        Route::delete('/{candidato}', [CandidatoController::class, 'destroy']);
-    });
+// Rota para página de inscrição em vagas
+Route::get('/vagas/inscricao', [VagaController::class, 'mostrarPaginaInscricao'])->name('vagas.inscricao');
+Route::post('/vagas/inscrever/{vaga}', [InscricaoController::class, 'inscrever'])->name('vagas.inscrever');
 
-    // Rotas de inscrições
-    Route::prefix('inscricoes')->group(function () {
-        Route::get('/', [InscricaoController::class, 'index']);
-        Route::post('/', [InscricaoController::class, 'store']);
-        Route::get('/{inscricao}', [InscricaoController::class, 'show']);
-        Route::put('/{inscricao}', [InscricaoController::class, 'update']);
-        Route::delete('/{inscricao}', [InscricaoController::class, 'destroy']);
-    });
+// ...
 
-    // Restante das rotas protegidas
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Rotas que requerem autenticação e verificação de email
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    // Rotas de perfil
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Rotas API
-    Route::prefix('api')->group(function () {
-        Route::apiResource('vagas', VagaController::class);
-        Route::apiResource('candidatos', CandidatoController::class);
-        Route::apiResource('inscricoes', InscricaoController::class);
-        Route::post('login', [AuthController::class, 'login']); // Rota de login para a API
-    });
+require __DIR__.'/auth.php';
