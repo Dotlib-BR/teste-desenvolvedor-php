@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Detalhes do Usuário</h2>
+<div class="container bg-dark text-light p-4">
+    <h2 class="mb-4">Detalhes do Usuário</h2>
     <p><strong>Nome:</strong> {{ $user->name }}</p>
     <p><strong>E-mail:</strong> {{ $user->email }}</p>
     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Editar</a>

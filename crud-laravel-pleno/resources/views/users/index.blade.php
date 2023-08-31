@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Lista de Usuários</h2>
-    <a href="{{ route('users.create') }}" class="btn btn-success">Novo Usuário</a>
-    <table class="table mt-3">
+<div class="container bg-dark text-light p-4">
+    <h2 class="mb-4">Lista de Usuários</h2>
+    <a href="{{ route('users.create') }}" class="btn btn-success mb-3">Novo Usuário</a>
+    <table class="table table-dark table-striped">
         <thead>
             <tr>
                 <th>ID</th>

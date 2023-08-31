@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Editar Usuário</h2>
+<div class="container bg-dark text-light p-4">
+    <h2 class="mb-4">Editar Usuário</h2>
     <form action="{{ route('users.update', $user->id) }}" method="POST">
         @csrf
         @method('PUT')

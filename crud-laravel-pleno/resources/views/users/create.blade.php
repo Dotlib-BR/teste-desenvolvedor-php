@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Criar Usuário</h2>
+<div class="container bg-dark text-light p-4">
+    <h2 class="mb-4">Criar Usuário</h2>
     <form action="{{ route('users.store') }}" method="POST">
         @csrf
         <div class="form-group">
