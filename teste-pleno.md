@@ -1,65 +1,50 @@
-[![](http://www.dotlib.com.br/site/images/footer/bra.png)](http://www.dotlib.com)
+# Crud-Laravel-Pleno
 
-# Teste para candidatos à vaga de Desenvolvedor PHP Pleno
+## Pré-requisitos
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
+Certifique-se de ter o Docker e o Docker Compose instalados em sua máquina. 
+Caso não tenha, você pode instalá-los seguindo as instruções em:
 
-## Instruções
+- [**Docker**](https://docs.docker.com/get-docker/)
+- [**Docker Compose**](https://docs.docker.com/compose/install/)
 
-O desafio consiste em implementar uma aplicação web utilizando o framework PHP Laravel, um banco de dados relacional (Mysql, Postgres ou SQLite), que terá como finalidade a inscrição de candidatos a uma oportunidade de emprego.
+## Configurando o Ambiente
 
-Sua aplicação deve possuir:
+1. Clone este repositório da branch thiagocsoares para o diretório desejado em sua máquina:
 
-- CRUD de vagas:
-  - Criar, editar, excluir e listar vagas.
-  - A vaga pode ser CLT, Pessoa Jurídica ou Freelancer.
-- CRUD de candidatos:
-  - Criar, editar, excluir e listar candidatos.
-- Um cadidato pode se inscrever em uma ou mais vagas.
-- Deve ser ser possível "pausar" a vaga, evitando a inscrição de candidatos.
-- Cada CRUD:
-  - Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
-  - Deve possuir formulários para criação e atualização de seus itens.
-  - Deve permitir a deleção de qualquer item de sua lista.
-  - Implementar validações de campos obrigatórios e tipos de dados.
-- Testes unitários e de unidade.
+git clone https://github.com/seu-usuario/nome-do-seu-projeto.git
 
-## Banco de dados
+2. Navegue até o diretório do projeto:
 
-- O banco de dados deve ser criado utilizando Migrations do framework Laravel, e também utilizar Seeds e Factorys para popular as informações no banco de dados.
+entre na pasta:
+cd crud-laravel-pleno 
+Em seguida crie um arquivo .env a partir do arquivo .env.example:
+Edite o arquivo .env e ajuste as variáveis de ambiente conforme necessário.
 
-## Tecnologias a serem utilizadas
+3. Iniciando a Aplicação
 
-Devem ser utilizadas as seguintes tecnologias:
+Navegue até o diretório do projeto:
 
-- HTML
-- CSS
-- Javascript
-- Framework Laravel (PHP)
-- Docker (construção do ambiente de desenvolvimento)
-- Mysql, Postgres ou SQLite
+cd crud-laravel-pleno
 
-## Entrega
+Abra um terminal e execute o seguinte comando para construir os contêineres Docker e iniciar os serviços:
 
-- Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
-- Crie uma branch com o seu nome completo;
-- Altere o arquivo teste-pleno.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
-- Depois de finalizado, envie-nos o pull request;
+docker-compose up -d
+Aguarde até que os contêineres sejam criados e os serviços sejam inicializados.
 
-## Bônus
+4. Execute o seguinte comando para instalar as dependências do Laravel:
 
-- API Rest JSON para todos os CRUDS listados acima.
-- Permitir deleção em massa de itens nos CRUDs.
-- Permitir que o usuário mude o número de itens por página.
-- Implementar autenticação de usuário na aplicação.
+docker-compose exec app composer install
 
-## O que iremos analisar
+5 Execute as migrações do banco de dados:
 
-- Organização do código;
-- Aplicação de design patterns;
-- Aplicação de testes;
-- Separação de módulos e componentes;
-- Legibilidade;
-- Criação do ambiente com Docker.
+./vendor/bin/sail artisan migrate
 
-### Boa sorte!
+6. Execute as Seeds
+
+./vendor/bin/sail artisan db:seed
+
+7. Acessando a Aplicação
+Após concluir as etapas acima, você poderá acessar a aplicação em seu navegador em:
+
+http://localhost:sua-porta-no-env
