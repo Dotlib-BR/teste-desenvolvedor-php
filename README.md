@@ -1,58 +1,20 @@
-[![](https://dotlib.com/theme/img/logos/logo.png)](http://www.dotlib.com)
+Projeto Teste Desenvolvedor PHP
+Para acessar o projeto, navegue para o seguinte endereço:
+http://devsystemone.ddns.net:8081/app/public/login
+![image](https://github.com/epontello/teste-desenvolvedor-php/assets/131972811/4cbbba0c-2491-4008-9d49-58d970c4f76f)
 
-# Nossa empresa
+Usuário: admin@admin.com
+Senha: 1234
 
-A Dot.Lib distribui conteúdo online científico e acadêmico a centenas de instituições espalhadas pela América Latina. Temos como parceiras algumas das principais editoras científicas nacionais e internacionais. Além de prover conteúdo, criamos soluções que atendem às necessidades de nossos clientes e editoras.
+O painel de vagas se encontra no menu à direita:
+![image](https://github.com/epontello/teste-desenvolvedor-php/assets/131972811/171fd1bd-64b6-46e6-b5d4-f8a7c0a9ce8c)
 
-## Conheça mais sobre a Dotlib
+Atraves dos botôes de controle é possível efetuar as operações de acordo com o cenessário.
 
-https://dotlib.com/
+Para acesso do candidato, basta sair do sistema clicando no botão vermelho do canto superior direito.
 
-https://www.linkedin.com/company/dotlib/
+Usuário: admin@admin.com
+Senha: 1234
 
-# Descrição da vaga
+O candidato possui apenas permissão para visualizar e se candidatar as vagas.
 
-Buscamos profissionais que sejam apaixonados por desenvolvimento, inovação e novas tecnologias, para integrar nosso time em projetos baseados em Node.JS, Laravel, React.JS e React Native.
-
-## Requisitos
-
-### **Obrigatórios:**
-
-- Mínimo 1 ano de experiência em desenvolvimento de sites e sistemas em Laravel;
-- Desenvolvimento de APIs RESTful;
-- Conhecimentos em SQL e NoSQL;
-- Conhecimentos em Docker;
-- Controle de versões (GIT).
-
-### **Diferenciais:**
-
-- TDD;
-- Conhecimentos em Node.JS;
-- Conhecimentos em Elasticsearch;
-- Conhecimentos em serviços AWS;
-- Experiência em metodologias ágeis (Scrum/Kanban).
-
-## Benefícios
-
-- Salário compatível com o mercado;
-- Vale Refeição ou Vale Alimentação;
-- Plano de Saúde e Odontológico;
-- Equipe unida, divertida e apaixonada por hambúrgueres;
-- TECH DAY - Evento trimestral de palestras sobre tecnologia;
-- Friday's Talk - Bate papo descontraído sobre tecnologia, apresentação de POCs de estudos, etc;
-- Emendas em feriados nacionais.
-
-## Contratação
-
-Regime: CLT
-
-## Alocação
-
-100% Remoto
-
-## Como se candidatar
-
-Para se candidatar, basta acessar a url de acordo com o nível e realizar o teste para a vaga:
-
-- [Desenvolvedor PHP Júnior](teste-junior.md)
-- [Desenvolvedor PHP Pleno](teste-pleno.md)
