@@ -24,7 +24,7 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard')); // Alterado para redirecionar para 'dashboard'
+        return redirect(route('dashboard')); // Redirecionar para 'dashboard'
     }
 
     public function login(Request $request)
@@ -35,7 +35,7 @@ class UserController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect(route('dashboard')); // Alterado para redirecionar para 'dashboard'
+            return redirect(route('dashboard')); // Redirecionar para 'dashboard'
         } else {
             return redirect()->back()->with('error', 'Credenciais inválidas. Tente novamente.');
         }
@@ -44,6 +44,6 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect(route('login')); // Alterado para redirecionar para 'login'
+        return redirect(route('login')); // Redirecionar para 'login'
     }
 }

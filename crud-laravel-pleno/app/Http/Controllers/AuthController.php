@@ -7,28 +7,31 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // Show the login form
-    public function showLogin()
+    // Mostrar o formulário de login
+    public function showLoginForm()
     {
-        // No need to check authentication for the login page
+        // Não é necessário verificar a autenticação para a página de login
         return view('auth.login');
     }
 
-    // Process the login
+    // Processar o login
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
 
         if (Auth::attempt($credentials)) {
-            // Authentication successful, redirect to the home page
-            return redirect()->route('home');
+            // Autenticação bem-sucedida, redirecionar para a página inicial
+            return redirect()->route('dashboard'); // Alterado para redirecionar para 'dashboard'
         }
 
-        // Authentication failed, redirect back to the login form with an error message
-        return redirect()->back()->withInput()->withErrors(['email' => 'Invalid credentials']);
+        // Autenticação falhou, redirecionar de volta para o formulário de login com uma mensagem de erro
+        return redirect()->back()->withInput()->withErrors(['email' => 'Credenciais inválidas. Tente novamente.']);
     }
 
-    // Log out
+    // Fazer logout
     public function logout()
     {
         Auth::logout();

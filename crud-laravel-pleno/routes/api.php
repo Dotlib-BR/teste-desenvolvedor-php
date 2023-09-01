@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
-use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 
@@ -40,10 +40,12 @@ Route::middleware(['auth'])->group(function () {
 
 // API Routes
 Route::prefix('api')->group(function () {
+    Route::post('login', [AuthController::class, 'login']); // API Login Route
+
+    // Resource Routes for Job, Candidate, and Application
     Route::apiResource('jobs', JobController::class);
     Route::apiResource('candidates', CandidateController::class);
     Route::apiResource('applications', ApplicationController::class);
-    Route::post('login', [AuthController::class, 'login']); // API Login Route
 
     // Dashboard Routes
     Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth:api');
