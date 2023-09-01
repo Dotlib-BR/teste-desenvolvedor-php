@@ -1,7 +1,9 @@
-import './bootstrap';
+// Antes
+//import './bootstrap';
+//import Alpine from 'alpinejs';
+//window.Alpine = Alpine;
 
-import Alpine from 'alpinejs';
-
+// Depois
+require('./bootstrap');
+const Alpine = require('alpinejs');
 window.Alpine = Alpine;
-
-Alpine.start();

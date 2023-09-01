@@ -8,7 +8,9 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "build": "tailwindcss build resources/css/app.css -o public/css/output.css"
+          
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
@@ -22,11 +24,11 @@
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.56.1",
         "sass-loader": "^12.6.0",
-        "tailwindcss": "^2.2.19"
+        "tailwindcss": "^3.3.3"
     },
     "dependencies": {
         "-": "0.0.1",
-        "node": ">=14.0.0",
-        "npm": ">=6.0.0"
+        "node": ">=18.0.0",
+        "npm": ">=8.0.0"
     }
 }

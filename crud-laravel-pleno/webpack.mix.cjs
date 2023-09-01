@@ -1,7 +1,11 @@
-const mix = require('laravel-mix');
+// webpack.mix.js
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+let mix = require('laravel-mix');
 
+mix.setResourceRoot('/');
 
-
+mix.webpackConfig({
+    resolve: {
+        extensions: ['*', '.wasm', '.mjs', '.js', '.jsx', '.json'],
+    },
+});
