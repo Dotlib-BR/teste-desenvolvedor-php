@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 // Auth-protected Routes
 Route::middleware(['auth'])->group(function () {
@@ -43,4 +44,7 @@ Route::prefix('api')->group(function () {
     Route::apiResource('candidates', CandidateController::class);
     Route::apiResource('applications', ApplicationController::class);
     Route::post('login', [AuthController::class, 'login']); // API Login Route
+
+    // Dashboard Routes
+    Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth:api');
 });

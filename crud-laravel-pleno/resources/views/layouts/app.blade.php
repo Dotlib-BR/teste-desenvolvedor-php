@@ -11,11 +11,6 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
@@ -32,7 +27,7 @@
 
         <!-- Page Content -->
         <main class="py-4">
-            {{ $slot }}
+            @yield('content') <!-- Define a seção 'content' -->
         </main>
     </div>
 </body>

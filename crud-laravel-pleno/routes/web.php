@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthController;
 Route::get('/', function () {
     return view('home');
 })->withoutMiddleware(['auth']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Login Route
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
