@@ -48,6 +48,6 @@ class User extends Authenticatable
      */
     public function applications()
     {
-        return $this->hasManyThrough(Application::class, Candidate::class); // Renamed from Inscricao and Candidato
+        return $this->hasManyThrough(Application::class, Candidate::class);
     }
 }

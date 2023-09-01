@@ -20,7 +20,7 @@
                 <td>{{ $inscricao->id }}</td>
                 <td>{{ $inscricao->vaga->titulo }}</td>
                 <td>{{ $inscricao->candidato->nome }}</td>
-                <td>{{ $inscricao->data_inscricao->format('d/m/Y') }}</td>
+                <td>{{ $inscricao->application_date->format('d/m/Y') }}</td>
                 <td>
                     <a href="{{ route('inscricaos.edit', $inscricao->id) }}" class="btn btn-primary">Editar</a>
                     <form action="{{ route('inscricaos.destroy', $inscricao->id) }}" method="POST" class="d-inline">

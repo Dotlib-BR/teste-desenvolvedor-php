@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('auth.login'); // Exibir o formulário de login
+        return view('auth.login');
     }
 
     public function login(Request $request)
@@ -18,7 +18,6 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // Autenticação bem-sucedida, redirecionar para a página após o login
             return redirect()->intended('/dashboard');
         }
 
