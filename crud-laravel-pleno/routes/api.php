@@ -1,25 +1,46 @@
 <?php 
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VagaController;
-use App\Http\Controllers\CandidatoController;
-use App\Http\Controllers\InscricaoController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
 
-// Rotas de vagas (CRUD)
-Route::apiResource('jobs', VagaController::class);
+// Auth-protected Routes
+Route::middleware(['auth'])->group(function () {
 
-// Rotas de candidatos (CRUD)
-Route::apiResource('candidates', CandidatoController::class);
+    // Job Routes
+    Route::prefix('jobs')->group(function () {
+        Route::get('/', [JobController::class, 'index']);
+        Route::post('/', [JobController::class, 'store']);
+        Route::get('/{job}', [JobController::class, 'show']);
+        Route::put('/{job}', [JobController::class, 'update']);
+        Route::delete('/{job}', [JobController::class, 'destroy']);
+    });
 
-// Rotas de inscrições (CRUD)
-Route::apiResource('applications', InscricaoController::class);
+    // Candidate Routes
+    Route::prefix('candidates')->group(function () {
+        Route::get('/', [CandidateController::class, 'index']);
+        Route::post('/', [CandidateController::class, 'store']);
+        Route::get('/{candidate}', [CandidateController::class, 'show']);
+        Route::put('/{candidate}', [CandidateController::class, 'update']);
+        Route::delete('/{candidate}', [CandidateController::class, 'destroy']);
+    });
 
-// Rotas de autenticação
-Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
+    // Application Routes
+    Route::prefix('applications')->group(function () {
+        Route::get('/', [ApplicationController::class, 'index']);
+        Route::post('/', [ApplicationController::class, 'store']);
+        Route::get('/{application}', [ApplicationController::class, 'show']);
+        Route::put('/{application}', [ApplicationController::class, 'update']);
+        Route::delete('/{application}', [ApplicationController::class, 'destroy']);
+    });
+});
 
-// Rotas de usuário (CRUD)
-Route::apiResource('users', UserController::class)->middleware('auth:api');
+// API Routes
+Route::prefix('api')->group(function () {
+    Route::apiResource('jobs', JobController::class);
+    Route::apiResource('candidates', CandidateController::class);
+    Route::apiResource('applications', ApplicationController::class);
+    Route::post('login', [AuthController::class, 'login']); // API Login Route
+});

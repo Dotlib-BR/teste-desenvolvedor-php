@@ -2,57 +2,57 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VagaController;
-use App\Http\Controllers\InscricaoController;
-use App\Http\Controllers\CandidatoController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('home');
 })->withoutMiddleware(['auth']);
 
-// Rota de login
+// Login Route
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
-// Rotas protegidas por autenticação
+// Auth-protected Routes
 Route::middleware(['auth'])->group(function () {
 
-    // Rotas de vagas
-    Route::prefix('vagas')->group(function () {
-        Route::get('/', [VagaController::class, 'index']);
-        Route::post('/', [VagaController::class, 'store']);
-        Route::get('/{vaga}', [VagaController::class, 'show']);
-        Route::put('/{vaga}', [VagaController::class, 'update']);
-        Route::delete('/{vaga}', [VagaController::class, 'destroy']);
+    // Job Routes
+    Route::prefix('jobs')->group(function () {
+        Route::get('/', [JobController::class, 'index']);
+        Route::post('/', [JobController::class, 'store']);
+        Route::get('/{job}', [JobController::class, 'show']);
+        Route::put('/{job}', [JobController::class, 'update']);
+        Route::delete('/{job}', [JobController::class, 'destroy']);
     });
 
-    // Rotas de candidatos
-    Route::prefix('candidatos')->group(function () {
-        Route::get('/', [CandidatoController::class, 'index']);
-        Route::post('/', [CandidatoController::class, 'store']);
-        Route::get('/{candidato}', [CandidatoController::class, 'show']);
-        Route::put('/{candidato}', [CandidatoController::class, 'update']);
-        Route::delete('/{candidato}', [CandidatoController::class, 'destroy']);
+    // Candidate Routes
+    Route::prefix('candidates')->group(function () {
+        Route::get('/', [CandidateController::class, 'index']);
+        Route::post('/', [CandidateController::class, 'store']);
+        Route::get('/{candidate}', [CandidateController::class, 'show']);
+        Route::put('/{candidate}', [CandidateController::class, 'update']);
+        Route::delete('/{candidate}', [CandidateController::class, 'destroy']);
     });
 
-    // Rotas de inscrições
-    Route::prefix('inscricaos')->group(function () {
-        Route::get('/', [InscricaoController::class, 'index']);
-        Route::post('/', [InscricaoController::class, 'store']);
-        Route::get('/{inscricao}', [InscricaoController::class, 'show']);
-        Route::put('/{inscricao}', [InscricaoController::class, 'update']);
-        Route::delete('/{inscricao}', [InscricaoController::class, 'destroy']);
+    // Application Routes
+    Route::prefix('applications')->group(function () {
+        Route::get('/', [ApplicationController::class, 'index']);
+        Route::post('/', [ApplicationController::class, 'store']);
+        Route::get('/{application}', [ApplicationController::class, 'show']);
+        Route::put('/{application}', [ApplicationController::class, 'update']);
+        Route::delete('/{application}', [ApplicationController::class, 'destroy']);
     });
 
-    // Rota de logout
+    // Logout Route
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-// Rotas API
+// API Routes
 Route::prefix('api')->group(function () {
-    Route::apiResource('vagas', VagaController::class);
-    Route::apiResource('candidatos', CandidatoController::class);
-    Route::apiResource('inscricaos', InscricaoController::class);
+    Route::apiResource('jobs', JobController::class);
+    Route::apiResource('candidates', CandidateController::class);
+    Route::apiResource('applications', ApplicationController::class);
     Route::apiResource('users', UserController::class);
 });
