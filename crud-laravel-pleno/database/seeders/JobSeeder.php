@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Job;
 
-class VagaSeeder extends Seeder
+class JobSeeder extends Seeder
 {
     /**
      * Run the database seeds.

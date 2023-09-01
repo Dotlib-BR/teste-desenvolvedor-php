@@ -7,9 +7,9 @@ use App\Http\Controllers\InscricaoController;
 use App\Http\Controllers\CandidatoController;
 use App\Http\Controllers\AuthController;
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+Route::get('/', function () {
+    return view('home');
+})->withoutMiddleware(['auth']);
 
 // Rota de login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');

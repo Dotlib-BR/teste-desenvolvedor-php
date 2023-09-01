@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Tests\Feature;
 
@@ -7,29 +7,29 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 
-class CriarUserFeatureAuthTest extends TestCase
+class CreateUserFeatureAuthTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
 
     /** @test */
-    public function criar_usuario()
+    public function can_create_user()
     {
-        $dadosUsuario = [
+        $userData = [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'password' => 'password',
-            'nivel_acesso' => 'Usuario',
+            'access_level' => 'Usuario',
         ];
 
         $user = User::factory()->create();
 
-        // Testa com usuario autenticado
+        // Test with authenticated user
         $this->actingAs($user);
 
-        $response = $this->post('/users', $dadosUsuario);
+        $response = $this->post('/users', $userData);
 
         $response->assertStatus(201);
-        $response->assertJson(['name' => $dadosUsuario['name']]);
+        $response->assertJson(['name' => $userData['name']]);
     }
 }

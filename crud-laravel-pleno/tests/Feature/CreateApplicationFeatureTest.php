@@ -6,36 +6,36 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Vaga; // Importe o modelo Vaga
-use App\Models\Candidato; // Importe o modelo Candidato
+use App\Models\Job; // Import the Job model
+use App\Models\Candidate; // Import the Candidate model
 
-class CriarInscricaoFeatureTest extends TestCase
+class CreateApplicationFeatureTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
 
     /** @test */
-    public function criar_inscricao()
+    public function can_create_application()
     {
-        // Criar um usuário de teste
+        // Create a test user
         $user = User::factory()->create();
 
-        // Autentica o user
+        // Authenticate the user
         $this->actingAs($user);
 
-        // Crie uma vaga e um candidato para uso no teste
-        $vaga = Vaga::factory()->create();
-        $candidato = Candidato::factory()->create();
+        // Create a job and a candidate for use in the test
+        $job = Job::factory()->create();
+        $candidate = Candidate::factory()->create();
 
-        $dadosInscricao = [
-            'candidato_id' => $candidato->id, // Use o ID do candidato criado
-            'vaga_id' => $vaga->id, // Use o ID da vaga criada
-            'data_inscricao' => now()->toDateString(),
+        $applicationData = [
+            'candidate_id' => $candidate->id, // Use the ID of the created candidate
+            'job_id' => $job->id, // Use the ID of the created job
+            'application_date' => now()->toDateString(),
         ];
 
-        $response = $this->post('/inscricaos', $dadosInscricao);
+        $response = $this->post('/applications', $applicationData);
 
         $response->assertStatus(201);
-        $response->assertJson(['candidato_id' => $dadosInscricao['candidato_id']]);
+        $response->assertJson(['candidate_id' => $applicationData['candidate_id']]);
     }
 }

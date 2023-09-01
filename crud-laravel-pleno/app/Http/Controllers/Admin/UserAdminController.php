@@ -25,7 +25,7 @@ class UserAdminController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8',
-            'nivel_acesso' => 'required|in:Usuario,Admin',
+            'access_level' => 'required|in:Usuario,Admin',
         ]);
 
         User::create($validatedData);
@@ -49,7 +49,7 @@ class UserAdminController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,'.$user->id,
             'password' => 'nullable|string|min:8',
-            'nivel_acesso' => 'required|in:Usuario,Admin',
+            'access_level' => 'required|in:Usuario,Admin',
         ]);
 
         if (!empty($validatedData['password'])) {
