@@ -27,7 +27,7 @@ class CandidateUnitTest extends TestCase
 
         $this->assertInstanceOf(Candidate::class, $candidate);
         $this->assertSame($candidateData['name'], $candidate->name);
-        $this->assertSame($candidateData['experience'], $candidate->professional_experience);
+        $this->assertSame($candidateData['experience'], $candidate->experience);
     }
 
     /** @test */
