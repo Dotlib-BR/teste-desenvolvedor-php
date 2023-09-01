@@ -9,13 +9,13 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
 // Rotas de vagas (CRUD)
-Route::apiResource('vagas', VagaController::class);
+Route::apiResource('jobs', VagaController::class);
 
 // Rotas de candidatos (CRUD)
-Route::apiResource('candidatos', CandidatoController::class);
+Route::apiResource('candidates', CandidatoController::class);
 
 // Rotas de inscrições (CRUD)
-Route::apiResource('inscricoes', InscricaoController::class);
+Route::apiResource('applications', InscricaoController::class);
 
 // Rotas de autenticação
 Route::post('login', [AuthController::class, 'login']);

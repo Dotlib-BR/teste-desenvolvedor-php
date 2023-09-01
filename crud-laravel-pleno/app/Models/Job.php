@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vaga extends Model
+class Job extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'titulo',
-        'descricao',
-        'tipo',
+        'title',
+        'description',
+        'type',
         'status',
     ];
 
-    public function inscricoes()
+    public function applications()
     {
-        return $this->hasMany(Inscricao::class);
+        return $this->hasMany(Application::class);
     }
 }

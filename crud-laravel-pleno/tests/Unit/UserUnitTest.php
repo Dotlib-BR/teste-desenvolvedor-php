@@ -13,57 +13,57 @@ class UserUnitTest extends TestCase
     use WithFaker;
 
     /** @test */
-    public function criar_usuario()
+    public function can_create_user()
     {
-        $dadosUsuario = [
+        $userData = [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password'),
-            'nivel_acesso' => ('Usuario'),
+            'access_level' => ('User'),
         ];
 
-        $usuario = User::create($dadosUsuario);
+        $user = User::create($userData);
 
-        $this->assertInstanceOf(User::class, $usuario);
-        $this->assertSame($dadosUsuario['name'], $usuario->name);
+        $this->assertInstanceOf(User::class, $user);
+        $this->assertSame($userData['name'], $user->name);
     }
 
     /** @test */
-    public function atualizar_usuario()
+    public function can_update_user()
     {
-        $usuario = User::factory()->create();
+        $user = User::factory()->create();
 
-        $novosDados = [
+        $newData = [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('newpassword'),
-            'nivel_acesso' => ('Admin'),
+            'access_level' => ('Admin'),
         ];
 
-        $usuario->update($novosDados);
+        $user->update($newData);
 
-        $this->assertSame($novosDados['name'], $usuario->name);
-        $this->assertSame($novosDados['email'], $usuario->email);
+        $this->assertSame($newData['name'], $user->name);
+        $this->assertSame($newData['email'], $user->email);
     }
 
     /** @test */
-    public function excluir_usuario()
+    public function can_delete_user()
     {
-        $usuario = User::factory()->create();
+        $user = User::factory()->create();
 
-        $usuario->delete();
+        $user->delete();
 
-        $this->assertDatabaseMissing('users', ['id' => $usuario->id]);
+        $this->assertDatabaseMissing('users', ['id' => $user->id]);
     }
 
     /** @test */
-    public function recuperar_usuario()
+    public function can_retrieve_user()
     {
-        $usuario = User::factory()->create();
+        $user = User::factory()->create();
 
-        $usuarioRecuperado = User::find($usuario->id);
+        $retrievedUser = User::find($user->id);
 
-        $this->assertInstanceOf(User::class, $usuarioRecuperado);
-        $this->assertSame($usuario->name, $usuarioRecuperado->name);
+        $this->assertInstanceOf(User::class, $retrievedUser);
+        $this->assertSame($user->name, $retrievedUser->name);
     }
 }

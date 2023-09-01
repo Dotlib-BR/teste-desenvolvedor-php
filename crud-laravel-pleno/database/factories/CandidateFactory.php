@@ -2,21 +2,21 @@
 
 namespace Database\Factories;
 
-use App\Models\Candidato;
+use App\Models\Candidate;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CandidatoFactory extends Factory
+class CandidateFactory extends Factory
 {
-    protected $model = Candidato::class;
+    protected $model = Candidate::class;
 
     public function definition(): array
     {
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'experiencia_profissional' => $this->faker->paragraph,
-            'habilidades' => $this->faker->sentence,
-            'disponibilidade' => $this->faker->randomElement(['Integral', 'Meio Período']),
+            'experience' => $this->faker->paragraph,
+            'skills' => $this->faker->sentence,
+            'availability' => $this->faker->randomElement(['Integral', 'Meio Período']),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => now(),
         ];

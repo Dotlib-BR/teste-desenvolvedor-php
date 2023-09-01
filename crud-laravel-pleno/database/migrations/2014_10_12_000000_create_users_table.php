@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Roda a migration.
+     * Run the migration.
      */
     public function up(): void
     {
@@ -18,49 +18,49 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('nivel_acesso');
+            $table->string('access_level');
             $table->timestamps();
         });
 
-        Schema::create('vagas', function (Blueprint $table) {
+        Schema::create('jobs', function (Blueprint $table) { 
             $table->id();
-            $table->string('titulo');
-            $table->text('descricao');
-            $table->string('tipo');
+            $table->string('title');
+            $table->text('description');
+            $table->string('type');
             $table->string('status');
             $table->timestamps();
         });
 
-        Schema::create('candidatos', function (Blueprint $table) {
+        Schema::create('candidates', function (Blueprint $table) { 
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->text('experiencia_profissional');
-            $table->text('habilidades');
-            $table->string('disponibilidade');
+            $table->text('experience');
+            $table->text('skills');
+            $table->string('availability');
             $table->timestamps();
         });
 
-        Schema::create('inscricaos', function (Blueprint $table) {
+        Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('vaga_id');
-            $table->unsignedBigInteger('candidato_id');
-            $table->timestamp('data_inscricao');
+            $table->unsignedBigInteger('job_id');
+            $table->unsignedBigInteger('candidate_id');
+            $table->timestamp('application_date');
             $table->timestamps();
 
-            $table->foreign('vaga_id')->references('id')->on('vagas')->onDelete('cascade');
-            $table->foreign('candidato_id')->references('id')->on('candidatos')->onDelete('cascade');
+            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
         });
     }
 
     /**
-     * Reverte a migration.
+     * Reverse the migration.
      */
     public function down(): void
     {
-        Schema::dropIfExists('inscricaos');
-        Schema::dropIfExists('candidatos');
-        Schema::dropIfExists('vagas');
+        Schema::dropIfExists('applications');
+        Schema::dropIfExists('candidates');
+        Schema::dropIfExists('jobs');
         Schema::dropIfExists('users');
     }
 };

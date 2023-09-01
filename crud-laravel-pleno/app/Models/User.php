@@ -20,7 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'nivel_acesso',
+        'access_level', // Renamed from nivel_acesso
     ];
 
     /**
@@ -44,10 +44,10 @@ class User extends Authenticatable
     ];
 
     /**
-     * Define a relação de inscrições para este usuário.
+     * Define the relationship with applications for this user.
      */
-    public function inscricoes()
+    public function applications()
     {
-        return $this->hasManyThrough(Inscricao::class, Candidato::class);
+        return $this->hasManyThrough(Application::class, Candidate::class); // Renamed from Inscricao and Candidato
     }
 }

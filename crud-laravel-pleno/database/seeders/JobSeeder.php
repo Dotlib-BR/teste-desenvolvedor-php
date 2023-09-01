@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Vaga;
+use App\Models\Job;
 
 class VagaSeeder extends Seeder
 {
@@ -13,7 +13,7 @@ class VagaSeeder extends Seeder
      */
     public function run(): void
     {
-        Vaga::factory()->count(10)->create();
+        Job::factory()->count(10)->create();
     }
 }
 

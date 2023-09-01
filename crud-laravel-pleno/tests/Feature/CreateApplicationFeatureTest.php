@@ -33,7 +33,7 @@ class CriarInscricaoFeatureTest extends TestCase
             'data_inscricao' => now()->toDateString(),
         ];
 
-        $response = $this->post('/inscricoes', $dadosInscricao);
+        $response = $this->post('/inscricaos', $dadosInscricao);
 
         $response->assertStatus(201);
         $response->assertJson(['candidato_id' => $dadosInscricao['candidato_id']]);

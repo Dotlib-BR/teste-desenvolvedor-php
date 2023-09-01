@@ -10,13 +10,13 @@ class InscricaoAdminController extends Controller
 {
     public function index()
     {
-        $inscricoes = Inscricao::paginate(20);
-        return view('admin.inscricoes.index', compact('inscricoes'));
+        $inscricaos = Inscricao::paginate(20);
+        return view('admin.inscricaos.index', compact('inscricaos'));
     }
 
     public function create()
     {
-        return view('admin.inscricoes.create');
+        return view('admin.inscricaos.create');
     }
 
     public function store(Request $request)
@@ -29,17 +29,17 @@ class InscricaoAdminController extends Controller
 
         Inscricao::create($validatedData);
 
-        return redirect()->route('admin.inscricoes.index')->with('success', 'Inscrição criada com sucesso.');
+        return redirect()->route('admin.inscricaos.index')->with('success', 'Inscrição criada com sucesso.');
     }
 
     public function show(Inscricao $inscricao)
     {
-        return view('admin.inscricoes.show', compact('inscricao'));
+        return view('admin.inscricaos.show', compact('inscricao'));
     }
 
     public function edit(Inscricao $inscricao)
     {
-        return view('admin.inscricoes.edit', compact('inscricao'));
+        return view('admin.inscricaos.edit', compact('inscricao'));
     }
 
     public function update(Request $request, Inscricao $inscricao)
@@ -52,12 +52,12 @@ class InscricaoAdminController extends Controller
 
         $inscricao->update($validatedData);
 
-        return redirect()->route('admin.inscricoes.index')->with('success', 'Inscrição atualizada com sucesso.');
+        return redirect()->route('admin.inscricaos.index')->with('success', 'Inscrição atualizada com sucesso.');
     }
 
     public function destroy(Inscricao $inscricao)
     {
         $inscricao->delete();
-        return redirect()->route('admin.inscricoes.index')->with('success', 'Inscrição excluída com sucesso.');
+        return redirect()->route('admin.inscricaos.index')->with('success', 'Inscrição excluída com sucesso.');
     }
 }

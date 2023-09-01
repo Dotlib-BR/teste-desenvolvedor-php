@@ -6,24 +6,24 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class CriarCandidatoFeatureTest extends TestCase
+class CreateCandidateFeatureTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
 
     /** @test */
-    public function criar_candidato()
+    public function can_create_candidate()
     {
-        $dadosCandidato = [
-            'nome' => $this->faker->name,
+        $candidateData = [
+            'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'experiencia_profissional' => $this->faker->paragraph,
             'habilidades' => $this->faker->sentence,
             'disponibilidade' => $this->faker->randomElement(['Integral', 'Meio Período']),
         ];
 
-        $response = $this->post('/candidatos', $dadosCandidato);
+        $response = $this->post('/candidates', $candidateData);
 
-        $response->assertRedirect(route('login')); // Verificando se vai para a página de login depois do redirect
+        $response->assertRedirect(route('login')); // Verifying if it redirects to the login page after redirect
     }
 }
