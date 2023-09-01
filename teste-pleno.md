@@ -12,7 +12,7 @@ Caso não tenha, você pode instalá-los seguindo as instruções em:
 
 1. Clone este repositório da branch thiagocsoares para o diretório desejado em sua máquina:
 
-git clone https://github.com/seu-usuario/nome-do-seu-projeto.git
+execute um git clone do projeto
 
 2. Navegue até o diretório do projeto:
 
