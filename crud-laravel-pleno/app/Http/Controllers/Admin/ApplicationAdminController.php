@@ -4,60 +4,60 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Inscricao;
+use App\Models\Application;
 
-class InscricaoAdminController extends Controller
+class ApplicationAdminController extends Controller
 {
     public function index()
     {
-        $inscricaos = Inscricao::paginate(20);
-        return view('admin.inscricaos.index', compact('inscricaos'));
+        $applications = Application::paginate(20);
+        return view('admin.applications.index', compact('applications'));
     }
 
     public function create()
     {
-        return view('admin.inscricaos.create');
+        return view('admin.applications.create');
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'vaga_id' => 'required|exists:vagas,id',
-            'candidato_id' => 'required|exists:candidatos,id',
-            'data_inscricao' => 'required|date',
+            'job_id' => 'required|exists:jobs,id',
+            'candidate_id' => 'required|exists:candidates,id',
+            'application_date' => 'required|date',
         ]);
 
-        Inscricao::create($validatedData);
+        Application::create($validatedData);
 
-        return redirect()->route('admin.inscricaos.index')->with('success', 'Inscrição criada com sucesso.');
+        return redirect()->route('admin.applications.index')->with('success', 'Inscrição criada com sucesso.');
     }
 
-    public function show(Inscricao $inscricao)
+    public function show(Application $application)
     {
-        return view('admin.inscricaos.show', compact('inscricao'));
+        return view('admin.applications.show', compact('application'));
     }
 
-    public function edit(Inscricao $inscricao)
+    public function edit(Application $application)
     {
-        return view('admin.inscricaos.edit', compact('inscricao'));
+        return view('admin.applications.edit', compact('application'));
     }
 
-    public function update(Request $request, Inscricao $inscricao)
+    public function update(Request $request, Application $application)
     {
         $validatedData = $request->validate([
-            'vaga_id' => 'required|exists:vagas,id',
-            'candidato_id' => 'required|exists:candidatos,id',
-            'data_inscricao' => 'required|date',
+            'job_id' => 'required|exists:jobs,id',
+            'candidate_id' => 'required|exists:candidates,id',
+            'application_date' => 'required|date',
         ]);
 
-        $inscricao->update($validatedData);
+        $application->update($validatedData);
 
-        return redirect()->route('admin.inscricaos.index')->with('success', 'Inscrição atualizada com sucesso.');
+        return redirect()->route('admin.applications.index')->with('success', 'Inscrição atualizada.');
     }
 
-    public function destroy(Inscricao $inscricao)
+    public function destroy(Application $application)
     {
-        $inscricao->delete();
-        return redirect()->route('admin.inscricaos.index')->with('success', 'Inscrição excluída com sucesso.');
+        $application->delete();
+        return redirect()->route('admin.applications.index')->with('success', 'Inscrição apagada.');
     }
 }

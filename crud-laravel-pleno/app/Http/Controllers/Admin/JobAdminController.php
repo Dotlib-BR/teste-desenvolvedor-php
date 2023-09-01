@@ -30,7 +30,7 @@ class JobAdminController extends Controller
 
         Job::create($validatedData);
 
-        return redirect()->route('admin.jobs.index')->with('success', 'Job criado com sucesso.');
+        return redirect()->route('admin.jobs.index')->with('success', 'Vaga criada com sucesso.');
     }
 
     public function show(Job $job)
@@ -54,12 +54,12 @@ class JobAdminController extends Controller
 
         $job->update($validatedData);
 
-        return redirect()->route('admin.jobs.index')->with('success', 'Dados do job atualizados com sucesso.');
+        return redirect()->route('admin.jobs.index')->with('success', 'Dados da vaga atualizados com sucesso.');
     }
 
     public function destroy(Job $job)
     {
         $job->delete();
-        return redirect()->route('admin.jobs.index')->with('success', 'Job excluído com sucesso.');
+        return redirect()->route('admin.jobs.index')->with('success', 'Vaga excluída com sucesso.');
     }
 }
