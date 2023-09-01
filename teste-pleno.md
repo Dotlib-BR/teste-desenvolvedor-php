@@ -16,8 +16,8 @@ execute um git clone do projeto
 
 2. Navegue até o diretório do projeto:
 
-entre na pasta:
-cd crud-laravel-pleno 
+entre na pasta: cd crud-laravel-pleno 
+
 Em seguida crie um arquivo .env a partir do arquivo .env.example:
 Edite o arquivo .env e ajuste as variáveis de ambiente conforme necessário.
 
@@ -25,11 +25,10 @@ Edite o arquivo .env e ajuste as variáveis de ambiente conforme necessário.
 
 Navegue até o diretório do projeto:
 
-cd crud-laravel-pleno
-
-Abra um terminal e execute o seguinte comando para construir os contêineres Docker e iniciar os serviços:
+cd crud-laravel-pleno e abra um terminal e execute o seguinte comando para construir os contêineres Docker e iniciar os serviços:
 
 docker-compose up -d
+
 Aguarde até que os contêineres sejam criados e os serviços sejam inicializados.
 
 4. Execute o seguinte comando para instalar as dependências do Laravel:
@@ -45,6 +44,7 @@ docker-compose exec app composer install
 ./vendor/bin/sail artisan db:seed
 
 7. Acessando a Aplicação
+
 Após concluir as etapas acima, você poderá acessar a aplicação em seu navegador em:
 
-http://localhost:sua-porta-no-env
+http://localhost:porta
