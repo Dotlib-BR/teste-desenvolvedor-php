@@ -13,17 +13,13 @@ class CreateUserFeatureTest extends TestCase
     use WithFaker;
 
     /** @test */
-    public function can_create_user()
+    public function authenticated_user_can_create_application()
     {
-        $userData = [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'password' => 'password',
-        ];
+        $user = User::factory()->create();
 
-        $response = $this->post('/register', $userData);
+        $response = $this->actingAs($user)->post(route('applications.apply', 1));
 
-        $response->assertStatus(302); // Verify the redirection after user creation
-        $this->assertCount(1, User::all()); // Verify that a user was created in the database
+        $response->assertStatus(302); // Verify the redirection after applying
+        $response->assertRedirect(route('jobs.index'));
     }
 }

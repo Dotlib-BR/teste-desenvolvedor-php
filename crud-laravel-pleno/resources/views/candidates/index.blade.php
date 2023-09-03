@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h2>Lista de Usuários</h2>
-    <a href="{{ route('users.create') }}" class="btn btn-success">Novo Usuário</a>
+    <h2>Lista de Candidatos</h2>
+    <a href="{{ route('candidates.create') }}" class="btn btn-success">Novo Candidato</a>
     <table class="table mt-3">
         <thead>
             <tr>
@@ -14,14 +14,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($users as $user)
+            @foreach($candidates as $candidate)
             <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
+                <td>{{ $candidate->id }}</td>
+                <td>{{ $candidate->name }}</td>
+                <td>{{ $candidate->email }}</td>
                 <td>
-                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Editar</a>
-                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
+                    <a href="{{ route('candidates.edit', $candidate->id) }}" class="btn btn-primary">Editar</a>
+                    <form action="{{ route('candidates.destroy', $candidate->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Excluir</button>

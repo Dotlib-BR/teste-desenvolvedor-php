@@ -12,19 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('access_level')->after('remember_token');
+            $table->enum('access_level', ['admin', 'user'])->default('user');
         });
 
         Schema::create('jobs', function (Blueprint $table) { 
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('type');
-            $table->string('status');
+            $table->enum('type', ['CLT', 'Pessoa Jurídica', 'Freelancer']);
+            $table->enum('status', ['open', 'closed', 'paused'])->default('open');
             $table->timestamps();
         });
 
-        Schema::create('candidates', function (Blueprint $table) { 
+        Schema::create('candidates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
@@ -36,13 +36,10 @@ return new class extends Migration
 
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('job_id');
-            $table->unsignedBigInteger('candidate_id');
-            $table->timestamp('application_date');
+            $table->foreignId('job_id')->constrained()->onDelete('cascade');
+            $table->foreignId('candidate_id')->constrained()->onDelete('cascade');
+            $table->date('application_date');
             $table->timestamps();
-
-            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
-            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
         });
     }
 

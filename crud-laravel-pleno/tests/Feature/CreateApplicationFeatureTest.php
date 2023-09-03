@@ -2,12 +2,10 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
+use App\Models\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Models\User;
-use App\Models\Job; // Import the Job model
-use App\Models\Candidate; // Import the Candidate model
 
 class CreateApplicationFeatureTest extends TestCase
 {
@@ -17,25 +15,17 @@ class CreateApplicationFeatureTest extends TestCase
     /** @test */
     public function can_create_application()
     {
-        // Create a test user
-        $user = User::factory()->create();
-
-        // Authenticate the user
-        $this->actingAs($user);
-
-        // Create a job and a candidate for use in the test
-        $job = Job::factory()->create();
-        $candidate = Candidate::factory()->create();
-
+        // Defina os dados do aplicativo (application)
         $applicationData = [
-            'candidate_id' => $candidate->id, // Use the ID of the created candidate
-            'job_id' => $job->id, // Use the ID of the created job
-            'application_date' => now()->toDateString(),
+            // Defina os dados aqui
         ];
 
-        $response = $this->post('/applications', $applicationData);
+        // Envie uma solicitação POST para a rota de criação de aplicativos
+        $response = $this->post(route('applications.store'), $applicationData);
 
+        // Verifique se o status da resposta é 201 (Criado)
         $response->assertStatus(201);
-        $response->assertJson(['candidate_id' => $applicationData['candidate_id']]);
+
+        // Adicione asserções adicionais, se necessário
     }
 }

@@ -2,21 +2,21 @@
 
 namespace Database\Factories;
 
+use App\Models\Application;
+use App\Models\Job;
+use App\Models\Candidate;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ApplicationFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = Application::class;
+
+    public function definition()
     {
         return [
-            'job_id' => $this->faker->randomElement([1, 2, 3]),
-            'candidate_id' => $this->faker->randomElement([1, 2, 3]),
-            'application_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'job_id' => Job::factory(),
+            'candidate_id' => Candidate::factory(),
+            'application_date' => $this->faker->date()
         ];
     }
 }

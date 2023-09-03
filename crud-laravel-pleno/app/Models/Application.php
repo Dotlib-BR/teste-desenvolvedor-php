@@ -10,18 +10,14 @@ class Application extends Model
     use HasFactory;
 
     protected $fillable = [
-        'job_id',
-        'candidate_id',
-        'application_date',
+        'job_id', 'candidate_id', 'application_date'
     ];
 
-    public function candidate()
-    {
-        return $this->belongsTo(Candidate::class);
-    }
-    
-    public function job()
-    {
+    public function job() {
         return $this->belongsTo(Job::class);
+    }
+
+    public function candidate() {
+        return $this->belongsTo(Candidate::class);
     }
 }

@@ -1,35 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\CandidateController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
 
-Route::get('/', function () {
-    return view('home');
-})->withoutMiddleware(['auth']);
+// Autenticação
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'Auth\LoginController@login');
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
-// Auth-protected Routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('/register', 'Auth\RegisterController@register');
 
-    // Login and Logout Routes
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
-    // Resource Routes for Job, Candidate, and Application
-    Route::resource('jobs', JobController::class);
-    Route::resource('candidates', CandidateController::class);
-    Route::resource('applications', ApplicationController::class);
-});
+// Dashboard
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('auth');
 
-// API Routes
-Route::prefix('api')->group(function () {
-    Route::apiResource('jobs', JobController::class);
-    Route::apiResource('candidates', CandidateController::class);
-    Route::apiResource('applications', ApplicationController::class);
-    // Add API routes for users if needed
-});
+// Vagas
+Route::resource('jobs', 'JobController')->middleware('auth');
+
+// Candidatos
+Route::resource('candidates', 'CandidateController')->middleware('auth');

@@ -19,7 +19,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Autenticação bem-sucedida, redirecionar para a página após o login
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/jobs');
         }
 
         // Autenticação falhou, redirecionar de volta ao formulário de login com mensagem de erro

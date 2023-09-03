@@ -1,32 +1,27 @@
-<?php 
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    use AuthenticatesUsers;
-
-    protected $redirectTo = RouteServiceProvider::HOME;
-
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    public function logout(Request $request)
+    public function login(Request $request)
     {
-        $this->guard()->logout();
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect()->intended('dashboard');
+        }
+        return back()->withErrors(['email' => 'These credentials do not match our records.']);
+    }
 
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
+    public function logout()
+    {
+        Auth::logout();
         return redirect('/');
     }
 }

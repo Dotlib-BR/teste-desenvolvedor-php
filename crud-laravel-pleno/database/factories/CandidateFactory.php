@@ -9,16 +9,14 @@ class CandidateFactory extends Factory
 {
     protected $model = Candidate::class;
 
-    public function definition(): array
+    public function definition()
     {
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'experience' => $this->faker->paragraph,
-            'skills' => $this->faker->sentence,
-            'availability' => $this->faker->randomElement(['Integral', 'Meio Período']),
-            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'updated_at' => now(),
+            'experience' => $this->faker->text(200),
+            'skills' => $this->faker->text(100),
+            'availability' => $this->faker->text(50)
         ];
     }
 }

@@ -10,15 +10,10 @@ class Candidate extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'experience',
-        'skills',
-        'availability',
+        'name', 'email', 'experience', 'skills', 'availability'
     ];
 
-    public function applications()
-    {
-        return $this->hasMany(Application::class);
+    public function jobs() {
+        return $this->belongsToMany(Job::class, 'applications')->withPivot('application_date');
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2>Lista de Inscrições</h2>
-    <a href="{{ route('inscricaos.create') }}" class="btn btn-success">Nova Inscrição</a>
+    <a href="{{ route('applications.create') }}" class="btn btn-success">Nova Inscrição</a>
     <table class="table mt-3">
         <thead>
             <tr>
@@ -22,8 +22,8 @@
                 <td>{{ $inscricao->candidato->nome }}</td>
                 <td>{{ $inscricao->application_date->format('d/m/Y') }}</td>
                 <td>
-                    <a href="{{ route('inscricaos.edit', $inscricao->id) }}" class="btn btn-primary">Editar</a>
-                    <form action="{{ route('inscricaos.destroy', $inscricao->id) }}" method="POST" class="d-inline">
+                    <a href="{{ route('applications.edit', $inscricao->id) }}" class="btn btn-primary">Editar</a>
+                    <form action="{{ route('applications.destroy', $inscricao->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Excluir</button>

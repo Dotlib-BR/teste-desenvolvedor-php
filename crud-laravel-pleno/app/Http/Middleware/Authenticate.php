@@ -1,20 +1,27 @@
-<?php
+<?php 
 
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 class Authenticate extends Middleware
 {
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      */
-    protected function redirectTo($request)
+    protected function redirectTo(Request $request): ?string
     {
-        if (! $request->expectsJson()) {
-            return route('login'); // Substitua 'login' pelo nome da rota de login
+        // Verifica se a requisição é da API e não está autenticada
+        if ($request->is('api/*') && !$request->user()) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
+
+        // Verifica se já está na rota de login para evitar loop de redirecionamento
+        if (! $request->routeIs('login') && ! $request->expectsJson()) {
+            return route('login');
+        }
+
+        return null;
     }
 }
