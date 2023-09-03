@@ -2,13 +2,31 @@
 
 @section('content')
 <div class="container">
-    <h2>Add New User</h2>
-    <form method="POST" action="{{ route('admin.users.store') }}">
+    <h1>Adicionar Usuário</h1>
+    <form method="POST" action="{{ route('admin.addUser') }}">
         @csrf
 
-        <!-- ... campos para adicionar novo usuário ... -->
+        <div class="form-group">
+            <label for="name">Nome:</label>
+            <input type="text" class="form-control" name="name" required>
+        </div>
 
-        <button type="submit" class="btn btn-primary">Add User</button>
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" class="form-control" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Senha:</label>
+            <input type="password" class="form-control" name="password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password_confirmation">Confirmar Senha:</label>
+            <input type="password" class="form-control" name="password_confirmation" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Adicionar</button>
     </form>
 </div>
 @endsection

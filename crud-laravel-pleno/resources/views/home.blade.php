@@ -1,27 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container bg-dark text-light p-4">
-    <h2 class="mb-4">Crie um usuário para ser candidato a uma vaga</h2>
-    <form action="{{ route('register') }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="name">Nome:</label>
-            <input type="text" name="name" class="form-control">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Welcome') }}</div>
+
+                <div class="card-body">
+                    @guest
+                        <p>{{ __('Welcome to our platform!') }}</p>
+                        <p><a href="{{ route('register') }}">Register</a> or <a href="{{ route('login') }}">Login</a></p>
+                    @else
+                        <p>{{ __('You are logged in!') }}</p>
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('jobs.index') }}">Jobs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('candidates.index') }}">Candidates</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('profile') }}">Profile</a> <!-- A rota 'profile' precisa ser definida -->
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    @endguest
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" name="email" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="password">Senha:</label>
-            <input type="password" name="password" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="password_confirmation">Confirme a senha:</label>
-            <input type="password" name="password_confirmation" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">Criar Usuário</button>
-    </form>
+    </div>
 </div>
 @endsection

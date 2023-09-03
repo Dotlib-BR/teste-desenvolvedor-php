@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::middleware([Authenticate::class])->group(function () {
+    Route::apiResource('jobs', APIJobController::class);
+    Route::apiResource('candidates', APICandidateController::class);
+});
+
 // Vagas
 Route::apiResource('api/jobs', 'Api\JobController');
 
@@ -18,8 +23,4 @@ Route::delete('api/applications/{id}', 'Api\ApplicationController@destroy');
 use App\Http\Controllers\API\JobController as APIJobController;
 use App\Http\Controllers\API\CandidateController as APICandidateController;
 
-// Jobs Routes
-Route::apiResource('jobs', APIJobController::class);
 
-// Candidates Routes
-Route::apiResource('candidates', APICandidateController::class);

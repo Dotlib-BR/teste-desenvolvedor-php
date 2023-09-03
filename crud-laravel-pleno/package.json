@@ -10,7 +10,6 @@
         "prod": "npm run production",
         "production": "mix --production",
         "build": "tailwindcss build resources/css/app.css -o public/css/output.css"
-          
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",

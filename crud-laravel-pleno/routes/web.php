@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+Route::get('/', function () {
+    return view('home');
+})->name('home');
 
 // Autenticação
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -23,3 +28,6 @@ Route::resource('jobs', 'JobController')->middleware('auth');
 
 // Candidatos
 Route::resource('candidates', 'CandidateController')->middleware('auth');
+
+// Home
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
