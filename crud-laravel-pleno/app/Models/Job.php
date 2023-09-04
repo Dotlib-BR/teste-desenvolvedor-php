@@ -10,12 +10,10 @@ class Job extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'type', 'status'
+        'title', 'description', 'type', 'status', 'user_id'
     ];
 
     public function user() {
-        // Se a chave estrangeira for diferente de user_id, você precisa especificar: 
-        // return $this->belongsTo(User::class, 'sua_chave_externa');
         return $this->belongsTo(User::class);
     }
 

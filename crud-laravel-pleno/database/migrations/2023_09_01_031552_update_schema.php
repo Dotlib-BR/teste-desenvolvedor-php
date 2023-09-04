@@ -17,11 +17,15 @@ return new class extends Migration
 
         Schema::create('jobs', function (Blueprint $table) { 
             $table->id();
+            $table->unsignedBigInteger('user_id');  // Adicionando a coluna user_id
             $table->string('title');
             $table->text('description');
             $table->enum('type', ['CLT', 'Pessoa Jurídica', 'Freelancer']);
             $table->enum('status', ['open', 'closed', 'paused'])->default('open');
             $table->timestamps();
+
+            // Definindo user_id como chave estrangeira
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::create('candidates', function (Blueprint $table) {

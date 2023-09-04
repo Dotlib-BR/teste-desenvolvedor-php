@@ -6,7 +6,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -14,7 +13,22 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <p>Bem-vindo, {{ auth()->user()->name }}!</p>
+
+                    @if (auth()->user()->access_level == 'admin')
+
+                        <a href="{{ route('jobs.index') }}">Ver Todas as Vagas</a>
+                        <a href="{{ route('dashboard') }}">Dashboard Administrativo</a>
+                        <!-- ... -->
+                    @else
+
+                        <a href="{{ route('jobs.index') }}">Ver Vagas</a>
+                        <a href="{{ route('applications') }}">Minhas Candidaturas</a>
+                        <!-- ... -->
+                    @endif
+
+                    <a href="{{ route('profile') }}">Meu Perfil</a>
+
                 </div>
             </div>
         </div>

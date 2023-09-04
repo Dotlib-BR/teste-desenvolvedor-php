@@ -29,6 +29,8 @@ class JobController extends Controller
             'status' => 'required|in:Ativa,Pausada'
         ]);
 
+        $data['user_id'] = auth()->id();
+
         Job::create($data);
 
         return redirect()->route('jobs.index');

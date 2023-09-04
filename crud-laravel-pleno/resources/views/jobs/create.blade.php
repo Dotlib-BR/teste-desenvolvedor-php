@@ -3,7 +3,7 @@
 @section('content')
 <div class="container bg-dark text-light p-4">
     <h2 class="mb-4">Criar Vaga</h2>
-    <form action="{{ route('vagas.store') }}" method="POST">
+    <form action="{{ route('jobs.store') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="titulo">Título:</label>
@@ -30,6 +30,7 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{{ route('jobs.index') }}" class="btn btn-secondary">Voltar para Vagas</a>
     </form>
 </div>
 @endsection
