@@ -43,6 +43,8 @@ Route::resource('candidates', CandidateController::class)->middleware('auth');
 
 // Applications
 Route::get('/applications', [ApplicationController::class, 'index'])->name('applications');
+Route::post('/applications', [ApplicationController::class, 'store'])->name('applications.store')->middleware('auth');
+
 
 // Profile
 Route::group(['middleware' => 'auth'], function () {

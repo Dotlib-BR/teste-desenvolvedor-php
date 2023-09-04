@@ -17,8 +17,8 @@
         <tbody>
             @foreach($jobs as $job)
             <tr>
-                <td>{{ $job->titulo }}</td>
-                <td>{{ $job->descricao }}</td>
+                <td>{{ $job->title }}</td>
+                <td>{{ $job->description }}</td>
                 <td>{{ $job->tipo }}</td>
                 <td>{{ $job->status }}</td>
                 <td>

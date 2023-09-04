@@ -8,7 +8,8 @@
         <ul>
             <li><strong>Nome:</strong> {{ Auth::user()->name }}</li>
             <li><strong>Email:</strong> {{ Auth::user()->email }}</li>
-            <!-- Você pode adicionar mais detalhes do perfil conforme necessário -->
+            <li><strong>Data de Criação:</strong> {{ Auth::user()->created_at->format('d/m/Y') }}</li>
+            <li><strong>Último Login:</strong> {{ Auth::user()->last_login_at ? Auth::user()->last_login_at->format('d/m/Y H:i') : 'N/A' }}</li>
         </ul>
     </div>
 @endsection

@@ -27,7 +27,8 @@
                         <!-- ... -->
                     @endif
 
-                    <a href="{{ route('profile') }}">Meu Perfil</a>
+                    <a href="{{ route('profile.edit') }}">Meu Perfil</a>
+
 
                 </div>
             </div>

@@ -22,7 +22,7 @@ class ApplicationController extends Controller
     public function store(Request $request)
     {
         $application = Application::create($request->all());
-        return redirect()->route('applications.index');
+        return redirect()->route('applications.index')->with('status', 'Inscrição criada com sucesso!');
     }
 
     public function show(Application $application)
@@ -38,12 +38,12 @@ class ApplicationController extends Controller
     public function update(Request $request, Application $application)
     {
         $application->update($request->all());
-        return redirect()->route('applications.index');
+        return redirect()->route('applications.index')->with('status', 'Inscrição atualizada com sucesso!');
     }
 
     public function destroy(Application $application)
     {
         $application->delete();
-        return redirect()->route('applications.index');
+        return redirect()->route('applications.index')->with('status', 'Inscrição excluída com sucesso!');
     }
 }
