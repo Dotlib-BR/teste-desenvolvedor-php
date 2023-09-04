@@ -14,6 +14,8 @@ class Job extends Model
     ];
 
     public function user() {
+        // Se a chave estrangeira for diferente de user_id, você precisa especificar: 
+        // return $this->belongsTo(User::class, 'sua_chave_externa');
         return $this->belongsTo(User::class);
     }
 
