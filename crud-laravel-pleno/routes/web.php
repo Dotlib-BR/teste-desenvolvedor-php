@@ -7,7 +7,6 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-// Autenticação
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
@@ -29,5 +28,15 @@ Route::resource('jobs', 'JobController')->middleware('auth');
 // Candidatos
 Route::resource('candidates', 'CandidateController')->middleware('auth');
 
+// Vagas
+Route::resource('jobs', 'JobController')->middleware('auth');
+
+// Candidatos
+Route::resource('candidates', 'CandidateController')->middleware('auth');
+
 // Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
