@@ -13,7 +13,12 @@
                         </div>
                     @endif
 
+                    @if(auth()->check())
                     <p>Bem-vindo, {{ auth()->user()->name }}!</p>
+                @else
+                    <p>Bem-vindo, visitante!</p>
+                @endif
+                
 
                     @if (auth()->user()->access_level == 'admin')
 
@@ -23,8 +28,7 @@
                     @else
 
                         <a href="{{ route('jobs.index') }}">Ver Vagas</a>
-                        <a href="{{ route('applications.index') }}">Minhas Candidaturas</a>
-
+                        <a href="{{ route('applications') }}">Minhas Candidaturas</a>
                         <!-- ... -->
                     @endif
 

@@ -44,11 +44,13 @@ Route::resource('candidates', CandidateController::class)->middleware('auth');
 
 // Applications
 Route::resource('applications', ApplicationController::class)->middleware('auth');
+
 Route::get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
 Route::get('/applications/create', [ApplicationController::class, 'create'])->name('applications.create');
 Route::post('/applications', [ApplicationController::class, 'store'])->name('applications.store')->middleware('auth');
 Route::get('/applications/{application}', [ApplicationController::class, 'show'])->name('applications.show');
 Route::get('/applications/{application}/edit', [ApplicationController::class, 'edit'])->name('applications.edit');
+Route::put('/applications/{application}', [ApplicationController::class, 'update'])->name('applications.update')->middleware('auth');
 Route::delete('/applications/{application}', [ApplicationController::class, 'destroy'])->name('applications.destroy')->middleware('auth');
 
 
