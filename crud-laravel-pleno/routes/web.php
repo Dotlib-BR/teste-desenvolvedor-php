@@ -41,14 +41,22 @@ Route::resource('jobs', JobController::class)->middleware('auth');
 // Candidates
 Route::resource('candidates', CandidateController::class)->middleware('auth');
 
+
 // Applications
-Route::get('/applications', [ApplicationController::class, 'index'])->name('applications');
+Route::resource('applications', ApplicationController::class)->middleware('auth');
+Route::get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
+Route::get('/applications/create', [ApplicationController::class, 'create'])->name('applications.create');
 Route::post('/applications', [ApplicationController::class, 'store'])->name('applications.store')->middleware('auth');
+Route::get('/applications/{application}', [ApplicationController::class, 'show'])->name('applications.show');
+Route::get('/applications/{application}/edit', [ApplicationController::class, 'edit'])->name('applications.edit');
+Route::delete('/applications/{application}', [ApplicationController::class, 'destroy'])->name('applications.destroy')->middleware('auth');
+
 
 
 // Profile
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile', [ProfileController::class, 'store'])->name('profile.store'); 
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update'); 
 });
 

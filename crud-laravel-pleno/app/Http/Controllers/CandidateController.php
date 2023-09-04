@@ -30,7 +30,7 @@ class CandidateController extends Controller
 
         Candidate::create($data);
 
-        return redirect()->route('candidates.index');
+        return redirect()->route('candidates.index')->with('status', 'Candidato criado com sucesso!');
     }
 
     public function edit(Candidate $candidate)
@@ -50,12 +50,12 @@ class CandidateController extends Controller
 
         $candidate->update($data);
 
-        return redirect()->route('candidates.index');
+        return redirect()->route('candidates.index')->with('status', 'Candidato atualizado com sucesso!');
     }
 
     public function destroy(Candidate $candidate)
     {
         $candidate->delete();
-        return redirect()->route('candidates.index');
+        return redirect()->route('candidates.index')->with('status', 'Candidato excluído com sucesso!');
     }
 }

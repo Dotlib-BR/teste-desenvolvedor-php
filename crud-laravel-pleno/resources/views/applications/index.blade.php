@@ -22,12 +22,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($applications as $application) <!-- Mudança: $inscricaos para $applications -->
+            @foreach($applications as $application)
             <tr>
                 <td>{{ $application->id }}</td>
-                <td>{{ $application->job->titulo }}</td> <!-- Mudança: $inscricao->vaga->titulo para $application->job->titulo -->
-                <td>{{ $application->candidate->nome }}</td> <!-- Suposição: O nome do campo para o candidato é candidate e o campo para o nome é nome -->
-                <td>{{ $application->application_date->format('d/m/Y') }}</td>
+                <td>{{ $application->job->titulo }}</td> 
+                <td>{{ $application->candidate->nome }}</td>
+                <td>{{ is_string($application->application_date) ? $application->application_date : $application->application_date->format('d/m/Y') }}</td>
                 <td>
                     <a href="{{ route('applications.edit', $application->id) }}" class="btn btn-primary">Editar</a>
                     <form action="{{ route('applications.destroy', $application->id) }}" method="POST" class="d-inline">

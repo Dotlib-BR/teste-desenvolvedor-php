@@ -23,7 +23,8 @@
                     @else
 
                         <a href="{{ route('jobs.index') }}">Ver Vagas</a>
-                        <a href="{{ route('applications') }}">Minhas Candidaturas</a>
+                        <a href="{{ route('applications.index') }}">Minhas Candidaturas</a>
+
                         <!-- ... -->
                     @endif
 
